@@ -16,12 +16,16 @@ export default {
     title: 'This is Introduction',
     theme: {
       navbar: true,
-      toc: false,
+      toc: true,
     },
   },
-  examples: {
-    title: 'Examples',
+  ics: {
+    title: 'ICS',
     type: 'page',
+    theme: {
+      navbar: true,
+      toc: true,
+    },
   },
   upgrade: {
     title: (

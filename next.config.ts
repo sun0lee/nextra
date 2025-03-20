@@ -19,8 +19,8 @@ export default withNextra({
   reactStrictMode: true,
   cleanDistDir: true,
   i18n: {
-    locales: ['zh', 'en'],
-    defaultLocale: 'zh',
+    locales: ['ko', 'en'],
+    defaultLocale: 'ko',
   },
   sassOptions: {
     silenceDeprecations: ['legacy-js-api'],

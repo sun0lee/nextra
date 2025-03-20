@@ -1,9 +1,9 @@
 import en from './en'
-import zh from './zh'
+import ko from './ko'
 
 export const i18nConfig = Object.freeze({
   en,
-  zh,
+  ko,
 })
 
 export type I18nLangKeys = keyof typeof i18nConfig
