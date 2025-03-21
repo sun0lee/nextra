@@ -132,6 +132,10 @@ export default async function RootLayout({ children, params }: Props) {
               { locale: 'ko', name: '한국어' },
             ]}
             pageMap={pageMap}
+            toc={{
+              title: '이 문서의 내용',
+              float: false,
+            }}
             feedback={{ content: '' }}
           // ... Your additional layout options
           >
