@@ -1,6 +1,9 @@
 import createWithNextra from 'nextra'
 
 const withNextra = createWithNextra({
+  latex: {
+    renderer: 'mathjax',
+  },
   defaultShowCopyCode: true,
   unstable_shouldAddLocaleToLinks: true,
 })
