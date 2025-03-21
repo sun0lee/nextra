@@ -134,7 +134,7 @@ export default async function RootLayout({ children, params }: Props) {
             pageMap={pageMap}
             toc={{
               title: '이 문서의 내용',
-              float: false,
+              float: true,
             }}
             feedback={{ content: '' }}
           // ... Your additional layout options

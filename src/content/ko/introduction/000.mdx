@@ -1,0 +1,89 @@
+---
+title: MDX 문서 렌더링
+---
+#  MDX 문서를 페이지로 렌더링하는 과정
+
+- Nextra + Next.js App Router
+
+```
+src/
+├── app/
+│   ├── [lang]/
+│   │   ├── [[...mdxPath]]/
+│   │   │   ├── page.tsx  // ① 동적 라우팅 및 MDX 문서 로딩
+│   │   ├── layout.tsx   // ② 전체 레이아웃
+│   ├── _dictionaries/
+│   │   ├── get-dictionary.ts
+├── content/
+│   ├── _meta.tsx       // ③ 문서 정보 (제목, 정렬 순서)
+│   ├── 000.mdx         // ④ MDX 파일 (글 내용)
+```
+
+## ① app/[lang]/[[...mdxPath]]/ *page.tsx* 
+
+— MDX 문서를 불러와서 페이지로 렌더링
+- 역할: URL에 따라 MDX 파일을 동적으로 불러와서 페이지를 렌더링하는 핵심 파일
+
+- ✅ 주요 기능
+  - Next.js의 App Router 기반 동적 라우팅을 처리 ([[...mdxPath]]를 통해 URL에 맞는 MDX 파일을 찾음)
+  - 해당하는 MDX 파일(content/000.mdx)을 불러와서 화면에 표시
+  - useMDXComponent 등을 사용하여 MDX 파일을 컴포넌트처럼 렌더링함
+
+## ② app/layout.tsx
+
+- 페이지 전체 레이아웃 설정
+- 역할: 페이지의 공통 레이아웃을 정의하는 파일 (헤더, 푸터, 사이드바 등 포함)
+
+```tsx
+    export const metadata = {
+      metadataBase: new URL('https://nextjs-nextra-starter-green.vercel.app'),
+      icons: '/img/favicon.svg',
+    } satisfies Metadata
+
+    interface Props {
+      children: ReactNode
+      params: Promise<{ lang: I18nLangKeys }>
+    }
+
+    export default async function RootLayout({ children, params }: Props) {
+      const { lang } = await params
+      const dictionary = await getDictionary(lang)
+      const pageMap = await getPageMap(lang)
+      const title = 'My Nextra Starter'
+      const description = 'A Starter template with Next.js, Nextra'
+      const { t } = await useServerLocale(lang)
+
+      return (
+        <html>
+          <Head>
+          </Head>
+          <body>
+          </body>
+        </html>
+      )
+    }
+
+```
+- ✅ 주요 기능
+  - 모든 페이지(page.tsx)에서 공통으로 적용될 헤더, 네비게이션, 푸터 등의 레이아웃을 설정
+  - MDX 페이지(page.tsx)를 감싸는 부모 컴포넌트 역할
+  - TOC(목차) 표시, 검색 기능, 언어 변경 버튼 등이 포함될 수도 있음
+
+## ③ content/_meta.tsx
+
+— 문서 정보 (제목, 정렬 순서 등)
+- 역할: 각 MDX 파일에 대한 메타데이터(제목, 정렬순서 등)를 설정하는 파일
+
+- ✅ 주요 기능
+	- 문서의 제목(title), 정렬 순서(order), 경로(path) 등의 정보를 관리
+	- 사이드바, TOC(목차) 등의 구성에 영향을 줌
+	- 페이지 간 이동을 위해 이전/다음 페이지 링크 설정 가능
+
+## ④ content/000.mdx
+— 실제 문서 내용
+- 역할: 실제 사용자가 보는 MDX 문서(블로그 글, 기술 문서 등)
+
+- ✅ 주요 기능
+	-	실제 콘텐츠(텍스트, 이미지, 코드 등)를 포함하는 문서
+	-	MDX 문법을 사용하여 JSX 컴포넌트와 조합 가능
+	-	page.tsx에서 이 파일을 불러와서 페이지에 렌더링
