@@ -2,6 +2,7 @@
 .p-panel,
 .p-fieldset,
 .p-accordion,
+.p-inline-message,
 .p-tabview {
   margin-top: 1.5rem;
 }
@@ -597,6 +598,22 @@
 
 .p-inline-message.p-inline-message-icon-only .p-inline-message-icon {
   margin-right: 0.5rem;
+}
+.p-scrollpanel .p-scrollpanel-bar {
+  background: var(--surface-200); /* ✅ 라이트 모드 기본 배경 */
+  border: 0 none;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.p-scrollpanel .p-scrollpanel-bar:hover {
+  background: var(--surface-300); /* ✅ hover 시 더 진한 색 */
+}
+
+.p-scrollpanel .p-scrollpanel-bar:focus-visible {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem var(--focus-ring);
 }
 
 img {

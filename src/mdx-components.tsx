@@ -8,9 +8,9 @@ import { Button } from 'primereact/button'
 import { Card } from 'primereact/card'
 import { Fieldset } from 'primereact/fieldset'
 import { Message } from 'primereact/message'
+import { ScrollPanel } from 'primereact/scrollpanel'
 import { TabPanel, TabView } from 'primereact/tabview'
 import { Tooltip } from 'primereact/tooltip'
-
 
 const G2Col = ({ children }: { children: ReactNode[] }) => {
   return (
@@ -167,6 +167,7 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   Tooltip,
   TabPanel,
   TabView,
+  ScrollPanel,
   GCallout,
   GMath,
   G2Col,
