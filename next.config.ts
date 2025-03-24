@@ -5,6 +5,7 @@ const withNextra = createWithNextra({
     renderer: 'katex',
     options: {
       output: 'mathml',
+      strict: false, // ⚡ 모든 엄격한 검사를 비활성화
     },
   },
   defaultShowCopyCode: true,

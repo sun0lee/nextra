@@ -149,6 +149,8 @@ const GTooltipIcon = ({
   )
 }
 
+const OverlayDemo = ({ id }: { id?: string }) => <>{id}</>
+const GCmt = ({ children }: { children?: React.ReactNode }) => <>{children}</>
 export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   ...getDocsMDXComponents({
     pre: withIcons(Pre, { js: GitHubIcon }),
@@ -168,6 +170,8 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   TabPanel,
   TabView,
   ScrollPanel,
+  OverlayDemo,
+  GCmt,
   GCallout,
   GMath,
   G2Col,
