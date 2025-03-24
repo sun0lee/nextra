@@ -1,9 +1,9 @@
 import en from './en'
-import zh from './zh'
+import ko from './ko'
 
 export const i18nConfig = Object.freeze({
   en,
-  zh,
+  ko,
 })
 
 export type I18nLangKeys = keyof typeof i18nConfig
@@ -11,7 +11,7 @@ export interface I18nLangAsyncProps {
   lang: I18nLangKeys
 }
 
-// 获取所有语言对象的联合类型
+// 모든 언어 객체의 유니온 타입 가져오기
 export type AllLocales = typeof i18nConfig[I18nLangKeys]
 
 
@@ -28,13 +28,13 @@ export type NestedKeyOf<ObjectType extends object> = {
     : `${Key}`
 }[keyof ObjectType & (string | number)]
 
-// 获取所有可能的键
+// 모든 가능한 키 가져오기
 export type LocaleKeys = NestedKeyOf<AllLocales>
 
 
 type DeepObject = Record<string, any>
 
-// 类型提取给定路径上值的类型
+// 주어진 경로의 값 타입 추출
 export type PathValue<T, P extends string> =
   P extends `${infer Key}.${infer Rest}`
     ? Key extends keyof T
@@ -44,13 +44,13 @@ export type PathValue<T, P extends string> =
       ? T[P]
       : never
 
-// 获取嵌套值
+// 중첩된 값 가져오기
 export function getNestedValue<T extends DeepObject, K extends string>(obj: T, path: K): PathValue<T, K> {
   return path.split('.').reduce((acc, key) => acc && acc[key], obj) as PathValue<T, K>
 }
 
 
-// 插入值表达式
+// 문자열 내 변수 치환
 export function interpolateString(template: string, context: Record<string, any>): string {
   return template.replace(/\{\{\s*(\w+(\.\w+)*)\s*\}\}/g, (_, path) => {
     const value = getNestedValue(context, path.trim())

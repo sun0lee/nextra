@@ -57,11 +57,11 @@ export default function LocaleToggle({
     const nextHref = {
       value: '',
     }
-    if (currentLocale === 'zh') {
-      nextHref.value = addBasePath(pathname.replace(`/zh`, `/en`))
+    if (currentLocale === 'ko') {
+      nextHref.value = addBasePath(pathname.replace(`/ko`, `/en`))
     }
     else {
-      nextHref.value = addBasePath(pathname.replace(`/en`, `/zh`))
+      nextHref.value = addBasePath(pathname.replace(`/en`, `/ko`))
     }
 
     const date = new Date(Date.now() + ONE_YEAR)
@@ -90,7 +90,7 @@ export default function LocaleToggle({
       onClick={changeLocale}
     >
       {
-        currentLocale === 'zh'
+        currentLocale === 'ko'
           ? <span className="icon-[uil--letter-chinese-a]" />
           : <span className="icon-[ri--english-input]" />
       }

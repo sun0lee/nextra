@@ -13,23 +13,31 @@ export default {
   },
   introduction: {
     type: 'page',
-    title: '这是介绍',
+    title: '소개',
     theme: {
       navbar: true,
-      toc: false,
+      toc: true,
     },
   },
-  examples: {
-    title: '示例',
+  ics: {
+    title: 'ICS',
     type: 'page',
+    theme: {
+      navbar: true,
+      toc: true,
+    },
   },
-  upgrade: {
+  kics: {
     title: (
       <span className="flex items-center leading-[1]">
-        新变化
+        K-ICS
         <TitleBadge />
       </span>
     ),
     type: 'page',
+    theme: {
+      navbar: true,
+      toc: true,
+    },
   },
 } satisfies MetaRecord

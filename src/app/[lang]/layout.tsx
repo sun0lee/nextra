@@ -13,7 +13,11 @@ import { getPageMap } from 'nextra/page-map'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 
 import { ThemeProvider } from './_components/ThemeProvider'
+import './styles/lightbluegrey.css'
+import 'primereact/resources/primereact.min.css'
+import 'primeicons/primeicons.css'
 import './styles/index.css'
+
 
 export const metadata = {
   // Define your metadata here
@@ -129,9 +133,13 @@ export default async function RootLayout({ children, params }: Props) {
             search={<Search />}
             i18n={[
               { locale: 'en', name: 'English' },
-              { locale: 'zh', name: '简体中文' },
+              { locale: 'ko', name: '한국어' },
             ]}
             pageMap={pageMap}
+            toc={{
+              title: '이 문서의 내용',
+              float: true,
+            }}
             feedback={{ content: '' }}
           // ... Your additional layout options
           >

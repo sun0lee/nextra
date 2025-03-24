@@ -1,6 +1,12 @@
 import createWithNextra from 'nextra'
 
 const withNextra = createWithNextra({
+  latex: {
+    renderer: 'katex',
+    options: {
+      output: 'mathml',
+    },
+  },
   defaultShowCopyCode: true,
   unstable_shouldAddLocaleToLinks: true,
 })
@@ -19,8 +25,8 @@ export default withNextra({
   reactStrictMode: true,
   cleanDistDir: true,
   i18n: {
-    locales: ['zh', 'en'],
-    defaultLocale: 'zh',
+    locales: ['ko', 'en'],
+    defaultLocale: 'ko',
   },
   sassOptions: {
     silenceDeprecations: ['legacy-js-api'],

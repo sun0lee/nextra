@@ -21,8 +21,10 @@ export default async function Page(props: PageProps) {
   // eslint-disable-next-line react/prefer-destructuring-assignment
   const params = await props.params
   const result = await importPage(params.mdxPath, params.lang)
-  const { default: MDXContent, toc, metadata } = result
 
+  // console.warn('📌 TOC 데이터:', result.toc)
+
+  const { default: MDXContent, toc, metadata } = result
 
   return (
     <Wrapper toc={toc} metadata={metadata}>
