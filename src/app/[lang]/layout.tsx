@@ -13,7 +13,11 @@ import { getPageMap } from 'nextra/page-map'
 import { getDictionary, getDirection } from '../_dictionaries/get-dictionary'
 
 import { ThemeProvider } from './_components/ThemeProvider'
+import './styles/lightbluegrey.css'
+import 'primereact/resources/primereact.min.css'
+import 'primeicons/primeicons.css'
 import './styles/index.css'
+
 
 export const metadata = {
   // Define your metadata here

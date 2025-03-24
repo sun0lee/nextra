@@ -2,7 +2,10 @@ import createWithNextra from 'nextra'
 
 const withNextra = createWithNextra({
   latex: {
-    renderer: 'mathjax',
+    renderer: 'katex',
+    options: {
+      output: 'mathml',
+    },
   },
   defaultShowCopyCode: true,
   unstable_shouldAddLocaleToLinks: true,

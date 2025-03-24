@@ -25,6 +25,53 @@ pnpm run dev
 <Bleed full >일반적으로 더 큰 크기로 보면 더 보기 좋은 그래픽 정보를 표시할 때 더 나은 읽기 환경을 제공합니다. 일반적으로 더 큰 크기로 보면 더 보기 좋은 그래픽 정보를 표시할 때 더 나은 읽기 환경을 제공합니다.</Bleed>
 
 
+<GMath severity="info" title ="bbb" >
+asd
+</GMath>
+
+<GCallout severity="info" title ="bbb">
+aaa
+</GCallout>
+
+<GMath severity="success" title ="bbb" >
+asd
+</GMath>
+
+<GCallout severity="success" title ="bbb">
+aaa
+</GCallout>
+
+
+<GMath severity="warn" title ="bbb" >
+asd
+</GMath>
+
+<GCallout severity="warn" title ="bbb">
+aaa
+</GCallout>
+
+
+<GMath severity="error" title ="bbb" >
+asd
+</GMath>
+
+<GCallout severity="error" title ="bbb">
+aaa
+</GCallout>
+
+
+
+<G2Col>
+<div>
+  - aaa 
+  - bbb
+</div>
+<div>
+  - bbb
+  - sccc
+</div>
+</G2Col>
+
 ### Callout
 
 <Callout type="info" emoji="ℹ️">
@@ -39,12 +86,18 @@ pnpm run dev
   This is a dangerous feature that can cause everything to explode.
 </Callout>
 
+
+
 ### Card
 
-<Cards>
+<Card title = "제목">
 어떻게 쓰는건데 ???
-</Cards>
+</Card>
 
+
+<Card subTitle = "제목">
+어떻게 쓰는건데 ???
+</Card>
 
 ### Step
 <Steps>
@@ -64,6 +117,11 @@ Contents for step 2.
 |aa|bb|cc|
 
 
+abcdf<GTooltipIcon icon ="pi pi-paperclip" severity ="secondary" desc="aaa"/>
+
+aaaa<GTooltipIcon desc="aasdd"/>
+
+<GTooltip label="aa" desc="bbb"/>
 
 ### Tab
 <Tabs items={['pnpm', 'npm', 'yarn']}>
@@ -76,11 +134,53 @@ Contents for step 2.
 ## 수식 활성화 
 $ \dfrac{a}{b-c} $
 
-
+<Button tooltip="Confirm to proceed" label="Save" />
 
 ## 이미지 추가 
 
-`![이미지 설명](이미지 경로)```java
+`![이미지 설명](이미지 경로)`
 
 
 ![Nextra 로고](/img/next.svg)
+
+
+<Fieldset legend="제목">
+aaa
+</Fieldset>
+
+
+
+
+  <TabView>
+      <TabPanel header="Header I">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </TabPanel>
+      <TabPanel header="Header II">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, 
+              eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+              enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui 
+              ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
+      </TabPanel>
+      <TabPanel header="Header III">
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti 
+              quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in
+              culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. 
+              Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
+      </TabPanel>
+  </TabView>
+
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="asv ">
+      dsdf
+</AccordionTab>
+<AccordionTab header=" ddd">
+      asdad
+</AccordionTab>
+<AccordionTab header="ewq ">
+      asdq
+</AccordionTab>
+</Accordion>
