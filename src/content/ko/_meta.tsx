@@ -27,13 +27,17 @@ export default {
       toc: true,
     },
   },
-  upgrade: {
+  kics: {
     title: (
       <span className="flex items-center leading-[1]">
-        업데이트
+        K-ICS
         <TitleBadge />
       </span>
     ),
     type: 'page',
+    theme: {
+      navbar: true,
+      toc: true,
+    },
   },
 } satisfies MetaRecord

@@ -27,10 +27,10 @@ export default {
       toc: true,
     },
   },
-  upgrade: {
+  kics: {
     title: (
       <span className="flex items-center leading-[1]">
-        What's New
+        K-ICS
         <TitleBadge />
       </span>
     ),
