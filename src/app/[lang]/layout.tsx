@@ -26,7 +26,7 @@ export const metadata = {
   icons: '/img/favicon.svg',
 } satisfies Metadata
 
-const repo = 'https://github.com/pdsuwwz/nextjs-nextra-starter'
+const repo = 'https://github.com/sun0lee/nextra'
 
 const CustomBanner = async ({ lang }: I18nLangAsyncProps) => {
   const { t } = await useServerLocale(lang)
@@ -124,7 +124,7 @@ export default async function RootLayout({ children, params }: Props) {
               </LastUpdated>
             )}
             editLink={null}
-            docsRepositoryBase="https://github.com/pdsuwwz/nextjs-nextra-starter"
+            docsRepositoryBase="https://github.com/sun0lee/nextra"
             footer={(
               <Footer className="bg-background py-5!">
                 <CustomFooter />
@@ -137,7 +137,7 @@ export default async function RootLayout({ children, params }: Props) {
             ]}
             pageMap={pageMap}
             toc={{
-              title: '이 문서의 내용',
+              title: 'on this page 🤔',
               float: true,
             }}
             feedback={{ content: '' }}

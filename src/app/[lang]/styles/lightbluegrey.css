@@ -1,10 +1,15 @@
 .p-card,
 .p-panel,
 .p-fieldset,
-.p-accordion,
+/*.p-accordion,*/
 .p-inline-message,
 .p-tabview {
   margin-top: 1.5rem;
+}
+
+.p-accordion
+ {
+  margin-top: 0.5rem;
 }
 
 .p-card {
@@ -17,7 +22,7 @@
 }
 
 .p-card .p-card-body {
-  padding: var(--content-padding);
+  padding: var(--title-padding);
 }
 
 .p-card .p-card-title {
@@ -471,8 +476,9 @@
   padding: var(--title-padding);
   border: 1px solid var(--surface-border);
   color: var(--text-color-secondary);
-  background: var(--surface-50);
+  background: var(--warn-bg);
   font-weight: 700;
+  font-size: var(--sm-font-size);
   border-radius: var(--border-radius);
   transition: box-shadow 0.2s;
 }
@@ -518,6 +524,7 @@
   border: 1px solid var(--surface-border);
   background: var(--surface-0);
   color: var(--text-color);
+  font-size: var(--sm-font-size); 
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -616,17 +623,46 @@
   box-shadow: 0 0 0 0.2rem var(--focus-ring);
 }
 
-img {
-  background-color: var(--surface-100); /* 라이트 모드 */
+table {
+  width: 100% !important ;
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed !important; 
+}
+
+th {
+  background-color: var(--surface-100);
+  font-weight: bold;
+  font-size: var(--sm-font-size);
+  text-align: center;
+  word-wrap: break-word; 
+}
+
+td {
+  padding: 4px 10px 4px 10px; /* 상 4px, 우 10px, 하 4px, 좌 10px */
+  font-size: var(--sm-font-size);
+  background-color: var(--surface-0);
+  word-wrap: break-word; 
+}
+
+ul {
+  list-style: none;
+  /*text-indent: -0.5rem;
+  padding-left: 1.2rem;*/
+}
+
+
+
+.img {
+  background-color: var(--background); 
   padding: 8px;
   display: inline-block;
   border-radius: var(--border-radius);
 }
 
 .dark img {
-  background-color: var(--surface-900);
+  filter: brightness(0.7) contrast(1.2);
 }
 
-.dark img {
-  filter: brightness(0.8) contrast(1.2);
-}
+
+

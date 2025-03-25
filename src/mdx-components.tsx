@@ -48,7 +48,7 @@ const GCallout = ({
         content={(
           <div style={{ width: '100%', textAlign: 'left' }}>
             {title && (
-              <div style={{ fontWeight: '700', marginBottom: '0.7rem', fontSize: '1.03rem', fontFamily: 'NotoSansKR' }}>
+              <div style={{ fontWeight: '700', marginBottom: '0.7rem', fontSize: '1.03rem' }}>
                 {_title}
               </div>
             )}
@@ -89,7 +89,7 @@ const GMath = ({
         content={(
           <div style={{ width: '100%', textAlign: 'left' }}>
             {title && (
-              <div style={{ fontWeight: '600', marginBottom: '0.7rem', fontSize: '0.9rem', fontFamily: 'NotoSansKR' /* fontStyle :"italic" , textDecoration: "underline" , textDecorationThickness: "0.2px" */ }}>
+              <div style={{ fontWeight: '600', marginBottom: '0.7rem', fontSize: '0.9rem' }}>
                 {_title}
               </div>
             )}
@@ -149,6 +149,39 @@ const GTooltipIcon = ({
   )
 }
 
+const OverlayDemo = ({ id }: { id?: string }) => <>{id}</>
+const OverlayDemoBasel = ({ id }: { id?: string }) => <>{id}</>
+/* const GCmt = ({ children }: { children?: React.ReactNode }) => <>{children}</> */
+
+const GCmt = ({
+  props,
+  children,
+}: {
+  pl: number
+  props: any
+  children: ReactNode
+}) => {
+  const divStyle = {
+    fontSize: '0.875rem',
+    border: 'none', // 테두리 없음
+    fontWeight: '400',
+    color: 'var(--surface-700)',
+    letterSpacing: '-0.04em',
+  }
+
+  const contentStyle = {
+    paddingTop: '0.1rem',
+    marginLeft: '1rem',
+  }
+  return (
+    <div {...props} style={divStyle}>
+      <div style={contentStyle} className="tw-pb-2 text-left ... ">
+        {children}
+      </div>
+    </div>
+  )
+}
+
 export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   ...getDocsMDXComponents({
     pre: withIcons(Pre, { js: GitHubIcon }),
@@ -168,6 +201,9 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   TabPanel,
   TabView,
   ScrollPanel,
+  OverlayDemo,
+  OverlayDemoBasel,
+  GCmt,
   GCallout,
   GMath,
   G2Col,
