@@ -36,7 +36,9 @@ export default {
     ),
     type: 'page',
     theme: {
+      typesetting: 'default',
       navbar: true,
+      collapsed: false,
       toc: true,
     },
   },
