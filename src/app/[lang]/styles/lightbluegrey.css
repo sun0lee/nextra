@@ -633,16 +633,16 @@ table {
 th {
   background-color: var(--surface-100);
   font-weight: bold;
-  font-size: var(--sm-font-size);
+  font-size: clamp(10px, 2vw, 14px); 
   text-align: center;
   word-wrap: break-word; 
 }
 
 td {
   padding: 4px 10px 4px 10px; /* 상 4px, 우 10px, 하 4px, 좌 10px */
-  font-size: var(--sm-font-size);
   background-color: var(--surface-0);
   word-wrap: break-word; 
+  font-size: clamp(10px, 2vw, 14px); 
 }
 
 ul {
