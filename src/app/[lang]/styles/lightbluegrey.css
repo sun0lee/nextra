@@ -697,12 +697,10 @@ article ul .p-accordion-header-link {
   filter: brightness(0.7) contrast(1.2);
 }
 
-.katex-display {
-  display: block;
+
+.katex {
   max-width: 100%;
   overflow-x: auto;
-  text-align: center;
-  font-size: min(4vw, 1em); 
+  font-size: clamp(0.9em, 2.5vw, 1.1em);  
 }
-
 

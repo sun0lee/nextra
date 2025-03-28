@@ -1,0 +1,69 @@
+---
+title: 2.2	Non-Life risk
+---
+## 2.2	Non-Life risk
+### 2.2.1	Definition
+48.	Non-Life risks capital requirement is intended to ensure that IAIG’s hold sufficient capital to protect against the 99.5th percentile of non-life losses over a one-year time horizon. The non-life requirement is split between the risk associated with timing, frequency and severity of future insured events (premium risk) and the risk associated with future payments on insured events that have already occurred (claims reserve risk).
+
+### 2.2.2	ICS methodology
+#### 2.2.2.1	Risks and exposures
+49.	All risk posed by insured events that occur during the one-year time horizon (including on policies that are not recognized on the ICS balance sheet) is included within premium risk. Risk posed by running off insured losses beyond the one-year time horizon is excluded from the ICS. While the ICS allows for a range of other methodologies, this calibration exercise assumes that premium liabilities are valued using an unearned premium allocation approach (see 2.2.3.1). Risk that profits on future policies (including due to lapse, cancellation and changes in premium liability methodology) differs from that currently recognised on the ICS balance sheet is assumed to be zero.
+![aaa](/ics/cal49.png)
+50.	Future events that are included in the ICS catastrophe risk component (e.g. natural catastrophe) are excluded but all other causes of losses (including catastrophic events that do not have a separate capital requirement) are included in premium risk. The risks associated with catastrophic events that have already occurred (including latent liability events) are included within reserve risk.
+51.	The ICS Non-Life capital requirement uses a factor-based approach where a factor for each insurance segment is multiplied by an exposure. The exposure base for premium risk is the expected premium to be earned during the one-year time horizon. As an approximation, IAIG’s can use the net written premium from the prior year. The exposure base for reserve risk is the net current claims estimate. This is the discounted future cashflows on insurance claims that have already occurred including expenses and net of the impact of reinsurance.
+
+#### 2.2.2.2	Segmentation
+52.	To make the most use of existing reporting, ICS segments are based on the same jurisdictional lines of business as used in reporting to local supervisors. For purposes of diversification, segments are grouped into risk category (Liability-like, Property-like, Motor-like, Other) and region (EEA and Switzerland, US and Canada, China, Japan, Other Developed Markets and Other Emerging Markets).
+
+#### 2.2.2.3	Aggregation/Diversification
+53.	Diversification is applied between Premium and Claims Reserve risks, within and between each of the four IAIS categories, and between geographical regions. No geographic diversification is applied within a single geographic region.
+54.	The multi-step aggregation is performed in the following order:
+- a. The first step of aggregation is to combine each ICS segment’s Premium risk and Claims Reserve risk charges, applying a 25% correlation between the Premium and Claims Reserve risk charges. Mortgage business and credit business are added across all regions and then included in the calculation of Real Estate risk and Credit risk, respectively.
+- b. The second step of aggregation is within categories, where the following correlation matrix is applied across segments of a given category:
+  |Categories|Correlation factor<br/>between segments <br/>of the category|
+  |:--:|:--:|
+  |Liability-like |50%|
+  |Motor-like |75%|
+  |Property-like |50%|
+  |Other |25%|
+
+- c. The third step of aggregation is within a region, where a correlation matrix is applied to each of the four aggregated IAIS categories’ risk charge (applying a 50% correlation between ICS categories).
+- d. The fourth step of aggregation is across regions, where a correlation matrix is applied to each region’s total risk charge (applying a 25% correlation between regions).
+
+### 2.2.3	Calibration
+#### 2.2.3.1	Data and assumptions
+55.	The factors were calculated with assumption that:
+- a.the only changes to the balance sheet will be from premiums received during the one-year time horizon will be from losses paid on existing policies and from changes to the estimates the non-life current estimate.
+- b.All other assets and liabilities (including the margin over the non-life current estimate), discount rates and exchange rates are constant.
+- c.All insurers use an unearned premium (aka premium allocation approach) for calculating premium liabilities with an expected combined ratio of 100%.
+56.	Factors were calculated for any segment where data was available for at least three separate insurers. For each insurer, a minimum of 8 years of data was required. (Typical reported triangles include 10 years of data; for US segments, Schedule P’s were combined to produce 20 years of loss history.) Data from “minor lines” (i.e. when a segment is less than 1% of an insurer’s portfolio) was excluded as it was often not representative of the typical risk profile for IAIG’s within that segment.
+57.	Factors were calculated by fitting a lognormal distribution to data from loss triangles. Data points within each segment were centred on a common mean and assumed to have the same standard deviation.
+
+#### 2.2.3.2	Sources
+58.	Where possible, data that has been collected in consistent and complete manner as part of a local reporting requirements was used. Data was provided by the Office of the Superintendent of Financial Institutions (Canada), Financial Services Agency (Japan), Financial Services Commission (Korea), Monetary Authority of Singapore, Prudential Regulatory Authority (UK) and National Association of Insurance Commissioners (USA). Further requests were made to volunteer IAIG’s during the ICS Field Testing process to allow for calibration of factors for jurisdictions where supervisors have only recently begun to collect such data.
+ 
+
+
+#### 2.2.3.3	Premium risk
+59.	For premium risk, a lognormal distribution was fit to the ultimate loss ratio (as evaluated after one year) for each segment. The factor was the 99.5th percentile of the distribution less the expected value. Each loss ratio was assumed to be independent and have an identical standard deviation. The mean loss ratio for each insurer is assumed to be unique: loss ratios were recentred on the segment (as opposed to insurer) mean before the distribution was fit. Where the ultimate loss ratio after one year was not available, the final ultimate loss ratio was used. For jurisdictions that were unable to separately report catastrophic and non-catastrophic loss, the distribution was fit on the total data and the resulting factor was reduced by 10%. While the historical data is undiscounted, the impact on the ICS balance sheet of a loss is discounted. Therefore, factors were reduced by a factor calculated using the payment pattern implied by triangles for each segment and the IAIS discount curves.
+
+#### 2.2.3.4	Claims reserve risk
+60.	For claims reserve risk, a lognormal distribution was fit to the distribution of reserve development for each segment’s loss triangles. Reserve development is defined as the change in the estimate of ultimate loss as a percentage of the outstanding reserve at the beginning of the year. Each year’s development, for all insurers within a segment, was assumed to be independent and identically distributed. The mean reserve development for each segment was recentred on 1 (i.e. reserves at the beginning of the year are assumed to be an accurate estimate of the expected ultimate loss). To allow for the most use of the available triangles, development was only calculated across four accident years. Analysis indicated that one-year development was distorted by the reserving cycle and so factors were calculated using the 99th percentile of two- year development.
+
+#### 2.2.3.5	Selection of factors
+61.	To ensure robustness, results were calculated and compared using a variety of statistical methods. To avoid impact of outliers created by reporting issues, final parameters for segments with sufficient data were estimated using the 50th and 90th percentiles of the segment’s distribution. All factors above 20% were rounded to the nearest 5%. All factors below 20% were rounded to the nearest 2.5% with a floor of 7.5%. An addition, using expert judgment, was made to the reserve risk factors for long-tailed lines to reflect potential for latent liability risk beyond that observed in the historical data.
+62.	For segments without calibration data, a mapping approach was used to align them to the most similar segment for which factors were calibrated. Additionally, expert judgment was used to determine factors for the following segments:
+
+|Region|Segment|updated Prem|updated Res|Original Mapping Prem|Original Mapping Res|
+|--|--|:--:|:--:|:--:|:--:|
+|Australia and NewZealand|Other type A|25%|20%|30%|20%|
+|Australia and NewZealand|Other type B|35%|30%|30%|25%|
+|Australia and NewZealand|consumer Credit|35%|15%|35%|25%|
+|Australia and NewZealand|Motor damage and Liability|25%|15%|25%|20%|
+|HongKong|Fire and Property damage|35%|20%|35%|30%|
+|HongKong|General liability|45%|26%|45%|36%|
+|HongKong|Treaty reinsurance|45%|25%|45%|35%|
+
+#### 2.2.3.6	Aggregation/Diversification
+63.	The correlation factors applied within the Non-Life risk component are based on expert judgement and aim at striking the right balance between simplicity and accuracy by appropriately capturing any tail correlation and non-linear dependencies between subcategories of Non-Life risks.
+
