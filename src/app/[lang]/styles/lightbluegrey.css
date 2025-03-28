@@ -256,6 +256,14 @@
   overflow: hidden;
 }
 
+.p-tabview-nav-content {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior: contain auto;
+  position: relative;
+}
 /* ✅ 탭 네비게이션 바 */
 .p-tabview-nav {
   display: flex;
@@ -264,7 +272,29 @@
   list-style-type: none;
   flex: 1 1 auto;
 }
-
+.p-tabview-nav-link {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  overflow: hidden;
+}
+.p-tabview-ink-bar {
+  display: none;
+  z-index: 1;
+}
+.p-tabview-nav-link:focus {
+  z-index: 1;
+}
+.p-tabview-close {
+  z-index: 1;
+}
+.p-tabview-title {
+  line-height: 1;
+  white-space: nowrap;
+}
 /* ✅ 탭 네비게이션 버튼 */
 .p-tabview-nav-btn {
   position: absolute;
@@ -399,7 +429,7 @@
 /* ✅ 탭 패널 스타일 */
 .p-tabview .p-tabview-panels {
   background: var(--surface-0);
-  padding: var(--content-padding);
+  padding: var(--title-padding);
   border: 0 none;
   color: var(--text-color);
   border-bottom-right-radius: var(--border-radius);
@@ -476,7 +506,7 @@
   padding: var(--title-padding);
   border: 1px solid var(--surface-border);
   color: var(--text-color-secondary);
-  background: var(--warn-bg);
+  background: var(--info-bg);
   font-weight: 700;
   font-size: var(--sm-font-size);
   border-radius: var(--border-radius);
@@ -633,7 +663,7 @@ table {
 th {
   background-color: var(--surface-100);
   font-weight: bold;
-  font-size: clamp(10px, 2vw, 14px); 
+  font-size: clamp(12px, 2vw, 14px); 
   text-align: center;
   word-wrap: break-word; 
 }
@@ -642,15 +672,18 @@ td {
   padding: 4px 10px 4px 10px; /* 상 4px, 우 10px, 하 4px, 좌 10px */
   background-color: var(--surface-0);
   word-wrap: break-word; 
-  font-size: clamp(10px, 2vw, 14px); 
+  font-size: clamp(12px, 2vw, 14px); 
 }
 
-ul {
+article ul:not(.p-tabview-nav) {
   list-style: none;
-  /*text-indent: -0.5rem;
-  padding-left: 1.2rem;*/
+  text-indent: -1rem;
+  /* padding-left: 1.2rem; */
 }
 
+article ul .p-accordion-header-link {
+  text-indent: 0rem;
+}
 
 
 .img {
@@ -665,4 +698,9 @@ ul {
 }
 
 
+.katex {
+  max-width: 100%;
+  overflow-x: auto;
+  font-size: clamp(0.9em, 2.5vw, 1.1em);  
+}
 

@@ -1,0 +1,126 @@
+---
+title: 3.1	Interest rate risk
+---
+## 3.1	Interest rate risk
+### 3.1.1	Definition
+79.	Interest rate risk is defined as the risk of adverse change in the value of capital resources due to unexpected changes in the level or volatility of interest rates. It is calculated as the aggregate of gains or losses under a set of scenarios, arising from independent sources, stressing the level and shape of the yield curve.
+
+### 3.1.2	ICS methodology
+80.	In the ICS, interest rate risk is assessed by applying stresses on a per currency basis. The stresses are combined to determine the final cross-currencies capital requirement using high level assumptions about the linear correlations between currencies and, within a currency, between individual stress scenarios.
+81.	At the currency level, the stress scenarios stem from a  <GTooltip label="Dynamic Nelson Siegel (DNS)" desc="As described in the article Diebold, F.X. and Li C (2006).“Forecasting the Term Structure of Government Bond Yields”. Journal of Econometrics, 130, 337-364"/> modelling simplified in two ways: 
+  1) the specification of the model commands the K matrix which restricts the mean-reversion behaviour to be diagonal; 
+  2) when calibrating stress scenarios from the model output, an approach similar to a principal-component-analysis reduces the number of individual stress scenarios.
+82.	The second simplification results in three individual scenarios, one representing the mean- reversion property of the DNS approach accompanied by a set of two symmetric scenarios.
+83.	The application of the stress scenarios remains aligned with the three-segment approach used for construction of the risk-free yield curve: scenario results are applied only on the first segment of the curve. The grading of the stresses between the end of the first segment and the start of the third segment relies on the automatic grading that is part of the Smith-Wilson method used to interpolate and extrapolate yield curves in between and outside of the point estimates. The magnitude of the level stress on the third segment has been set at 10% based on expert judgment and is capped at the maximum annual change described in the three-segments valuation specifications (15 bps).
+84.	The Interest Rate risk charge is calculated as:
+$$
+max \Bigg(0, \sum_{i} MR_i + Var_{99.5}\Big(\sum_i LT_i\Big)\Bigg)
+$$
+- where
+  - • $i$ is an index over all currencies in which the IAIG is exposed to Interest Rate risk;
+  - • $MR_i$ iis the result of the mean reversion scenario for currency $i$; and 
+  - • $LT_i$ is a random variable encompassing the results of the level up and level down scenarios for currency $i$
+85.	For currency $i$, $LT_i$ is defined as:
+$$
+\dfrac{1}{N^{-1}(0.995)} \times (LU_i max(X_i,0)-LD_i min(X_i,0))
+$$
+- where:
+  - • $N^{-1}(0.995)$ is the 99.5% quantile of the standardised normal distribution;
+  - • $LU_i$ and $LD_i$ are the results of the level up and level down scenarios respectively; and
+  - • $X_i$ is a random variable following a standardised normal distribution such that for any $i \neq j$, $corr(X_i, X_j)=0.75$,
+86.	Because there is no simple closed form solution to obtain the aggregate requirement, the requirement is calculated using direct simulation. The simulation algorithm is based on a large number of scenarios using random variables $\{X_i\}$ with the above correlation structure, and for each scenario calculates the quantity $\sum_i LT_i$. The aggregate requirement is the sum of all mean reversion losses and the 99.5th percentile of the level sum.
+
+
+### 3.1.3	Calibration
+87.	For each currency, calibrating the stresses is based on determining the optimum parameters for the DNS model. This optimisation is performed by formulating the time series of the DNS parameter as a state space model and using  <GTooltip label="the Kalman Filter technique" desc="See for example, Kalman, R.E. (1960). “A new approach to Linear Filtering and Prediction Problems”. Journal of Basic Engineering. 82 (1): 35-45"/> to find the set of parameters ( $\kappa_{11}$, $\kappa_{22}$, $\kappa_{33}$, $\theta_1$, $\theta_2$, $\theta_3$, $\sigma_{11}$, $\sigma_{21}$, $\sigma_{22}$,$\sigma_{31}$, $\sigma_{32}$, $\sigma_{33}$ ) which maximise the log-likelihood.
+88.	The dataset used for this calibration is made of weekly interest rate observations starting at 1 January 2010 up to the relevant date of the interest rate curve. Maturities used for the calibration are (in years) 1,2,3,4,5,6,7,8,9,10,20,30 to the extent available (eg if the Last Observable Term is at year 10, then no data for years 20 and 30 are used). For each successive calibration, the starting point of the optimisation process is the optimum set of parameters found the previous year. The initial calibration was performed assuming no random component in the model.
+89.	No filtering adjustment is applied to the raw dataset to derive the calibration. The weekly observations are transformed into zero-coupon spot rates, using the same methodology as for the risk-free rate curve – i.e. including a credit risk adjustment of 10 basis points when the observed instruments are not considered risk-free, eg government bonds.
+90.	Under the Dynamic Nelson-Siegel model, the yield curve at time t is described in closed form as a linear combination of a level curve ($L_t$), a slope curve ($S_t$), and a curvature curve ($C_t$):
+$$
+y_t(\tau) = L_t + S_t \Big( \dfrac{1-e^{-\lambda \tau}}{\lambda \tau} \Big) + C_t \Big( \dfrac{1-e^{-\lambda \tau}}{\lambda \tau} -e^{-\lambda \tau} \Big)
+$$
+
+91.	The dynamic of the change in the yield curve - restricted to model definitions where mean- reversion matrix is diagonal<GTooltipIcon desc="A fully flexible model with cross terms in the mean reversion factors (i.e. with non-diagonal elements in the K matrix) was also tested, without much difference."/> - is described by the following transition equation:
+$$
+\begin{bmatrix}
+    dL_t \\
+    dS_t \\
+    dC_t
+\end{bmatrix} =
+\begin{bmatrix}
+    \kappa_{11} & 0 & 0 \\
+    0 & \kappa_{22} & 0 \\
+    0 & 0 & \kappa_{33}
+\end{bmatrix}
+\left[
+\begin{bmatrix}
+    \theta_1 \\
+    \theta_2 \\
+    \theta_3
+\end{bmatrix}
+-
+\begin{bmatrix}
+    L_t \\
+    S_t \\
+    C_t
+\end{bmatrix}
+\right] dt +
+\begin{bmatrix}
+    \sigma_{11} & 0 & 0 \\
+    \sigma_{21} & \sigma_{22} & 0 \\
+    \sigma_{31} & \sigma_{32} & \sigma_{33}
+\end{bmatrix}
+\begin{bmatrix}
+    dW_t^L \\
+    dW_t^S \\
+    dW_t^C
+\end{bmatrix}
+$$
+92.	From this model specification, the DNS shocks are computed using the following algorithm.
+
+<GCallout severity="info" title ="DNS shock algorithm">
+1) Fit L, S and C to the discrete year-end data points using least squares. That is, choose L, S and C so that the sum of the squares of the difference between L\*Level Curve + S\*Slope Curve +C\*Curvature Curve at the terms for which there are data points, and the data points themselves, is minimised. This initial vector ($L$, $S$, $C$) is referred to as $V_0$.
+2) The mean reversion shock, expressed as a ($L$, $S$, $C$) vector is: $(I-e^{-k})(\theta-V_0)$ 
+- – where $I$ is the 3 x 3 identity matrix. This linear combination of the DNS curves gets added to the year-end rates.
+3) One set of shocks that could be placed under the square root, expressed as ($L$, $S$, $C$) vectors, consists of the columns of the square root of the conditional covariance matrix (using $\odot$ as the Hadamard product operator):
+$$
+M = \sqrt{(\sum\sum^T) \odot \Big( \dfrac{1-e^{-(K_i+K_j)}}{K_i+K_j}\Big)_{ij}}
+$$
+- multiplied by the normal percentile 𝑁−1(0.995), where:
+$
+K = \begin{bmatrix}
+    K_1 & 0 & 0 \\
+    0 & K_2 & 0 \\
+    0 & 0 & K_3
+\end{bmatrix}
+$
+4) In order to reduce the workload on the insurers and keep this method comparable to the principal components approach used previously, a principal components-type analysis on the three shocks available is performed and the most significant shock is kept<GTooltipIcon desc="This shock account for around 95% of the requirements."/>. Let:
+  $$
+  N =
+  \begin{bmatrix}
+      LOT \; & 0 \;& 0 \\
+      0 & a  \; & 0 \\
+      0 & 0 \; & b
+  \end{bmatrix}
+  M
+  $$
+  <GCmt>
+    - • $LOT$ = Last Observed Term (eg 30 for USD) 
+    - • $a$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau}$
+    - • $b$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau} - e^{-\lambda \tau}$
+  </GCmt>
+- – Diagonalise the matrix $NTN$, and let $e_1$ be the eigenvector of $NTN$ (with $\|e_1\|=1$) that have the largest eigenvalue (i.e. the two eigenvectors with the lowest eigenvalues are discarded). The remaining shock is defined by $Me_1$.
+5) The final shock is defined by *Level shock* = $N^{-1}(0.995) * Me_1$.
+6) The actual shocked curves are equal to the year-end curve plus or minus the linear combination of DNS curves, with coefficients taken from the components of the vector *Level shock*. For example, if Level shock is equal to:
+$
+\begin{bmatrix}
+    0.03 \\
+    0.002 \\
+    0.01
+\end{bmatrix}
+$ then the corresponding shocked curves are: Year-end curve $\pm N^{-1} (0.995)$ $*0.03$ Level Curve  $+ 0.002$ Slope Curve $+ 0.01$ Curvature Curve)
+</GCallout>
+
+93. IAIGs operating in multiple jurisdictions are exposed to interest rate risk in more than one currency. The cross-currency aggregation is based on modelling the full joint distribution of the interest rate risk level random variables across currencies with a 75% pairwise linear correlation assumption between currencies. In times of crisis, spikes in interest rates are observed to be significantly correlated between currencies whereas they are not observed to be fully correlated in normal conditions, which, on a simplified scale of [0%, 25%, 50%, 75%, 100%] is best represented by 75%. To limit the complexity of the model, the per currency scenario assessment is limited to the 7 most material currencies, representing a trade-off between accuracy and simplicity.
+94. During the monitoring period, 20,000 realisations of the multivariate correlated observations were used to evaluate the percentile of the Level aggregate. Using more simulations, e.g. 30,000, was also tested without a discernible increase in the simulation result accuracy but with a significant impact on the reporting template size. Correlated observations were obtained by transforming independent realisations of the normal law using the Cholesky decomposition<GTooltipIcon desc="See for example, Lloyd N.Tefethen and David Bau. Numerical Linear Algebra"/> of the correlation structure. Independent realisations of the normal distribution were obtained using the Mersenne Twister pseudorandom number generator.<GTooltipIcon desc="See for example, Matsumoto, M. and Nishimura T. (1998). “Mersenne twister: a 623-dimensionally equidistributed uniform pseudo-random generator”. ACM Transactions on Modelling and Computer Simulation 8 (1): 3-30."/>
+![Cholesky factorization of the covariance matrix](/ics/cal94.png)

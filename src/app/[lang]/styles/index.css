@@ -214,17 +214,17 @@
   --highlight-bg: #eff6ff;
   --highlight-text-color: #1d4ed8;
 
-  --info-bg: #E3F2FD; 
-  --info-text: #1565C0; 
-  --info-icon: #1565C0; 
+  --info-bg: #F1F5F9; 
+  --info-text: #3B4A63; 
+  --info-icon: #3B4A63; 
   
-  --success-bg: #E8F5E9;
-  --success-text: #2E7D32;
-  --success-icon: #2E7D32;
+  --success-bg: #EEF3F3;
+  --success-text: #3C5958;
+  --success-icon: #3c5958;
   
-  --warn-bg: #F1F5F9; /* 연한 회색 배경 */
-  --warn-text: #1F2937; /* 어두운 회색 텍스트 */
-  --warn-icon: #1F2937; /* 아이콘 색상 동일 */
+  --warn-bg: #f7f3e9ee; 
+  --warn-text: #3a3519d8; 
+  --warn-icon: #3a3519d8; 
 
   --error-bg: #FFEBEE;
   --error-text: #D32F2F;
@@ -305,17 +305,17 @@
   --highlight-bg: rgba(96, 165, 250, 0.16);
   --highlight-text-color: rgba(255, 255, 255, 0.87);
 
-  --info-bg: #1E293B; 
-  --info-text: #D1E3F2; 
-  --info-icon: #D1E3F2; 
+  --info-bg: #2D3748; 
+  --info-text: #CBD5E0; 
+  --info-icon: #CBD5E0; 
   
-  --success-bg: #1B3C32;
-  --success-text: #A5D6A7;
-  --success-icon: #A5D6A7;
+  --success-bg: #2A3B3B;
+  --success-text: #A7C4C3;
+  --success-icon: #89A6A5;
   
-  --warn-bg: #2D3748; /* 어두운 회색 배경 */
-  --warn-text: #CBD5E0; /* 밝은 회색 텍스트 */
-  --warn-icon: #CBD5E0; /* 아이콘 색상 동일 */
+  --warn-bg: #2A2A2A; 
+  --warn-text: #D6D6D6; 
+  --warn-icon: #D6D6D6; 
 
   --error-bg: #3C1E1E;
   --error-text: #F28B82;
