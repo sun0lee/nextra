@@ -256,6 +256,14 @@
   overflow: hidden;
 }
 
+.p-tabview-nav-content {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior: contain auto;
+  position: relative;
+}
 /* ✅ 탭 네비게이션 바 */
 .p-tabview-nav {
   display: flex;
@@ -264,7 +272,29 @@
   list-style-type: none;
   flex: 1 1 auto;
 }
-
+.p-tabview-nav-link {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  overflow: hidden;
+}
+.p-tabview-ink-bar {
+  display: none;
+  z-index: 1;
+}
+.p-tabview-nav-link:focus {
+  z-index: 1;
+}
+.p-tabview-close {
+  z-index: 1;
+}
+.p-tabview-title {
+  line-height: 1;
+  white-space: nowrap;
+}
 /* ✅ 탭 네비게이션 버튼 */
 .p-tabview-nav-btn {
   position: absolute;
@@ -399,7 +429,7 @@
 /* ✅ 탭 패널 스타일 */
 .p-tabview .p-tabview-panels {
   background: var(--surface-0);
-  padding: var(--content-padding);
+  padding: var(--title-padding);
   border: 0 none;
   color: var(--text-color);
   border-bottom-right-radius: var(--border-radius);
