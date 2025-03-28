@@ -74,7 +74,7 @@ const GMath = ({
   children: ReactNode
 }) => {
   const _title = title ? `❱❱ ${title} ` : ''
-  const _severity = severity || 'warn'
+  const _severity = severity || 'success'
   const _width = width || '100%'
 
   return (

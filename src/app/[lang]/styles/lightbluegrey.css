@@ -476,7 +476,7 @@
   padding: var(--title-padding);
   border: 1px solid var(--surface-border);
   color: var(--text-color-secondary);
-  background: var(--warn-bg);
+  background: var(--info-bg);
   font-weight: 700;
   font-size: var(--sm-font-size);
   border-radius: var(--border-radius);
@@ -633,7 +633,7 @@ table {
 th {
   background-color: var(--surface-100);
   font-weight: bold;
-  font-size: clamp(10px, 2vw, 14px); 
+  font-size: clamp(12px, 2vw, 14px); 
   text-align: center;
   word-wrap: break-word; 
 }
@@ -642,15 +642,18 @@ td {
   padding: 4px 10px 4px 10px; /* 상 4px, 우 10px, 하 4px, 좌 10px */
   background-color: var(--surface-0);
   word-wrap: break-word; 
-  font-size: clamp(10px, 2vw, 14px); 
+  font-size: clamp(12px, 2vw, 14px); 
 }
 
-ul {
+article ul:not(.p-tabview-nav) {
   list-style: none;
-  /*text-indent: -0.5rem;
-  padding-left: 1.2rem;*/
+  text-indent: -1rem;
+  /* padding-left: 1.2rem; */
 }
 
+article ul .p-accordion-header-link {
+  text-indent: 0rem;
+}
 
 
 .img {
@@ -664,5 +667,12 @@ ul {
   filter: brightness(0.7) contrast(1.2);
 }
 
+.katex-display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  text-align: center;
+  font-size: min(4vw, 1em); 
+}
 
 
