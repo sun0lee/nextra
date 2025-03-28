@@ -1,0 +1,192 @@
+---
+title: 3. Market risks
+---
+
+# 3. Market risks
+## 3.1	Interest rate risk
+### 3.1.1	Definition
+
+
+79. 금리 위험은 금리 수준 또는 변동성이 예상과 다르게 변화하여 자본 자원(capital resources) 가치가 불리하게 변동할 위험으로 정의됨.
+- • 여러 독립적인 요인에서 발생하는 시나리오별 손익을 집계하여 산출함.
+
+
+### 3.1.2	ICS methodology
+
+80. ICS에서는 금리 위험을 개별 통화 단위로 평가하며, 스트레스 결과를 통합하여 최종 금리 위험 자본 요구량을 산출함.
+- • 통화 간 및 동일 통화 내 개별 스트레스 시나리오 간의 선형 상관관계를 반영하여 집계됨.
+
+
+81. 통화별 스트레스 시나리오는 두 가지 단순화를 적용한  <GTooltip label="동적 넬슨시겔(DNS)" desc="As described in the article Diebold, F.X. and Li C (2006).“Forecasting the Term Structure of Government Bond Yields”. Journal of Econometrics, 130, 337-364"/> 모델을 기반으로 설정됨.
+  1) 모델의 구조가 K 행렬을 결정하며, 평균회귀(mean-reversion) 행동을 대각선으로 제한함.
+  2) 모델 결과에서 스트레스 시나리오를 산출할 때, 주성분 분석(Principal Component Analysis)과 유사한 접근 방식을 사용하여 개별 스트레스 시나리오 개수를 줄임.
+
+
+82. 이러한 단순화로 인해 3개의 개별 시나리오가 도출됨.
+  1) 평균회귀 시나리오
+  2) 대칭적으로 설정된 두 개의 추가 시나리오
+
+83. 스트레스 시나리오는 무위험 수익률 곡선(risk-free yield curve) 구축에 사용되는 세그먼트 구조와 정합성을 유지함.
+- • 스트레스 결과는 곡선의 첫 번째 구간에만 적용됨.
+- • 첫 번째 세그먼트 종료부터 세 번째 세그먼트 시작까지의 구간은 스미스-윌슨(Smith-Wilson) 방법을 활용하여 자동 조정됨.
+- • 세 번째 세그먼트의 스트레스 크기는 전문가 판단에 따라 10%로 설정되며, 연간 최대 변동폭(15bp)으로 상한 제한됨.
+
+84. 금리 위험 계수는 다음과 같이 계산됨.
+
+<GMath title ="금리위험계수">
+$$
+max \Bigg(0, \sum_{i} MR_i + Var_{99.5}\Big(\sum_i LT_i\Big)\Bigg)
+$$
+
+<GCmt>
+ - • $i$: 금리 위험에 익스포져가 있는 모든 통화
+ - • $MR_i$ :  통화 $i$의 평균회귀 시나리오 결과
+ - • $LT_i$ : 통화 $i$의 금리 상승 및 하락 시나리오를 포함하는 확률 변수
+</GCmt>
+</GMath>
+
+
+85. 통화 $i$에 대한 $LT_i$는 다음과 같이 정의됨.
+<GMath title ="LT">
+$$
+\dfrac{1}{N^{-1}(0.995)} \times (LU_i max(X_i,0)-LD_i min(X_i,0))
+$$
+<GCmt>
+- • $N^{-1}(0.995)$: 표준 정규분포의 99.5% 분위수
+- • $LU_i$ , $LD_i$: 각각 금리 상승 및 하락 시나리오의 결과
+- • $X_i$: 표준 정규분포를 따르는 확률변수이며, 통화 $i$와 $j$의 상관계수 $corr(X_i, X_j)=0.75$
+</GCmt>
+</GMath>
+
+
+86. 집계된 자본요구량을 닫힌 형태의 해(closed-form solution)로 직접 도출하는 것은 어렵기 때문에, 직접 시뮬레이션 방식으로 계산함.
+ - • $\{X_i\}$ 확률 변수의 상관구조를 반영하여 다수의 시나리오를 생성한 후, 각 시나리오에서 $\sum_i LT_i$ 를 계산함.
+ - • 최종 자본요구량은 모든 평균회귀 손실과 99.5% 분위수의 합으로 결정됨.
+
+### 3.1.3	Calibration
+
+
+87. 각 통화의 스트레스 보정은 동적 넬슨-시겔(DNS) 모델의 최적 매개변수를 결정하는 방식으로 수행됨.
+ - • DNS 매개변수의 시계열을 상태공간(state space) 모델로 설정하고 <GTooltip label="칼만 필터(Kalman Filter)" desc="See for example, Kalman, R.E. (1960). “A new approach to Linear Filtering and Prediction Problems”. Journal of Basic Engineering. 82 (1): 35-45"/> 기법을 사용하여 로그우도(log-likelihood)를 극대화하는 파라미터( $\kappa_{11}$, $\kappa_{22}$, $\kappa_{33}$, $\theta_1$, $\theta_2$, $\theta_3$, $\sigma_{11}$, $\sigma_{21}$, $\sigma_{22}$,$\sigma_{31}$, $\sigma_{32}$, $\sigma_{33}$ )를 찾음.
+
+88. 위험계수 산출에 사용된 데이터는 2010년 1월 1일부터 해당 시점의 금리 곡선 데이터까지의 주간(weekly) 금리 관측치로 구성됨.
+ - • 사용된 만기: 1,2,3,4,5,6,7,8,9,10,20,30년 (데이터 가용성에 따라 조정됨).
+ - • 각 연도별 위험계수 산출 시, 이전 연도의 최적 매개변수를 초기값으로 사용하여 연속성을 유지함.
+
+89. 위험계수 산출을 위해 원시 데이터(raw dataset)에 별도의 필터링 조정을 적용하지 않음.
+ - • 주간 금리 관측치는 동일한 방법론을 사용하여 제로쿠폰(Zero-coupon) 스팟 금리로 변환됨.
+ - • 무위험 금리가 아닌 채권(예: 정부채)에는 신용 위험 조정(Credit Risk Adjustment) 10bp를 적용함.
+
+90. DNS 모델에서는 시점 𝑡에서의 금리 곡선을 다음과 같이 정의함.
+<GMath title ="t시점의 DNS curve">
+$$
+y_t(\tau) = L_t + S_t \Big( \dfrac{1-e^{-\lambda \tau}}{\lambda \tau} \Big) + C_t \Big( \dfrac{1-e^{-\lambda \tau}}{\lambda \tau} -e^{-\lambda \tau} \Big)
+$$
+<GCmt>
+  - • 수준(Level, $L_t$), 기울기(Slope, $S_t$), 곡률(Curvature, $C_t$)의 선형 조합으로 표현됨.
+</GCmt>
+</GMath>
+
+
+91. DNS 모델의 평균회귀 행렬이 대각 행렬로 제한되는 경우<GTooltipIcon desc="평균회귀 요인의 교차항이 포함된 완전 유연한 모델(즉, K 행렬의 비대각선 요소가 있는 모델)도 테스트했음. 그러나 큰 차이는 없었음"/>, 수익률 곡선 변화의 동적 특성은 다음과 같은 전이 방정식으로 설명됨.
+$$
+\begin{bmatrix}
+    dL_t \\
+    dS_t \\
+    dC_t
+\end{bmatrix} =
+\begin{bmatrix}
+    \kappa_{11} & 0 & 0 \\
+    0 & \kappa_{22} & 0 \\
+    0 & 0 & \kappa_{33}
+\end{bmatrix}
+\left[
+\begin{bmatrix}
+    \theta_1 \\
+    \theta_2 \\
+    \theta_3
+\end{bmatrix}
+-
+\begin{bmatrix}
+    L_t \\
+    S_t \\
+    C_t
+\end{bmatrix}
+\right] dt +
+\begin{bmatrix}
+    \sigma_{11} & 0 & 0 \\
+    \sigma_{21} & \sigma_{22} & 0 \\
+    \sigma_{31} & \sigma_{32} & \sigma_{33}
+\end{bmatrix}
+\begin{bmatrix}
+    dW_t^L \\
+    dW_t^S \\
+    dW_t^C
+\end{bmatrix}
+$$
+
+92. 이 모델 사양을 기반으로, DNS 충격(Shock)은 다음 알고리즘을 사용하여 계산됨.
+
+<GCallout severity="info" title ="DNS shock algorithm">
+1) 연말시점(이산형)의 금리 데이터를 이용하여 최소제곱법으로 L, S, C를 추정함. 
+    - – 즉, L\*Level Curve + S\*Slope Curve +C\*Curvature Curve 와 연말 시점의 금리데이터 간의 차이의 제곱 합이 최소화되도록 L, S, C를 선택함. 
+    - – 이때 초기 벡터($L$, $S$, $C$)는 $V_0$로 지칭됨.
+2) 평균회귀 충격은 ($L$, $S$, $C$) 벡터로 표현되며, 식은 다음과 같음: 
+$$
+(I-e^{-k})(\theta-V_0)
+$$ 
+    - – 여기서 $I$는 3x3 단위행렬임. 이 DNS 곡선들의 선형 결합으로 연말금리 추정치를 조정함.
+
+3) 충격세트는 ($L$, $S$, $C$) 벡터로 표현되며, 조건부 공분산 행렬의 제곱근 $M$에 정규 백분위수 $N^{-1}$(0.995)를 곱하여 산출함. 
+$$
+M = \sqrt{(\sum\sum^T) \odot \Big( \dfrac{1-e^{-(K_i+K_j)}}{K_i+K_j} \Big)_{ij}}
+$$
+    - – 이 때  $
+K = \begin{bmatrix}
+    K_1 & 0 & 0 \\
+    0 & K_2 & 0 \\
+    0 & 0 & K_3
+\end{bmatrix}
+$, $\odot$는 Hadamard 곱 연산자 
+
+4) 보험사들의 작업 부담을 줄이고, 이전에 사용된 주성분 분석(Principal Component Analysis, PCA)과 비교할 수 있도록, 사용 가능한 세 가지 충격에 대해 주성분 분석을 수행하고 가장 중요한 충격<GTooltipIcon desc="이 충격은 요구자본량의 약 95%를 차지함"/>을 선택함.
+  $$
+  N =
+  \begin{bmatrix}
+      LOT \; & 0 \;& 0 \\
+      0 & a  \; & 0 \\
+      0 & 0 \; & b
+  \end{bmatrix}
+  M
+  $$
+<GCmt>
+  - • $LOT$ = Last Observed Term (eg 30 for USD) 
+  - • $a$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau}$
+  - • $b$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau} - e^{-\lambda \tau}$
+</GCmt>
+- – 먼저 행렬 $NTN$을 대각화하고, $NTN$의 가장 큰 고유값을 가진 고유벡터 $e_1$를 산출함.($\|e_1\|=1$, 즉 정규환 고유벡터). 가장 작은 두 고유값을 가진 고유벡터는 버리고, 남은 충격은 $Me_1$로 정의됨. 
+5) 최종 충격은 수준충격 *Level shock* = $N^{-1}(0.995) * Me_1$ 으로 정의됨.
+6) 실제 충격을 적용한 곡선은 연말 커브에 DNS커브들의 선형 결합을 더하거나 빼서 산출함. 이때 계수는 레벨 충격(Level shock) 벡터의 성분에서 가져옴. 
+- – 예를 들어, 수준 충격이 
+$
+\begin{bmatrix}
+    0.03 \\
+    0.002 \\
+    0.01
+\end{bmatrix}
+$ 라면
+- – 연도말 충격 커브는 $\pm N^{-1} (0.995)$ $*0.03$ Level Curve  $+ 0.002$ Slope Curve $+ 0.01$ Curvature Curve)
+</GCallout>
+
+93. 여러 국가에서 운영되는 IAIG는 여러 통화에서 금리 위험에 노출되어 있음. 
+- • 금리 리스크 합산은 통화 간 금리 위험 수준 확률 변수의 전체 공동 분포를 모델링하며, 통화 간 75%의 쌍별 선형 상관관계(pairwise linear correlation)를 가정함.
+- • 금융위기 시 금리 급등은 통화 간 상당한 상관관계를 보이지만, 정상적인 조건에서는 완전한 상관관계는 나타나지 않음. [0%, 25%, 50%, 75%, 100%] 척도에서 75%가 가장 적합함.
+- • 모델 복잡도를 제한하기 위해, 7개의 주요 통화에 대해서만 개별 시나리오 평가를 수행하며, 이는 정확성과 단순성 간의 균형을 맞추기 위한 선택임.
+
+94. 모니터링 기간 동안, 다변량 상관관계를 반영한 20,000개의 시뮬레이션을 수행하여 집계된 수준의 분위수를 평가함.
+- • 30,000개 시뮬레이션도 테스트했으나 정확도 개선 없이 보고 템플릿 크기만 증가하여 사용하지 않음.
+- • 독립적 정규분포 샘플을 생성 후, 촐레스키 분해(Cholesky Decomposition)<GTooltipIcon desc="See for example, Lloyd N.Tefethen and David Bau. Numerical Linear Algebra"/>를 사용하여 상관관계를 적용함.
+- • 정규 분포의 독립적인 난수는 Mersenne Twister 의사난수 생성기<GTooltipIcon desc="See for example, Matsumoto, M. and Nishimura T. (1998). “Mersenne twister: a 623-dimensionally equidistributed uniform pseudo-random generator”. ACM Transactions on Modelling and Computer Simulation 8 (1): 3-30."/>를 사용
+
+![Cholesky factorization of the covariance matrix](/ics/cal94.png)
+
