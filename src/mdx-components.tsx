@@ -112,7 +112,6 @@ const GTooltip = ({ label, desc }: { label: string, desc: string }) => {
         link
         label={label}
         className="tooltip-target !bg-transparent !border-none !shadow-none  !py-0 !px-0 !mx-0 !text-inherit underline underline-offset-4 decoration-dashed decoration-yellow-500/50 "
-        style={{ fontFamily: 'NotoSansKR' }}
         data-pr-tooltip={desc}
         data-pr-position="mouse"
         data-pr-at="left bottom"
@@ -167,6 +166,7 @@ const GCmt = ({
     fontWeight: '400',
     color: 'var(--surface-700)',
     letterSpacing: '-0.04em',
+    marginTop: '1.25rem',
   }
 
   const contentStyle = {

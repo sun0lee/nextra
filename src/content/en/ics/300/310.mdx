@@ -1,5 +1,5 @@
 ---
-title: 3.1	Interest rate risk
+title: 3.1	Interest rate 
 ---
 ## 3.1	Interest rate risk
 ### 3.1.1	Definition
@@ -7,7 +7,7 @@ title: 3.1	Interest rate risk
 
 ### 3.1.2	ICS methodology
 80.	In the ICS, interest rate risk is assessed by applying stresses on a per currency basis. The stresses are combined to determine the final cross-currencies capital requirement using high level assumptions about the linear correlations between currencies and, within a currency, between individual stress scenarios.
-81.	At the currency level, the stress scenarios stem from a  <GTooltip label="Dynamic Nelson Siegel (DNS)" desc="As described in the article Diebold, F.X. and Li C (2006).“Forecasting the Term Structure of Government Bond Yields”. Journal of Econometrics, 130, 337-364"/> modelling simplified in two ways: 
+81.	At the currency level, the stress scenarios stem from a Dynamic Nelson Siegel <GTooltip label="(DNS)" desc="As described in the article Diebold, F.X. and Li C (2006).“Forecasting the Term Structure of Government Bond Yields”. Journal of Econometrics, 130, 337-364"/> modelling simplified in two ways: 
   1) the specification of the model commands the K matrix which restricts the mean-reversion behaviour to be diagonal; 
   2) when calibrating stress scenarios from the model output, an approach similar to a principal-component-analysis reduces the number of individual stress scenarios.
 82.	The second simplification results in three individual scenarios, one representing the mean- reversion property of the DNS approach accompanied by a set of two symmetric scenarios.
@@ -32,7 +32,7 @@ $$
 
 
 ### 3.1.3	Calibration
-87.	For each currency, calibrating the stresses is based on determining the optimum parameters for the DNS model. This optimisation is performed by formulating the time series of the DNS parameter as a state space model and using  <GTooltip label="the Kalman Filter technique" desc="See for example, Kalman, R.E. (1960). “A new approach to Linear Filtering and Prediction Problems”. Journal of Basic Engineering. 82 (1): 35-45"/> to find the set of parameters ( $\kappa_{11}$, $\kappa_{22}$, $\kappa_{33}$, $\theta_1$, $\theta_2$, $\theta_3$, $\sigma_{11}$, $\sigma_{21}$, $\sigma_{22}$,$\sigma_{31}$, $\sigma_{32}$, $\sigma_{33}$ ) which maximise the log-likelihood.
+87.	For each currency, calibrating the stresses is based on determining the optimum parameters for the DNS model. This optimisation is performed by formulating the time series of the DNS parameter as a state space model and using  <GTooltip label="the Kalman Filter" desc="See for example, Kalman, R.E. (1960). “A new approach to Linear Filtering and Prediction Problems”. Journal of Basic Engineering. 82 (1): 35-45"/>technique to find the set of parameters ( $\kappa_{11}$, $\kappa_{22}$, $\kappa_{33}$, $\theta_1$, $\theta_2$, $\theta_3$, $\sigma_{11}$, $\sigma_{21}$, $\sigma_{22}$,$\sigma_{31}$, $\sigma_{32}$, $\sigma_{33}$ ) which maximise the log-likelihood.
 88.	The dataset used for this calibration is made of weekly interest rate observations starting at 1 January 2010 up to the relevant date of the interest rate curve. Maturities used for the calibration are (in years) 1,2,3,4,5,6,7,8,9,10,20,30 to the extent available (eg if the Last Observable Term is at year 10, then no data for years 20 and 30 are used). For each successive calibration, the starting point of the optimisation process is the optimum set of parameters found the previous year. The initial calibration was performed assuming no random component in the model.
 89.	No filtering adjustment is applied to the raw dataset to derive the calibration. The weekly observations are transformed into zero-coupon spot rates, using the same methodology as for the risk-free rate curve – i.e. including a credit risk adjustment of 10 basis points when the observed instruments are not considered risk-free, eg government bonds.
 90.	Under the Dynamic Nelson-Siegel model, the yield curve at time t is described in closed form as a linear combination of a level curve ($L_t$), a slope curve ($S_t$), and a curvature curve ($C_t$):

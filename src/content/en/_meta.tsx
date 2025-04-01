@@ -25,6 +25,7 @@ export default {
     theme: {
       navbar: true,
       toc: true,
+      collapsed: false,
     },
   },
   kics: {
@@ -35,5 +36,10 @@ export default {
       </span>
     ),
     type: 'page',
+    theme: {
+      navbar: true,
+      toc: true,
+      collapsed: false,
+    },
   },
 } satisfies MetaRecord

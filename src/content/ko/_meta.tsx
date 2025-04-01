@@ -24,6 +24,7 @@ export default {
     type: 'page',
     theme: {
       navbar: true,
+      collapsed: true,
       toc: true,
     },
   },
@@ -38,7 +39,7 @@ export default {
     theme: {
       typesetting: 'default',
       navbar: true,
-      collapsed: false,
+      collapsed: true,
       toc: true,
     },
   },
