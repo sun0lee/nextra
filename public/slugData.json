@@ -1,0 +1,639 @@
+[
+  {
+    "actualUrl": "ics/100",
+    "targetUrl": "/en/ics/100",
+    "lang": "en",
+    "category": "ics",
+    "slug": "100"
+  },
+  {
+    "actualUrl": "ics/200/210",
+    "targetUrl": "/en/ics/210",
+    "lang": "en",
+    "category": "ics",
+    "slug": "210"
+  },
+  {
+    "actualUrl": "ics/200/220",
+    "targetUrl": "/en/ics/220",
+    "lang": "en",
+    "category": "ics",
+    "slug": "220"
+  },
+  {
+    "actualUrl": "ics/200/230",
+    "targetUrl": "/en/ics/230",
+    "lang": "en",
+    "category": "ics",
+    "slug": "230"
+  },
+  {
+    "actualUrl": "ics/300/310",
+    "targetUrl": "/en/ics/310",
+    "lang": "en",
+    "category": "ics",
+    "slug": "310"
+  },
+  {
+    "actualUrl": "ics/300/320",
+    "targetUrl": "/en/ics/320",
+    "lang": "en",
+    "category": "ics",
+    "slug": "320"
+  },
+  {
+    "actualUrl": "ics/300/330",
+    "targetUrl": "/en/ics/330",
+    "lang": "en",
+    "category": "ics",
+    "slug": "330"
+  },
+  {
+    "actualUrl": "ics/300/340",
+    "targetUrl": "/en/ics/340",
+    "lang": "en",
+    "category": "ics",
+    "slug": "340"
+  },
+  {
+    "actualUrl": "ics/300/350",
+    "targetUrl": "/en/ics/350",
+    "lang": "en",
+    "category": "ics",
+    "slug": "350"
+  },
+  {
+    "actualUrl": "ics/300/360",
+    "targetUrl": "/en/ics/360",
+    "lang": "en",
+    "category": "ics",
+    "slug": "360"
+  },
+  {
+    "actualUrl": "ics/400",
+    "targetUrl": "/en/ics/400",
+    "lang": "en",
+    "category": "ics",
+    "slug": "400"
+  },
+  {
+    "actualUrl": "ics/500",
+    "targetUrl": "/en/ics/500",
+    "lang": "en",
+    "category": "ics",
+    "slug": "500"
+  },
+  {
+    "actualUrl": "ics/600",
+    "targetUrl": "/en/ics/600",
+    "lang": "en",
+    "category": "ics",
+    "slug": "600"
+  },
+  {
+    "actualUrl": "ics/700",
+    "targetUrl": "/en/ics/700",
+    "lang": "en",
+    "category": "ics",
+    "slug": "700"
+  },
+  {
+    "actualUrl": "ics/index",
+    "targetUrl": "/en/ics/index",
+    "lang": "en",
+    "category": "ics",
+    "slug": "index"
+  },
+  {
+    "actualUrl": "introduction/000",
+    "targetUrl": "/en/introduction/000",
+    "lang": "en",
+    "category": "introduction",
+    "slug": "000"
+  },
+  {
+    "actualUrl": "introduction/index",
+    "targetUrl": "/en/introduction/index",
+    "lang": "en",
+    "category": "introduction",
+    "slug": "index"
+  },
+  {
+    "actualUrl": "kics/index",
+    "targetUrl": "/en/kics/index",
+    "lang": "en",
+    "category": "kics",
+    "slug": "index"
+  },
+  {
+    "actualUrl": "ics/000",
+    "targetUrl": "/ko/ics/000",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "000"
+  },
+  {
+    "actualUrl": "ics/100",
+    "targetUrl": "/ko/ics/100",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "100"
+  },
+  {
+    "actualUrl": "ics/200/210",
+    "targetUrl": "/ko/ics/210",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "210"
+  },
+  {
+    "actualUrl": "ics/200/220",
+    "targetUrl": "/ko/ics/220",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "220"
+  },
+  {
+    "actualUrl": "ics/200/230",
+    "targetUrl": "/ko/ics/230",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "230"
+  },
+  {
+    "actualUrl": "ics/300/310",
+    "targetUrl": "/ko/ics/310",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "310"
+  },
+  {
+    "actualUrl": "ics/300/320",
+    "targetUrl": "/ko/ics/320",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "320"
+  },
+  {
+    "actualUrl": "ics/300/330",
+    "targetUrl": "/ko/ics/330",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "330"
+  },
+  {
+    "actualUrl": "ics/300/340",
+    "targetUrl": "/ko/ics/340",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "340"
+  },
+  {
+    "actualUrl": "ics/300/350",
+    "targetUrl": "/ko/ics/350",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "350"
+  },
+  {
+    "actualUrl": "ics/300/360",
+    "targetUrl": "/ko/ics/360",
+    "lang": "ko",
+    "category": "ics",
+    "slug": "360"
+  },
+  {
+    "actualUrl": "introduction/000",
+    "targetUrl": "/ko/introduction/000",
+    "lang": "ko",
+    "category": "introduction",
+    "slug": "000"
+  },
+  {
+    "actualUrl": "introduction/index",
+    "targetUrl": "/ko/introduction/index",
+    "lang": "ko",
+    "category": "introduction",
+    "slug": "index"
+  },
+  {
+    "actualUrl": "kics/01-intro/100",
+    "targetUrl": "/ko/kics/100",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "100"
+  },
+  {
+    "actualUrl": "kics/01-intro/101",
+    "targetUrl": "/ko/kics/101",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "101"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-3-life/231",
+    "targetUrl": "/ko/kics/231",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "231"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-3-life/232",
+    "targetUrl": "/ko/kics/232",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "232"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-3-life/233",
+    "targetUrl": "/ko/kics/233",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "233"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-3-life/234",
+    "targetUrl": "/ko/kics/234",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "234"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-3-life/235",
+    "targetUrl": "/ko/kics/235",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "235"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-4-pnc/241",
+    "targetUrl": "/ko/kics/241",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "241"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-4-pnc/242",
+    "targetUrl": "/ko/kics/242",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "242"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-4-pnc/243",
+    "targetUrl": "/ko/kics/243",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "243"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-4-pnc/244",
+    "targetUrl": "/ko/kics/244",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "244"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-5-dcnt/251",
+    "targetUrl": "/ko/kics/251",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "251"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-5-dcnt/252",
+    "targetUrl": "/ko/kics/252",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "252"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-5-dcnt/253",
+    "targetUrl": "/ko/kics/253",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "253"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-5-dcnt/254",
+    "targetUrl": "/ko/kics/254",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "254"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-5-dcnt/255",
+    "targetUrl": "/ko/kics/255",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "255"
+  },
+  {
+    "actualUrl": "kics/02-valuation/2-5-dcnt/256",
+    "targetUrl": "/ko/kics/256",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "256"
+  },
+  {
+    "actualUrl": "kics/02-valuation/210",
+    "targetUrl": "/ko/kics/210",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "210"
+  },
+  {
+    "actualUrl": "kics/02-valuation/220",
+    "targetUrl": "/ko/kics/220",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "220"
+  },
+  {
+    "actualUrl": "kics/03-ac/310",
+    "targetUrl": "/ko/kics/310",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "310"
+  },
+  {
+    "actualUrl": "kics/03-ac/320",
+    "targetUrl": "/ko/kics/320",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "320"
+  },
+  {
+    "actualUrl": "kics/03-ac/330",
+    "targetUrl": "/ko/kics/330",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "330"
+  },
+  {
+    "actualUrl": "kics/04-scr/01-intro/411",
+    "targetUrl": "/ko/kics/411",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "411"
+  },
+  {
+    "actualUrl": "kics/04-scr/01-intro/412",
+    "targetUrl": "/ko/kics/412",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "412"
+  },
+  {
+    "actualUrl": "kics/04-scr/01-intro/413",
+    "targetUrl": "/ko/kics/413",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "413"
+  },
+  {
+    "actualUrl": "kics/04-scr/01-intro/414",
+    "targetUrl": "/ko/kics/414",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "414"
+  },
+  {
+    "actualUrl": "kics/04-scr/01-intro/415",
+    "targetUrl": "/ko/kics/415",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "415"
+  },
+  {
+    "actualUrl": "kics/04-scr/01-intro/416",
+    "targetUrl": "/ko/kics/416",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "416"
+  },
+  {
+    "actualUrl": "kics/04-scr/01-intro/417",
+    "targetUrl": "/ko/kics/417",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "417"
+  },
+  {
+    "actualUrl": "kics/04-scr/01-intro/418",
+    "targetUrl": "/ko/kics/418",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "418"
+  },
+  {
+    "actualUrl": "kics/04-scr/02-life/421",
+    "targetUrl": "/ko/kics/421",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "421"
+  },
+  {
+    "actualUrl": "kics/04-scr/02-life/422",
+    "targetUrl": "/ko/kics/422",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "422"
+  },
+  {
+    "actualUrl": "kics/04-scr/02-life/423",
+    "targetUrl": "/ko/kics/423",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "423"
+  },
+  {
+    "actualUrl": "kics/04-scr/02-life/424",
+    "targetUrl": "/ko/kics/424",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "424"
+  },
+  {
+    "actualUrl": "kics/04-scr/02-life/425",
+    "targetUrl": "/ko/kics/425",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "425"
+  },
+  {
+    "actualUrl": "kics/04-scr/02-life/426",
+    "targetUrl": "/ko/kics/426",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "426"
+  },
+  {
+    "actualUrl": "kics/04-scr/02-life/427",
+    "targetUrl": "/ko/kics/427",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "427"
+  },
+  {
+    "actualUrl": "kics/04-scr/02-life/428",
+    "targetUrl": "/ko/kics/428",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "428"
+  },
+  {
+    "actualUrl": "kics/04-scr/03-pnc/431",
+    "targetUrl": "/ko/kics/431",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "431"
+  },
+  {
+    "actualUrl": "kics/04-scr/03-pnc/432",
+    "targetUrl": "/ko/kics/432",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "432"
+  },
+  {
+    "actualUrl": "kics/04-scr/03-pnc/433",
+    "targetUrl": "/ko/kics/433",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "433"
+  },
+  {
+    "actualUrl": "kics/04-scr/04-mkt/441",
+    "targetUrl": "/ko/kics/441",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "441"
+  },
+  {
+    "actualUrl": "kics/04-scr/04-mkt/442",
+    "targetUrl": "/ko/kics/442",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "442"
+  },
+  {
+    "actualUrl": "kics/04-scr/04-mkt/443",
+    "targetUrl": "/ko/kics/443",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "443"
+  },
+  {
+    "actualUrl": "kics/04-scr/04-mkt/444",
+    "targetUrl": "/ko/kics/444",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "444"
+  },
+  {
+    "actualUrl": "kics/04-scr/04-mkt/445",
+    "targetUrl": "/ko/kics/445",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "445"
+  },
+  {
+    "actualUrl": "kics/04-scr/04-mkt/446",
+    "targetUrl": "/ko/kics/446",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "446"
+  },
+  {
+    "actualUrl": "kics/04-scr/05-crd/451",
+    "targetUrl": "/ko/kics/451",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "451"
+  },
+  {
+    "actualUrl": "kics/04-scr/05-crd/452",
+    "targetUrl": "/ko/kics/452",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "452"
+  },
+  {
+    "actualUrl": "kics/04-scr/05-crd/453",
+    "targetUrl": "/ko/kics/453",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "453"
+  },
+  {
+    "actualUrl": "kics/04-scr/06-opr",
+    "targetUrl": "/ko/kics/06-opr",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "06-opr"
+  },
+  {
+    "actualUrl": "kics/04-scr/07-tax",
+    "targetUrl": "/ko/kics/07-tax",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "07-tax"
+  },
+  {
+    "actualUrl": "kics/05-doc/500",
+    "targetUrl": "/ko/kics/500",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "500"
+  },
+  {
+    "actualUrl": "kics/05-doc/510",
+    "targetUrl": "/ko/kics/510",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "510"
+  },
+  {
+    "actualUrl": "kics/06-trans/610",
+    "targetUrl": "/ko/kics/610",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "610"
+  },
+  {
+    "actualUrl": "kics/06-trans/620",
+    "targetUrl": "/ko/kics/620",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "620"
+  },
+  {
+    "actualUrl": "kics/etc/997",
+    "targetUrl": "/ko/kics/997",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "997"
+  },
+  {
+    "actualUrl": "kics/etc/998",
+    "targetUrl": "/ko/kics/998",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "998"
+  },
+  {
+    "actualUrl": "kics/etc/999",
+    "targetUrl": "/ko/kics/999",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "999"
+  },
+  {
+    "actualUrl": "kics/index",
+    "targetUrl": "/ko/kics/index",
+    "lang": "ko",
+    "category": "kics",
+    "slug": "index"
+  }
+]
