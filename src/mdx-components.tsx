@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import OverlayDemo from '@/components/ui/overlayDemo'
 import Image from 'next/image'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { Bleed, Callout, FileTree, Pre, Steps, Tabs, withIcons } from 'nextra/components'
@@ -147,8 +148,6 @@ const GTooltipIcon = ({
     </>
   )
 }
-
-const OverlayDemo = ({ id }: { id?: string }) => <>{id}</>
 const OverlayDemoBasel = ({ id }: { id?: string }) => <>{id}</>
 /* const GCmt = ({ children }: { children?: React.ReactNode }) => <>{children}</> */
 
