@@ -20,12 +20,15 @@ title: 2.2	Non-Life
 54.	The multi-step aggregation is performed in the following order:
 - a. The first step of aggregation is to combine each ICS segment’s Premium risk and Claims Reserve risk charges, applying a 25% correlation between the Premium and Claims Reserve risk charges. Mortgage business and credit business are added across all regions and then included in the calculation of Real Estate risk and Credit risk, respectively.
 - b. The second step of aggregation is within categories, where the following correlation matrix is applied across segments of a given category:
-  |Categories|Correlation factor<br/>between segments <br/>of the category|
-  |:--:|:--:|
-  |Liability-like |50%|
-  |Motor-like |75%|
-  |Property-like |50%|
-  |Other |25%|
+
+|Categories|Correlation|
+|:--:|:--:|
+|Liability-like |50%|
+|Motor-like |75%|
+|Property-like |50%|
+|Other |25%|
+
+  <GCaption>Correlation factor between segments of the category</GCaption>
 
 - c. The third step of aggregation is within a region, where a correlation matrix is applied to each of the four aggregated IAIS categories’ risk charge (applying a 50% correlation between ICS categories).
 - d. The fourth step of aggregation is across regions, where a correlation matrix is applied to each region’s total risk charge (applying a 25% correlation between regions).

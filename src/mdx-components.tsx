@@ -151,6 +151,18 @@ const GTooltipIcon = ({
 const OverlayDemoBasel = ({ id }: { id?: string }) => <>{id}</>
 /* const GCmt = ({ children }: { children?: React.ReactNode }) => <>{children}</> */
 
+const GCaption = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className="text-center text-[0.9rem]  italic text-gray-500 dark:text-gray-400 mt-0 mb-4">
+      〈
+      {' '}
+      {children}
+      {' '}
+      〉
+    </div>
+  )
+}
+
 const GCmt = ({
   props,
   children,
@@ -208,4 +220,5 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   G2Col,
   GTooltip,
   GTooltipIcon,
+  GCaption,
 })

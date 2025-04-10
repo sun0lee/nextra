@@ -1,0 +1,65 @@
+---
+title: 5. Operational risk
+---
+# 5. Operational risk
+
+## 5.1 Definition
+207. Operational risk is the risk of adverse change in the value of capital resources due to operational events including inadequate or failed internal processes, people and systems, or from external events. Operational risk includes legal and conduct risk but excludes strategic and reputational risk.
+
+## 5.2 ICS methodology
+208. The Operational risk charge has components for gross current estimates, gross written premiums, and growth. Life insurance also has a separate factor for non-risk business where policyholders bear the investment risk. The risk charge is calculated as follows:
+
+<GMath title = "OP risk charge">
+= max [non_life_premium_exposure ∗ factor, non_life_liability_exposure ∗ factor] + non_life_growth_exposure ∗ factor  
+\+ max [life_(risk)_premium_exposure ∗ factor, life_(risk)_liability_exposure ∗ factor]  
+\+ life_(risk)_growth_exposure ∗ factor + life_(non_risk)_liability_exposure ∗ factor
+</GMath>
+
+With the following factors:
+
+||Premium|Growth|Liabilities|
+|:--:|--|--|--|
+|**Exposure**|Gross written premium (GWP) in most recent financial year|GWP in most recent financial year in excess of the growth threshold (20%) compared to the previous year’s GWP|Gross current estimate|
+|**Factor**|2.75%|2.75%|2.75%|
+
+<GCaption>Risk from Non-Life Operations</GCaption>
+
+||Premium|Growth|Liabilities|
+|:--:|--|--|--|
+|**Exposure**|GWP in most recent financial year|GWP in most recent financial year in excess of the growth threshold (20%) compared to the previous year’s GWP|Gross current estimate |
+|**Factor**|4%|4%|0.45%|
+
+<GCaption>Risk from Life Operations - Life (risk)</GCaption>
+
+
+||Premium|Growth|Liabilities|
+|:--:|--|--|--|
+|**Exposure**|||Gross current estimate|
+|**Factor**|||0.40%|
+
+<GCaption>Risk from Life Operations - Life (non-risk)</GCaption>
+
+## 5.3 Calibration
+209. The initial calibration for Operational risk was based essentially on a review of existing frameworks (in particular Solvency II), with adjustments based on expert judgement.
+210. In 2009, the Committee of European Insurance and Occupational Pensions Supervisors (CEIOPS) published advice on the calibration of Operational risk in Solvency II, that has been used by the IAIS to benchmark its own calibration for the ICS. As part of this paper$^{17)}$, CEIOPS carried out their analysis and provided a summary of external information on the calibration of Operational risk. A table comparing CEIOPS selection of factors to the 2018 ICS factors can be found below. Differences are due to expert judgement.
+
+|Exposure|CEIOPS selection|ICS Factor<GTooltipIcon desc="2018 methodology"/>|
+|--|:--:|:--:|
+|Gross Current Estimate - Life (risk)|0.6%<GTooltipIcon desc="Includes zero floor on technical provisions; in underlying analysis, the NL CE excluded premium liabilities."/>|0.4%|
+|Gross Current Estimate – Non-Life|3.6%<GTooltipIcon desc="Includes zero floor on technical provisions; in underlying analysis, the NL CE excluded premium liabilities."/>|2.75%|
+|Gross Premium – Life (risk)|5.5%<GTooltipIcon desc="Exposure is earned (not written) premium."/>|4.0%|
+|Gross Premium – Non- Life|3.8%<GTooltipIcon desc="Exposure is earned (not written) premium."/>|2.75%|
+
+<GCaption>comparing CEIOPS selection of factors to the 2018 ICS factors</GCaption>
+
+<GCmt>
+[17) CEIOPS-DOC-45-09-L2-Advice-Standard-Formula-operational-risk (europa.eu)](https://register.eiopa.europa.eu/CEIOPS-Archive/Documents/Advices/CEIOPS-L2-Final-Advice-on-Standard-Formula-operational-risk.pdf)
+</GCmt>
+
+211. The calibration was then monitored over time, using the ratio between the Operational risk charge and the ICS capital requirement. According to that benchmark indicator, the ICS Operational risk charge appeared to be in line with results provided in a 2016 survey from ORIC International on capital benchmarking$^{18)}$, which reported an average ratio between “diversified operational risk capital requirement” and “diversified group capital requirement” of 7.3%.
+
+<GCmt>
+[18) Capital Benchmarking | Oric international](https://www.oricinternational.com/capital-benchmarking)
+</GCmt>
+
+212. Nevertheless, the Life (Non-risk) factor was deemed to be excessively high compared to the Life (risk) one. Therefore, the calibration for Life (risk) has been increased from 0.4% to 0.45% of liabilities and decreased from 0.45% to 0.4% of liabilities for Life (Non-risk).

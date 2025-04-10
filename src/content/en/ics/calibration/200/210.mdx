@@ -58,26 +58,48 @@ title: 2.1	Life insurance
 26.	The distinction between short-term and long-term contracts was introduced to reflect that claim amounts over a short period are likely more volatile than over a longer period.
 27.	All stresses are assumed to occur simultaneously, therefore risk charges for those four categories are added together.
 
-##### 2.1.3.3.1	Medical expenses (Category 1)
-28.	For short-term contracts, an initial calibration based on 10-year historical data provided by IAIGs was undertaken in 2015. The calibration methodology consisted of calculating, for a number of portfolios, the coefficient of variation (standard deviation divided by average) over time of the following ratios:
-- a.	number of claims<GTooltipIcon desc="In this section on Morbidity and Disability risk the term claims encompasses claims due to all causes incurred in a given financial year."/> per insured people; and
-- b.	claim amounts to premiums.
-29.	The calculated coefficients of variation showed an important heterogeneity and averaged at 12.1% (ratio based on number counts) and 5.3% (ratio based on amounts). Based on those results, a figure of 8% was chosen to represent the typical coefficient of variation for Category 1 products. Under a Gaussian assumption, this 8% coefficient translated into a 21% stress factor (99.5 percentile), which was rounded down to 20%.
-30.	For long-term contracts, a calibration was done in 2017 based on an additional data collection from IAIGs, also covering 10 years of history. A 99.5% quantile was calculated based on the historical distribution of claims to gross written premiums. Under a Gaussian assumption, those data provided evidence of a risk factor of 7%. Finally, a margin for prudence was incorporated and an 8% stress factor was set.
+<GCallout severity="success" title ="Morbidity and Disability risk">
+<TabView>
+<TabPanel header="Category 1 ">
+  **2.1.3.3.1	Medical expenses (Category 1)**
 
-##### 2.1.3.3.2	Lump sum in case of a health event (Category 2)
-31.	For Category 2 short-term contracts, the same approach was applied as for Category 1 short- term contracts, based on data collected in 2015. Both sets of ratios showed evidence of an average coefficient of variation close to 8%. However, given the significant variability of those coefficients across portfolios (from 1% to 28%), some conservatism was introduced and a value of 10% was chosen as a typical coefficient of variation, resulting in a 99.5% stress factor of 26%, rounded down to 25%.
-32.	For Category 2 long-term contracts, the same approach was applied as for Category 1 long-term contracts, based on data collected in 2017. This approach resulted in the choice of a 20% stress factor (30% based on number of policies, 19% based on expected claims).
-33.	An additional data analysis conducted in 2018 and 2022 on long-term Category 2 business written in Japan provided evidence supporting a risk factor of 15%.
+  28.	For short-term contracts, an initial calibration based on 10-year historical data provided by IAIGs was undertaken in 2015. The calibration methodology consisted of calculating, for a number of portfolios, the coefficient of variation (standard deviation divided by average) over time of the following ratios:
+    - a.	number of claims<GTooltipIcon desc="In this section on Morbidity and Disability risk the term claims encompasses claims due to all causes incurred in a given financial year."/> per insured people; and
+    - b.	claim amounts to premiums.
+  29.	The calculated coefficients of variation showed an important heterogeneity and averaged at 12.1% (ratio based on number counts) and 5.3% (ratio based on amounts). Based on those results, a figure of 8% was chosen to represent the typical coefficient of variation for Category 1 products. Under a Gaussian assumption, this 8% coefficient translated into a 21% stress factor (99.5 percentile), which was rounded down to 20%.
+  30.	For long-term contracts, a calibration was done in 2017 based on an additional data collection from IAIGs, also covering 10 years of history. A 99.5% quantile was calculated based on the historical distribution of claims to gross written premiums. Under a Gaussian assumption, those data provided evidence of a risk factor of 7%. Finally, a margin for prudence was incorporated and an 8% stress factor was set.
 
-##### 2.1.3.3.3	Short-term recurring payments (Category 3)
-34.	For Category 3 short-term contracts, the same approach was applied as for Category 1 short- term contracts, based on data collected in 2015. The set of ratios based on the number of insured people showed a coefficient of variation slightly above 8% on average, and 4% for the set based on premiums. Given the high level of discrepancy across portfolios (between 0.7% and 20%, after exclusion of obvious outliers), a typical coefficient of variation was set at 7%, which translated into a stress factor of 18%, rounded up to 20%.
-35.	For Category 3 long-term contracts, the same approach was applied as for Category 1 long-term contracts, based on data collected in 2017. This approach resulted in setting a 12% stress factor (26% based on number of policies, 12% based on expected claims).
-36.	The data analyses run in 2018 and 2022 showed evidence that the 99.5% quantile for long-term Category 3 business in Japan was slightly below 10%. Therefore, it was decided to set the stress factor for business written in Japan to 10%.
+</TabPanel>
+<TabPanel header="Category 2 ">
+  **2.1.3.3.2	Lump sum in case of a health event (Category 2)**
 
-##### 2.1.3.3.4	Long-term recurring payments (Category 4)
-37.	For short-term contracts, the calibration data collected was limited: only one Volunteer Group provided data covering at least 10 consecutive years in 2019, and none in 2022. Therefore, stresses for short-term contracts were determined by reference to Solvency II, which features the same target criteria (99.5% VaR over a one-year time horizon).
-38.	For long-term contracts, the same stress factors were chosen as a starting point, and a 20% haircut, based on expert judgement, was applied to the inception rate stress factor to account for a lower volatility of claims over the long run.
+  31.	For Category 2 short-term contracts, the same approach was applied as for Category 1 short- term contracts, based on data collected in 2015. Both sets of ratios showed evidence of an average coefficient of variation close to 8%. However, given the significant variability of those coefficients across portfolios (from 1% to 28%), some conservatism was introduced and a value of 10% was chosen as a typical coefficient of variation, resulting in a 99.5% stress factor of 26%, rounded down to 25%.
+  32.	For Category 2 long-term contracts, the same approach was applied as for Category 1 long-term contracts, based on data collected in 2017. This approach resulted in the choice of a 20% stress factor (30% based on number of policies, 19% based on expected claims).
+  33.	An additional data analysis conducted in 2018 and 2022 on long-term Category 2 business written in Japan provided evidence supporting a risk factor of 15%.
+
+</TabPanel>
+<TabPanel header="Category 3">
+  **2.1.3.3.3	Short-term recurring payments (Category 3)**
+
+  34.	For Category 3 short-term contracts, the same approach was applied as for Category 1 short- term contracts, based on data collected in 2015. The set of ratios based on the number of insured people showed a coefficient of variation slightly above 8% on average, and 4% for the set based on premiums. Given the high level of discrepancy across portfolios (between 0.7% and 20%, after exclusion of obvious outliers), a typical coefficient of variation was set at 7%, which translated into a stress factor of 18%, rounded up to 20%.
+  35.	For Category 3 long-term contracts, the same approach was applied as for Category 1 long-term contracts, based on data collected in 2017. This approach resulted in setting a 12% stress factor (26% based on number of policies, 12% based on expected claims).
+  36.	The data analyses run in 2018 and 2022 showed evidence that the 99.5% quantile for long-term Category 3 business in Japan was slightly below 10%. Therefore, it was decided to set the stress factor for business written in Japan to 10%.
+
+</TabPanel>
+<TabPanel header="Category 4">
+  **2.1.3.3.4	Long-term recurring payments (Category 4)**
+  
+  37.	For short-term contracts, the calibration data collected was limited: only one Volunteer Group provided data covering at least 10 consecutive years in 2019, and none in 2022. Therefore, stresses for short-term contracts were determined by reference to Solvency II, which features the same target criteria (99.5% VaR over a one-year time horizon).
+  38.	For long-term contracts, the same stress factors were chosen as a starting point, and a 20% haircut, based on expert judgement, was applied to the inception rate stress factor to account for a lower volatility of claims over the long run.
+
+</TabPanel>
+</TabView>
+
+</GCallout>
+
+
+
+
 
 #### 2.1.3.4	Lapse risk
 39.	The calculation of the lapse risk charge involves three different scenarios:

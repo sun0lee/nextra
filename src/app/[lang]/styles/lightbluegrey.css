@@ -110,6 +110,8 @@
   transform-origin: left center !important; /* 오른쪽 기준 */
   padding: 0.5rem;
   border-radius: 10px;
+  max-width: 550px;
+  min-width: 250px;
 }
 
 .p-tooltip.p-tooltip-right .p-tooltip-arrow {
@@ -131,7 +133,7 @@
   background: var(--primary);
   border: none;
   padding: 0.75rem 1.25rem;
-  font-size: 1rem;
+  font-size: inherit;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   border-radius: var(--border-radius);
 }
@@ -657,18 +659,21 @@
   box-shadow: 0 0 0 0.2rem var(--focus-ring);
 }
 
-table {
-  width: 100% !important ;
-  margin: 0 auto;
-  border-collapse: collapse;
-  table-layout: fixed !important; 
+/*테이블 가운데 정렬 */
+table.nextra-scrollbar {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  margin-top: 0.5rem;
+  /* max-width: 90%; */
 }
 
 th {
   background-color: var(--surface-100);
+  padding: 5px 5px 5px 5px; /* 상 4px, 우 10px, 하 4px, 좌 10px */
   font-weight: bold;
   font-size: clamp(12px, 2vw, 14px); 
-  text-align: center;
+  text-align: center !important;
   word-wrap: break-word; 
 }
 

@@ -31,12 +31,16 @@ ICS는 다양한 방법론을 허용하지만, 본 산출 과정에서는 보험
 54. 진전계수방식으로 리스크를 집계하며, 단계별 과정은 다음과 같음.
   - a. 1단계: 각 ICS 부문의 보험료 위험과 준비금 위험을 통합(25% 상관계수 적용). 주택담보대출(Mortgage) 및 신용보험(Credit) 리스크는 모든 지역에서 합산 후, 각각 부동산 리스크 및 신용 리스크 계산에 포함됨.
   - b. 2단계: 보험 유형별 통합(동일 카테고리 내 부문별 상관계수 적용).
-      |Categories|Correlation factor<br/>between segments <br/>of the category|
-      |:--:|:--:|
-      |Liability-like |50%|
-      |Motor-like |75%|
-      |Property-like |50%|
-      |Other |25%|
+
+|Categories|Correlation|
+|:--:|:--:|
+|Liability-like |50%|
+|Motor-like |75%|
+|Property-like |50%|
+|Other |25%|
+
+<GCaption>카테고리 내 부문별 상관계수</GCaption>
+
   - c. 3단계: 지역별 통합(IAIS 4개 카테고리별 리스크 합산, 50% 상관계수 적용).
   - d. 4단계: 최종적으로 지역 간 통합(지역별 총 리스크에 25% 상관계수 적용).
 
@@ -88,19 +92,20 @@ ICS는 다양한 방법론을 허용하지만, 본 산출 과정에서는 보험
   - • 위험 계수가 20% 이상인 경우, 5% 단위로 반올림함.
   - • 위험 계수가 20% 미만인 경우, 2.5% 단위로 반올림하되, 최소값을 7.5%로 설정함.
   - • 지급이 장기간에 걸쳐 이루어지는 보험(long-tailed line)<GTooltipIcon desc="책임보험(liability insurance), 산재보험(workers’ compensation) 등"/> 부문의 준비금 위험 계수는, 역사적 데이터에서 관측되지 않은 잠재적 책임 리스크를 반영하기 위해 전문가 판단을 통해 추가 조정함.
-62. 보정(calibration) 데이터가 없는 부문에 대해서는, 가장 유사한 부문에 매핑(mapping)하여 보정된 계수를 적용함.
+62. 위험계수 산출 데이터가 없는 부문에 대해서는, 가장 유사한 부문에 매핑(mapping)하여 보정된 계수를 적용함.
   - • 또한, 일부 부문의 계수는 전문가 판단을 통해 산출함.
 
 |Region|Segment|updated Prem|updated Res|Original Mapping Prem|Original Mapping Res|
 |--|--|:--:|:--:|:--:|:--:|
 |Australia and NewZealand|Other type A|25%|20%|30%|20%|
 |Australia and NewZealand|Other type B|35%|30%|30%|25%|
-|Australia and NewZealand|consumer Credit|35%|15%|35%|25%|
+|Australia and NewZealand|Consumer Credit|35%|15%|35%|25%|
 |Australia and NewZealand|Motor damage and Liability|25%|15%|25%|20%|
 |HongKong|Fire and Property damage|35%|20%|35%|30%|
 |HongKong|General liability|45%|26%|45%|36%|
 |HongKong|Treaty reinsurance|45%|25%|45%|35%|
 
+<GCaption>위험계수 보정</GCaption>
 
 #### 2.2.3.6 Aggregation/Diversification
 63. 일반손해보험 리스크 구성 요소 간 적용되는 상관 계수는 전문가 판단을 기반으로 설정됨.

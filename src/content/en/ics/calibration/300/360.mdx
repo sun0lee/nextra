@@ -1,0 +1,74 @@
+---
+title: 3.6	Asset concentration 
+---
+## 3.6	Asset concentration risk
+### 3.6.1	Definition
+155. The Asset Concentration risk charge is an incremental risk charge above the Market and Credit risk charges, which acknowledges that assets held by IAIGs are not perfectly diversified.
+
+### 3.6.2 ICS methodology
+156. The Asset concentration risk charge calculation involves a risk charge for:
+  - a. real estate; and
+  - b. assets other than real estate.
+157. The sum of a) and b) above is the risk charge for asset concentration.
+
+### 3.6.3	Calibration
+#### 3.6.3.1	Real estate
+158. Due to insufficient data expert judgement was applied. The radius of 250 metres to identify group of properties to identify single exposure are based on the values identified for the terrorist attack submodule. The level of 3% is based on expert judgement and the stress level is consistent with the level of stress for real estate.
+
+#### 3.6.3.2 Assets other than real estate
+##### 3.6.3.2.1	Methodology
+159. The methodology is based on the paper Granularity Adjustment for Regulatory Capital Assessment by Gordy and Luetkebohmert.$^{15)}$
+
+<GCmt>
+[15) Granularity Adjustment for Regulatory Capital Assessment (ijcb.org)](https://www.ijcb.org/journal/ijcb13q3a2.pdf)
+</GCmt>
+
+160. The paper provides an approximation for the theoretical framework of a granularity adjustment, which is further reduced to a simplified granularity adjustment $\widetilde{GA}$ 
+<GMath title="Granularity Adjustment">
+$$
+\widetilde{GA} = \cfrac{1}{2K^*}\sum_{i=1}^{n} s_i^2 C_i[\delta (K_i+R_i)-K_i]
+$$
+
+<GCmt>
+161. Further details can be found in the paper. Roughly speaking  
+$s_i$ can be interpreted as the portfolio share,   
+$K_i$ as the unexpected loss,  
+$R_i$ as the expected loss.  
+$C_i$ is a term depending on the variance and expected value of loss given default (LGD) of asset $i$ and  
+$\delta$ is parameter that depends on the quantile of the distribution and a so-called precision parameter $\xi$ (which is proposed to be set to 0.25 in the paper).
+</GCmt>
+</GMath>
+
+##### 3.6.3.2.2	Assumptions
+162. The following assumptions (going beyond the assumptions made in the paper) were made to determine the risk charge for the ICS.
+  - a. Assume $LGD_i = LGD = 0.45$ to determine $C_i$. This choice is consistent with the assumptions for Credit risk.
+  - b. $R_i$ is relatively small compared to $K_i$
+  - c. $K_i + R_i$ is the ICS Equity and Credit risk charge.
+
+163. Using these assumptions (and as proposed in the paper that $X$ (the risk factor) is gamma distributed with mean $\mu =1$ and variance $\sigma^2 = \frac{1}{\xi}$ ) yields.
+<GMath title="Granularity Adjustment (Using these assumptions)">
+$$
+\widehat{GA} = 0.71656 \cfrac{\sum_{i=1}^n E_i K_i}{\sum_{i=1}^n K_i}
+$$ 
+</GMath>
+
+164. Where $E_i$ is the net exposure to group of connected counterparties $i$  and $K_i$ is the total risk charge for Credit and Equity risk before diversification and management actions.
+
+165. To limit the burden for IAIG to determine all connected counterparties a threshold value $T$ was introduced. This threshold value $T$ is to be chosen in a way such that the number of connected counterparties for which $E_i > T$ holds, is greater than 10 but does not exceed 100.
+<GMath title="Asset concentration risk charge with threshold T">
+$$
+f \times \Big( \dfrac{\sum_{E_i >T} (E_i -T)(d K_i^{eq} + K_i^{cr})}{d K^{eq} + K^{cr}} +T \Big)
+$$
+<GCmt>
+- a. $f = 0.71656$;
+- b. $d = 0.95$;
+- c. $E_i$ is the net exposure to group of connected counterparties $i$;
+- d. $T$ is an exposure threshold determined by the IAIG in such a way that the number of groups of connected counterparties $i$ for which $E_i>T$ is equal to or greater than 10 but does not exceed 100;
+- e. $K_i^{eq}$ is the Equity risk charge associated with counterparty $i$, before diversification and management actions;
+- f. $K_i^{cr}$ is the Credit risk charge associated with counterparty $i$, before diversification and management actions;
+- g. $K^{eq}$ is the total Equity risk charge of the IAIG, before diversification and management actions; and
+- h. $K^{cr}$ is the total Credit risk charge of the IAIG, before diversification and management actions.
+</GCmt>
+</GMath>
+
+166. The value $d$ is based on expert judgement.
