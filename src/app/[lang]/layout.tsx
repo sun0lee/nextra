@@ -101,6 +101,7 @@ export default async function RootLayout({ children, params }: Props) {
         <meta property="og:title" content={title} />
         <meta name="description" content={description} />
         <meta property="og:description" content={description} />
+        <meta name="google-site-verification" content="_nWNGp4njhy6U7wrbWYMDSWpH_JVX6SuC8emrwY7MGw" />
         <link rel="canonical" href={repo} />
       </Head>
       <body>
