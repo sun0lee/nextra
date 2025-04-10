@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import OverlayDemo from '@/components/ui/overlayDemo'
 import Image from 'next/image'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { Bleed, Callout, FileTree, Pre, Steps, Tabs, withIcons } from 'nextra/components'
@@ -112,7 +113,6 @@ const GTooltip = ({ label, desc }: { label: string, desc: string }) => {
         link
         label={label}
         className="tooltip-target !bg-transparent !border-none !shadow-none  !py-0 !px-0 !mx-0 !text-inherit underline underline-offset-4 decoration-dashed decoration-yellow-500/50 "
-        style={{ fontFamily: 'NotoSansKR' }}
         data-pr-tooltip={desc}
         data-pr-position="mouse"
         data-pr-at="left bottom"
@@ -148,10 +148,20 @@ const GTooltipIcon = ({
     </>
   )
 }
-
-const OverlayDemo = ({ id }: { id?: string }) => <>{id}</>
 const OverlayDemoBasel = ({ id }: { id?: string }) => <>{id}</>
 /* const GCmt = ({ children }: { children?: React.ReactNode }) => <>{children}</> */
+
+const GCaption = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className="text-center text-[0.9rem]  italic text-gray-500 dark:text-gray-400 mt-0 mb-4">
+      〈
+      {' '}
+      {children}
+      {' '}
+      〉
+    </div>
+  )
+}
 
 const GCmt = ({
   props,
@@ -167,6 +177,7 @@ const GCmt = ({
     fontWeight: '400',
     color: 'var(--surface-700)',
     letterSpacing: '-0.04em',
+    marginTop: '1.25rem',
   }
 
   const contentStyle = {
@@ -209,4 +220,5 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   G2Col,
   GTooltip,
   GTooltipIcon,
+  GCaption,
 })

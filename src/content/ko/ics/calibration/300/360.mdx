@@ -1,0 +1,77 @@
+---
+title: 3.6	Asset concentration
+---
+## 3.6 자산 집중 위험  
+### 3.6.1 정의  
+155. 자산 집중 위험액은 시장 및 신용위험액에 추가되는 위험(incremental risk)이며, IAIG가 보유한 자산이 완전히 분산되어 있지 않다는 점을 반영함.
+
+### 3.6.2 ICS 산출방식  
+156. 자산 집중 위험액 산출에는 다음 항목에 대한 위험액이 포함됨:  
+- a. 부동산  
+- b. 부동산 이외의 자산  
+
+157. 위의 a)와 b)를 합산한 값이 자산 집중 위험액임.
+
+### 3.6.3 위험 계수 산출  
+#### 3.6.3.1 부동산  
+158. 충분한 데이터가 없어 전문가 판단을 적용함. 단일 익스포져로 간주할 부동산 집합을 식별하기 위한 반경 250m는 테러 공격 하위 모듈에서 사용된 값에 근거함. 3% 수준은 전문가 판단에 기반하며, 스트레스 수준은 부동산에 대한 스트레스 수준과 일치함.
+
+#### 3.6.3.2 부동산 이외의 자산  
+##### 3.6.3.2.1 산출방식  
+159. 본 산출방식은 Gordy와 Luetkebohmert의 논문 「Granularity Adjustment for Regulatory Capital Assessment」$^{15)}$에 기초함.
+
+<GCmt>
+[15) Granularity Adjustment for Regulatory Capital Assessment (ijcb.org)](https://www.ijcb.org/journal/ijcb13q3a2.pdf)
+</GCmt>
+
+160. 해당 논문은 세분성 조정(granularity adjustment)의 이론적 틀에 대한 근사식을 제공하며, 이는 단순화된 세분성 조정 $\widetilde{GA}$로 축약됨.
+<GMath title="granularity adjustment">
+$$
+\widetilde{GA} = \cfrac{1}{2K^*}\sum_{i=1}^{n} s_i^2 C_i[\delta (K_i+R_i)-K_i]
+$$
+<GCmt>
+161. 자세한 사항은 해당 논문을 참고. 요약하면,  
+$s_i$는 포트폴리오 내 비중,  
+$K_i$는 비기대손실,  
+$R_i$는 기대손실로 해석 가능함.  
+$C_i$는 자산 $i$의 부도 시 손실(LGD)의 분산과 기댓값에 따라 결정됨.  
+$\delta$는 분포의 분위수와 정밀도 계수 $\xi$에 따라 결정되는 계수이며, 논문에서는 $\xi = 0.25$로 제안됨.
+</GCmt>
+</GMath>
+
+##### 3.6.3.2.2 가정  
+162. ICS 위험액 산출을 위해 (논문에서 제시한 가정 외에) 다음과 같은 추가 가정을 적용.  
+  - a. $C_i$를 산정하기 위해 $LGD_i = LGD = 0.45$로 가정. 이는 신용위험에 대한 가정과 일치함.  
+  - b. $R_i$는 $K_i$에 비해 상대적으로 작음.  
+  - c. $K_i + R_i$는 ICS의 주식 및 신용위험액임.
+
+163. 위 가정 및 논문에서 제안된 바와 같이 $X$ (위험요소)는 기댓값 $\mu = 1$, 분산 $\sigma^2 = \frac{1}{\xi}$를 가지는 감마 분포를 따른다고 가정하면 다음과 같은 식을 얻음:
+<GMath title ="Granularity Adjustment (가정 적용 후)">
+$$
+\widehat{GA} = 0.71656 \cfrac{\sum_{i=1}^n E_i K_i}{\sum_{i=1}^n K_i}
+$$
+
+</GMath>
+
+164. 여기서 $E_i$는 연계된 상대방 집단 $i$에 대한 순 익스포져이고, $K_i$는 분산 및 관리조치 전의 주식 및 신용위험에 대한 전체 위험액임.
+
+165. IAIG가 모든 연계된 상대방을 식별하는 데 따르는 부담을 줄이기 위해 임계값(threshold) $T$를 도입함. 이 임계값 $T$는 $E_i > T$인 연계 상대방 집단의 수가 최소 10개 이상, 최대 100개 이하가 되도록 설정되어야 함.
+
+<GMath title="임계값 T를 고려한 자산집중위험액">
+$$
+f \times \Big( \dfrac{\sum_{E_i >T} (E_i -T)(d K_i^{eq} + K_i^{cr})}{d K^{eq} + K^{cr}} +T \Big)
+$$
+<GCmt>
+- a. $f = 0.71656$;<GTooltipIcon desc="Granularity Adjustment 계산에 쓰이는 계수"/>
+- b. $d = 0.95$;<GTooltipIcon desc="자산위험 보정 계수"/>
+- c. $E_i$는 연계된 상대방 집단 $i$에 대한 순 익스포져;  
+- d. $T$는 IAIG가 설정한 익스포져 임계값이며, $E_i > T$인 집단의 수가 10개 이상 100개 이하임;  
+- e. $K_i^{eq}$는 연계 상대방 $i$에 대한 분산 및 관리조치 전의 주식위험액;  
+- f. $K_i^{cr}$는 연계 상대방 $i$에 대한 분산 및 관리조치 전의 신용위험액;  
+- g. $K^{eq}$는 IAIG 전체의 주식위험액 (분산 및 관리조치 전);  
+- h. $K^{cr}$는 IAIG 전체의 신용위험액 (분산 및 관리조치 전).
+</GCmt>
+</GMath>
+
+
+166. $d$ 값은 전문가 판단에 기반함.

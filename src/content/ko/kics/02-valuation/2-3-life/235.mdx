@@ -137,7 +137,18 @@ title: 3-5. 재보험자산
 </Accordion>
 - 
   - ㈀ 단, AM Best의 신용등급을 사용하는 경우, \<표27>에 따라 S&P등급으로 매핑한 후, S&P의 장기평균(10년 이상) 1년 부도율을 사용하여야 한다.
-![표27_ 신용평가기관의 K-ICS신용등급 매핑표](/kics/table27.png)
+
+    |K-ICS<br/>신용등급|국내<br/>신용평가기관|해외<br/>S&P|해외<br/>Moody's|해외<br/>Fitch|해외<br/>AM Best<GTooltipIcon desc="AM Best의 경우, Financial Strengh Rating(FSR)만 허용"/>|
+    |:--:|:--:|:--:|:--:|:--:|:--:|
+    |1||AAA|Aaa|AAA||
+    |2|AAA|AA/A-1|Aa/P-1|AA/F1|A+|
+    |3|AA/A1|A/A-2|A/P-2|A/F2|A|
+    |4|A/A2|BBB/A-3|Baa/P-3|BBB/F3|B+|
+    |5|BBB/A3|BB|Ba|BB|B|
+    |6|BB|B|B|B|C+|
+    |7|B이하|CCC↓|Caa↓|CCC↓|C↓|
+
+    <GCaption>표27. 신용평가기관의 K-ICS신용등급 매핑표</GCaption>
 
 <Accordion  activeIndex={[]}>
 <AccordionTab header="AM Best의 등급은 매핑하여 부도율을 사용하는 이유">

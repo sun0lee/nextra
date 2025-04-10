@@ -20,25 +20,26 @@ export default {
     },
   },
   ics: {
-    title: 'ICS',
-    type: 'page',
-    theme: {
-      navbar: true,
-      toc: true,
-    },
-  },
-  kics: {
     title: (
       <span className="flex items-center leading-[1]">
-        K-ICS
+        ICS
         <TitleBadge />
       </span>
     ),
     type: 'page',
     theme: {
+      navbar: true,
+      collapsed: true,
+      toc: true,
+    },
+  },
+  kics: {
+    title: 'K-ICS',
+    type: 'page',
+    theme: {
       typesetting: 'default',
       navbar: true,
-      collapsed: false,
+      collapsed: true,
       toc: true,
     },
   },

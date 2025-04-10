@@ -1,0 +1,173 @@
+---
+title: 4. Credit Risk
+---
+# 4. 신용리스크
+## 4.1 정의
+167. 신용리스크는 부도에 이르지 않는 채무자의 신용도 하락에 따른 가치 손실 위험뿐 아니라, 실제 부도 발생으로 인한 자본자원의 가치 하락 위험(마이그레이션 리스크, 스프레드 리스크 포함)을 포착하고자 함.
+
+
+## 4.2 ICS 산출방법론
+168. 신용리스크는 규정에 따라 산정된 순익스포져 금액에 규정된 위험계수를 곱하여 산출됨. 신용위험액은 각 순익스포져에 대응하는 위험계수를 적용한 금액들의 합산하여 산출함. 이때 경영진의 대응 조치(리스크 경감 등)도 고려됨.
+169. 신용위험액은 차입자의 특정 익스포져 유형에 해당하는 모든 상환우선 채무(senior debt)에 적용됨.
+170. 국가의 발행 또는 보증이 없는 지역정부, 지방자치단체 및 기타 정부기관의 채무는 공공부문(public sector entities)으로 분류함. 정부 또는 지방자치단체가 소유하되 보증하지 않는 상업적 기업에 대한 익스포져는 기업(corporates)으로 분류됨.
+171. 인프라 범주는 특정 정의와 기준을 충족하는 인프라 프로젝트 및 기업에 대한 채무 익스포져를 포함함.
+172. 유동화(securitisation) 범주는 모기지담보증권 및 기타 자산유동화증권 보유분 전부를 포함함. 유동화 익스포져의 기초자산 풀에 또 다른 유동화자산이 포함되어 있을 경우, 해당 익스포져는 재유동화(re-securitisation)로 분류됨.
+
+## 4.3 위험계수 산출
+### 4.3.1 신용리스크 위험계수 산출
+173. 신용리스크 위험액은 특정 순익스포져 금액에 대해 규정된 위험계수를 적용하여 결정됨. 신용리스크 위험계수는 다음과 같은 익스포져 분류에 대해 ICS 등급(Rating Category, RC) 및 만기에 따라 산출됨:  
+  - a. 공공부문 
+  - b. 일반기업 및 재보험 
+  - c. 인프라 
+  - d. 유동화 
+  - e. 재유동화
+  - f. 주택담보대출
+    - i. 농업 및 상업용 주택담보대출 
+    - ii. 주거용 주택담보대출 
+174. 공공부문기관, 일반 기업 및 재보험, 인프라, 유동화 및 재유동화 익스포져에 대해서는, 데이터의 제약으로 인해 만기 14년 초과는 단일 계수로 산출함.
+
+### 4.3.2 일반 기업
+175. 기업 신용익스포져에 대한 신용리스크 위험계수 산출 기준은 비대칭 단일 위험요인(Asymptotic Single Risk Factor) 신용리스크 모형이며, 채무자의 신용도 하락으로 인해 자산가치가 감소하고, 이로 인해 시간이 지남에 따라 부도확률이 영향을 받는 리스크를 반영함.
+176. 위험계수는 1년 위험기간에 대한 기대손실(Expected Loss)과 익스포져의 잔여만기 동안의 등급하락위험(Downgrade Risk)을 모두 반영함.
+177. 위험계수 $K$는 다음과 같이 계산됨:
+<GMath title="The stress factor, K">
+  Expected Loss + Downgrade Risk
+</GMath>
+
+#### 4.3.2.1 기대손실
+178. 기대손실(Expected Loss)은 스트레스 조건 하에서의 부도확률(SPD, Stressed Probability of Default)과 부도시 손실률(LGD, Loss Given Default)을 기반으로 계산됨:
+  <GMath title ="Expected Loss">
+  Expected Loss = $LGD \times SPD$
+  </GMath>
+179. 신용리스크 모형은 다음과 같이 스트레스 부도확률(SPD)을 정의함. 이때 $PD$는 부도확률임:
+<GMath title ="SPD(Stressed Probability of Default)" severity="info">
+  $N \Bigg( \cfrac{N^{-1}(PD_H)-\sqrt{\rho}N^{-1}(\alpha)}{\sqrt{1-\rho}} \Bigg)$
+  <GCmt>
+  - • $\alpha$ : 신뢰수준 99.5%
+  - • $\rho$ : 시스템 위험(systematic risk)에 대한 민감도, 즉 전체 경제상황(공통요인)에 따라 개별 채무자의 부도확률이 얼마나 영향을 받는지를 나타내는 상관계수
+  </GCmt>
+</GMath>
+
+180. LGD는 Basel II 접근방법과 동일하게 45%의 고정값으로 가정함.
+
+#### 4.3.2.2 등급하락위험 
+181. 등급하락위험 (Downgrade Risk)은 채무자의 신용도 하락으로 인한 자산가치 감소 가능성은 Oldrich Vasicek의 “The Distribution of Loan Portfolio Value” 논문에서 제시한 평가기법을 기반으로 산출됨.
+182. 등급하락위험 계수는 아래와 같이 정의됨:
+<GMath title ="Downgrade Risk">
+  $e^{rH} \times \cfrac{V_{expected} - V_{stress}}{V_{current}}$
+
+<GCmt>
+- a. $V_{expected}$ : 시점 $H$에서의 채권 기대가치
+- b. $V_{stressed}$ : 스트레스 조건 하 시점 $H$에서의 채권 기대가치
+- c. $V_{current}$ : 현재 시점에서의 채권가치
+</GCmt>
+</GMath>
+
+183. $V_{expected}$ 및 $V_{stress}$는 Vasicek 모형과 위험중립 부도확률을 활용하여 산출되며, 신용리스크에 반영된 위험프리미엄을 고려함. 시점 $H$에서의 채권가격은 다음과 같음:
+<GMath title="H시점의 채권가격" severity="info">
+  $$
+  e^{-r(T-H)} (1-LGD\times PD^*)
+  $$
+  <GCmt>
+  - • $r$ 채권수익률,  
+  - • $PD^*$는 시점 $H$부터 $T$까지의 위험중립 부도확률이며, 위험중립 부도확률($PD^*$)은 실제 세계(real-world) 부도확률 $PD$로부터 아래 관계식을 통해 도출됨:  
+    $PD^* = N(N^{-1}(PD))+ \lambda \rho \sqrt{T-H}$
+  - • $\lambda$ : 시장위험가격(market price of risk)을 의미 (시장의 위험 프리미엄 계수)
+  - • $\rho$ : 시스템 위험(systematic risk)에 대한 민감도, 즉 전체 경제상황(공통요인)에 따라 개별 채무자의 부도확률이 얼마나 영향을 받는지를 나타내는 상관계수
+  </GCmt>
+</GMath>
+
+184. 시점 $H$~$T$ 사이의 스트레스 부도확률은 아래와 같음:
+<GMath title="시점 H~T 사이의 real world SPD" severity="info">
+  - $Pr(logA_T < logB_T)$
+   
+  $$
+    = N\Bigg(\cfrac{\sqrt{T} N^{-1}(PD_T) - \sqrt{H}\sqrt{\rho}N^{-1}(\alpha) - \sqrt{H}\sqrt{1-\rho}Z_H}{\sqrt{T-H}} \Bigg)
+  $$
+</GMath>
+ 
+스트레스 조건 하 위험중립 부도확률은 다음과 같음:
+<GMath title="risk-neutral SPD" severity="info">
+  $$
+  N\Bigg(\cfrac{\sqrt{T} N^{-1}(PD_T) - \sqrt{H}\sqrt{\rho}N^{-1}(\alpha) - \sqrt{H}\sqrt{1-\rho}Z_H}{\sqrt{T-H}} +\lambda\rho \sqrt{T-H} \Bigg)
+  $$
+<GCmt>
+- • $Z_H$는 Truncated 정규분포(Truncated Normal Distribution)를 따르는 확률변수.
+</GCmt>
+</GMath>
+
+![SPD 비교](/ics/cal184.png)
+
+185. $Z_H$의 모든 가능한 값에 대해 채권가격을 적분하여 스트레스 조건 하 기대가치 $V_{stress}$는 아래와 같음:
+<GMath title ="V_stress" severity="info">
+$$
+  V_{stress} = e^{-r(T-H)} \Big[ 1-\dfrac{LGD}{1-SPD} \int_{N^{-1}(SPD)}^{\infty} N(aZ+b) dN(Z)\Big]
+$$
+</GMath>
+
+시점 $H$에서의 기대가치$V_{expected}$는 다음과 같음:
+<GMath title ="V_expected" severity="info">
+$$
+  V_{expected} = e^{-r(T-H)} \big(1-LGD \times N(N^{-1}(PD)+\lambda \rho \sqrt{T-H}\big)
+$$
+</GMath>
+
+현재 시점(t=0)의 채권가치$V_{current}$는 다음과 같음:
+<GMath title ="V_current" severity="info">
+$$
+  V_{current} = e^{-rT} \bigg( 1-LGD \times N \big(N^{-1}(PD)+\lambda\rho\sqrt{T}\big) \bigg)
+$$
+
+</GMath>
+
+#### 4.3.2.3 데이터 및 가정
+186. 기업 신용익스포져에 대한 누적 부도확률 $PD_H$와 $PD_T$는 _2013 Standard & Poor’s annual global corporate default study and rating transitions에_ 기반하여 산출됨. ICS의 신뢰수준은 99.5%로 $\alpha = 0.005$를 사용함.
+
+187. 나머지 모형 파라미터는 Basel IRB 접근법과 동일함:
+  - a. 채권이자율 $r$은 연 5%로 설정
+  - b. 상관계수 $\rho$는 부도확률에 따라 달라지며 아래 식으로 산출됨:
+    $$
+      \rho = 0.24 - 0.12 \times \cfrac{1-e^{50PD_H}}{1-e^{-50}}
+    $$
+  - c. 시장위험가격 $\lambda$는 다음과 같음:<GTooltipIcon desc=" Basel IRB 산출근거로부터 도출된 내부 분석 결과를 사용한 가정 (This assumption is taken from confidential analysis used in the derivation of the Basel IRB approach.)"/>,
+    $$
+      \lambda = \cfrac{0.40625 \times (T-H)^{0.0093}}{\sqrt{\rho}}
+    $$  
+  - d. 위에서 언급했듯이 LGD는 45% 고정값으로 가정함
+
+
+### 4.3.3 공공기관
+188. 공공기관의 신용위험계수 산출은 일반 기업 익스포져에 적용되는 위험계수를 기반으로 하되, 이들의 낮은 리스크 프로파일을 반영하여 조정된 신용위험계수를 사용함.
+189. 이러한 조정은 전문가의 판단(expert judgement)을 기반으로 이루어졌음.
+190. ICS 신용등급 1 및 2에 대해서는, 해당하는 기업 익스포져의 신용위험계수의 절반 수준을 사용함.
+191. ICS 신용등급 3\~7의 경우, 기업 익스포져보다 반 등급(risk category) 높은 등급에 해당하는 위험계수를 적용함. 따라서 예를 들어 ICS 등급 3에 대해서는, 기업 익스포져의 ICS 등급 2와 3의 위험계수를 평균하여 산출함.
+192. 등급이 없는 익스포져에 대해서는 ICS 등급 5에 해당하는 위험계수를 적용함.
+
+### 4.3.4 재보험
+193. 재보험 익스포져에 대한 신용위험계수는 전문가의 판단에 따라 일반 기업 익스포져와 동일하게 적용함.
+
+### 4.3.5 인프라
+194. 인프라 익스포져에 대해서도 기업 익스포져와 동일한 위험계수를 적용함. 다만, 등급이 없는 익스포져의 경우에는 기업 익스포져에 적용되는 동일 만기의 위험계수의 75% 수준으로 조정함. 이 조정은 인프라 자산이 기업 익스포져보다 전반적으로 더 우수한 성과를 보였다는 점에 근거함. 
+195. 이러한 평가는 무디스(Moody’s)의 2020년 부도 및 회수율 연구(1983\~2020년 데이터)<GTooltipIcon desc="Moody’s 2020 default and recovery rates study (1983-2020 data)"/> 및 S&P의 2020년 인프라 부도 및 등급변동 연구(1981\~2020년 데이터)<GTooltipIcon desc="Standard & Poor’s 2020 annual infrastructure default and rating transition study (1981-2020 data)"/>를 기반으로 수행됨. 
+
+### 4.3.6 유동화증권
+196. 유동화증권에 대해서는 ICS 등급 14의 경우 기업 익스포져와 동일한 위험계수를 적용함.
+197. ICS 등급 5에 대해서는 해당 기업 익스포져의 위험계수의 300%를 적용함.
+198. ICS 등급 5 이하 등급(즉, RC 67 또는 등급 미부여)의 경우, 손실률 100%(즉, 전액 손실)로 간주함.
+199. 이러한 조정은 Basel IRB 프레임워크를 기반으로 한 분석 결과를 반영한 것임.
+
+### 4.3.7 재유동화증권 
+200. 재유동화증권에 대해서는 ICS 등급 1\~4의 경우 기업 익스포져의 위험계수의 200%를 적용함.
+201. ICS 등급 5의 경우에는 해당 기업 익스포져의 위험계수의 600%를 적용함.
+202. ICS 등급 5 이하에 대해서는 손실률 100%로 간주함.
+203. 이러한 조정 역시 Basel IRB 프레임워크를 기반으로 한 분석을 반영함.
+
+
+### 4.3.8 모기지대출
+
+204. 모기지 대출에 대한 신용위험계수는 Basel 기준서(Annex 1)에 정의된 모기지 리스크 가중치를 기준으로 함.
+205. 농업용, 상업용 및 주택용 모기지에 대해서는 Basel 기준서의 99.9% VaR 기준 가중치를 99.5% VaR 기준으로 재조정하기 위해 75% 스케일러를 적용함.
+
+### 4.3.9 기타요인 
+
+206. 신용위험 산출을 위한 기타 요인은 전문가의 판단에 기반하거나, 장외파생상품(OTC derivatives)과 같이 Basel 기준서를 직접 참조함.

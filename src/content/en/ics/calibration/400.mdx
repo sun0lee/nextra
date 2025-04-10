@@ -1,0 +1,167 @@
+---
+title: 4. Credit Risk
+---
+# 4. Credit Risk
+## 4.1 Definition
+167. Credit Risk aims to capture the risk of adverse changes in the value of capital resources due to unexpected changes in the actual default as well as in the deterioration of an obligor’s credit worthiness short of default, including migration risk, and spread risk due to defaults.
+
+
+## 4.2 ICS methodology
+168. Credit risk is calculated by applying prescribed stress factors to specified net exposure amounts. The credit risk charge is the sum of each stress factor applied based on the specified net exposures amounts. Management actions are taken into consideration in the calculation of the credit risk charge.
+169. The credit risk charge applies to all senior debt obligations of specified exposure classes of borrowers.
+170. Regional governments and municipal authorities and other government entities whose debt is not issued or guaranteed by the national government, are classified as public sector entities. Exposures to commercial undertakings owned but not guaranteed by governments or municipal authorities are classified as corporates.
+171. The infrastructure category includes debt exposures to infrastructure projects and corporates that meet specific definitions and criteria.
+172. The securitisation category includes all holdings of mortgage-backed securities and other asset-backed securities. If any of the assets in the pool of exposures underlying a securitisation exposure are themselves a securitisation, then the exposure belongs to the re-securitisation category.
+
+
+## 4.3 Calibration
+### 4.3.1 Calibration of credit risk stress factors
+173. The Credit risk charge is determined by applying prescribed stress factors to specified net exposure amounts. The credit risk stress factors have been calibrated for the following exposure classes by ICS Rating Category (RC) and maturity.
+  - a. Public sector entities
+  - b. Corporates and reinsurance
+  - c. Infrastructure
+  - d. Securitisations
+  - e. Re-securitisations
+  - f. Mortgage loans
+    - i. Agricultural and commercial mortgages
+    - ii. Residential mortgages
+174. For public sector entities, corporates and reinsurance, infrastructure, securitisations and re- securitisations exposures, single factors for all maturities beyond 14 years have been derived because of data availability.
+
+### 4.3.2 Calibration for corporate credit exposures
+175. The basis for the credit risk calibration for corporate credit exposures is an asymptotic single risk factor credit risk model and incorporates the risk of a decrease in value of an asset due to deterioration of the obligor’s creditworthiness impacting the probability of default over time.
+176. The stress factors reflect both the expected loss over a risk horizon of one year and the downgrade risk over the remaining maturity of the exposure.
+177. The stress factor, $K$, is calculated as:
+<GMath title="The stress factor, K">
+  Expected Loss + Downgrade Risk
+</GMath>
+
+#### 4.3.2.1 Expected Loss
+178. The expected loss is based on the stressed probability of default (SPD) and the loss-given- default (LGD) with:
+  <GMath title ="Expected Loss">
+  Expected Loss = $LGD \times SPD$
+  </GMath>
+179. The credit risk model defines the following a formula for the stress probability of default over a given time horizon at any given confidence level, (where PD is the probability of default)
+<GMath title ="SPD(Stressed Probability of Default)">
+  $N \Bigg( \cfrac{N^{-1}(PD_H)-\sqrt{\rho}N^{-1}(\alpha)}{\sqrt{1-\rho}} \Bigg)$
+</GMath>
+
+180. LGD is assumed to be a constant of 45%, consistent with the approach used in Basel II.
+
+#### 4.3.2.2 Downgrade Risk
+181. The potential decrease in value of an asset due to deterioration of the obligor’s creditworthiness has been calculated based on the valuation techniques described in the paper “The Distribution of Loan Portfolio Value” by Oldrich Vasicek.
+182. The factor for downgrade is given by:
+<GMath title ="Downgrade Risk">
+  $e^{rH} \times \cfrac{V_{expected} - V_{stress}}{V_{current}}$
+
+<GCmt>
+- a. $V_{expected}$ is the expected value of the bond at time $H$.
+- b. $V_{stressed}$ is the expected value under stress of the bond at time $H$; and
+- c. $V_{current}$ is the current value of the bond.
+</GCmt>
+</GMath>
+
+183. The expected value and stress value of the bond price at time $H$ are calculated by applying the Vasicek model and using a risk-neutral PD to value the bond to account for the risk premium associated with credit risk that is reflected in the bond price. The formula for the bond price at time $H$ is given by:
+<GMath title="H시점의 채권가격" severity="info">
+  $$
+  e^{-r(T-H)} (1-LGD\times PD^*)
+  $$
+  <GCmt>
+  - • $r$ is the bond yield, and 
+  - • $PD*$ is the risk-neutral probability of default from time $H$ to time $T$. The risk-neutral probability of default is derived from the real-world probability of default via the relation:  
+    $PD^* = N(N^{-1}(PD))+ \lambda \rho \sqrt{T-H}$
+  - • $\lambda$ : market price of risk
+  - • $\rho$ : 시스템 위험(systematic risk)에 대한 민감도, 즉 전체 경제상황(공통요인)에 따라 개별 채무자의 부도확률이 얼마나 영향을 받는지를 나타내는 상관계수
+  </GCmt>
+</GMath>
+
+184. The stress probability of default between times $H$ and $T$ is given by:
+<GMath title="시점 H~T 사이의 real world SPD" severity="info">
+  - $Pr(logA_T < logB_T)$
+   
+  $$
+    = N\Bigg(\cfrac{\sqrt{T} N^{-1}(PD_T) - \sqrt{H}\sqrt{\rho}N^{-1}(\alpha) - \sqrt{H}\sqrt{1-\rho}Z_H}{\sqrt{T-H}} \Bigg)
+  $$
+</GMath>
+
+and the stress risk-neutral probability of default is given by:
+<GMath title="risk-neutral SPD" severity="info">
+  $$
+  N\Bigg(\cfrac{\sqrt{T} N^{-1}(PD_T) - \sqrt{H}\sqrt{\rho}N^{-1}(\alpha) - \sqrt{H}\sqrt{1-\rho}Z_H}{\sqrt{T-H}} +\lambda\rho \sqrt{T-H} \Bigg)
+  $$
+<GCmt>
+- • $Z_H$는 Truncated 정규분포(Truncated Normal Distribution)를 따르는 확률변수.
+</GCmt>
+</GMath>
+
+where the random variable $Z_H$, has a truncated normal distribution.
+
+185. Integrating the bond price over all possible values of $Z_H$ gives an expected bond price under stress $V_{stress}$ of:
+<GMath title ="V_stress" severity="info">
+$$
+  V_{stress} = e^{-r(T-H)} \Big[ 1-\dfrac{LGD}{1-SPD} \int_{N^{-1}(SPD)}^{\infty} N(aZ+b) dN(Z)\Big]
+$$
+</GMath>
+
+An expected value of the bond at time $H$ $V_{expected}$ of:
+<GMath title ="V_expected" severity="info">
+$$
+  V_{expected} = e^{-r(T-H)} \big(1-LGD \times N(N^{-1}(PD)+\lambda \rho \sqrt{T-H}\big)
+$$
+</GMath>
+
+And current value of the bond, $V_{current}$ of:
+<GMath title ="V_current" severity="info">
+$$
+  V_{current} = e^{-rT} \bigg( 1-LGD \times N \big(N^{-1}(PD)+\lambda\rho\sqrt{T}\big) \bigg)
+$$
+
+</GMath>
+#### 4.3.2.3 Data and assumptions
+186. The cumulative probabilities of default $PD_H$ and $PD_T$, for corporate credit exposures have been derived from the 2013 Standard & Poor’s annual global corporate default study and rating transitions. The confidence level for ICS is 99.5% and so $\alpha =0.005$.
+187. All of the remaining model parameters are the same as under the Basel IRB approach:
+  - a. The bond interest rate $r$ is set at 5% annually.
+  - b. The correlation parament, $\rho$ varies by credit rating, and is given by:
+    $$
+      \rho = 0.24 - 0.12 \times \cfrac{1-e^{50PD_H}}{1-e^{-50}}
+    $$
+  - c. The market price of risk<GTooltipIcon desc="This assumption is taken from confidential analysis used in the derivation of the Basel IRB approach."/>, $\lambda$ is given by:
+    $$
+      \lambda = \cfrac{0.40625 \times (T-H)^{0.0093}}{\sqrt{\rho}}
+    $$  
+  - d. As noted above, LGD is set as a constant of 45%.
+
+
+### 4.3.3 Public sector entities
+188. The calibration of public sector entities is based on the risk factors for corporate exposures but with the credit risk factors adjusted to reflect their lower risk profile.
+189. These adjustments to the corporate credit risk factors were based on expert judgement.
+190. For ICS credit rating 1 and 2 the credit risk factors are half of the equivalent factors for corporate exposure.
+191. For ICS credit rating 3 – 7, the credit risk stress factors applied are those for an exposure half a risk category stronger than for corporate exposures. Therefore, the stress factor at each duration for ICS RC 3 is calculated as the average of the corporate credit stress factors for ICS RC 2 and 3.
+192. Unrated exposures assume the same risk factor as those for ICS RC 5.
+
+### 4.3.4 Reinsurance
+193. The credit risk calibration for reinsurance exposures is assumed to be the same as for corporate exposures, based on expert judgement.
+
+### 4.3.5 Infrastructure
+194. For infrastructure exposures the risk factors used are the same as for corporate exposures except for unrated exposures where the risk factor is set at 75% of the equivalent risk factor by duration for corporate exposures. This calibration is based on the performance of infrastructure assets compared to corporate exposures.
+195. This assessment was based on analysis of the historical cumulative default rate (CDR) from rating agencies, from Moody’s 2020 default and recovery rates study (1983-2020 data) and Standard & Poor’s 2020 annual infrastructure default and rating transition study (1981-2020 data).
+
+### 4.3.6 Securitisations
+196. For Securitised exposures the credit risk factors are the same as for corporate exposures with RC 1-4.
+197. For RC 5, the risk factor is 300% of the equivalent corporate exposure risk factor.
+198. Anything rated below RC 5 is assumed to have a risk factor of 100% (i.e. the loss of entire value)
+199. These adjustments to the corporate credit risk factors were based on analysis supporting the Basel IRB framework.
+
+### 4.3.7 Re-securitisations
+200. For Re-securitised exposures the credit risk factors are 200% of those for corporate exposures with RC 1-4.
+201. For RC 5, the risk factor is 600% of the equivalent corporate exposure risk factor.
+202. Anything rated below RC 5 is assumed to have a risk factor of 1 (i.e. loss of entire value)
+203. These adjustments to the corporate credit risk factors were based on analysis supporting the Basel IRB framework.
+ 
+
+
+### 4.3.8 Mortgage loans
+204. The credit risk factors are based on the credit risk weights for mortgages from Annex 1 of the Basel Framework.
+205. For agricultural, commercial and residential mortgages a scalar of 75% was used to recalibrate the mortgage risk weights from Annex 1 of the Basel Framework from a 99.9% Value at Risk to a 99.5% Value at Risk.
+
+### 4.3.9 Other factors
+206. Other factors used for the purpose of Credit risk calculation are based on expert judgement or on a direct reference to the Basel Framework in the specific case of OTC derivatives.

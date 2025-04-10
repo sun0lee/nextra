@@ -7,9 +7,12 @@
   margin-top: 1.5rem;
 }
 
-.p-accordion
- {
+.p-accordion{
   margin-top: 0.5rem;
+}
+
+.p-accordion-content .p-tabview {
+  margin-top: 0rem ;
 }
 
 .p-card {
@@ -98,14 +101,17 @@
 
 
 .p-tooltip .p-tooltip-text {
-  background: var(--surface-100); 
-  color: var(--text-color-secondary); 
-  font-size: 0.75rem; /* 폰트 크기 작게 */
+  background: var(--info-bg); 
+  color: var(--info-text); 
+  font-size: 0.8rem; /* 폰트 크기 작게 */
+  font-style: italic;
+  font-weight: bolder;
+  font-family: var(--font-feature-settings);
   transform-origin: left center !important; /* 오른쪽 기준 */
   padding: 0.5rem;
-  /*padding: var(--content-padding);
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  border-radius: var(--border-radius);*/
+  border-radius: 10px;
+  max-width: 550px;
+  min-width: 250px;
 }
 
 .p-tooltip.p-tooltip-right .p-tooltip-arrow {
@@ -125,9 +131,9 @@
 .p-button {
   color: var(--primary-foreground);
   background: var(--primary);
-  border: 1px solid var(--primary);
+  border: none;
   padding: 0.75rem 1.25rem;
-  font-size: 1rem;
+  font-size: inherit;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   border-radius: var(--border-radius);
 }
@@ -653,18 +659,21 @@
   box-shadow: 0 0 0 0.2rem var(--focus-ring);
 }
 
-table {
-  width: 100% !important ;
-  margin: 0 auto;
-  border-collapse: collapse;
-  table-layout: fixed !important; 
+/*테이블 가운데 정렬 */
+table.nextra-scrollbar {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  margin-top: 0.5rem;
+  /* max-width: 90%; */
 }
 
 th {
   background-color: var(--surface-100);
+  padding: 5px 5px 5px 5px; /* 상 4px, 우 10px, 하 4px, 좌 10px */
   font-weight: bold;
   font-size: clamp(12px, 2vw, 14px); 
-  text-align: center;
+  text-align: center !important;
   word-wrap: break-word; 
 }
 
@@ -681,10 +690,9 @@ article ul:not(.p-tabview-nav) {
   /* padding-left: 1.2rem; */
 }
 
-article ul .p-accordion-header-link {
+article ul :where(.p-accordion-header-link, .p-tabview-panels, .p-card-body) {
   text-indent: 0rem;
 }
-
 
 .img {
   background-color: var(--background); 
