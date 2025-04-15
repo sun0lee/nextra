@@ -6,4 +6,5 @@ Allow: /
 Host: https://nextra-ten-rose.vercel.app
 
 # Sitemaps
-Sitemap: https://nextra-ten-rose.vercel.app/sitemap.xml
+Sitemap: https://nextra-ten-rose.vercel.app/ko/sitemap.xml
+Sitemap: https://nextra-ten-rose.vercel.app/en/sitemap.xml
