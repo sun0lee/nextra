@@ -690,7 +690,7 @@ article ul:not(.p-tabview-nav) {
   /* padding-left: 1.2rem; */
 }
 
-article ul :where(.p-accordion-header-link, .p-tabview-panels, .p-card-body) {
+article ul :where(.p-component, .p-accordion-header-link, .p-tabview-panels, .p-card-body, p-inline-message) {
   text-indent: 0rem;
 }
 

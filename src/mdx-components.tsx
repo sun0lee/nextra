@@ -192,7 +192,17 @@ const GCmt = ({
     </div>
   )
 }
+const GLv1 = ({ children }: { children: ReactNode }) => (
+  <div className="border-l-4 border-blue-500 pl-0 my-2  text-blue-900 dark:text-blue-200">
+    {children}
+  </div>
+)
 
+const GLv2 = ({ children }: { children: ReactNode }) => (
+  <div className="border-l-4 border-gray-400 pl-1 my-2  text-gray-800 dark:text-gray-300">
+    {children}
+  </div>
+)
 export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   ...getDocsMDXComponents({
     pre: withIcons(Pre, { js: GitHubIcon }),
@@ -221,4 +231,6 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   GTooltip,
   GTooltipIcon,
   GCaption,
+  GLv1,
+  GLv2,
 })
