@@ -1,6 +1,7 @@
 import en from './en'
 import ko from './ko'
 
+export const locales = ['ko', 'en'] as const
 export const i18nConfig = Object.freeze({
   en,
   ko,
