@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://nextra-ten-rose.vercel.app
+
+# Sitemaps
+Sitemap: https://nextra-ten-rose.vercel.app/sitemap.xml
