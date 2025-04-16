@@ -173,7 +173,7 @@ const GCmt = ({
   children,
 }: {
   title?: string
-  severity?: 'success' | 'info' | 'warn' | 'error' | string
+  severity?: 'success' | 'info' | 'warn' | 'error' 
   children: ReactNode
 }) => {
   return (
