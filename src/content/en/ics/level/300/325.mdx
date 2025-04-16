@@ -97,12 +97,12 @@ LTFR^{\boxed{}}_{t-1} - 15bps, & \text{if } LTFR^{\star}_t \leq LTFR^{\boxed{}}_
 LTFR^{\star}_t, & \text{otherwise}
 \end{cases}
 $$
+</GMath>
 <GCmt>
   - • $LTFR^{\boxed{}}_t$ denotes the LTFR of year $t$, after limitation of the annual change;
   - • $LTFR^{\boxed{}}_{t-1}$ denotes the LTFR of year $t-1$, after limitation of the annual change; and
   - • $LTFR^{\star}_t$ denotes the LTFR of year $t$, before limitation of the annual change.
 </GCmt>
-</GMath>
 
 
 #### 3.2.5.3	Determination of the adjustment to the risk-free yield curve
@@ -217,13 +217,13 @@ $$
 <GMath title ="WAMP_spread">
 $= w_{gov} \times spread_{\text{gov after RC}}(t)$  
 $ + \sum_{ICS_{RC}} w_{\text{ICS RC}_i} \times spread_{\text{ICS RC}_i \text{after RC}}(t)$
+</GMath>
 <GCmt>
 - • $w_{gov}$ is the weight of government bonds;
 - • $w_{\text{ICS RC}_i}$ is the weight of debt instruments belonging to ICS rating category i;
 - • $spread_{\text{gov after RC}}(t)$ is the spread after risk correction corresponding to government bonds. When a government bond rate is used for the risk-free yield curve, the applied spread is nil; and
 - • $spread_{\text{ICS RC}_i \text{after RC}}(t)$ is the spread after risk correction corresponding to debt instruments that belong to ICS rating category i.
 </GCmt>
-</GMath>
 
 - L2-92.  $w_{gov}$ and $w_{\text{ICS RC}_i}$ are determined only considering eligible assets according to Table 2.
 - L2-93. Debt instruments in ICS RC 4 and lower, as well as unrated debt instruments, are allocated to the ICS RC 4.
@@ -232,6 +232,7 @@ $ + \sum_{ICS_{RC}} w_{\text{ICS RC}_i} \times spread_{\text{ICS RC}_i \text{aft
 
 <GMath title ="TOM">
 $=min \Bigg(\cfrac{M}{min(LOT,\text{lifetime of liablility})},100\% \Bigg)$
+</GMath>
 <GCmt>
   - • $\text{lifetime of liablility}$ is the maturity after which the insurance liabilities are not expected to generate any cash flow, and 
   - • M is the last maturity for which, under the cash flow test described in paragraph L2-66.c, neither the cash carry forward limit of 10% is breached nor the remaining cash becomes negative. 
@@ -248,17 +249,19 @@ $=min \Bigg(\cfrac{M}{min(LOT,\text{lifetime of liablility})},100\% \Bigg)$
   </AccordionTab>
   </Accordion>
 </GCmt>
-</GMath>
 
 - L2-96. The final spread adjustment for the Middle Bucket ($\text{Spread Adj}_{MB}(t)$) applied to the yield curve is computed such that it is greater than or equal to the spread adjustment for the General Bucket ($\text{Spread Adj}_{GB}(t)$) at each maturity $t$.
 <GMath title ="Middle Bucket spread adjustment">
-$\text{Spread Adj}_{MB}(t)$ $=Max [A,B]$  
+$$
+\text{Spread Adj}_{MB}(t)=Max [A,B]
+$$  
+</GMath>
 <GCmt>
 - • $A$ : $w_{GB} * 0.8 * \text{Spread Adj}_{\text{Gross-GB}}(t)$ 
 - • $B$ : $w_{MB} * (0.8 * \text{Spread Adj}_{\text{Gross-GB}}(t) * (1-TOM)+ 0.9* WAMP_{spread}(t)* TOM$
 - for $t>0$ and $\text{Spread Adj}_{MB}(0)=0$ 
 </GCmt>
-</GMath>
+
 - L2-97. The spread adjustment $\text{Spread Adj}_{MB}(t)$ determined according to this methodology is applied additively to the risk-free rate at each maturity $t$ up to year $M$. After that maturity, the spread adjustment is phased out in such a way that the resulting spot curve remains above the spot curve for the corresponding General Bucket.
 
 </TabPanel>
@@ -272,20 +275,21 @@ $\text{Spread Adj}_{MB}(t)$ $=Max [A,B]$
   $$
   r_{GB}(t) = rfr(t)+80\% \cdot w_{GB} \cdot  \text{Spread Adj}_{\text{Gross-GB}}(t)
   $$
+</GMath>
 
   <GCmt>
   - • up to the LOT, where $rfr(t)$ is the risk-free spot rate at maturity 
   - • $t$ and $w$ the IAIG specific modulation factor. 
   - • For Segments 2 and 3 of the adjusted yield curve, the same extrapolation methodology is used as for determining the risk-free yield curve is applied to the adjusted yield curve.
   </GCmt>
-</GMath>
 - L2-103. The IAIG uses the relevant adjusted yield curves according to the currency of the insurance liability cash outflows.
 
 </TabPanel>
 </TabView>
 
 
-<Fieldset legend="5) Modulation Factor w" toggleable>
+3.2.5.3.2.5 Modulation Factor w
+
 - L2-104. The modulation factor $w_i$ is computed on a portfolio basis. It is computed using all assets, which are sensitive to changes in credit spreads<GTooltipIcon desc="This includes government bonds when the respective yield curve is based on swaps."/>, in the same currency spread bucket as the main currency of the liabilities.
 - L2-105. The currency spread buckets are based on the spread mappings which are used for determining the credit spreads for those currencies.
 - L2-106. The modulation factor $w_i$ is computed using the following formula:
@@ -293,43 +297,42 @@ $\text{Spread Adj}_{MB}(t)$ $=Max [A,B]$
 $$
 min \left( 1, max\left(0, \frac{PVBPU_{assets}}{PVBPU_{liab}*0.8*weight_{spread}}\right) \right)
 $$
+</GMath>
 <GCmt>
   - •	$w_{GB}$ is the modulation factor to be applied for General Bucket portfolios;
 </GCmt>
-</GMath>
 
 <GMath title ="w_MB">
 $$
 min \left( 1, max\left(0, \frac{PVBPU_{assets}}{PVBPU_{liab}*[TOM*0.9*weight_{spread,MB} + 0.8*weight_{spread}*(1-TOM)]}\right) \right)
 $$
+</GMath>
 <GCmt>
   - •	$w_{MB}$ is the modulation factor to be applied for Middle Bucket portfolios;
 </GCmt>
-</GMath>
 
   - •	$PVBPU$ stands for the price value of a basis point up, and is calculated in the following way
+
   <GMath title ="PVBPU" severity="info">
     $$
     PVBPU(X) = PV(X)- PV_{up}(X)
     $$
-    
-    <GCmt>
+  </GMath>
+    <GCmt severity="info">
     - • $PV(X)$ is the current price and 
     - • $PV_{up}(assets)$ the price obtained by applying a parallel shift of one basis point upwards to the relevant yield curve, while 
     - • $PV_{up}(liab)$ is the price obtained by applying a parallel shift up to the LOT of one basis point upwards to the relevant yield curve, after the LOT extrapolation according to section 3.2.5.2 is used. Changes in cash flows due to the parallel shift of one basis point are considered when they are expected to have a non-negligible impact on the ICS coverage ratio. 
     - • The spot rates of the relevant yield curve $r_{relevant}(t)$ for liabilities are obtained as follows:
+    </GCmt>
     <GMath>
       $$
       r_{relevant}(t) = rfr(t) + 80\% \text{Spread Adj}_{\text{Gross-GB}}(t)
       $$
+    </GMath>
       <GCmt>
       - – up to the LOT and using the same extrapolation methodology for Segments 2 and 3 as used for determining the risk-free yield curve. 
       - – Re-calculations are performed taking into consideration potential changes in cash flows when interest rates change. 
       - – The relevant yield curve for assets is the yield curve used to determine the current balance sheet value.
       </GCmt>
-    </GMath>
-    </GCmt>
-  </GMath>
   - •	$weight_{spread}$ is the weight of spread contributing assets. $weight_{spread,MB}$ is the weight of the spread contributing assets for the Middle Bucket. These are computed using the parameters as for paragraph L2-91.
   
-</Fieldset>

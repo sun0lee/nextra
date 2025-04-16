@@ -29,21 +29,19 @@ title: 3.1	Interest rate
     $$
     y(t, \tau) = L_t + S_t \left( \frac{1 - e^{-\lambda \tau}}{\lambda \tau} \right) + C_t \left( \frac{1 - e^{-\lambda \tau}}{\lambda \tau} - e^{-\lambda \tau} \right)
     $$
-    <GCmt>
-    - **수준(Level, ( $L_t$ ))**: 전체 금리 수준을 결정
-    - **기울기(Slope, ( $S_t$ ))**: 단기와 장기 금리 차이를 반영
-    - **곡률(Curvature, ( $C_t$ ))**: 중기 금리의 형태를 조절
-    - **( $\lambda$ ) (감쇠 속도 결정 매개변수)**: 금리 곡선의 형태 변화를 조절
-    </GCmt>
     </GMath>
+    <GCmt>
+    - • **수준(Level, ( $L_t$ ))**: 전체 금리 수준을 결정
+    - • **기울기(Slope, ( $S_t$ ))**: 단기와 장기 금리 차이를 반영
+    - • **곡률(Curvature, ( $C_t$ ))**: 중기 금리의 형태를 조절
+    - • **( $\lambda$ ) (감쇠 속도 결정 매개변수)**: 금리 곡선의 형태 변화를 조절
+    </GCmt>
 
     **$\lambda$(람다)의 의미**
     ( $\lambda$ ) 값에 따라 금리 곡선의 변화 속도가 달라집니다.
-    <GCmt>
         - **( $\lambda$ )가 작을 때**: 감쇠 속도가 느려져 장기 금리까지 영향을 미침.
         - **( $\lambda$ )가 클 때**: 감쇠 속도가 빨라 단기 금리에만 영향을 미침.
         - **금리 곡선의 변곡점(중간 만기 구간) 조절** 역할을 수행.
-    </GCmt>
 
 </AccordionTab>
 <AccordionTab header="Dynamic Nelson-Siegel ">
@@ -53,13 +51,13 @@ title: 3.1	Interest rate
         $$
         X_t = \mu + K (X_t - \mu) dt + \Sigma dW_t
         $$
-        <GCmt>
-        - $ X_t = (L_t, S_t, C_t) $ : 3가지 요인 (수준, 기울기, 곡률)
-        - $ K $ : 평균회귀 속도를 조절하는 행렬
-        - $ \Sigma $ : 변동성을 결정하는 행렬
-        - $ W_t $ : 표준 브라운 운동
-        </GCmt>
     </GMath>
+        <GCmt>
+        - • $ X_t = (L_t, S_t, C_t) $ : 3가지 요인 (수준, 기울기, 곡률)
+        - • $ K $ : 평균회귀 속도를 조절하는 행렬
+        - • $ \Sigma $ : 변동성을 결정하는 행렬
+        - • $ W_t $ : 표준 브라운 운동
+        </GCmt>
 
     DNS 모델은 Vasicek 모형과 유사한 평균회귀(mean-reverting) 특성을 가지며, 시간이 지남에 따라 금리가 특정 수준으로 수렴하도록 합니다.
 
@@ -68,7 +66,7 @@ title: 3.1	Interest rate
     | **K 행렬을 대각 행렬로 제한** | 요인 간 상호작용을 배제하고 개별적으로 평균 회귀하도록 설정 | 계산 단순화, 안정성 증가, 해석 용이 |
     | **PCA 기반 차원 축소** | 스트레스 시나리오에서 주요 변동 패턴만 남김 | 모델 복잡도 감소, 해석 가능성 증가, 계산 부담 감소 |
 
-    이러한 단순화는 모델의 해석 가능성을 높이고, 현실적인 스트레스 시나리오를 도출하는 데 유용합니다. 하지만 지나친 단순화는 현실과의 괴리를 초래할 수 있으므로, 필요에 따라 조정해야 합니다.<br/><br/>
+    이러한 단순화는 모델의 해석 가능성을 높이고, 현실적인 스트레스 시나리오를 도출하는 데 유용합니다. 하지만 지나친 단순화는 현실과의 괴리를 초래할 수 있으므로, 필요에 따라 조정해야 합니다.<br/>
             
         <TabView>
         <TabPanel header="K 행렬을 대각 행렬로 제한 ">
@@ -126,12 +124,12 @@ $$
 max \Bigg(0, \sum_{i} MR_i + Var_{99.5}\Big(\sum_i LT_i\Big)\Bigg)
 $$
 
+</GMath>
 <GCmt>
  - • $i$: 금리 위험에 익스포져가 있는 모든 통화
  - • $MR_i$ :  통화 $i$의 평균회귀 시나리오 결과
  - • $LT_i$ : 통화 $i$의 금리 상승 및 하락 시나리오를 포함하는 확률 변수
 </GCmt>
-</GMath>
 
 
 85. 통화 $i$에 대한 $LT_i$는 다음과 같이 정의됨.
@@ -139,12 +137,12 @@ $$
 $$
 \dfrac{1}{N^{-1}(0.995)} \times (LU_i max(X_i,0)-LD_i min(X_i,0))
 $$
+</GMath>
 <GCmt>
 - • $N^{-1}(0.995)$: 표준 정규분포의 99.5% 분위수
 - • $LU_i$ , $LD_i$: 각각 금리 상승 및 하락 시나리오의 결과
 - • $X_i$: 표준 정규분포를 따르는 확률변수이며, 통화 $i$와 $j$의 상관계수 $corr(X_i, X_j)=0.75$
 </GCmt>
-</GMath>
 
 
 86. 집계된 자본요구량을 닫힌 형태의 해(closed-form solution)로 직접 도출하는 것은 어렵기 때문에, 직접 시뮬레이션 방식으로 계산함.
@@ -170,10 +168,10 @@ $$
 $$
 y_t(\tau) = L_t + S_t \Big( \dfrac{1-e^{-\lambda \tau}}{\lambda \tau} \Big) + C_t \Big( \dfrac{1-e^{-\lambda \tau}}{\lambda \tau} -e^{-\lambda \tau} \Big)
 $$
+</GMath>
 <GCmt>
   - • 수준(Level, $L_t$), 기울기(Slope, $S_t$), 곡률(Curvature, $C_t$)의 선형 조합으로 표현됨.
 </GCmt>
-</GMath>
 
 
 91. DNS 모델의 평균회귀 행렬이 대각 행렬로 제한되는 경우<GTooltipIcon desc="평균회귀 요인의 교차항이 포함된 완전 유연한 모델(즉, K 행렬의 비대각선 요소가 있는 모델)도 테스트했음. 그러나 큰 차이는 없었음"/>, 수익률 곡선 변화의 동적 특성은 다음과 같은 전이 방정식으로 설명됨.
@@ -247,11 +245,10 @@ $, $\odot$는 Hadamard 곱 연산자
   \end{bmatrix}
   M
   $$
-<GCmt>
+  
   - • $LOT$ = Last Observed Term (eg 30 for USD) 
   - • $a$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau}$
   - • $b$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau} - e^{-\lambda \tau}$
-</GCmt>
 - – 먼저 행렬 $NTN$을 대각화하고, $NTN$의 가장 큰 고유값을 가진 고유벡터 $e_1$를 산출함.($\|e_1\|=1$, 즉 정규환 고유벡터). 가장 작은 두 고유값을 가진 고유벡터는 버리고, 남은 충격은 $Me_1$로 정의됨. 
 5) 최종 충격은 수준충격 *Level shock* = $N^{-1}(0.995) * Me_1$ 으로 정의됨.
 6) 실제 충격을 적용한 곡선은 연말 커브에 DNS커브들의 선형 결합을 더하거나 빼서 산출함. 이때 계수는 레벨 충격(Level shock) 벡터의 성분에서 가져옴. 

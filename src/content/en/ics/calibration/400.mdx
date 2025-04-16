@@ -52,27 +52,27 @@ title: 4. Credit Risk
 182. The factor for downgrade is given by:
 <GMath title ="Downgrade Risk">
   $e^{rH} \times \cfrac{V_{expected} - V_{stress}}{V_{current}}$
+</GMath>
 
 <GCmt>
 - a. $V_{expected}$ is the expected value of the bond at time $H$.
 - b. $V_{stressed}$ is the expected value under stress of the bond at time $H$; and
 - c. $V_{current}$ is the current value of the bond.
 </GCmt>
-</GMath>
 
 183. The expected value and stress value of the bond price at time $H$ are calculated by applying the Vasicek model and using a risk-neutral PD to value the bond to account for the risk premium associated with credit risk that is reflected in the bond price. The formula for the bond price at time $H$ is given by:
 <GMath title="H시점의 채권가격" severity="info">
   $$
   e^{-r(T-H)} (1-LGD\times PD^*)
   $$
-  <GCmt>
+</GMath>
+  <GCmt severity="info">
   - • $r$ is the bond yield, and 
   - • $PD*$ is the risk-neutral probability of default from time $H$ to time $T$. The risk-neutral probability of default is derived from the real-world probability of default via the relation:  
     $PD^* = N(N^{-1}(PD))+ \lambda \rho \sqrt{T-H}$
   - • $\lambda$ : market price of risk
   - • $\rho$ : 시스템 위험(systematic risk)에 대한 민감도, 즉 전체 경제상황(공통요인)에 따라 개별 채무자의 부도확률이 얼마나 영향을 받는지를 나타내는 상관계수
   </GCmt>
-</GMath>
 
 184. The stress probability of default between times $H$ and $T$ is given by:
 <GMath title="시점 H~T 사이의 real world SPD" severity="info">
@@ -88,10 +88,10 @@ and the stress risk-neutral probability of default is given by:
   $$
   N\Bigg(\cfrac{\sqrt{T} N^{-1}(PD_T) - \sqrt{H}\sqrt{\rho}N^{-1}(\alpha) - \sqrt{H}\sqrt{1-\rho}Z_H}{\sqrt{T-H}} +\lambda\rho \sqrt{T-H} \Bigg)
   $$
-<GCmt>
+</GMath>
+<GCmt severity="info">
 - • $Z_H$는 Truncated 정규분포(Truncated Normal Distribution)를 따르는 확률변수.
 </GCmt>
-</GMath>
 
 where the random variable $Z_H$, has a truncated normal distribution.
 
@@ -114,8 +114,8 @@ And current value of the bond, $V_{current}$ of:
 $$
   V_{current} = e^{-rT} \bigg( 1-LGD \times N \big(N^{-1}(PD)+\lambda\rho\sqrt{T}\big) \bigg)
 $$
-
 </GMath>
+
 #### 4.3.2.3 Data and assumptions
 186. The cumulative probabilities of default $PD_H$ and $PD_T$, for corporate credit exposures have been derived from the 2013 Standard & Poor’s annual global corporate default study and rating transitions. The confidence level for ICS is 99.5% and so $\alpha =0.005$.
 187. All of the remaining model parameters are the same as under the Basel IRB approach:

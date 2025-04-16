@@ -29,6 +29,7 @@ title: 3.6	Asset concentration
 $$
 \widetilde{GA} = \cfrac{1}{2K^*}\sum_{i=1}^{n} s_i^2 C_i[\delta (K_i+R_i)-K_i]
 $$
+</GMath>
 <GCmt>
 161. 자세한 사항은 해당 논문을 참고. 요약하면,  
 $s_i$는 포트폴리오 내 비중,  
@@ -37,7 +38,6 @@ $R_i$는 기대손실로 해석 가능함.
 $C_i$는 자산 $i$의 부도 시 손실(LGD)의 분산과 기댓값에 따라 결정됨.  
 $\delta$는 분포의 분위수와 정밀도 계수 $\xi$에 따라 결정되는 계수이며, 논문에서는 $\xi = 0.25$로 제안됨.
 </GCmt>
-</GMath>
 
 ##### 3.6.3.2.2 가정  
 162. ICS 위험액 산출을 위해 (논문에서 제시한 가정 외에) 다음과 같은 추가 가정을 적용.  
@@ -61,6 +61,7 @@ $$
 $$
 f \times \Big( \dfrac{\sum_{E_i >T} (E_i -T)(d K_i^{eq} + K_i^{cr})}{d K^{eq} + K^{cr}} +T \Big)
 $$
+</GMath>
 <GCmt>
 - a. $f = 0.71656$;<GTooltipIcon desc="Granularity Adjustment 계산에 쓰이는 계수"/>
 - b. $d = 0.95$;<GTooltipIcon desc="자산위험 보정 계수"/>
@@ -71,7 +72,6 @@ $$
 - g. $K^{eq}$는 IAIG 전체의 주식위험액 (분산 및 관리조치 전);  
 - h. $K^{cr}$는 IAIG 전체의 신용위험액 (분산 및 관리조치 전).
 </GCmt>
-</GMath>
 
 
 166. $d$ 값은 전문가 판단에 기반함.

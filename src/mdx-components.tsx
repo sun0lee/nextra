@@ -95,7 +95,11 @@ const GMath = ({
               </div>
             )}
             {children && (
-              <div style={{ width: '100%', textAlign: 'center' }}>{children}</div>
+              <div style={{ width: '100%', textAlign: 'center', overflowX: 'auto' , overflowY: 'hidden' }}>
+                <div style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+                  {children}
+                </div>
+              </div>
             )}
           </div>
         )}
@@ -164,34 +168,50 @@ const GCaption = ({ children }: { children: ReactNode }) => {
 }
 
 const GCmt = ({
-  props,
+  title,
+  severity = 'success',
   children,
 }: {
-  pl: number
-  props: any
+  title?: string
+  severity?: 'success' | 'info' | 'warn' | 'error' | string
   children: ReactNode
 }) => {
-  const divStyle = {
-    fontSize: '0.875rem',
-    border: 'none', // 테두리 없음
-    fontWeight: '400',
-    color: 'var(--surface-700)',
-    letterSpacing: '-0.04em',
-    marginTop: '1.25rem',
-  }
-
-  const contentStyle = {
-    paddingTop: '0.1rem',
-    marginLeft: '1rem',
-  }
   return (
-    <div {...props} style={divStyle}>
-      <div style={contentStyle} className="tw-pb-2 text-left ... ">
-        {children}
-      </div>
+    <div className="my-2">
+      <Message
+        style={{
+          marginTop: ['success', 'info', 'warn', 'error'].includes(severity) ? '-0.3rem' : '0rem',
+          padding: '0.0rem',
+          paddingLeft: '0.5rem',
+          paddingRight:'0.5rem',
+          paddingBottom: ['success', 'info', 'warn', 'error'].includes(severity) ? '0.5rem' : '-0.5rem',
+          width: '100%',
+        }}
+        severity={severity}
+        content={(
+          <div style={{ width: '100%', textAlign: 'left' }}>
+            {title && (
+              <div style={{ fontWeight: '600', marginBottom: '0.5rem', fontSize: '0.9rem' }}>
+                {title}
+              </div>
+            )}
+            <div
+              style={{
+                fontSize: '0.875rem',
+                fontWeight: '400',
+                color: 'var(--surface-700)',
+                letterSpacing: '-0.04em',
+              }}
+            >
+              {children}
+            </div>
+          </div>
+        )}
+      />
     </div>
   )
 }
+
 const GLv1 = ({ children }: { children: ReactNode }) => (
   <div className="border-l-4 border-blue-500 pl-0 my-2  text-blue-900 dark:text-blue-200">
     {children}
