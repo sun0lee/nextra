@@ -83,6 +83,7 @@ $$
 2) The mean reversion shock, expressed as a ($L$, $S$, $C$) vector is: $(I-e^{-k})(\theta-V_0)$ 
 - – where $I$ is the 3 x 3 identity matrix. This linear combination of the DNS curves gets added to the year-end rates.
 3) One set of shocks that could be placed under the square root, expressed as ($L$, $S$, $C$) vectors, consists of the columns of the square root of the conditional covariance matrix (using $\odot$ as the Hadamard product operator):
+
 $$
 M = \sqrt{(\sum\sum^T) \odot \Big( \dfrac{1-e^{-(K_i+K_j)}}{K_i+K_j}\Big)_{ij}}
 $$

@@ -709,6 +709,6 @@ article ul :where(.p-component, .p-accordion-header-link, .p-tabview-panels, .p-
 .katex {
   max-width: 100%;
   overflow-x: auto;
-  font-size: clamp(0.9em, 2.5vw, 1.1em);  
+  font-size: clamp(0.9em, 2.5vw, 1.0em);  
 }
 

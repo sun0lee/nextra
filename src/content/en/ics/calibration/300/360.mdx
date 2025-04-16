@@ -19,7 +19,7 @@ title: 3.6	Asset concentration
 ##### 3.6.3.2.1	Methodology
 159. The methodology is based on the paper Granularity Adjustment for Regulatory Capital Assessment by Gordy and Luetkebohmert.$^{15)}$
 
-<GCmt>
+<GCmt severity="aa">
 [15) Granularity Adjustment for Regulatory Capital Assessment (ijcb.org)](https://www.ijcb.org/journal/ijcb13q3a2.pdf)
 </GCmt>
 
@@ -28,16 +28,14 @@ title: 3.6	Asset concentration
 $$
 \widetilde{GA} = \cfrac{1}{2K^*}\sum_{i=1}^{n} s_i^2 C_i[\delta (K_i+R_i)-K_i]
 $$
-
-<GCmt>
-161. Further details can be found in the paper. Roughly speaking  
-$s_i$ can be interpreted as the portfolio share,   
-$K_i$ as the unexpected loss,  
-$R_i$ as the expected loss.  
-$C_i$ is a term depending on the variance and expected value of loss given default (LGD) of asset $i$ and  
-$\delta$ is parameter that depends on the quantile of the distribution and a so-called precision parameter $\xi$ (which is proposed to be set to 0.25 in the paper).
-</GCmt>
 </GMath>
+
+161. Further details can be found in the paper. Roughly speaking  
+- • $s_i$ can be interpreted as the portfolio share,   
+- • $K_i$ as the unexpected loss,  
+- • $R_i$ as the expected loss.  
+- • $C_i$ is a term depending on the variance and expected value of loss given default (LGD) of asset $i$ and  
+- • $\delta$ is parameter that depends on the quantile of the distribution and a so-called precision parameter $\xi$ (which is proposed to be set to 0.25 in the paper).
 
 ##### 3.6.3.2.2	Assumptions
 162. The following assumptions (going beyond the assumptions made in the paper) were made to determine the risk charge for the ICS.
@@ -59,6 +57,7 @@ $$
 $$
 f \times \Big( \dfrac{\sum_{E_i >T} (E_i -T)(d K_i^{eq} + K_i^{cr})}{d K^{eq} + K^{cr}} +T \Big)
 $$
+</GMath>
 <GCmt>
 - a. $f = 0.71656$;
 - b. $d = 0.95$;
@@ -69,6 +68,5 @@ $$
 - g. $K^{eq}$ is the total Equity risk charge of the IAIG, before diversification and management actions; and
 - h. $K^{cr}$ is the total Credit risk charge of the IAIG, before diversification and management actions.
 </GCmt>
-</GMath>
 
 166. The value $d$ is based on expert judgement.

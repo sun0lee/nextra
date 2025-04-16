@@ -42,11 +42,11 @@ title: 4. Credit Risk
 179. 신용리스크 모형은 다음과 같이 스트레스 부도확률(SPD)을 정의함. 이때 $PD$는 부도확률임:
 <GMath title ="SPD(Stressed Probability of Default)" severity="info">
   $N \Bigg( \cfrac{N^{-1}(PD_H)-\sqrt{\rho}N^{-1}(\alpha)}{\sqrt{1-\rho}} \Bigg)$
-  <GCmt>
+</GMath>
+  <GCmt severity="info">
   - • $\alpha$ : 신뢰수준 99.5%
   - • $\rho$ : 시스템 위험(systematic risk)에 대한 민감도, 즉 전체 경제상황(공통요인)에 따라 개별 채무자의 부도확률이 얼마나 영향을 받는지를 나타내는 상관계수
   </GCmt>
-</GMath>
 
 180. LGD는 Basel II 접근방법과 동일하게 45%의 고정값으로 가정함.
 
@@ -56,26 +56,26 @@ title: 4. Credit Risk
 <GMath title ="Downgrade Risk">
   $e^{rH} \times \cfrac{V_{expected} - V_{stress}}{V_{current}}$
 
+</GMath>
 <GCmt>
 - a. $V_{expected}$ : 시점 $H$에서의 채권 기대가치
 - b. $V_{stressed}$ : 스트레스 조건 하 시점 $H$에서의 채권 기대가치
 - c. $V_{current}$ : 현재 시점에서의 채권가치
 </GCmt>
-</GMath>
 
 183. $V_{expected}$ 및 $V_{stress}$는 Vasicek 모형과 위험중립 부도확률을 활용하여 산출되며, 신용리스크에 반영된 위험프리미엄을 고려함. 시점 $H$에서의 채권가격은 다음과 같음:
 <GMath title="H시점의 채권가격" severity="info">
   $$
   e^{-r(T-H)} (1-LGD\times PD^*)
   $$
-  <GCmt>
+</GMath>
+  <GCmt severity="fino">
   - • $r$ 채권수익률,  
   - • $PD^*$는 시점 $H$부터 $T$까지의 위험중립 부도확률이며, 위험중립 부도확률($PD^*$)은 실제 세계(real-world) 부도확률 $PD$로부터 아래 관계식을 통해 도출됨:  
     $PD^* = N(N^{-1}(PD))+ \lambda \rho \sqrt{T-H}$
   - • $\lambda$ : 시장위험가격(market price of risk)을 의미 (시장의 위험 프리미엄 계수)
   - • $\rho$ : 시스템 위험(systematic risk)에 대한 민감도, 즉 전체 경제상황(공통요인)에 따라 개별 채무자의 부도확률이 얼마나 영향을 받는지를 나타내는 상관계수
   </GCmt>
-</GMath>
 
 184. 시점 $H$~$T$ 사이의 스트레스 부도확률은 아래와 같음:
 <GMath title="시점 H~T 사이의 real world SPD" severity="info">
@@ -91,10 +91,10 @@ title: 4. Credit Risk
   $$
   N\Bigg(\cfrac{\sqrt{T} N^{-1}(PD_T) - \sqrt{H}\sqrt{\rho}N^{-1}(\alpha) - \sqrt{H}\sqrt{1-\rho}Z_H}{\sqrt{T-H}} +\lambda\rho \sqrt{T-H} \Bigg)
   $$
-<GCmt>
+</GMath>
+<GCmt severity="info">
 - • $Z_H$는 Truncated 정규분포(Truncated Normal Distribution)를 따르는 확률변수.
 </GCmt>
-</GMath>
 
 ![SPD 비교](/ics/cal184.png)
 
