@@ -1,0 +1,43 @@
+---
+title: 5.5	운영리스크
+---
+## 5.5	운영리스크
+- L1-136. 운영리스크 기준자본(Operational risk charge)은 지정된 위험 익스포져에 정해진 스트레스 계수를 적용하여 산출함.
+- L1-137. 운영리스크 기준자본 산출은 지역별 구분 및 다음 사업 부문별 구분을 기반으로 함:
+
+  |구분|상세|
+  |:--:|--|
+  |• 일반손해보험(Non-Life) | 생명보험이나 유사 생명건강보험이 아닌 보험상품. 보통 재산 및 배상책임 보험 또는 일반보험이라 불림.|
+  |• 생명(위험)(Life (risk)) | 보험자가 투자위험을 부담하는 생명보험 또는 유사 생명건강보험에 해당하는 보험상품.|
+  |• 생명(비위험)(Life (non-risk)) | 계약자가 투자위험을 부담하는 상품.|
+- L1-138. 운영리스크의 익스포져 및 스트레스 계수는 Level 2 본문에서 제시함.
+
+- L2-329. 운영리스크 기준자본은 다음과 같이 산출함:
+
+<GMath title ="Operational risk charge">
+- $max [\text{non life premium exposure} * factor, \text{non life liability exposure}* factor]$
+- $+ \text{non life growth exposure} * factor$
+- $+ max [\text{life(risk) premium exposure} * factor, \text{life(risk) liability exposure}* factor]$
+- $+ \text{life(risk) growth exposure} * factor+ \text{life (non risk) liability exposure} * factor$
+</GMath>
+
+- L2-330. 운영리스크 구성요소는 각 위험 익스포져에 스트레스 계수를 곱하여 산출함. 동일한 계수는 5.1.2절에서 정의한 지역별 구분 전반에 걸쳐 적용됨.
+- L2-331. 운영리스크에 대한 익스포져와 스트레스 계수는 다음 표와 같음:
+
+| Exposure   | Premium    | Growth   | Liabilities         |
+|------------|------------|----------|---------------------|
+| Exposure   | <GTooltip label="GWP" desc="Gross written premium"/> in most recent financial year | GWP in most recent financial year in excess of the growth threshold (20%) compared to the previous year’s GWP | Gross current estimate |
+| Factor     | 2.75%   | 2.75%    | 2.75%   |
+
+<GCaption>Table 33: 운영리스크 익스포져 및 스트레스 계수 – 일반손해보험 부문</GCaption>
+
+| Exposure | Premium | Growth | Liabilities |
+|----------|---------|--------|-------------|
+| Exposure | Life (risk): GWP in most recent financial year | Life (risk): GWP in most recent financial year in excess of the growth threshold (20%) compared to the previous year’s GWP | Life (risk): Gross current estimate <br/> Life (non-risk): Gross current estimate |
+| Factor   | Life (risk): 4% | Life (risk): 4% | Life (risk): 0.45% <br/> Life (non-risk): 0.40% |
+
+<GCaption>Table 33: 운영리스크 익스포져 및 스트레스 계수 – 생명보험 부문</GCaption>
+
+- L2-332. GWP는 재보험이나 기타 회수 가능액을 고려하기 전, 해당 재무연도에 인식된 신계약 및 갱신계약 전체를 포함함. 일시납 보험계약의 경우, 연도 중 전액이 GWP에 포함됨. 그 외 보험계약은 해당 연도 중에 IAIG에 귀속되는 보험료를 GWP로 포함함.
+- L2-333. 총 현행추정치는 재보험이나 기타 회수 가능액을 고려하기 전 수치를 기준으로 함.
+- L2-334. 운영리스크 중 성장 위험(Growth risk) 구성요소를 계산할 때, 일반손해보험 및 생명(위험) 부문에 대해 최근 두 개 재무연도의 GWP를 사용함. 해당 수치는 출재재보험 전 기준이며 연결 기준으로 고려함.

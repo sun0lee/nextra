@@ -40,13 +40,13 @@ src/
 
   </TabPanel>
   <TabPanel header="generateStaticParamsFor ">
-      - •	특정 경로(예: 'mdxPath')를 기준으로 정적 경로(static paths)를 생성하는 함수야.
-      - •	Nextra가 자동으로 MDX 파일들의 경로를 읽어서 각 페이지의 URL을 미리 만들도록 도와주는 역할을 해.
+        - •	특정 경로(예: 'mdxPath')를 기준으로 정적 경로(static paths)를 생성하는 함수야.
+        - •	Nextra가 자동으로 MDX 파일들의 경로를 읽어서 각 페이지의 URL을 미리 만들도록 도와주는 역할을 해.
 
   </TabPanel>
   <TabPanel header="importPage ">
-      - •	특정 MDX 문서를 가져와서 메타데이터(metadata), 본문(content), 목차(toc) 등을 반환하는 함수야.
-      - •	params.mdxPath와 params.lang을 전달하면, 해당 경로에 있는 MDX 문서를 불러와서 렌더링할 수 있는 형태로 변환해 줘.
+        - •	특정 MDX 문서를 가져와서 메타데이터(metadata), 본문(content), 목차(toc) 등을 반환하는 함수야.
+        - •	params.mdxPath와 params.lang을 전달하면, 해당 경로에 있는 MDX 문서를 불러와서 렌더링할 수 있는 형태로 변환해 줘.
 
   </TabPanel>
   </TabView>
@@ -75,25 +75,25 @@ src/
 - •	Next.js의 동적 경로(Static Path) 생성 함수야.
 - •	'mdxPath' 값을 기준으로 MDX 문서들의 정적 경로를 미리 생성해 줘서, 정적 사이트 생성(SSG)이 가능하도록 도와줘.
 - •	예시
-  - •	/docs/intro.mdx → mdxPath: \['docs', 'intro']
-  - •	/about.mdx → mdxPath: \['about'] 
+    - •	/docs/intro.mdx → mdxPath: \['docs', 'intro']
+    - •	/about.mdx → mdxPath: \['about'] 
 
 </TabPanel>
 <TabPanel header="generateMetadata ">
-  - •	Next.js 13+의 SEO 메타데이터 생성 함수야.
+    - •	Next.js 13+의 SEO 메타데이터 생성 함수야.
 	- •	페이지마다 메타데이터(예: 제목, 설명, OG 태그 등) 를 동적으로 불러와 설정하는 역할을 해.
 
 </TabPanel>
 <TabPanel header="params ">
-  - •	props.params를 가져와서 비동기적으로 해석(await) 해.
+    - •	props.params를 가져와서 비동기적으로 해석(await) 해.
 	- •	params에는 현재 페이지의 mdxPath(파일 경로)와 lang(언어)이 포함되어 있어.
 </TabPanel>
 <TabPanel header="metadata ">
-  - •	importPage를 사용해서 현재 페이지의 MDX 문서를 불러와서 메타데이터만 추출해. Ex) title, description
+    - •	importPage를 사용해서 현재 페이지의 MDX 문서를 불러와서 메타데이터만 추출해. Ex) title, description
 
 </TabPanel>
 <TabPanel header="type PageProps ">
-  - •	PageProps 타입을 정의한 부분이야.
+    - •	PageProps 타입을 정의한 부분이야.
 	- •	params는 mdxPath와 lang을 포함하는 비동기 객체(Promise) 형태야.
 	- •	Readonly\<>를 사용해서 불변(immutable)하도록 보호하고 있어.
 
@@ -108,7 +108,7 @@ src/
   ```
   <Accordion activeIndex={[0]}>
   <AccordionTab header=" ">
-  - •	useMDXComponents()에서 wrapper 컴포넌트를 가져와서 MDX 문서를 감싸는 역할을 해.
+    - •	useMDXComponents()에서 wrapper 컴포넌트를 가져와서 MDX 문서를 감싸는 역할을 해.
 	- •	보통 전체 페이지 레이아웃(TOC, 제목, 스타일링)을 담당하는 컨테이너 컴포넌트야.
   </AccordionTab>
   </Accordion>
@@ -137,9 +137,9 @@ src/
 
 
 - ✅ 주요 기능
-  - Next.js의 App Router 기반 동적 라우팅을 처리 ([[...mdxPath]]를 통해 URL에 맞는 MDX 파일을 찾음)
-  - 해당하는 MDX 파일(content/000.mdx)을 불러와서 화면에 표시
-  - useMDXComponent 등을 사용하여 MDX 파일을 컴포넌트처럼 렌더링함
+    - Next.js의 App Router 기반 동적 라우팅을 처리 ([[...mdxPath]]를 통해 URL에 맞는 MDX 파일을 찾음)
+    - 해당하는 MDX 파일(content/000.mdx)을 불러와서 화면에 표시
+    - useMDXComponent 등을 사용하여 MDX 파일을 컴포넌트처럼 렌더링함
 
 ## ② app/layout.tsx
 
@@ -177,9 +177,9 @@ src/
 
 ```
 - ✅ 주요 기능
-  - 모든 페이지(page.tsx)에서 공통으로 적용될 헤더, 네비게이션, 푸터 등의 레이아웃을 설정
-  - MDX 페이지(page.tsx)를 감싸는 부모 컴포넌트 역할
-  - TOC(목차) 표시, 검색 기능, 언어 변경 버튼 등이 포함될 수도 있음
+    - 모든 페이지(page.tsx)에서 공통으로 적용될 헤더, 네비게이션, 푸터 등의 레이아웃을 설정
+    - MDX 페이지(page.tsx)를 감싸는 부모 컴포넌트 역할
+    - TOC(목차) 표시, 검색 기능, 언어 변경 버튼 등이 포함될 수도 있음
 
 ## ③ content/_meta.tsx
 
