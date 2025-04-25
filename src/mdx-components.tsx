@@ -75,7 +75,7 @@ const GMath = ({
   children: ReactNode
 }) => {
   const _title = title ? `❱❱ ${title} ` : ''
-  const _severity = severity || 'success'
+  const _severity = severity || 'contrast'
   const _width = width || '100%'
 
   return (
@@ -169,24 +169,25 @@ const GCaption = ({ children }: { children: ReactNode }) => {
 
 const GCmt = ({
   title,
-  severity = 'success',
+  severity,
   children,
 }: {
   title?: string
-  severity?: 'success' | 'info' | 'warn' | 'error'
+  severity?: 'success' | 'info' | 'warn' | 'error' | undefined
   children: ReactNode
 }) => {
+  const _severity = severity || 'contrast'
   return (
     <div className="my-2">
       <Message
         style={{
-          marginTop: ['success', 'info', 'warn', 'error'].includes(severity) ? '-0.5rem' : '0rem',
+          marginTop: ['success', 'info', 'warn', 'error', 'contrast'].includes(_severity) ? '-0.5rem' : '0rem',
           paddingLeft: '0.5rem',
           paddingRight: '0.5rem',
           // paddingBottom: ['success', 'info', 'warn', 'error'].includes(severity) ? '0.5rem' : '-0.5rem',
           width: '100%',
         }}
-        severity={severity}
+        severity={_severity}
         content={(
           <div style={{ width: '100%', textAlign: 'left' }}>
             {title && (

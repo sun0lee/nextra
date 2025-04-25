@@ -602,6 +602,10 @@
   color: var(--error-icon);
 }
 
+.p-inline-message.p-inline-message-contrast {
+  background: var(--surface-50);
+}
+
 /* ✅ 공통 스타일 */
 .p-inline-message .p-inline-message-icon {
   font-size: 1rem;

@@ -235,6 +235,7 @@ $$
   <GMath title="WAMP_spread">
   $= w_{gov} \times spread_{\text{gov after RC}}(t)$  
   $ + \sum_{ICS_{RC}} w_{\text{ICS RC}_i} \times spread_{\text{ICS RC}_i \text{after RC}}(t)$
+  </GMath>
 
   <GCmt>
     - • $w_{gov}$: 정부채권의 비중  
@@ -242,7 +243,6 @@ $$
     - • $spread_{\text{gov after RC}}(t)$: 정부채권 위험조정 후 스프레드 (기준금리에 정부채권이 사용되면 0으로 간주)  
     - • $spread_{\text{ICS RC}_i \text{after RC}}(t)$: ICS 등급별 채권 위험조정 후 스프레드
   </GCmt>
-  </GMath>
 
     - L2-92. $w_{gov}$ 및 $w_{\text{ICS RC}_i}$는 Table 2에 따라 적격자산만을 기준으로 산정됨.
     - L2-93. ICS RC 4 이하 또는 무등급 채권은 ICS RC 4에 포함됨.
@@ -253,6 +253,7 @@ $$
   
   $= \min\left(\cfrac{M}{\min(\text{LOT}, \text{lifetime of liab})}, 100\%\right)$
 
+  </GMath>
   <GCmt>
     - • $\text{lifetime of liab}$: 해당 보험부채의 예상 현금흐름 종료시점  
     - • $M$: 현금흐름 테스트(L2-66.c 기준)를 통해, 10% 초과 캐시 캐리포워드 없이 음의 잔여현금이 발생하지 않는 최종 시점  
@@ -271,7 +272,6 @@ $$
   </AccordionTab>
   </Accordion>
   </GCmt>
-  </GMath>
 
 
     - L2-96. 최종 Middle Bucket 스프레드 조정치($\text{Spread Adj}_{MB}(t)$)는 다음과 같이 산출되며, 각 만기에서 General Bucket 스프레드 조정치보다 크거나 같아야 함:
@@ -280,12 +280,12 @@ $$
   $$
   \text{Spread Adj}_{MB}(t) = \max \left[ A, B \right]
   $$
+  </GMath>
   <GCmt>
     - • $A$ : $w_{GB} \cdot 0.8 \cdot \text{Spread Adj}_{\text{Gross-GB}}(t)$  
     - • $B$ : $w_{MB} \cdot \left(0.8 \cdot \text{Spread Adj}_{\text{Gross-GB}}(t) \cdot (1-TOM) + 0.9 \cdot WAMP_{spread}(t) \cdot TOM \right)$  
   단, $t > 0$일 때 적용하며, $\text{Spread Adj}_{MB}(0) = 0$
   </GCmt>
-  </GMath>
 
     - L2-97. 이 방식에 따라 산출된 Middle Bucket  스프레드 조정치는 $t = M$까지 무위험금리에 가산되며, 이후 구간에서는 General Bucket 곡선보다 높은 수준을 유지하면서 점진적으로 감쇠됨.
 
@@ -301,12 +301,12 @@ $$
     $$
     r_{GB}(t) = rfr(t) + 80\% \cdot w_{GB} \cdot \text{Spread Adj}_{\text{Gross-GB}}(t)
     $$
+  </GMath>
   <GCmt>
       - • $rfr(t)$는 $t$시점의 무위험 현물금리 (spot rate)
       - • $w_{GB}$는 IAIG별 조정계수임. 
       - • Segments 2 및 3 구간의 조정 수익률곡선은 무위험곡선과 동일한 외삽기법을 적용함.
   </GCmt>
-  </GMath>
 
     - L2-103. IAIG는 보험부채의 현금흐름 통화에 따라 적절한 조정 수익률곡선을 적용함.
 
