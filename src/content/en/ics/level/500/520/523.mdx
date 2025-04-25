@@ -1,0 +1,335 @@
+---
+title: 5.2.3	Calculation of Non-life risk charges
+---
+### 5.2.3	Calculation of Non-life risk charges
+- L1-100. Non-life risk charges are applicable to non-life business and similar to non-life health business.
+- L1-101. The non-life risk charge comprises both Premium risk and Claims Reserve risk, which are captured by a factor-based approach with factors applied to ICS segments within defined regions, as specified in the Level 2 text. The Claims Reserve risk factors include the effects of Latent Liability risk.
+- L1-102. The non-life insurance risk charge is calculated using an aggregation approach that recognises diversification across lines of business and regions. The correlation factors are specified in the Level 2 text. The aggregation approach recognises the following sources of diversification:
+  - •	Between Premium risk and Claims Reserve risk;
+  - •	Within ICS categories, which is a high-level grouping of the type of business;
+  - •	Within a region; and
+  - •	Across regions.
+- L1-103. Premium and Claims Reserve risk charges are calculated based on the geographical segmentation specified in the Level 2 text. The geographical segmentation is further segmented into lines of business based on statutory reporting in certain regions.
+
+#### 5.2.3.1	Segments / Lines of business
+- L2-168. Each exposure for Premium risk and Claims Reserve risk is mapped to a line of business based on the location of risk. Each line of business has a corresponding ICS segment, as specified in Table 14. Any jurisdiction not explicitly listed in Table 14 is allocated to either Other developed markets or Other emerging markets according to Table 5.
+
+#### 5.2.3.2	Definition of ICS segments and risk charges
+- L2-169. Each ICS segment is assigned:
+  - a.	An ICS category: a high level grouping of the type of business (property-like, liability-like, motor-like, other, mortgage and credit); and
+  - b.	A risk factor for the purpose of calculating the risk charge.
+- L2-170. Premium risk factors do not include the impact of catastrophe events since catastrophe risk is a separate risk within the ICS.
+- L2-171. Some of the Claims Reserve risk factors take into account latent liability risk. The purpose of the latent liability risk charge is to capture risk from liability exposures that is not adequately captured by historical claims experience.
+- L2-172. Table 14 provides the list of ICS segments, the associated ICS category, as well as the risk charges for Premium and Claims Reserve risks. The definitions of ICS segments are provided in 0.
+
+#### 5.2.3.3	Aggregation
+- L2-173. The calculation of non-life risk charges for each ICS segment takes into account diversification effects.
+- L2-174. The first step of aggregation combines each ICS segment’s Premium risk and Claims Reserve risk charges, applying a 25% correlation factor between the Premium and Claims Reserve risk charges for all segments (with the exception of mortgage and credit as outlined below).
+- L2-175. Mortgage business and credit business are added across all regions and then aggregated with Real Estate risk and Credit risk, respectively.
+- L2-176. The second step of aggregation is within ICS categories, where a correlation matrix is applied across segments of a given category. The correlation factors are specified in Table 13 below:
+
+| **ICS Categories** | Correlation factor |
+|:--:|:--:|
+| **Liability-like** | 50%  |
+| **Motor-like**     | 75%  |
+| **Property-like**  | 50%  |
+| **Other**          | 25%  |
+
+<GCaption>Table 13: Within category correlation factors</GCaption>
+
+- L2-177. The third step of aggregation is within each region listed in section 5.1.2, using a 50% correlation factor between each of the four ICS categories.
+- L2-178. The fourth step of aggregation is across regions, using a 25% correlation factor between each region’s total risk charge.
+
+#### 5.2.3.4	Input data required
+- L2-179. The Premium risk charge for each ICS segment is calculated as the relevant risk factor multiplied by the greater of the net premium earned and net premium to be earned.
+- L2-180. The Claims Reserve risk charge for each ICS segment is calculated as the relevant risk factor multiplied by the net current estimate.
+
+<TabView scrollable>
+<TabPanel header="EEA and Switzerland ">
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Medical expense insurance** | Other | 15% | 10% |
+  | **Income protection** | Other | 25% | 35% |
+  | **Workers' Compensation** | Liability-like | 25% | 27% |
+  | **Motor vehicle liability <br/>- Motor third party liability** | Motor-like | 20% | 15% |
+  | **Motor, other classes** | Motor-like | 20% | 15% |
+  | **Marine, aviation and transport** | Property-like | 35% | 25% |
+  | **Fire and other damage** | Property-like | 17.5% | 17.5% |
+  | **General liability <br/>- third party liability** | Liability-like | 35% | 27% |
+  | **Credit and suretyship** | Credit | 35% | 50% |
+  | **Legal expenses** | Other | 15% | 40% |
+  | **Assistance** | Other | 15% | 50% |
+  | **Miscellaneous financial loss** | Other | 30% | 35% |
+  | **Non-proportional health reinsurance** | Other | 50% | 45% |
+  | **Non-proportional Casualty reinsurance** | Liability-like | 55% | 45% |
+  | **Non-proportional marine, <br/>aviation and transport reinsurance** | Property-like | 55% | 40% |
+  | **Non-Proportional property reinsurance** | Property-like | 45% | 40% |
+
+</TabPanel>
+<TabPanel header="Canada ">
+
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Property - personal** | Property-like | 35% | 25% |
+  | **Home Warranty** | Property-like | 30% | 25% |
+  | **Product Warranty** | Property-like | 30% | 25% |
+  | **Property - commercial** | Property-like | 30% | 30% |
+  | **Aircraft** | Property-like | 45% | 35% |
+  | **Automobile <br/>- liability/personal accident** | Motor-like | 35% | 20% |
+  | **Automobile - other** | Motor-like | 35% | 20% |
+  | **Boiler and Machinery** | Property-like | 30% | 25% |
+  | **Equipment Warranty** | Property-like | 30% | 25% |
+  | **Credit Insurance** | Credit | 45% | 30% |
+  | **Credit Protection** | Credit | 45% | 30% |
+  | **Fidelity** | Other | 45% | 30% |
+  | **Hail** | Property-like | 35% | 30% |
+  | **Legal Expenses** | Other | 45% | 40% |
+  | **Liability** | Liability-like | 50% | 38% |
+  | **Mortgage** | Mortgage | 45% | 30% |
+  | **Surety** | Credit | 45% | 30% |
+  | **Title** | Liability-like | 35% | 30% |
+  | **Marine** | Property-like | 45% | 35% |
+  | **Accident and Sickness** | Other | 45% | 30% |
+  | **Other Approved Products** | Other | 45% | 35% |
+
+</TabPanel>
+<TabPanel header="US ">
+
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Auto physical damage** | Motor-like | 12.50% | 10% |
+  | **Homeowners/ Farm owners** | Property-like | 30% | 15% |
+  | **Special property** | Property-like | 25% | 17.50% |
+  | **Private passenger auto liability/ medical** | Motor-like | 15% | 15% |
+  | **Commercial auto/ truck liability/ medical** | Motor-like | 15% | 15% |
+  | **Workers' compensation** | Liability-like | 15% | 16% |
+  | **Commercial multi-peril** | Liability-like | 30% | 26% |
+  | **Medical professional liability - Occurrence** | Liability-like | 40% | 45% |
+  | **Medical professional liability – Claims-Made** | Liability-like | 30% | 35% |
+  | **Other Liability – Occurrence** | Liability-like | 17.50% | 28% |
+  | **Other Liability – Claims-Made** | Liability-like | 15% | 20% |
+  | **Products liability** | Liability-like | 45% | 47% |
+  | **Reinsurance <br/>– non-proportional assumed property** | Property-like | 35% | 25% |
+  | **Reinsurance <br/>– non-proportional assumed liability** | Liability-like | 45% | 39% |
+  | **Special liability** | Liability-like | 30% | 25% |
+  | **Mortgage insurance** | Mortgage | 45% | 30% |
+  | **Fidelity/surety** | Credit | 35% | 40% |
+  | **Financial Guaranty** | Credit | 45% | 25% |
+  | **Other** | Other | 25% | 35% |
+  | **Reinsurance <br/>– non-proportional assumed financial lines** | Other | 45% | 20% |
+
+</TabPanel>
+<TabPanel header="China ">
+  
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Motor** | Motor-like | 10% | 20% |
+  | **Property, <br/>including commercial, personal and engineering** | Property-like | 30% | 45% |
+  | **Marine and Special** | Property-like | 25% | 45% |
+  | **Liability** | Liability-like | 10% | 36% |
+  | **Agriculture** | Property-like | 25% | 35% |
+  | **Credit** | Credit | 45% | 35% |
+  | **Short-term Accident** | Other | 10% | 10% |
+  | **Short-term Health** | Other | 10% | 10% |
+  | **Short-term Life** | Other | 10% | 20% |
+  | **Others** | Other | 35% | 20% |
+
+</TabPanel>
+<TabPanel header="Japan ">
+  
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Fire** | Property-like | 20% | 35% |
+  | **Hull** | Property-like | 40% | 35% |
+  | **Cargo** | Property-like | 35% | 40% |
+  | **Transit** | Property-like | 40% | 35% |
+  | **Personal Accident** | Other | 10% | 15% |
+  | **Automobile** | Motor-like | 7.50% | 10% |
+  | **Aviation** | Property-like | 50% | 45% |
+  | **Guarantee Ins.** | Credit | 35% | 40% |
+  | **Machinery** | Property-like | 35% | 40% |
+  | **General Liability** | Liability-like | 17.50% | 27% |
+  | **Contractor's All Risks** | Property-like | 35% | 40% |
+  | **Movables All Risks** | Property-like | 17.50% | 25% |
+  | **Workers' Compensation** | Liability-like | 35% | 22% |
+  | **Misc. Pecuniary Loss** | Other | 35% | 45% |
+  | **Nursing Care Ins.** | Other | 35% | 45% |
+  | **Others** | Other | 35% | 40% |
+
+</TabPanel>
+<TabPanel header="Australia and New Zealand ">
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Householders** | Property-like | 30% | 20% |
+  | **Commercial Motor** | Motor-like | 25% | 20% |
+  | **Domestic Motor** | Motor-like | 25% | 20% |
+  | **Other type A** | Other | 25% | 20% |
+  | **Travel** | Other | 35% | 25% |
+  | **Fire and ISR** | Property-like | 30% | 25% |
+  | **Marine and Aviation** | Property-like | 35% | 25% |
+  | **Consumer Credit** | Credit | 35% | 15% |
+  | **Other Accident** | Other | 35% | 25% |
+  | **Other type B** | Other | 35% | 35% |
+  | **Mortgage** | Mortgage | 45% | 30% |
+  | **CTP** | Motor-like | 45% | 35% |
+  | **Public and Product Liability** | Liability-like | 45% | 31% |
+  | **Professional Indemnity** | Liability-like | 45% | 35% |
+  | **Employers’ Liability** | Liability-like | 45% | 36% |
+  | **Short tail medical expenses** | Other | 15% | 25% |
+  | **Other type C** | Other | 45% | 35% |
+  | **Householders - non-prop reins** | Property-like | 45% | 30% |
+  | **Commercial Motor - non-prop reins** | Motor-like | 45% | 30% |
+  | **Domestic Motor - non-prop reins** | Motor-like | 45% | 30% |
+  | **Other non-prop reins type A** | Other | 45% | 30% |
+  | **Travel - non-prop reins** | Other | 45% | 35% |
+  | **Fire and ISR - non-prop reins** | Property-like | 55% | 40% |
+  | **Marine and Aviation - non-prop reins** | Property-like | 55% | 40% |
+  | **Consumer Credit - non-prop reins** | Credit | 55% | 40% |
+  | **Other Accident - non-prop reins** | Other | 55% | 40% |
+  | **Other non-prop reins type B** | Other | 55% | 35% |
+  | **Mortgage - non-prop reins** | Mortgage | 50% | 35% |
+  | **CTP - non-prop reins** | Motor-like | 55% | 40% |
+  | **Public and Product Liability - non-prop reins** | Liability-like | 55% | 43% |
+  | **Professional Indemnity - non-prop reins** | Liability-like | 55% | 40% |
+  | **Employer’s Liability - non-prop reins** | Liability-like | 55% | 43% |
+  | **Other non-prop reins type C** | Other | 55% | 40% |
+
+</TabPanel>
+<TabPanel header="  Hong Kong SAR ">
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Accident and health** | Other | 10% | 25% |
+  | **Motor vehicle, damage and liability** | Motor-like | 25% | 15% |
+  | **Aircraft, damage and liability** | Property-like | 45% | 40% |
+  | **Ships, damage and liability** | Property-like | 45% | 40% |
+  | **Goods in transit** | Property-like | 45% | 50% |
+  | **Fire and Property damage** | Property-like | 35% | 20% |
+  | **General liability** | Liability-like | 45% | 26% |
+  | **Pecuniary loss** | Other | 45% | 35% |
+  | **Non-proportional treaty reinsurance** | Property-like | 45% | 25% |
+  | **Proportional treaty reinsurance** | Property-like | 35% | 35% |
+
+</TabPanel>
+<TabPanel header="Korea">
+  
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Fire, technology, overseas** | Property-like | 25% | 30% |
+  | **Package** | Property-like | 35% | 50% |
+  | **Maritime** | Property-like | 45% | 45% |
+  | **Personal injury** | Other | 35% | 50% |
+  | **Workers accident, liability** | Liability-like | 12.50% | 31% |
+  | **Foreigners** | Other | 15% | 10% |
+  | **Advance payment refund guarantee** | Credit | 50% | 50% |
+  | **Other Non-life** | Other | 45% | 50% |
+  | **Private vehicle (personal injury)** | Motor-like | 15% | 30% |
+  | **Private vehicle (property, vehicles damage)** | Motor-like | 25% | 35% |
+  | **Vehicle for commercial or business purpose (personal injury)** | Motor-like | 25% | 20% |
+  | **Vehicle for commercial or business purpose (property, vehicles)** | Motor-like | 25% | 20% |
+  | **Other motor** | Motor-like | 15% | 20% |
+
+
+</TabPanel>
+<TabPanel header="Singapore ">
+  
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Personal Accident** | Other | 30% | 25% |
+  | **Singapore/Health** | Other | 25% | 20% |
+  | **Singapore/Fire** | Property-like | 30% | 25% |
+  | **Marine and Aviation - Cargo** | Property-like | 35% | 30% |
+  | **Motor** | Motor-like | 30% | 25% |
+  | **Work Injury Compensation** | Liability-like | 35% | 31% |
+  | **Bonds** | Credit | 35% | 30% |
+  | **Engineering Construction** | Property-like | 35% | 30% |
+  | **Credit** | Credit | 35% | 30% |
+  | **Mortgage** | Mortgage | 35% | 30% |
+  | **Others - non liability class** | Other | 35% | 30% |
+  | **Marine and Aviation - Hull** | Property-like | 45% | 35% |
+  | **Professional indemnity** | Liability-like | 35% | 35% |
+  | **Public liability** | Liability-like | 35% | 31% |
+  | **Others - liability class** | Liability-like | 35% | 31% |
+
+</TabPanel>
+<TabPanel header="Chinese Taipei ">
+
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Fire - residence** | Property-like | 25% | 40% |
+  | **Fire - commercial** | Property-like | 55% | 45% |
+  | **Marine - inland cargo** | Property-like | 30% | 25% |
+  | **Marine - overseas cargo** | Property-like | 30% | 25% |
+  | **Marine - hull** | Property-like | 55% | 45% |
+  | **Marine - fish boat** | Property-like | 45% | 45% |
+  | **Marine - aircraft** | Property-like | 55% | 45% |
+  | **Motor - personal vehicle** | Motor-like | 25% | 25% |
+  | **Motor - commercial vehicle** | Motor-like | 25% | 25% |
+  | **Motor - personal liability** | Motor-like | 25% | 25% |
+  | **Motor - commercial liability** | Motor-like | 25% | 25% |
+  | **Liability - public, employer, product, etc.** | Liability-like | 35% | 36% |
+  | **Liability - professional** | Liability-like | 35% | 35% |
+  | **Engineering** | Property-like | 55% | 45% |
+  | **Nuclear power station** | Property-like | 55% | 45% |
+  | **Guarantee - surety, fidelity** | Credit | 55% | 45% |
+  | **Credit** | Credit | 55% | 45% |
+  | **Other property damage** | Property-like | 35% | 40% |
+  | **Accident** | Other | 15% | 10% |
+  | **Property Damage - commercial earthquake** | Property-like | 45% | 35% |
+  | **Comprehensive - personal property and liability** | Property-like | 45% | 45% |
+  | **Comprehensive - commercial property and liability** | Property-like | 45% | 45% |
+  | **Property damage - typhoon and flood** | Property-like | 55% | 45% |
+  | **Property damage - compulsory earthquake** | Property-like | 55% | 45% |
+  | **Health** | Other | 15% | 10% |
+
+</TabPanel>
+<TabPanel header="Other Developed ">
+
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Motor** | Motor-like | 30% | 20% |
+  | **Property damage** | Property-like | 30% | 25% |
+  | **Accident, protection and health (APH)** | Other | 35% | 30% |
+  | **Short tail medical expenses** | Other | 35% | 25% |
+  | **Other short tail** | Other | 35% | 30% |
+  | **Marine, Air, Transport (MAT)** | Property-like | 35% | 35% |
+  | **Workers' compensation** | Liability-like | 35% | 36% |
+  | **Public liability** | Liability-like | 35% | 31% |
+  | **Product liability** | Liability-like | 35% | 43% |
+  | **Professional indemnity** | Liability-like | 35% | 35% |
+  | **Other liability and other long tail** | Liability-like | 35% | 36% |
+  | **Non-proportional motor, property damage, APH and MAT** | Property-like | 50% | 40% |
+  | **Catastrophe reinsurance** | Property-like | 50% | 40% |
+  | **Non-proportional liability** | Liability-like | 50% | 44% |
+  | **Non-proportional professional indemnity** | Liability-like | 50% | 40% |
+  | **Mortgage insurance** | Mortgage | 45% | 35% |
+  | **Commercial credit insurance** | Credit | 45% | 35% |
+  | **Other medium-term** | Other | 50% | 40% |
+
+</TabPanel>
+<TabPanel header="Other Emerging ">
+
+  | **ICS Segment** | ICS Category | Premium risk factor | Claims Reserve risk factor |
+  |:--|:--:|:--:|:--:|
+  | **Motor** | Motor-like | 35% | 25% |
+  | **Property damage** | Property-like | 35% | 30% |
+  | **Accident, protection and health (APH)** | Other | 35% | 30% |
+  | **Short tail medical expenses** | Other | 35% | 25% |
+  | **Other short tail** | Other | 35% | 30% |
+  | **Marine, Air, Transport (MAT)** | Property-like | 35% | 35% |
+  | **Workers' compensation** | Liability-like | 45% | 36% |
+  | **Public liability** | Liability-like | 45% | 36% |
+  | **Product liability** | Liability-like | 45% | 47% |
+  | **Professional indemnity** | Liability-like | 45% | 35% |
+  | **Other liability and other long tail** | Liability-like | 45% | 36% |
+  | **Non-proportional motor, property damage, APH and MAT** | Property-like | 50% | 45% |
+  | **Catastrophe reinsurance** | Property-like | 50% | 45% |
+  | **Non proportional liability** | Liability-like | 50% | 48% |
+  | **Non-proportional professional indemnity** | Liability-like | 50% | 45% |
+  | **Mortgage insurance** | Mortgage | 50% | 40% |
+  | **Commercial credit insurance** | Credit | 50% | 40% |
+  | **Other medium-term** | Other | 55% | 40% |
+
+</TabPanel>
+</TabView>
+
+<GCaption>Table 14: ICS Non-life segmentation</GCaption>

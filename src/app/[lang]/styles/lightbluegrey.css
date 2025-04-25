@@ -252,12 +252,10 @@
 }
 
 
-/* ✅ 탭 컨테이너 */
 .p-tabview-nav-container {
   position: relative;
 }
 
-/* ✅ 스크롤 가능한 탭 */
 .p-tabview-scrollable .p-tabview-nav-container {
   overflow: hidden;
 }
@@ -270,7 +268,6 @@
   overscroll-behavior: contain auto;
   position: relative;
 }
-/* ✅ 탭 네비게이션 바 */
 .p-tabview-nav {
   display: flex;
   margin: 0;
@@ -300,8 +297,8 @@
 .p-tabview-title {
   line-height: 1;
   white-space: nowrap;
+  font-size: var(--sm-font-size);
 }
-/* ✅ 탭 네비게이션 버튼 */
 .p-tabview-nav-btn {
   position: absolute;
   top: 0;
@@ -310,7 +307,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--surface-0);
+  background: var(--surface-100);
   color: var(--primary);
   width: 3rem;
   border-radius: 0;
@@ -324,12 +321,10 @@
   right: 0;
 }
 
-/* ✅ 탭 스크롤바 숨김 */
 .p-tabview-nav-content::-webkit-scrollbar {
   display: none;
 }
 
-/* ✅ 탭 링크 스타일 */
 .p-tabview-nav-link {
   cursor: pointer;
   user-select: none;
@@ -341,47 +336,36 @@
   color: var(--text-color-secondary);
 }
 
-/* ✅ 활성화된 탭 */
 .p-tabview-nav-link:focus {
   z-index: 1;
 }
 
-/* ✅ 탭 닫기 버튼 */
 .p-tabview-close {
   z-index: 1;
 }
 
-/* ✅ 탭 제목 */
-.p-tabview-title {
-  line-height: 1;
-  white-space: nowrap;
-}
-
-/* ✅ 탭 인디케이터 바 (비활성화 상태) */
 .p-tabview-ink-bar {
   display: none;
   z-index: 1;
 }
 .p-tabview .p-tabview-nav {
-  background: var(--surface-0);
-  border: 1px solid var(--surface-border);
-  border-width: 0 0 2px 0;
+  background: var(--surface-100);
+  border-top: 1px solid var(--surface-300);
+  border-left: 1px solid var(--surface-300);
+  border-right: 1px solid var(--surface-300);
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
 }
 
 .p-tabview .p-tabview-nav li {
-  margin-right: 0;
+  margin-right: -0.5rem;
 }
 
 
-
-/* ✅ 탭 링크 기본 스타일 */
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
-  border: solid var(--surface-border);
-  border-width: 0 0 2px 0;
-  border-color: transparent transparent var(--surface-border) transparent;
-  background: var(--surface-0);
+  background: var(--surface-100);
   color: var(--text-color-secondary);
-  padding: var(--title-padding) 1.25rem;
+  padding: 0.65rem 1.25rem;
   font-weight: 700;
   border-top-right-radius: var(--border-radius);
   border-top-left-radius: var(--border-radius);
@@ -389,60 +373,57 @@
   margin: 0 0 -2px 0;
 }
 
-/* ✅ 포커스 효과 */
 .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus-visible {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: inset 0 0 0 0.2rem var(--focus-ring);
 }
 
-/* ✅ 비활성 탭 Hover */
 .p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
-  background: var(--surface-0);
-  border-color: var(--surface-400);
+  background: var(--surface-50);
   color: var(--text-color-secondary);
 }
-
-/* ✅ 활성 탭 */
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
   background: var(--surface-0);
-  border-color: var(--primary);
-  color: var(--primary);
+  border-color: var(--surface-100);
+  color: var(--surface-900);
 }
 
-/* ✅ 닫기 버튼 스타일 */
 .p-tabview .p-tabview-close {
   margin-left: var(--inline-spacing);
 }
 
-/* ✅ 탭 스크롤 버튼 */
 .p-tabview .p-tabview-nav-btn.p-link {
-  background: var(--surface-0);
-  color: var(--primary);
-  width: 3rem;
+  background: var(--surface-200);
+  border-top: 1px solid var(--surface-300);
+  border-left: 1px solid var(--surface-300);
+  border-right: 1px solid var(--surface-300);
+  color: var(--surface-900);
+  width: 2rem;
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 
               0 2px 2px 0 rgba(0, 0, 0, 0.14), 
               0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border-radius: 0;
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
 }
 
 .p-tabview .p-tabview-nav-btn.p-link:focus-visible {
+  background: var(--surface-100);
   outline: 0 none;
   outline-offset: 0;
   box-shadow: inset 0 0 0 0.2rem var(--focus-ring);
 }
 
-/* ✅ 탭 패널 스타일 */
 .p-tabview .p-tabview-panels {
   background: var(--surface-0);
-  padding: var(--title-padding);
-  border: 0 none;
+  padding: var(--title-padding) 1rem var(--title-padding);
+  border: 1px solid var(--surface-300);
+  border-top: none; 
   color: var(--text-color);
   border-bottom-right-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);
 }
 
-/* ✅ 패널 헤더 */
 .p-panel .p-panel-header {
   border: 1px solid var(--surface-border);
   padding: var(--content-padding);
@@ -452,12 +433,10 @@
   border-top-left-radius: var(--border-radius);
 }
 
-/* ✅ 패널 제목 */
 .p-panel .p-panel-header .p-panel-title {
   font-weight: 700;
 }
 
-/* ✅ 패널 헤더 아이콘 */
 .p-panel .p-panel-header .p-panel-header-icon {
   width: 2rem;
   height: 2rem;
@@ -468,7 +447,6 @@
   transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
-/* ✅ 아이콘 Hover 효과 */
 .p-panel .p-panel-header .p-panel-header-icon:enabled:hover {
   color: var(--text-color);
   border-color: transparent;
@@ -624,6 +602,10 @@
   color: var(--error-icon);
 }
 
+.p-inline-message.p-inline-message-contrast {
+  background: var(--surface-50);
+}
+
 /* ✅ 공통 스타일 */
 .p-inline-message .p-inline-message-icon {
   font-size: 1rem;
@@ -687,8 +669,15 @@ td {
 article ul:not(.p-tabview-nav) {
   list-style: none;
   text-indent: -1rem;
-  /* padding-left: 1.2rem; */
+  margin-top: 0.0rem;
 }
+
+/*중첩 목록간 간격 ( margin-top = 0)*/
+article li > ul,
+article li > ol {
+  margin-top: 0.0rem ;
+}
+
 
 article ul :where(.p-component, .p-accordion-header-link, .p-tabview-panels, .p-card-body, p-inline-message) {
   text-indent: 0rem;

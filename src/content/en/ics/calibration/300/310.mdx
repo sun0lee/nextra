@@ -17,17 +17,17 @@ $$
 max \Bigg(0, \sum_{i} MR_i + Var_{99.5}\Big(\sum_i LT_i\Big)\Bigg)
 $$
 - where
-  - • $i$ is an index over all currencies in which the IAIG is exposed to Interest Rate risk;
-  - • $MR_i$ iis the result of the mean reversion scenario for currency $i$; and 
-  - • $LT_i$ is a random variable encompassing the results of the level up and level down scenarios for currency $i$
+    - • $i$ is an index over all currencies in which the IAIG is exposed to Interest Rate risk;
+    - • $MR_i$ iis the result of the mean reversion scenario for currency $i$; and 
+    - • $LT_i$ is a random variable encompassing the results of the level up and level down scenarios for currency $i$
 85.	For currency $i$, $LT_i$ is defined as:
 $$
 \dfrac{1}{N^{-1}(0.995)} \times (LU_i max(X_i,0)-LD_i min(X_i,0))
 $$
 - where:
-  - • $N^{-1}(0.995)$ is the 99.5% quantile of the standardised normal distribution;
-  - • $LU_i$ and $LD_i$ are the results of the level up and level down scenarios respectively; and
-  - • $X_i$ is a random variable following a standardised normal distribution such that for any $i \neq j$, $corr(X_i, X_j)=0.75$,
+    - • $N^{-1}(0.995)$ is the 99.5% quantile of the standardised normal distribution;
+    - • $LU_i$ and $LD_i$ are the results of the level up and level down scenarios respectively; and
+    - • $X_i$ is a random variable following a standardised normal distribution such that for any $i \neq j$, $corr(X_i, X_j)=0.75$,
 86.	Because there is no simple closed form solution to obtain the aggregate requirement, the requirement is calculated using direct simulation. The simulation algorithm is based on a large number of scenarios using random variables $\{X_i\}$ with the above correlation structure, and for each scenario calculates the quantity $\sum_i LT_i$. The aggregate requirement is the sum of all mean reversion losses and the 99.5th percentile of the level sum.
 
 
@@ -85,9 +85,9 @@ $$
 3) One set of shocks that could be placed under the square root, expressed as ($L$, $S$, $C$) vectors, consists of the columns of the square root of the conditional covariance matrix (using $\odot$ as the Hadamard product operator):
 
 $$
-M = \sqrt{(\sum\sum^T) \odot \Big( \dfrac{1-e^{-(K_i+K_j)}}{K_i+K_j}\Big)_{ij}}
+M = \sqrt{(\Sigma\Sigma^T) \odot \big( \frac{1-e^{-(K_i+K_j)}}{K_i+K_j}\big)_{ij}}
 $$
-- multiplied by the normal percentile 𝑁−1(0.995), where:
+- multiplied by the normal percentile $N^{-1}(0.995)$, where:
 $
 K = \begin{bmatrix}
     K_1 & 0 & 0 \\
@@ -105,11 +105,10 @@ $
   \end{bmatrix}
   M
   $$
-  <GCmt>
+
     - • $LOT$ = Last Observed Term (eg 30 for USD) 
     - • $a$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau}$
     - • $b$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau} - e^{-\lambda \tau}$
-  </GCmt>
 - – Diagonalise the matrix $NTN$, and let $e_1$ be the eigenvector of $NTN$ (with $\|e_1\|=1$) that have the largest eigenvalue (i.e. the two eigenvectors with the lowest eigenvalues are discarded). The remaining shock is defined by $Me_1$.
 5) The final shock is defined by *Level shock* = $N^{-1}(0.995) * Me_1$.
 6) The actual shocked curves are equal to the year-end curve plus or minus the linear combination of DNS curves, with coefficients taken from the components of the vector *Level shock*. For example, if Level shock is equal to:

@@ -47,13 +47,13 @@ title: 2.1	Life insurance
 #### 2.1.3.3	Morbidity and Disability risk
 24. For the calculation of the morbidity/disability risk charge, the business is split: (resulting in eight segments (4 types of guarantee and for each type, 2 terms of contract).)
 - a. By type of guarantee:
-  - i. Medical expenses (Category 1)
-  - ii. Lump sum in case of a health event (Category 2)
-  - iii. Short-term recurring payments (Category 3)
-  - iv. Long-term recurring payments (Category 4)
+    - i. Medical expenses (Category 1)
+    - ii. Lump sum in case of a health event (Category 2)
+    - iii. Short-term recurring payments (Category 3)
+    - iv. Long-term recurring payments (Category 4)
 - b. By term of contract:
-  - i. Short-term (up to 5 years)
-  - ii. Long-term (more than 5 years)
+    - i. Short-term (up to 5 years)
+    - ii. Long-term (more than 5 years)
 25.	For segments in categories 1 to 3, stress factors are applied either to inception / recovery rates (when those are explicitly used for the modelling of claim costs) or otherwise directly to the expected amount of future claims. For segments in category 4, stress factors are applicable to the assumptions underlying the calculation of future claims (inception rates and recovery rates).
 26.	The distinction between short-term and long-term contracts was introduced to reflect that claim amounts over a short period are likely more volatile than over a longer period.
 27.	All stresses are assumed to occur simultaneously, therefore risk charges for those four categories are added together.
@@ -64,8 +64,8 @@ title: 2.1	Life insurance
   **2.1.3.3.1	Medical expenses (Category 1)**
 
   28.	For short-term contracts, an initial calibration based on 10-year historical data provided by IAIGs was undertaken in 2015. The calibration methodology consisted of calculating, for a number of portfolios, the coefficient of variation (standard deviation divided by average) over time of the following ratios:
-    - a.	number of claims<GTooltipIcon desc="In this section on Morbidity and Disability risk the term claims encompasses claims due to all causes incurred in a given financial year."/> per insured people; and
-    - b.	claim amounts to premiums.
+      - a.	number of claims<GTooltipIcon desc="In this section on Morbidity and Disability risk the term claims encompasses claims due to all causes incurred in a given financial year."/> per insured people; and
+      - b.	claim amounts to premiums.
   29.	The calculated coefficients of variation showed an important heterogeneity and averaged at 12.1% (ratio based on number counts) and 5.3% (ratio based on amounts). Based on those results, a figure of 8% was chosen to represent the typical coefficient of variation for Category 1 products. Under a Gaussian assumption, this 8% coefficient translated into a 21% stress factor (99.5 percentile), which was rounded down to 20%.
   30.	For long-term contracts, a calibration was done in 2017 based on an additional data collection from IAIGs, also covering 10 years of history. A 99.5% quantile was calculated based on the historical distribution of claims to gross written premiums. Under a Gaussian assumption, those data provided evidence of a risk factor of 7%. Finally, a margin for prudence was incorporated and an 8% stress factor was set.
 

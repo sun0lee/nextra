@@ -1,0 +1,38 @@
+---
+title: 5.5	Operational risk
+---
+## 5.5	Operational risk
+- L1-136. The Operational risk charge is determined by applying prescribed stress factors to specified risk exposures.
+- L1-137. The calculation of the Operational risk charge is based on data items split into geographical segments and the following line of business segments:
+    - •	Non-Life – insurance products that do not relate to life or similar to life health insurance, often referred to as property and casualty or general insurance;
+    - •	Life (risk) – insurance products that relate to life or similar to life health insurance where the insurer bears investment risk; and
+    - •	Life (non-risk) – products where the policyholder bears the investment risk.
+- L1-138. The exposures and stress factors for Operational risk are specified in the Level 2 text. 
+- L2-329. The Operational risk charge is calculated as follows:
+<GMath title ="Operational risk charge">
+- $max [\text{non life premium exposure} * factor, \text{non life liability exposure}* factor]$
+- $+ \text{non life growth exposure} * factor$
+- $+ max [\text{life(risk) premium exposure} * factor, \text{life(risk) liability exposure}* factor]$
+- $+ \text{life(risk) growth exposure} * factor+ \text{life (non risk) liability exposure} * factor$
+</GMath>
+- L2-330. The Operational risk components are computed as factors multiplied by risk exposures. The same factors are applied across geographical segments as defined in section 5.1.2.
+- L2-331. The exposures and stress factors for Operational risk are specified in the following table.
+
+
+| Exposure   | Premium    | Growth   | Liabilities         |
+|------------|------------|----------|---------------------|
+| Exposure   | <GTooltip label="GWP" desc="Gross written premium"/> in most recent financial year | GWP in most recent financial year in excess of the growth threshold (20%) compared to the previous year’s GWP | Gross current estimate |
+| Factor     | 2.75%   | 2.75%    | 2.75%   |
+
+<GCaption>Table 33: Operational risk exposures and stress factors - Risk from Non-Life Operations</GCaption>
+
+| Exposure | Premium | Growth | Liabilities |
+|----------|---------|--------|-------------|
+| Exposure | Life (risk): GWP in most recent financial year | Life (risk): GWP in most recent financial year in excess of the growth threshold (20%) compared to the previous year’s GWP | Life (risk): Gross current estimate <br/> Life (non-risk): Gross current estimate |
+| Factor   | Life (risk): 4% | Life (risk): 4% | Life (risk): 0.45% <br/> Life (non-risk): 0.40% |
+
+<GCaption>Table 33: Operational risk exposures and stress factors - Risk from Life Operations</GCaption>
+
+- L2-332. GWP includes all business (new and renewal) written during the specified financial year before any allowance for reinsurance or other related recoverables. For single premium policies, premiums are included in full as written during the year. For other insurance policies, GWP includes premiums due to the IAIG during the specified time period (financial year) on all business in-force.
+- L2-333. Gross current estimates are considered before any allowance for reinsurance or other related recoverables.
+- L2-334. To calculate the growth risk component of Operational risk, the GWP for the two most recent financial years for non-life and life (risk) are used. The figures are considered before the effect of ceded reinsurance and on a consolidated basis.

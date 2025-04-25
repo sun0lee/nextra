@@ -8,16 +8,16 @@ title: 6. Aggregation/Diversification of ICS risk charges
 
 ## 6.2 ICS methodology
 214. In order to reflect the diversification in the calculation of the ICS capital requirement, the ICS is using a variance-covariance matrix approach to aggregate individual risk charges. It is applied in multiple steps:
-  - a. A top-level aggregation between major risk categories (Life risk, Non-life risk, Catastrophe risk, Market risk, Credit risk and Operational risk);
-  - b. A medium-level aggregation between the sub-risks of Life risk, Catastrophe risk and Market risk; and
-  - c. An aggregation within individual risk charges (eg Interest rate risk, Non-life risk).
+    - a. A top-level aggregation between major risk categories (Life risk, Non-life risk, Catastrophe risk, Market risk, Credit risk and Operational risk);
+    - b. A medium-level aggregation between the sub-risks of Life risk, Catastrophe risk and Market risk; and
+    - c. An aggregation within individual risk charges (eg Interest rate risk, Non-life risk).
 
 ## 6.3 Calibration
 215. The structure of correlation matrices set out in the ICS represents a trade-off between simplicity and risk sensitivity. The multiple-step approach offers the benefit of limiting the number of correlation parameters to be specified, but reduces the risk sensitivity that a single matrix (including the correlation between each individual risk) would have produced.
 216. In the context of the ICS standard method, the correlation parameters have been calibrated in order for the ICS to meet its target criteria of a 99.5% VaR confidence level. Correlation parameters that are valid for the tail of distributions might differ from parameters valid for the average or lower part of the distributions. As an example, in a stressed environment some correlations may increase. Therefore, the availability of data on which to base a calibration of the correlation parameters has been limited. As such, correlation matrices were derived based on an expert judgement assessment of a qualitative level of correlation between risks (negative, null, low, medium or high). That qualitative assessment was then translated into correlation factors, using the following correspondence:
-  - a. Negative: -0.25;
-  - b. Null: 0;
-  - c. Low: 0.25;
-  - d. Medium: 0.5; and
-  - e. High: 0.75.
+    - a. Negative: -0.25;
+    - b. Null: 0;
+    - c. Low: 0.25;
+    - d. Medium: 0.5; and
+    - e. High: 0.75.
 217. The choice has been made for operational risk to be simply added to other risk charges after their aggregation, assuming therefore an absence of correlation between operational risk and all other risks. Indeed, operational risk events can be idiosyncratic and unrelated to other ICS risks, leading to significant financial losses that cannot be appropriately and effectively reduced by diversification.

@@ -1,0 +1,131 @@
+---
+title: 5.1	ICS risks and calculation methods
+---
+## 5.1	ICS risks and calculation methods
+- L1-73. The categories of risk included in the standard method are: Insurance risk, Market risk, Credit risk and Operational risk. Table 4 lists the risk categories, along with the individual risks in each risk category.
+- L1-74. The ICS capital requirement is based on the potential adverse changes in qualifying capital resources resulting from unexpected changes, events or other manifestations of the specified risks.
+- L1-75. Risks are measured using either a stress approach or a factor-based approach. For natural catastrophe risk, a vendor or proprietary model may be used.
+- L1-76. The stress approach uses the IAIG’s current balance sheet pre-stress and the IAIG’s balance sheet post-stress, assuming the stress happens instantaneously. The risk charge for each individual risk is determined as the decrease between the amount of capital resources on the pre- stress balance sheet and the amount of capital resources on the post-stress balance sheet. Stresses are applied individually with individual stressed balance sheets being calculated to determine the risk charge with respect to each individual stress. As a simplification, the change in net asset value is used as a proxy for the changes in qualifying capital resources.
+- L1-77. The factor-based approach is determined by applying factors to specific exposure measures.
+- L1-78. The scope of the risks covered by the ICS capital requirement, as well as the applicable measurement method, are outlined in Table 4.
+
+<TabView>
+<TabPanel header="Insurance risk ">
+
+| Risk                          | Scope/Definition                                                                                                                                            | Measurement Method                                     |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| Mortality risk <br/>(life)         | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the level, trend or volatility of mortality rates.                                                                                  | Stress                                                 |
+| Longevity risk <br/>(life)         | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the level, trend or volatility of mortality rates.                                                                                  | Stress                                                 |
+| Morbidity/<br/>Disability risk (life) | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the level, trend or volatility of disability, sickness and morbidity rates.                                                       | Stress                                                 |
+| Lapse risk <br/>(life)             | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the level or volatility of rates of policy lapses, terminations, renewals and surrenders.                                          | Stress                                                 |
+| Expense risk <br/>(life)           | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in liability cash flows due to the incidence of expenses incurred.                                                                    | Stress                                                 |
+| Premium risk <br/>(non-life)       | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the timing, frequency and severity of future insured events (to the extent not already captured in Morbidity/Disability risk).     | Factor                                                 |
+| Claims reserve risk <br/>(non-life)| Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the expected future payments for claims or events that have already occurred (reported or not) and not yet fully settled.          | Factor                                                 |
+| Catastrophe risk              | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the occurrence of low frequency and high severity events.                                                                            | Stress, except for natural catastrophe (may use model) |
+
+</TabPanel>
+<TabPanel header="Market risk  ">
+| Risk                          | Scope/Definition                                                                                                                                            | Measurement Method                                     |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| Interest Rate risk            | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the level or volatility of interest rates.                                                                                          | Stress                                                 |
+| Non-default spread risk       | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the level or volatility of spreads over the risk-free interest rate term structure, excluding the default component.               | Stress                                                 |
+| Equity risk                   | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the level or volatility of market prices of equities.                                                                               | Stress                                                 |
+| Real Estate risk              | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the level or volatility of market prices of real estate or from the amount and timing of cash flows from real estate investments.  | Stress                                                 |
+| Currency risk                 | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in the level or volatility of currency exchange rates.                                                                                 | Stress                                                 |
+| Asset Concentration risk      | The lack of diversification in the asset portfolio.                                                                                                        | Factor                                                 |
+
+</TabPanel>
+<TabPanel header="Credit risk  ">
+
+| Risk                          | Scope/Definition                                                                                                                                            | Measurement Method                                     |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| Credit risk                   | Unexpected changes<GTooltipIcon desc="Expected impacts are assumed to be incorporated in valuation methodologies"/> in actual defaults, deterioration in creditworthiness short of default, including migration and default-related spread risk.         | Factor                                                 |
+
+</TabPanel>
+<TabPanel header="Operational risk  ">
+
+| Risk                          | Scope/Definition                                                                                                                                            | Measurement Method                                     |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| Operational risk              | Operational events including inadequate or failed internal processes, people, systems, or external events. Includes legal risk, excludes strategic/reputation. | Factor                                                 |
+
+</TabPanel>
+</TabView>
+
+<GCaption>Table 4: Risks, definitions and measurement method</GCaption>
+
+- L1-79. The individual risk charges are combined in a way that recognises risk diversification, using correlation matrices.
+- L1-80. The ICS target criteria is a 99.5% Value at Risk (VaR), over a one-year time horizon, of adverse changes in the IAIG’s qualifying capital resources.
+
+### 5.1.1	Risk mitigation techniques
+- L1-81. In order to promote good risk management and achieve an appropriate level of risk sensitivity, the ICS recognises the effect of risk mitigation techniques, provided certain criteria are met. These criteria are set out in the Level 2 text and are designed to ensure that the risk mitigation techniques are accurately and appropriately reflected within the risk charges.
+- L1-82. In addition, certain conditions are set regarding the renewal of risk mitigation arrangements. The conditions vary depending on whether the risk mitigation arrangement applies to a Market risk exposure or non-life Premium risk. These conditions are specified in the Level 2 text.
+- L2-130. Risk mitigation techniques may be recognised in the ICS risk charges provided they meet all of the following requirements:
+<GCallout severity="info" title ="Recognition Requirements for Risk mitigation techniques">
+    - a. The risk mitigation technique is effective and legally enforceable in all relevant jurisdictions and results in an effective transfer of risk to a third party.
+    - b. The contractual arrangement ensures that the risk transfer is clearly defined.
+    - c. The calculation of the ICS risk charges allows for the effects of risk mitigation techniques through a reduction of the risk charge commensurate with the extent of risk mitigation. That reduction makes reasonable allowance for any basis risk effects due to changes in risk mitigation assumptions and relationships during a stress scenario and there is appropriate treatment for any corresponding risk embedded in the use of risk mitigation techniques (eg Credit risk). These two effects are treated separately.
+    - d. The calculation is made on the basis of assets and liabilities existing at the reporting date of the ICS calculation.
+    - e. There is no double counting of mitigation effects.
+    - f. The documentation for the arrangement sets out a direct claim on the IAIG’s counterparty in the event of its default, insolvency, bankruptcy or other credit event.
+    - g. Providers of risk mitigation are of an adequate credit quality (demonstrable through either adequate rating, capitalisation or collateralisation levels) to ensure with appropriate certainty that the IAIG will receive the protection in the cases specified by the contracting parties. Credit quality is assessed consistently with the definition of credit categories provided in section 5.4.
+</GCallout>
+
+- L2-131. In addition to these requirements, market risk mitigation techniques are based on an explicit reference to specific exposures or a pool of exposures.
+- L2-132. Where risk mitigation techniques are in force for a period shorter than 12 months and meet the qualitative criteria above, a proportional factor is applied to the risk mitigation effect taken into account in the ICS risk charges. That factor is defined as either:
+<GCallout severity="success" title ="Risk mitigation techniques- recognised proportion">
+    - a. The proportion of the full term of the risk exposure covered by the risk mitigation technique up to a maximum of 100%, where the risk exposure’s term is less than 12 months; or
+    - b. The proportion of 12 months covered by the risk mitigation technique up to a maximum of 100%, where the risk exposure term is 12 months or more.
+</GCallout>
+
+- L2-133. However, where the IAIG plans to replace a risk mitigation arrangement relating to a Market risk exposure at the time of its expiry with a similar arrangement, this renewal may be taken into account if the IAIG expects to renew and all of the foreseeable costs of renewal within the time horizon are taken into account. The requirement of an expectation to renew is considered to be met if all of the following conditions are met:
+
+<GCallout severity="info" title =" Recognition Requirements for Renewal of Mitigation Instruments">
+    - a. The renewal is consistent with previous business practice and documented strategy.
+    - b. The replacement of the risk mitigation instrument does not take place more often than every three months, except for Currency risk or Equity risk where the replacement of the risk mitigation instrument does not take place more often than every month.
+    - c. The risk that the risk mitigation arrangement cannot be replaced due to an absence of liquidity in the market is not material under different market conditions and there is no material basis or operational risks compared to the risk mitigation effect. If the instruments mitigating Currency or Equity risk are replaced more frequently than every three months, then the IAIG justifies to its group wide supervisor that:
+      - i. the market for these instruments is sufficiently liquid at the relevant tenor; and
+      - ii. these instruments do not pose a materially greater risk than those replaced less frequently than every three months.
+    - d. The replacement of the risk mitigation arrangement is not conditional on any future event that is outside of the control of the IAIG. Where the replacement of the risk mitigation arrangement is conditional on any future event that is within the control of the IAIG, then the conditions are clearly set out in the documented strategy referred to in point a).
+    - e. The renewal is realistic regarding the availability of the arrangement and its cost is deducted from the value attributed to the instrument. This deduction takes into account the risk that the cost may increase during the following 12 months.
+    - f. Any additional risk stemming from the risk mitigation arrangement (eg Credit risk) is taken into account in the ICS risk charges.
+    - g. The IAIG is able to demonstrate to its GWS that the required instruments will be available for renewal from a deep and liquid market under all reasonably foreseeable eventualities over the following 12 months. Where this is not the case, the benefit recognised for the renewal of the risk mitigation arrangement is limited to 80% of the full risk mitigating value of the arrangement at the reporting date.
+</GCallout>
+
+- L2-134. The renewal of risk mitigation arrangements with respect to Non-Life Premium risk may be taken into account if the IAIG expects to renew and the costs of renewal within the time horizon are taken into account. The requirement of an expectation to renew is considered to be met if all of the following conditions are met:
+    - a. The renewal is consistent with previous business practice and documented strategy;
+    - b. The renewal is realistic with regards to availability of the arrangement and its cost15; and
+    - c. Any additional risk stemming from the risk mitigation arrangement (eg Credit risk) is taken into account in the relevant risk charges.
+- L2-135. When modelling natural catastrophe risk, the renewal of the arrangements may be taken into account if all of the following conditions are met:
+    - a. The renewal is consistent with previous business practice and documented strategy;
+    - b. The renewal is realistic regarding the availability of the arrangement and its cost; and
+    - c. Any additional risk stemming from the risk mitigation arrangement (eg Credit risk) is also taken into account in the natural catastrophe risk modelling.
+- L2-136. Risk mitigation arrangements are not recognised in the calculation of the Operational risk charge.
+
+### 5.1.2	Geographical segmentation
+- L1-83. For some of the risks, a geographical segmentation is used to calculate the risk charge. The geographical segmentation is set out in the Level 2 text.
+- L2-137. For those risk charges calculated using a geographical segmentation, the following regions are used:
+    - a. European Economic Area (EEA) and Switzerland;
+    - b. US and Canada;
+    - c. China;
+    - d. Japan;
+    - e. Other developed markets; and
+    - f. Other emerging markets.
+- The jurisdictions included in each region are listed in Table 5.
+
+|Region|Jurisdictions included|
+|--|--|
+|EEA and Switzerland|Austria, Belgium, Bulgaria, Croatia, Republic of Cyprus, Czech Republic,Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Ireland, Italy,Latvia, Lithuania, Luxembourg, Malta, Netherlands, Poland, Portugal,Romania, Slovakia, Slovenia, Spain, Sweden, United Kingdom, Iceland,Liechtenstein, Norway and Switzerland|
+|US and Canada |US<GTooltipIcon desc="Including American Samoa, Guam, Northern Mariana Island, Puerto Rico and US Virgin Islands."/> and Canada|
+|China |Mainland China and Macao SAR|
+|Japan |Japan |
+|Other developed markets<GTooltipIcon desc="‘Other developed’ taken from IMF list of advanced economies minus countries mentioned in other regions as of April 2016."/>|Australia, New Zealand, Israel, San Marino, Korea, Singapore, Chinese Taipei and Hong Kong SAR|
+|Other emerging markets|A list of emerging markets is provided in Table E of the Statistical Appendix of the [IMF World Economic Outlook April 2016](http://www.imf.org/external/pubs/ft/weo/2016/01/pdf/text.pdf). For completeness, if a country is not listed in the regions above, it is classified as “Other emerging markets”.|
+
+<GCaption>Table 5: Geographical segmentation</GCaption>
+
+
+
+### 5.1.3	Management actions
+- L1-84. A credit for exercising management actions is taken into account at the level of each risk in the capital requirement, subject to a cap, as described in the Level 2 text.
+- L2-138. The impact of management actions for each individual risk is calculated consistently with the provisions set out in section 3.2.4. The impact of management actions is based on realistic assumptions and reflects the IAIG’s obligations to policyholders as well as legal provisions applicable to the IAIG and contract boundaries. The impact of management actions takes into account only the effects of future actions that are contractually enforceable by the IAIG and that are assumed to be enacted by the IAIG after the stress event. This excludes for example dynamic hedging and similar rebalancing strategies that are assumed to be enacted during the stress. For example, the equity stress is assumed to happen instantaneously, therefore a rebalancing during the decline of equity prices of x% is not allowed.
+- L2-139. The impact of management actions related to FDB on the pre-tax aggregated ICS risk charges (as specified in section 5.6) is limited to the total initial amount of insurance liabilities related to FDB.

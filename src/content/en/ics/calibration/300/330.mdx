@@ -8,12 +8,12 @@ title:  3.3	Equity
 ### 3.3.2	ICS methodology
 107. The Equity risk charge calculation involves:
 108. A level stress for the following six equity segments:
-  - a. Listed equity in developed markets (other than infrastructure);
-  - b. Infrastructure equity in developed markets;
-  - c. Listed equity in emerging markets (other than infrastructure);
-  - d. Infrastructure equity in emerging markets;
-  - e. Hybrid debt / preference shares;
-  - f. Other equity.
+    - a. Listed equity in developed markets (other than infrastructure);
+    - b. Infrastructure equity in developed markets;
+    - c. Listed equity in emerging markets (other than infrastructure);
+    - d. Infrastructure equity in emerging markets;
+    - e. Hybrid debt / preference shares;
+    - f. Other equity.
 109. A volatility stress.
 110. Segments i., iii. and vi. are subject to a Neutral Adjusted Dampener (NAD) as described in section 3.3.3.6.
 111. In terms of aggregation, equities in each of the six segments are first subject to a separate stress. The results of those stresses, i. and ii. under ‘Equity in developed markets’, iii. and iv. in ‘Equity in emerging markets’, ‘Hybrid debt/preference shares’, and ‘Other equity’ are aggregated using a correlation matrix. The result of the volatility stress is added to the aggregate result of the level scenarios.
@@ -77,9 +77,9 @@ title:  3.3	Equity
 <TabPanel header="3.3.3.2.1	Methodology ">
 
   115. The calibration for infrastructure equity was determined by reference to the calibration to listed equity, using a three-step approach:
-    - a. Step 1: calculate relevant 99.5% VaR using the three methods described below, over a common time period, for infrastructure equity on the one hand, general equity on the other hand.
-    - b. Step 2: determine a relativity factor for infrastructure, equal to the ratio between the 99.5% VaR for infrastructure and general equity as calculated in Step 1.
-    - c. Step 3: apply the relativity factor determined in Step 2 to the stress factors applicable to listed equity, as calculated in section 3.3.3.1.
+      - a. Step 1: calculate relevant 99.5% VaR using the three methods described below, over a common time period, for infrastructure equity on the one hand, general equity on the other hand.
+      - b. Step 2: determine a relativity factor for infrastructure, equal to the ratio between the 99.5% VaR for infrastructure and general equity as calculated in Step 1.
+      - c. Step 3: apply the relativity factor determined in Step 2 to the stress factors applicable to listed equity, as calculated in section 3.3.3.1.
   116. The three methods used under Step 1 are Methods 2, 3 and 4 described in section 3.3.3.1.1, adjusted to remove the effect of the drift. Those methods are specified below as Method 2 bis, 3 bis and 4 bis:
 
 
@@ -120,8 +120,8 @@ title:  3.3	Equity
 </TabPanel>
 <TabPanel header="3.3.3.2.2	Data used ">
   117. The data used to perform the calculations described above are monthly series of:
-    - a. The EDHECInfra Infra300® index
-    - b. The FTSE All World index (Bloomberg ticker FTAW01) between August 2011 and August 2022.
+      - a. The EDHECInfra Infra300® index
+      - b. The FTSE All World index (Bloomberg ticker FTAW01) between August 2011 and August 2022.
 
 </TabPanel>
 </TabView>
@@ -136,20 +136,20 @@ title:  3.3	Equity
 <TabPanel header="3.3.3.4.1	Methodology ">
   120. Stress factors are determined for three different asset classes, using the same methodology as used for listed equity, described in section 3.3.3.1.1.
   121. The three asset classes chosen are:
-    - a. Private equity;
-    - b. Gold; and
-    - c. Oil.
+      - a. Private equity;
+      - b. Gold; and
+      - c. Oil.
   122. The three stress factors are then combined into one using the following weights, which were chosen based on expert judgement:
-    - a. 50% for the private equity factor;
-    - b. 25% for the gold factor; and
-    - c. 25% for the oil factor.
+      - a. 50% for the private equity factor;
+      - b. 25% for the gold factor; and
+      - c. 25% for the oil factor.
 
 </TabPanel>
 <TabPanel header="3.3.3.4.2	Data used ">
   123. The three indices used to derive the calibration for other equity:
-    - a. A private equity index (Bloomberg ticker LPXIDITR) between January 1999 and December 2014;
-    - b. A gold index (Bloomberg ticker BCOMGCTR) between January 1991 and December 2014; and
-    - c. An oil index (Bloomberg ticker BCOMCLTR) between January 1991 and December 2014.
+      - a. A private equity index (Bloomberg ticker LPXIDITR) between January 1999 and December 2014;
+      - b. A gold index (Bloomberg ticker BCOMGCTR) between January 1991 and December 2014; and
+      - c. An oil index (Bloomberg ticker BCOMCLTR) between January 1991 and December 2014.
 
 </TabPanel>
 </TabView>
@@ -171,9 +171,9 @@ title:  3.3	Equity
 #### 3.3.3.6	Neutral Adjusted Dampener (NAD)
 127. The objective of the Neutral Adjusted Dampener (NAD) is to dampen the volatility of the solvency position of IAIGs resulting from market changes, reducing the risk of procyclical investment behaviour of the IAIGs, such as fire sales. Moreover, during periods of market exuberance, the increase of the equity risk charges is expected to increase the resilience with regard to future downturns.
 128. The Neutral Adjusted Dampener is added to the raw level Equity risk charges for the following three level scenarios specified by segments of assets:
-  - a. A decrease of the market prices of all listed shares in developed markets
-  - b. A decrease of the market prices of all listed shares in emerging markets
-  - c. A decrease of the market prices of all assets classified as other equity
+    - a. A decrease of the market prices of all listed shares in developed markets
+    - b. A decrease of the market prices of all listed shares in emerging markets
+    - c. A decrease of the market prices of all assets classified as other equity
 
 129. The NAD is calculated using the following formula, for each of the above three level scenarios:
 <GMath title ="NAD" >
@@ -182,16 +182,16 @@ $$
 $$
 </GMath>
 <GCmt>
-  - a. $CI_i$ = Current Index value for category $i$
-  - b. $AI_i$ = x years moving average index for category $i$
-  - c. $c$ = This parameter provides a corridor to limit the impact of the NAD in extreme market conditions.
-  - d. $a$ = This parameter has the impact of dampening the NAD and therefore prevents a binary behaviour (either $+c\%$ or $-c\%$)
-  - e. $b$ = This parameter aims to address the drawback whereby the NAD would always be positive and increasing in a positive accelerating market, even if the market change is a moderate/normal increase.
+    - a. $CI_i$ = Current Index value for category $i$
+    - b. $AI_i$ = x years moving average index for category $i$
+    - c. $c$ = This parameter provides a corridor to limit the impact of the NAD in extreme market conditions.
+    - d. $a$ = This parameter has the impact of dampening the NAD and therefore prevents a binary behaviour (either $+c\%$ or $-c\%$)
+    - e. $b$ = This parameter aims to address the drawback whereby the NAD would always be positive and increasing in a positive accelerating market, even if the market change is a moderate/normal increase.
 </GCmt>
 
 130. a, b, c and x are similar for the above three level scenarios and have been set based on expert judgement, in order to respond to the following targets:
-  - a. The NAD should represent a positive and negative adjustment around the same number of times over a sufficiently long period of time, set between May 2000 and September 2022.
-  - b. The average NAD value should be as close to zero as possible over a sufficiently long period of time, similarly set between May 2000 and September 2022.
+    - a. The NAD should represent a positive and negative adjustment around the same number of times over a sufficiently long period of time, set between May 2000 and September 2022.
+    - b. The average NAD value should be as close to zero as possible over a sufficiently long period of time, similarly set between May 2000 and September 2022.
 
 
 131. The indices used for the purpose of the NAD calibration were the same as the ones used for determining the shocks of the raw level Equity risk charges.
@@ -226,9 +226,9 @@ $$
   **3.3.3.7.2	Correlations between listed equity and other equity**
 
   135.	The “other equity index” is defined as the weighted average of the following indices, normalised at the first common observed date:
-    - a. A private equity index (with 50% weight);
-    - b. A gold index (with 25% weight); and
-    - c. An oil index (with 25% weight),
+      - a. A private equity index (with 50% weight);
+      - b. A gold index (with 25% weight); and
+      - c. An oil index (with 25% weight),
   where the private equity, gold and oil indices are those specified in section 3.3.3.4.2, observed annually from January 1999 to January 2014.
 
   136. The empirical linear correlation between the log-returns of the “other equity index” and the log-returns of the FTSE Developed index, observed on the 1999 – 2014 period, is 72%. This value has been rounded up to 75% in the Equity correlation matrix.
