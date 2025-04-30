@@ -340,3 +340,26 @@
   }
 }
 
+h1 {
+  @apply text-3xl font-extrabold mb-4;
+}
+
+h2 {
+  @apply text-2xl font-bold mb-3;
+}
+
+h3 {
+  @apply text-xl font-bold mb-2;
+}
+
+h4 {
+  @apply text-xl font-bold mb-2;
+}
+
+h5 {
+  @apply text-lg font-bold mb-2;
+}
+
+h6 {
+  @apply text-lg font-semibold mb-2;
+}
