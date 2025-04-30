@@ -1,0 +1,460 @@
+---
+title: "Smith-Wilson 방법론"
+---
+
+
+# Smith-Wilson 모델
+
+## 1. 이론적 배경 
+Smith-Wilson 모델은 2000년대 초반 Andrew Smith와 Tim Wilson이 개발한 금리 커브 보간 및 외삽 방법론임. 이 모델은 특히 유럽 보험 규제인 Solvency II에서 EIOPA(European Insurance and Occupational Pensions Authority)가 채택해 표준 방법론으로 사용하고 있음.
+
+
+## 2. 모델의 구성
+할인율 함수 $P(t)$는 다음과 같이 표현됨:
+
+<GMath severity="info" title ="할인율 함수">
+$$
+P(t) = e^{-UFR·t} +\sum_{j=1}^N \zeta_j · W(t,u_j)
+$$
+</GMath>
+<GCmt severity="info" >
+- • $P(t)$: 만기 t에 대한 할인율(discount factor)
+- • $UFR$: Ultimate Forward Rate
+- • $\zeta_j$: 각 Wilson 함수에 대한 가중치
+- • $W(t,u_j)$: Wilson 함수
+- • $u_j$: 관찰된 시장 데이터의 만기
+</GCmt>
+
+<GCallout severity="warn" title ="Smith-Wilson 방법론의 아이디어">
+Smith-Wilson 방법론의 핵심 아이디어는 금리 곡선$P(t)$을 두 가지 주요 구성 요소로 나누는 것.
+1. **장기수렴점** : $e^{-UFR·t}$ : UFR(Ultimate Forward Rate)로 수렴하는 장기 균형 성분
+2. **시장일관성** : $ \sum_{j=1}^N \zeta_j · W(t,u_j)$ : 관찰된 시장 데이터와 일치하도록 하는 조정 성분
+</GCallout>
+
+이러한 접근법은 장기 금리의 예측 가능성을 높이고, 시장에서 관찰된 금리와의 일치를 보장함. Smith-Wilson 모델은 장기 금리가 충분히 관찰되지 않는 시장에서 유용함. (ex. 보험사의 장기 부채 평가 시 필요한 할인율 구조를 생성 등)
+
+위의 조건을 만족하는 Wilson 함수 W(t,u)는 다음과 같이 정의됨:
+
+<GMath severity="info"  title ="Wilson 함수">
+$$
+W(t,u) = e^{-UFR·(t+u)} · [\alpha·min(t,u) - 0.5·e^{-\alpha·max(t,u)}·(e^{\alpha·min(t,u)}-e^{-\alpha·min(t,u)})]
+$$
+</GMath>
+<GCmt severity="info" >
+- • $\alpha$는 수렴 속도
+</GCmt>
+
+
+이러한 수학적 구조를 통해 Smith-Wilson 모델은 관찰된 시장 금리와 정확히 일치하면서도, 장기적으로는 사전에 정의된 UFR 값으로 부드럽게 수렴하는 금리 곡선을 생성함.
+
+
+## 3. Parameter
+
+Smith-Wilson 모델 적용을 위해 아래과 같은 주요 파라미터들을 설정하고 보정해야 함
+
+
+|주요 parameter|설명|Solvency II|K-ICS (보험부채)|K-ICS (자산)|
+|:--:|--|--|--|--|
+|**<GTooltip label ="UFR" desc="Ultimate Forward Rate"/><br/>(LTFR)**  | 장기선도금리는 보험부채의 장기적인 특성으로 시장에서 관찰되지 않는 최종관찰만기 이후의 장기금리를 추산|UFR은 장기 실질 금리(2.2%)와 기대 인플레이션(2%)의 합으로 설정됨|장기선도금리는 실질이자율의 장기평균과 기대인플레이션율의 합으로 산출<br/>- 2024년 : 4.55% <br/>- 2025년 : 4.30%|50년 물 YTM<br/>이자지급주기 연2회를 가정|
+|**$\alpha$**| UFR로의 수렴 속도를 결정하는 파라미터로, 값이 클수록 수렴이 빠름.|- 일반적으로 0.05~0.15 사이의 값 사용|최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값<br/> init alpha=0.001|alpha=0.1|
+|**<GTooltip label="LLP" desc="최종관찰만기, Last Liquid Point"/>** <br/> **<GTooltip label="(LOT)" desc="Last Observed Term"/>**| 시장 데이터가 충분히 유동적이고 신뢰할 수 있다고 간주되는 마지막 만기 지점.|- 통화별로 다르게 설정(예: EUR 20년, USD 30년, KRW 20년)|20Y -> 30Y으로 연장<br/> - 2025년 : LOT 23Y|50Y|
+| **<GTooltip label="CP" desc="최초수렴시점, Convergence Point"/>**| 선도금리가 UFR에 충분히 가까워지는 시점.|Max(LLP + 40년, 60년)|60Y||
+
+
+  <GImg caption="무위험 금리기간구조 (新제도(IFRS17/K-ICS) 보험부채 평가를 위한 할인율에 대한 이해" maxWidth ="700px">
+    ![[참고] 무위험 금리기간구조 (新제도(IFRS17/K-ICS) 보험부채 평가를 위한 할인율에 대한 이해)](/kics/253_2.png)
+  </GImg>
+
+
+## 4. Calibration
+<GCallout severity="warn" title =" Calibration 요약">
+<TabView>
+<TabPanel header="input data ">
+    - 무위험 금리 지표 선택(국채 수익률, OIS 등)
+    - 신용 및 유동성 리스크 조정
+    - 만기별 금리 데이터 수집
+
+</TabPanel>
+<TabPanel header="➔초기 파라미터 ">
+    - UFR 값 설정(규제 지침 또는 경제적 분석에 따름)
+    - $\alpha$ 파라미터 초기값 설정 
+      - • K-ICS : 최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값
+    - 관찰 만기 포인트 선택(어떤 만기의 시장 데이터를 사용할지)
+
+</TabPanel>
+<TabPanel header="➔가중치(ζ) 계산 ">
+    - 관찰된 시장 금리와 정확히 일치하도록 선형 방정식 시스템을 풀어 가중치 계산
+    - 행렬 형태로는 $\zeta = H^{-1} \cdot (\mu - UFR)$로 표현
+    - 여기서 $H$는 Wilson 함수의 행렬, $\mu$는 관찰된 금리
+
+</TabPanel>
+<TabPanel header="➔결과 검증 및 조정 ">
+    - 생성된 금리 곡선의 경제적 합리성 검토
+    - 필요시 $\alpha$ 파라미터 조정하여 수렴 특성 최적화
+    - 특이점이나 비현실적 형태 확인
+
+</TabPanel>
+<TabPanel header="➔민감도 분석 ">
+    - $UFR$ 및 $\alpha$ 값 변화에 따른 금리 곡선 변화 검토
+    - 관찰 데이터 변화에 대한 모델의 안정성 평가
+
+</TabPanel>
+</TabView>
+</GCallout>
+
+### 4.1. $\alpha$ finding
+
+    <GCallout severity="success" title ="K-ICS에서 부채평가 할인율 산출 시 alpha">
+    
+    speed of convergence (수렴속도, $\alpha$)는 참고 논문에서는 상수를 가정하였으나, K-ICS에서는 최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값을 산출하여 적용하도록 함.
+
+      <Accordion activeIndex={[0]}>
+      <AccordionTab header="smithWilsonAlphaFinding() ">
+      ```java filename="SmithWilsonKics.java"
+        private void smithWilsonAlphaFinding() {
+        for (int i = 0; i < this.alphaItrNum; i++) {
+          initAlpha(i);
+          updateZetaAndKappa(this.alphaApplied);
+
+          if (i == 0) {
+            if (isConverged(this.alphaFwd)) break;
+          } else {
+            adjustAlpha(this.alphaFwd);
+          }
+        }
+      }
+      ```        
+      <TabView>
+      <TabPanel header="initAlpha() ">
+      ```java
+        private void initAlpha(int iteration) {
+        if (iteration == 0) {
+          this.alphaApplied = 0.001;
+          this.alphaDApplied = (1.0 - 0.0001) / 4.0;
+        } else if (iteration == 1) {
+          this.alphaApplied = (1.0 + 0.0001) / 2.0;
+        }
+      }
+      ```
+      </TabPanel>
+      <TabPanel header="updateZetaAndKappa() ">
+      ```java
+        private void updateZetaAndKappa(double alpha) {
+        RealMatrix tenorCol = MatrixUtils.createColumnRealMatrix(this.tenorYearFrac);
+        RealMatrix weight = MatrixUtils.createRealMatrix(
+          smithWilsonWeight(this.tenorYearFrac, this.tenorYearFrac, alpha, this.ltfrCont)
+        );
+        RealMatrix invWeight = MatrixUtils.inverse(weight);
+
+        double[] pVal = new double[this.tenorYearFrac.length];
+        double[] mean = new double[this.tenorYearFrac.length];
+        double[] loss = new double[this.tenorYearFrac.length];
+        double[] sinh = new double[this.tenorYearFrac.length];
+
+        for (int j = 0; j < this.tenorYearFrac.length; j++) {
+          pVal[j] = zeroBondUnitPrice(this.iRateBase[j], this.tenorYearFrac[j]);
+          mean[j] = zeroBondUnitPrice(this.ltfrCont, this.tenorYearFrac[j]);
+          loss[j] = smithWilsonLoss(this.iRateBase[j], this.tenorYearFrac[j], this.ltfrCont);
+          sinh[j] = Math.sinh(alpha * this.tenorYearFrac[j]);
+        }
+
+        RealMatrix lossCol = MatrixUtils.createColumnRealMatrix(loss);
+        RealMatrix zetaCol = invWeight.multiply(lossCol);
+        RealMatrix sinhCol = MatrixUtils.createColumnRealMatrix(sinh);
+        RealMatrix qMatDiag = MatrixUtils.createRealDiagonalMatrix(mean);
+
+        double kappaNum = tenorCol.transpose().multiply(qMatDiag).multiply(zetaCol).scalarMultiply(alpha).scalarAdd(1.0).getEntry(0, 0);
+        double kappaDenom = sinhCol.transpose().multiply(qMatDiag).multiply(zetaCol).getEntry(0, 0);
+
+        this.kappaApplied = kappaNum / (Math.abs(kappaDenom) < ZERO_DOUBLE ? 1.0 : kappaDenom);
+        this.alphaPp = Math.exp(-this.ltfrCont * this.ltfrT)* (kappaNum - Math.exp(-alpha * this.ltfrT) * kappaDenom);
+        this.alphaDpp = -this.ltfrCont * this.alphaPp+ Math.exp(-this.ltfrCont * this.ltfrT)* alpha * Math.exp(-alpha * this.ltfrT) * kappaDenom;
+        this.alphaFwd = -1.0 / this.alphaPp * this.alphaDpp;
+        this.zetaColumn = zetaCol;
+      }
+      ```
+      </TabPanel>
+      <TabPanel header="isConverged() ">
+
+        ```java
+        private boolean isConverged(double alphaFwd) {
+          return Math.abs(Math.exp(this.ltfrCont) - Math.exp(alphaFwd)) < ltfrEpsilon;
+        }
+        ```
+      최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값 alpha를 찾기 
+      </TabPanel>
+      <TabPanel header="adjustAlpha() ">
+        ```java
+        private void adjustAlpha(double alphaFwd) {
+          if (Math.abs(Math.exp(alphaFwd) - Math.exp(this.ltfrCont)) > ltfrEpsilon) {
+            this.alphaApplied += this.alphaDApplied;
+          } else {
+            this.alphaApplied -= this.alphaDApplied;
+          }
+          this.alphaDApplied *= 0.5;
+        }
+        ```
+      </TabPanel>
+      </TabView>
+
+      </AccordionTab>
+      </Accordion>
+
+    </GCallout>
+
+### 4.2 $\zeta$ 및 할인율 산출 
+
+<TabView>
+<TabPanel header="1) with Zero Coupon Bonds ">
+    $t$시점의 단일현금흐름으로 구성된 자산의 현재 시장가치는 관측된 시장 금리에 수렴하는 할인율을 통해 계산된 현재 가치와 같음.
+    장기적으로, forward 금리 곡선은 UFR로 점차 수렴하게 되며, t->$\infin$ 일 때, 조정항(Correction)은 0에 수렴함.
+
+    <GMath title ="Present market value">
+    $$
+        = PV_{UFR} \pm Correction
+    $$
+    </GMath>
+    <GCmt>
+    - • _Correction =_ $\zeta_1\cdot(w_1) + \zeta_2\cdot(w_2)+ \dots +\zeta_N\cdot(w_N)$
+    - • $w_j$_is obtained through a Kernal function_ $Kernel_j(t)$ _that depends on the input's maturity._
+    </GCmt>
+
+    <GMath title ="Wilson funtion">
+    $$
+      W(t, u_j) = e^{-UFR \cdot(t+u_j)} \cdot \{\alpha\cdot min(t,u_j)-0.5\cdot e^{-\alpha \cdot max(t,u_j)} \cdot (e^{\alpha \cdot min(t,u_j)} - e^{-\alpha \cdot min(t,u_j)}) \}
+    $$
+    </GMath>
+    <GCmt>
+        - – $u_i$ : 가격이 알려진 무이표채권의 만기 ; $i = \{1,2,...,N\}$
+        - – $W(t, u_j)$는 t에 대한 함수로 Wilson funtion
+    </GCmt>
+
+
+    위의 수식을 무이표채권의 가격을 윌슨함수의 조합으로 표현하면, 아래와 같다.
+    <GMath title ="할인율 v(0,t)">
+    $$
+    m_t=v(0,t) =  e^{-UFR \small \cdot t} + \sum_{j=1}^N\zeta_j \cdot W(t , u_j)
+    $$
+    </GMath>
+
+
+    시장에 이미 가격이 알려진 N개의 무이표채 가격을 이용하면 $\zeta$를 산출할 수 있으며, $p(t)$수식에 산출한 $\zeta$를 대입하면 만기 t에 대한 무이표채의 가격을 함수식으로 도출할 수 있음.
+
+    이 관계식으로 프로젝션 하고자 하는 만기구간에 대한 할인율을 도출할 수 있음. 
+
+
+    <GMath severity="aa" title ="v(t)">
+      $$
+      m=v(t) =  e^{-UFR \small \cdot t} + \sum_{j=1}^N\zeta_j \cdot W(t , u_j)
+      $$
+    </GMath>
+
+    위의 할인율 함수를 이용하여 시장에서 관측된 만기별 무이표채의 가격을 행렬식으로 표현하면 아래와 같음. 
+
+    <GMath severity="aa" title ="market price">
+    $$
+    M = \mu +W\cdot \zeta
+    $$
+    </GMath>
+    <GCmt severity="aa">
+    - $M =  \begin{bmatrix},m_1\\m_2 \\ \vdots \\m_j\\ \vdots \\m_N \end{bmatrix}$ ,  $\mu = \begin{bmatrix}e^{-UFR\cdot t_1} \\e^{-UFR\cdot t_2} \\ \vdots\\e^{-UFR\cdot t_j}\\\vdots\\ e^{-UFR\cdot t_N} \end{bmatrix}$   , $\zeta=\begin{bmatrix} \zeta_1 \\ \zeta_2 \\ \vdots \\ \zeta_j \\\vdots\\ \zeta_N \end{bmatrix}$, $W = \begin{bmatrix} W(t_1,t_1),W(t_1,t_2), ... , W(t_1,t_N) \\ W(t_2,t_1),W(t_2,t_2), ... , W(t_2,t_N) \\ \vdots\\ W(t_j,t_1),W(t_j,t_2), ... , W(t_j,t_N)  \\\vdots\\  W(t_N,t_1),W(t_N,t_2), ... , W(t_N,t_N) \end{bmatrix}$
+    - $W(t, u_j) = e^{-UFR \cdot(t+u_j)} \cdot \{\alpha\cdot min(t,u_j)-0.5\cdot e^{-\alpha \cdot max(t,u_j)} \cdot (e^{\alpha \cdot min(t,u_j)} - e^{-\alpha \cdot min(t,u_j)}) \}$
+    </GCmt>
+
+    시장에 알려만 각 만기 $u_i$ 에 따라 만기별 무이표채 가격의 식이 전개됨. 관측되는 만기 구간의 수가 $N$이고, 추정할 보정 계수 $\zeta$도 $N$개 이기 때문에 $N \times N$ 정방행렬의 형태로 구성됨.
+
+
+    벡터 $\zeta$는 관측치($M$)와 장기 선도이자율($\mu$)에 대한 차이에 벡터 $W$의 역함수를 곱하여 산출함.
+
+    $$
+    \zeta = W^{-1}\cdot(M-\mu) 
+    $$
+
+    $\zeta$를 구하면, 수식  $v(t) =  e^{-UFR \small \cdot t} + \sum_{j=1}^N\zeta_j \cdot W(t , u_j)$는 $t$ 에 대한 함수로 표현되므로 모든 만기 $t$ 에 대한 할인율을 산출할 수 있음.
+
+
+</TabPanel>
+<TabPanel header="2) with Assets generating multiple CF ">
+    만기별 무이표채가 아닌 여러 개의 현금흐름으로 구성된 채권의 시장가격을 알 때, 이를 활용하여 smith-wilson 모형을 일반화함.
+
+  <GImg caption="ytm을 spot rate으로 변환">
+      ![aa](/esg/ytm2spot.png)
+  </GImg>
+
+
+    <GMath title ="Present market value">
+    $$
+        = PV_{UFR} \pm Correction
+    $$
+    </GMath>
+    <GCmt>
+    - • _Correction =_ $\zeta_1\cdot(\sum_{j=1}^J c_{1,j}\cdot w_1) + \zeta_2\cdot(\sum_{j=1}^J c_{2,j}\cdot w_2)+ \dots +\zeta_N\cdot(\sum_{j=1}^J c_{N,j}\cdot w_N)$
+    - • $w_j$_is obtained through a Kernal function_ $Kernel_j(t)$ _that depends on the input's maturity._
+    </GCmt>
+
+    제타에 곱해지는 만기 별 가중치를 산출할 때, 기준이 되는 상품이 단일 현금흐름으로 구성된 것이 아니라 각 시점 별 현금흐름으로 구성되어 있기 때문에 이 현금흐름(이표)의 효과를 반영해야 함. 
+    
+    시장에서 관찰가능한 N개의 상품 중 i번째 상품 $$asset_i$$의 $$j$$번째 $$c_{i,j}$$의 효과를 포함하기 위해 현금흐름의 금액 비중을 만기별 가중치에 반영함. 
+    <GMath title =" Kernel(t)">
+    $$
+    Kernel_i(t) = \sum_{j=1}^M c_{i,j}\cdot W(t,t_j)
+    $$
+    </GMath>
+    <GCmt>
+      - • $c_{i,j} : \{ c_{i,1}, c_{i,2}, ...,c_{i,M} \}$
+      - • $i=(1,2,...,N)$
+      - • $j = (1,2,...,M)$
+      - • $ W(t, u_j) = e^{-UFR \cdot(t+u_j)} \cdot \{\alpha\cdot min(t,u_j)-0.5\cdot e^{-\alpha \cdot max(t,u_j)} \cdot (e^{\alpha \cdot min(t,u_j)} - e^{-\alpha \cdot min(t,u_j)}) \}$
+    </GCmt>
+
+    산출한 조정항 (Correction) 을 이용하여 discount factor 정리하면
+
+    <GMath title ="v(t)">
+    $$
+    v(0,t) =  e^{-UFR \small \cdot t} + \sum_{i=1}^N\zeta_i \cdot \sum_{j=1}^Mc_{i,j}\cdot W(t,t_j)
+    $$
+    </GMath>
+
+    시장에서 관찰되는 $i$번째 상품의 가격 $m_i$을 위에서 정의한 현가함수로 평가하면 $m_i = \sum_{j=1}^Mc_{i,j} \cdot v(0,t_j)$이다.
+
+    이를 이용하여 시장에서 관측가능한 $N$개의 상품의 가격을 현가함수로 표현하면
+<GMath title ="">
+  $$
+      m_1 =  \sum_{j=1}^Mc_{1,j} \cdot \bigg(e^{-UFR \small \cdot t_j} + \sum_{l=1}^N\zeta_i \cdot \sum_{k=1}^Mc_{l,k}\cdot W(t_j,t_k)\bigg)
+  $$
+  $$
+      m_2 =  \sum_{j=1}^Mc_{2,j} \cdot \bigg(e^{-UFR \small \cdot t_j} + \sum_{l=1}^N\zeta_i \cdot \sum_{k=1}^Mc_{l,k}\cdot W(t_j,t_k)\bigg)
+  $$
+  $$
+                                                \vdots
+  $$
+  $$
+      m_N =  \sum_{j=1}^Mc_{N,j} \cdot \bigg(e^{-UFR \small \cdot t_j} + \sum_{l=1}^N\zeta_i \cdot \sum_{k=1}^Mc_{l,k}\cdot W(t_j,t_k)\bigg)
+  $$
+</GMath>
+
+    식을 전개하면,
+
+<GMath title ="">
+    $$
+    m_1 =  \sum_{j=1}^Mc_{1,j} \cdot e^{-UFR \small \cdot t_j} + \sum_{l=1}^N \bigg(\sum_{k=1}^M\Big( \sum_{j=1}^Mc_{1,j}\cdot W(t_j,t_k)\Big)\cdot c_{l,k}\bigg)\cdot\zeta_l
+    $$
+
+    $$
+    m_2 =  \sum_{j=1}^Mc_{2,j} \cdot e^{-UFR \small \cdot t_j} + \sum_{l=1}^N \bigg(\sum_{k=1}^M\Big( \sum_{j=1}^Mc_{2,j}\cdot W(t_j,t_k)\Big)\cdot c_{l,k}\bigg)\cdot\zeta_l
+    $$
+
+                                            $$
+                                            \vdots
+                                            $$
+
+    $$
+     m_N =  \sum_{j=1}^Mc_{1,j} \cdot e^{-UFR \small \cdot t_j} + \sum_{l=1}^N \bigg(\sum_{k=1}^M\Big( \sum_{j=1}^Mc_{N,j}\cdot W(t_j,t_k)\Big)\cdot c_{l,k}\bigg)\cdot\zeta_l
+     $$
+</GMath>
+
+    위의 식을 행렬식으로 표현하면 아래와 같음. 
+
+    $$
+        M =  C_\mu + (CW C^T)\cdot \zeta
+    $$
+
+    시장의 가격$M$과 자산의 현금흐름 $C$를 알고 있으므로 $\zeta$를 구할 수 있음.
+
+    $$
+    \zeta = (CW C^T)^{-1}\cdot (m-C_\mu)
+    $$
+
+    현물이자율을 산출해야 하므로 무이표채권의 가격산출식 (=현가함수)에 산출한 $\zeta$를 대입하면
+
+    $$
+    v(0,t) =  e^{-UFR \small \cdot t} + \sum_{i=1}^N\zeta_i \cdot \sum_{j=1}^Mc_{i,j}\cdot W(t,t_j)
+    $$
+
+   이 때, $\hat{\zeta} = C^T \cdot \zeta$라고하면
+
+    $$
+    v(0,t) =  e^{\tiny -UFR  \cdot t} + \sum_{j=1}^N\hat{\zeta_i} \cdot W(t ,t_j) 
+    $$
+
+
+
+    * K-ICS 기준서에 따라 만기별 수익률을 현물이자율로 전환시에는 수렴속도 $$\alpha=0.1$$을 적용함. 
+
+</TabPanel>
+</TabView>
+
+
+## 5. 특성 및 장단점
+
+<TabView>
+<TabPanel header="주요 특성 ">
+1. **정확한 시장 데이터 일치**: Smith-Wilson 모델은 관찰된 모든 시장 금리와 정확히 일치하는 곡선을 생성함. 이는 캘리브레이션 과정에서 연립방정식을 풀어 달성함.
+2. **장기 수렴성**: 모델은 마지막 관찰 지점 이후 선도금리(forward rate)가 사전에 정의된 UFR로 점진적으로 수렴하도록 설계됨.
+3. **평활성(Smoothness)**: Wilson 함수의 특성으로 인해 생성된 금리 곡선은 자연스럽고 부드러운 형태를 가짐.
+4. **유연성**: α 파라미터를 조정하여 UFR로의 수렴 속도를 제어할 수 있음.
+</TabPanel>
+
+<TabPanel header="장점 ">
+
+  1. **규제 정합성**: Solvency II, K-ICS 등 여러 보험 규제 체계에서 공식 방법론으로 채택되어 규제 요건 충족이 용이함.
+  2. **장기 부채 평가에 적합**: UFR로 수렴하기 때문에 초장기 할인율을 안정적으로 제공.
+  3. **데이터 부족 환경 대응**: 유동성이 낮은 장기 금리 시장에서도 경제적으로 합리적인 금리 곡선을 제공함.
+  4. **직관적 해석**: 모델 파라미터(UFR, α)가 경제적 의미를 가지고 있어 해석이 용이함.
+	- • 완전한 시장 적합성: 관찰된 모든 만기에서 실제 금리와 정확히 일치하는 특성.
+	- • 수학적으로 엄밀한 기반: 보간(Interpolation)과 외삽(Extrapolation)을 동시에 통일된 수식으로 처리함.
+
+</TabPanel>
+<TabPanel header="단점 ">
+
+  1. **UFR 의존성**: 곡선의 장기 부분이 UFR 선택에 크게 의존해, UFR이 부적절하게 설정되면 현실과 괴리가 발생할 수 있음.
+  2. **정치적 민감성**: UFR 설정이 규제 당국의 결정에 따라 이루어지므로, 때로는 경제적 현실보다 정치적 고려에 영향을 받을 수 있음.
+  3. **복잡성**: 다른 단순한 보간 방법(예: 선형 보간, 스플라인)에 비해 계산이 복잡함.
+  4. **다중 곡선 환경 미반영**: 기본적으로 단일 금리 곡선만 모델링하므로, 다중 곡선 환경(예: OIS vs LIBOR)을 직접 처리하기 어려움.
+  5. **동적 모델링의 한계**: 주로 정적 금리 곡선 구성에 사용되며, 시간에 따른 금리 변동을 모델링하는 데는 추가적인 가정이 필요함.
+
+    - • 관찰 데이터에 민감하고, 알파(α) 하나로 수렴 속도와 부드러움을 모두 조정해야 해서 forward curve가 들쭉날쭉(bumpy) 할 수 있음. (관찰 포인트가 적거나 데이터 품질이 낮으면, 선도금리(forward rate) 곡선이 비정상적으로 변동할 수 있음, 특히 만기 간격이 불규칙하거나 관찰 데이터에 노이즈가 많을 경우 문제가 심각해질 수 있음.)
+    - •	파라미터 민감성 :	단 하나의 α 파라미터로 수렴 속도와 평활성을 동시에 조정해야 함.	α를 잘못 설정하면 곡선이 비현실적 형태를 가질 수 있음.
+    - •	데이터 품질 의존 : 관찰 금리에 노이즈가 많으면, 조정항이 과하게 반응해 곡선이 휘어지거나 비정상적 외삽 결과가 나올 수 있음.
+    - •	실무 적용의 복잡성 :	H행렬(윌슨 함수 행렬) 계산과 역행렬(inverse) 구하는 과정이 필요한데, 규모가 커지면 수치적으로 불안정해질 수 있음.
+</TabPanel>
+</TabView>
+
+
+## 6. 적용 사례
+
+<TabView>
+<TabPanel header="Solvency II ">
+
+  1. **기본 무위험 금리 기간구조(Basic Risk-Free Rate Term Structure)**:
+    - EIOPA는 매월 각 통화별 무위험 금리 곡선을 발표함
+    - 스왑 금리나 국채 수익률에서 출발하여 신용 및 유동성 리스크 조정을 적용함
+    - Smith-Wilson 모델을 사용하여 LLP 이후 구간을 UFR로 외삽함
+
+  2. **매칭 조정(Matching Adjustment) 및 변동성 조정(Volatility Adjustment)**:
+    - 장기 부채에 대한 추가 조정을 허용
+    - 기본 무위험 금리 곡선에 이러한 조정을 적용한 후에도 Smith-Wilson 외삽이 사용됨
+
+  3. **경과 조치(Transitional Measures)**:
+    - Solvency II 도입 초기에 충격을 완화하기 위한 경과 조치 적용
+    - 이전 체제와 Solvency II 간의 기술적 준비금 차이를 점진적으로 반영
+
+</TabPanel>
+<TabPanel header="K-ICS ">
+
+  1. **K-ICS 무위험 금리 곡선**:
+    - 한국 보험감독당국은 K-ICS에서 무위험 금리 곡선 구성에 Smith-Wilson 방법론을 채택함
+    - 국고채 수익률을 기준으로 하되, 필요시 조정을 적용함
+    - LLP는 일반적으로 20년으로 설정하고, 그 이후는 Smith-Wilson 외삽 적용
+
+  2. **금리 시나리오 생성**:
+    - 금리리스크 측정을 위한 기준 금리 곡선으로 Smith-Wilson 모델로 생성된 곡선 사용
+    - AFNS 모델로 금리 충격 시나리오를 생성하고, 이를 Smith-Wilson 기반 곡선에 적용
+
+  3. **자산-부채 평가**:
+    - 보험 부채의 공정가치 평가에 Smith-Wilson 할인율 곡선 사용
+    - 자산과 부채의 금리 민감도 불일치 분석에 활용
+
+</TabPanel>
+</TabView>
+

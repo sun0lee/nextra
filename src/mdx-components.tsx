@@ -21,6 +21,14 @@ const G2Col = ({ children }: { children: ReactNode[] }) => {
     </div>
   )
 }
+
+const severityIconMap = {
+  success: 'pi pi-check-circle',
+  info: 'pi pi-info-circle',
+  warn: 'pi pi-exclamation-triangle',
+  error: 'pi pi-times-circle',
+}
+
 const GCallout = ({
   title,
   width = '100%',
@@ -32,7 +40,16 @@ const GCallout = ({
   width?: string
   children: ReactNode
 }) => {
-  const _title = title ? `❱❱ ${title} ` : ''
+  const iconClass = severity ? severityIconMap[severity] : 'pi pi-question-circle'
+
+  const _title = title
+    ? (
+        <>
+          <i className={`${iconClass} mr-1`}></i>
+          {title}
+        </>
+      )
+    : ''
   const _severity = severity || 'info'
   const _width = width || '100%'
 
@@ -74,7 +91,14 @@ const GMath = ({
   width?: string
   children: ReactNode
 }) => {
-  const _title = title ? `❱❱ ${title} ` : ''
+  const _title = title
+    ? (
+        <>
+          <i className="pi pi-chevron-circle-down mr-1"></i>
+          {title}
+        </>
+      )
+    : ''
   const _severity = severity || 'contrast'
   const _width = width || '100%'
 
@@ -213,7 +237,7 @@ const GCmt = ({
 }
 
 const GLv1 = ({ children }: { children: ReactNode }) => (
-  <div className="border-l-4 border-blue-500 pl-0 my-2  text-blue-900 dark:text-blue-200">
+  <div className="italic text-blue-900 dark:text-blue-200 ">
     {children}
   </div>
 )
@@ -223,6 +247,32 @@ const GLv2 = ({ children }: { children: ReactNode }) => (
     {children}
   </div>
 )
+
+interface GImgProps {
+  children: React.ReactNode
+  caption?: string
+  maxWidth?: string
+}
+
+const GImg = ({ children, caption, maxWidth = '500px' }: GImgProps) => (
+  <div
+    className="mx-auto text-center border border-surface-300 rounded-md px-5 pt-2 my-2"
+    style={{ maxWidth }}
+  >
+    <div className="[&>img]:max-w-full [&>img]:h-auto">{children}</div>
+    {caption && (
+      <div className="text-center text-[0.9rem] italic text-gray-500 dark:text-gray-400 mt-0 mb-2">
+        〈
+        {' '}
+        {caption}
+        {' '}
+        〉
+      </div>
+    )}
+  </div>
+)
+
+
 export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   ...getDocsMDXComponents({
     pre: withIcons(Pre, { js: GitHubIcon }),
@@ -253,4 +303,5 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   GCaption,
   GLv1,
   GLv2,
+  GImg,
 })

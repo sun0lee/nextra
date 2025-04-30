@@ -53,7 +53,9 @@ K-ICS신용등급은 다음에 해당하는 국내 신용평가기관 또는 외
 
     AM Best도 보험사의 ICR과 FSR 신용등급을 제공 중이나, ICR의 경우 많은 국가에서 ECAI로 지정되지 않았으므로 사용 불가
       - – 다만, FSR에 특화된 평가회사인 점, 그리고 다수의 보험회사가 재보험계약 체결 시 AM Best에서 받은 등급을 이용<GTooltipIcon desc="원보험사가 재보험계약 체결 시, 출재사의 재보험금 적시 지급 여부를 FSR 등급으로 판단"/>하는 점 등을 고려하여 재보험계약 관련 익스포져에만 AM Best 등급을 사용토록 함
-    ![AM Best의 신용등급 분류기준](/kics/452_1.png)
+      <GImg caption = "AM Best의 신용등급 분류기준" maxWidth="600px">
+      ![AM Best의 신용등급 분류기준](/kics/452_1.png)
+      </GImg>
 
 </AccordionTab>
 </Accordion>
@@ -97,21 +99,24 @@ K-ICS신용등급은 다음에 해당하는 국내 신용평가기관 또는 외
 <Accordion multiple activeIndex={[]}>
 <AccordionTab header="ECAI가 공시하는 등급부도율을 이용하여 K-ICS 신용등급으로 매핑하는 예시">
       ㉮ 공시이력 7년~20년, 20년 이상의 신용평가기관으로 구분하여, 신용평가기관이 공시한 평균누적부도율(3년)을 확인한다.
-
-      ![](/kics/452_2.png)
+      <GImg caption = "" maxWidth="600px">
+      ![aa](/kics/452_2.png)
+      </GImg>
 
       ㉯ 평균누적부도율이 0이 아닌 등급 중 가장 상위 등급(예시에서는 A등급)을 다음의 전환기준에 따라 K-ICS신용등급 및 S&P등급으로 매핑한다.
-      ![](/kics/452_3.png)
-      ![](/kics/452_4.png)
-      <GCmt severity="aa">
+      <GImg caption = "" maxWidth="600px">
+      ![aa](/kics/452_3.png)
+      </GImg>
+      <GImg caption = "" maxWidth="600px">
+      ![aa](/kics/452_4.png)
+      </GImg>
         - • "A"신용평가기관의 BBB의 평균누적부도율(3년)은 1.3%로 5등급에 해당하나, 0이 아닌 등급중 가장 상위등급 (예시에는 A)을 기준으로 차등적으로 적용하기 때문에 4등급으로 매핑
-      </GCmt>
 
       ㉰ 최종 매핑등급은 S&P등급 기준 보다 낮은 등급만 인정한다. 만약에, 매핑한 등급이 S&P 등급보다 높거나 동일한 경우, S&P등급보다 한 단계 낮은 등급으로 매핑한다.
-      ![](/kics/452_5.png)
-      <GCmt severity="aa">
+      <GImg caption = "" maxWidth="600px">
+      ![aa](/kics/452_5.png)
+      </GImg>
         - • ㉯ 과정 수행 후 "A"신용평가기관의 AAA등급이 S&P의 AAA등급과 동일한 등급으로 매핑되었으므로, 최종등급은 1단계씩 하향조정하여 매핑
-      </GCmt>
 
       ☞ 위의 예시에서 “A”신용평가기관에서 BBB등급을 받은 거래상대방의 경우, ㉮~㉰의 과정을 거쳐 K-ICS신용등급은 5등급으로 매핑
 
@@ -467,10 +472,12 @@ $= \dfrac{\sum_t t\times CF_t}{\sum_t CF_t}$
 
       ☞ 담보가치 : 1,000, 총 대출잔액 : 900(LTV 90%),
         - 1순위대출(은행)잔액 : 500(평가금액 480), 2순위대출(보험)잔액 : 400(평가금액 390)
-
+    <GImg caption = "선순위 및 후순위 대출 모두 공정가치 평가 가능한 경우" maxWidth="600px">
       ![선순위 및 후순위 대출 모두 공정가치 평가 가능한 경우](/kics/452_6.png)
-
+    </GImg>
+    <GImg caption = "후순위 대출만 공정가치 평가 가능한 경우" maxWidth="600px">
       ![후순위 대출만 공정가치 평가 가능한 경우](/kics/452_7.png)
+    </GImg>
 
 </AccordionTab>
 </Accordion>
