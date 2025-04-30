@@ -19,6 +19,24 @@ export default {
       toc: true,
     },
   },
+  blog: {
+    type: 'page',
+    title: 'blog',
+    theme: {
+      navbar: true,
+      toc: true,
+      collapsed: true,
+    },
+  },
+  gesg: {
+    type: 'page',
+    title: 'ESG',
+    theme: {
+      navbar: true,
+      toc: true,
+      collapsed: true,
+    },
+  },
   ics: {
     title: (
       <span className="flex items-center leading-[1]">
