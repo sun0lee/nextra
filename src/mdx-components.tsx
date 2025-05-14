@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { OverviewPage } from '@/components/overview-page'
 import OverlayDemo from '@/components/ui/overlayDemo'
 import Image from 'next/image'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
@@ -283,6 +284,7 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   FileTree,
   Steps,
   Tabs,
+  OverviewPage,
   Button,
   Card,
   Fieldset,
