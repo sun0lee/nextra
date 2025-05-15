@@ -28,7 +28,10 @@ export const OverviewPage = async ({
 
   // console.log('[pageMap]', JSON.stringify(pageMap, null, 2))
 
-  const filteredPageMap = pageMap.filter(item => item.name !== 'index')
+  const filteredPageMap = pageMap.filter(
+    (item): item is Extract<PageMapItem, { name: string }> =>
+      'name' in item && item.name !== 'index',
+  )
   const indexPageMap = getIndexPageMap(filteredPageMap)
 
   return indexPageMap.map((pageItem, index) => {
@@ -47,7 +50,6 @@ export const OverviewPage = async ({
             )
           }
           return (
-            // @ts-expect-error -- fixme
             <Cards.Card
               key={item.name}
               // @ts-expect-error -- fixme
