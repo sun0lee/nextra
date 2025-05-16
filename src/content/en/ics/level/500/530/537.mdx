@@ -1,0 +1,45 @@
+---
+title: 5.3.7  Asset Concentration risk
+---
+## 5.3  Market risks
+### 5.3.7  Asset Concentration risk
+- L1-128. The Asset Concentration risk charge is an incremental risk charge above the Market and Credit risk charges, which acknowledges that assets held by the IAIG are not perfectly diversified. Assets in separate accounts or where the investment risks fully flow-through<GTooltipIcon desc=" Not considering any guarantee to policyholders that may exist on the value of the overall investment fund(s) such as on variable annuity products."/> to policyholders are excluded from the calculation of the Asset Concentration risk charge.
+- L1-129. For real estate, a specified factor is applied to assets in excess of specified threshold. The methodology to calculate the Asset Concentration risk charge is specified in the Level 2 text.
+- L2-237. The methodology to calculate the Asset Concentration risk charge is specified below.
+
+#### 5.3.7.1  Assets other than real estate
+- L2-238. For assets other than real estate, the Asset Concentration risk charge is calculated as:
+<GMath title ="Asset Concentration risk charge-other than real estate">
+$$
+f\times \left( \cfrac{\sum_{E_i \gt T}(E_i-T)(d \cdot K_i^{eq}+K_i^{cr})}{d \cdot K^{eq} +K^{cr}} + T\right)
+$$
+</GMath>
+<GCmt>
+- • $f = 0.71656$ ;
+- • $d = 0.95$;
+- • $E_i$ is the net exposure to group of connected counterparties $i$;
+- • $T$ is an exposure threshold determined by the IAIG in such a way that the number of groups of connected counterparties $i$ for which $E_i \gt T$is equal to or greater than 10 but does not exceed 100;
+- • $K_i^{eq}$ is the Equity risk charge associated with counterparty $i$, before diversification and management actions;
+- • $K_i^{cr}$ is the Credit risk charge associated with counterparty $i$, before diversification and management actions;
+- • $K^{eq}$ is the total Equity risk charge of the IAIG, before diversification and management actions; and
+- • $K^{cr}$ is the total Credit risk charge of the IAIG, before diversification and management actions.
+</GCmt>
+- L2-239. Groups of connected counterparties are determined according to the definition provided by the Basel Committee on Banking Supervision ( <GTooltip label="BCBS" desc="As specified in the BCBS publication Supervisory framework for measuring and controlling large exposures (April 2014), which also outlines criteria for assessing whether ‘control’ or ‘economic interdependence’ exists."/>). Specifically, two or more natural or legal persons are considered a group of connected counterparties if at least one of the following criteria is satisfied:
+    - a.  Control relationship: one of the counterparties, directly or indirectly, has control over the other(s); or
+    - b.  Economic interdependence: if one of the counterparties were to experience financial problems, the other(s), as a result, would also be likely to encounter financial problems.
+- L2-240. Exposures to national governments are excluded from the Asset Concentration risk charge calculation. Public sector exposures, not issued or guaranteed by a national government, such as provincial, state or municipal debt, are included within the Asset Concentration risk charge calculation with their corresponding Credit and Equity risk charges.
+- L2-241. The determination of the gross counterparty exposures includes both on- and off-balance sheet positions, and considers the following:
+    - a.  Exposures to reinsurance counterparties are included on a pre-stress basis<GTooltipIcon desc="The contingent risk associated with catastrophe scenarios is not included in the exposure."/>;
+    - b.  The determination of OTC derivatives exposures is based on a credit-equivalent basis, as applicable, and exposures to central counterparties are excluded;
+    - c.  Exposures are based on a look-through approach for investment funds and structured products;
+    - d.  Non-affiliated (external) guarantees, commitments, bank deposits, receivables and any other items subject to the possibility of financial loss due to counterparty default are included; and
+    - e.  Gross exposures are calculated based upon the MAV basis described in section 3, except where otherwise specified.
+- L2-242. The determination of net counterparty exposures considers the following:
+    - a.  Exposures from assets held in separate accounts or life insurance contracts where the investment risks fully flow-through to policyholders are excluded. Nevertheless, assets backing any guarantees to policyholders are included;
+    - b.  Asset exposures may be netted against liability exposures to the extent that they are subject to a legally enforceable right of offset;
+    - c.  For exposures covered by collateral or unconditional and irrevocable guarantees, the substitution approach specified in sections 5.4.2.1.1 and 5.4.2.2.3 may be used for the portion of the exposure covered by the collateral or the guarantees. The exposure to the primary counterparty is then replaced by the exposure to the collateral or guarantor. This approach should also be used for bank deposits if an explicit guarantee (such as a national government guarantee) exists. Where national government exposures are substituted for corporate exposures, the corresponding amounts are excluded from the determination of the Asset Concentration risk charge, in line with the provisions of paragraph L2-240; and
+    - d.  For collateralised non-life reinsurance exposures, the haircut approach specified in section 5.4.2.1.2 is used in lieu of the substitution approach. The exposure to the reinsurer is the adjusted net exposure calculated in section 5.4 on Credit risk. The collateral received is excluded from the counterparty exposure. However, the asset concentration risk for the collateral calculated on a standalone basis is one component of the haircut applied to the collateral.
+
+#### 5.3.7.2  Real estate
+- L2-243. In order to calculate the Asset Concentration risk charge for real estate, property exposures are determined on the basis of single property, or group of properties within a 250 metres radius, including exposures from both direct and indirect holdings (such as funds of properties).
+- L2-244. The Asset Concentration risk charge for any property exposure as defined above is calculated as 25% of the net property exposure exceeding 3% of the IAIG’s total net investment assets relating to insurance activities. The net property exposures are calculated in line with paragraphs L2-241 and L2-242.

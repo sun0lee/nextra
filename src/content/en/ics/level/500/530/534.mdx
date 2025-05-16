@@ -1,0 +1,68 @@
+---
+title: 5.3.4  Equity risk
+---
+## 5.3  Market risks
+### 5.3.4  Equity risk
+- L1-118. The Equity risk charge is calculated as the change in net asset value following the occurrence of stress scenarios that impact the level and volatility of the fair value of equities, after management actions. The level scenarios are specified by segments of assets. A volatility scenario is measured separately. The stress scenario is defined in the Level 2 text.
+- L1-119. The Equity risk charge applies to direct and indirect exposures to all assets and liabilities with values sensitive to changes in the level or volatility of the fair value of equities as specified in the Level 2 text.
+- L1-120. The Equity risk charge uses the following segmentation of assets as defined in the Level 2 text:
+    - • Equity in developed markets, split between:
+      - o Listed equity (other than infrastructure); and
+      - o Infrastructure equity;
+    - • Equity in emerging markets, split between:
+      - o Listed equity (other than infrastructure); and
+      - o Infrastructure equity;
+    - • Hybrid debt/preference shares; and
+    - • Other equity.
+- L2-220. The following definitions apply to the equity segments listed in the Level 1 text.
+- L2-221. Listed equity in developed markets includes equities listed on the securities exchanges of equity markets included in the FTSE Developed Index: Australia, Austria, Belgium, Canada, Denmark, Finland, France, Germany, Hong Kong SAR, Ireland, Israel, Italy, Japan, Luxembourg, Netherlands, New Zealand, Norway, Poland, Portugal, Singapore, South Korea, Spain, Sweden, Switzerland, UK, and US.
+- L2-222. Any equity market not included in the FTSE Developed Index is considered an emerging market.
+- L2-223. Infrastructure equity is comprised of equity assets that meet the definitions and criteria specified in sections 1 and 2 of Annex 3.
+- L2-224. Investments in subordinated debt are included in the Equity risk charge within the segment hybrid debt/preference shares.
+- L2-225. The segment other equity is comprised of all investments not included in the previous equity segments.
+- L2-226. The four level scenarios (one for each asset segment) and volatility scenario are defined as:
+    - a. A decrease by 35%, before applying the Neutral Adjusted Dampener (NAD), of the market prices of listed shares in developed markets, other than infrastructure equity, and by 27% of the market prices of infrastructure equity in developed markets. The impact of the decrease in value of listed equity and infrastructure equity is aggregated using a linear correlation factor of 1.
+    - b. A decrease by 48%, before applying NAD, of the market prices of listed shares in emerging markets, other than infrastructure equity, and by 37% of the market prices of infrastructure equity in emerging markets. The impact of the decrease in value of listed equity and infrastructure equity is aggregated using a linear correlation factor of 0.75.
+    - c. A decrease of the market prices of hybrid debt/preference shares by x%, with x based on the ICS rating category (RC) of the asset, as specified in Table 17.
+      |ICS RC| 1-2|3|4|5|6-7|
+      |:--:|--|--|--|--|--|
+      | x%|4%|6%|11%|21%|35%|
+
+      <GCaption>Table 17: Stress factors for hybrid debt/preference shares</GCaption>
+    - d. A decrease by 49%, before applying NAD, of the market prices of all assets classified as other equity, as defined in paragraph L2-225.
+    - e. A absolute increase by x% of the implied volatilities of all the asset classes listed above, with x having the values provided in Table 18. For maturities not specified, the increase is interpolated linearly.
+      |Maturity(months)|0-1|3|6|12|24|36|48|60|
+      |:--:|--|--|--|--|--|--|--|--|
+      |x%|42%|28%|23%|20%|17%|16%|15%|14%|
+
+      |Maturity(months)|84|120|144|180|240|300|360 above|
+      |:--:|--|--|--|--|--|--|--|
+      |x%|14%|12%|11%|10%|7%|4%|0%|
+
+      <GCaption>Table 18: Absolute stress factors for implied volatilities</GCaption>
+
+- L2-227. The NAD is an additive component that behaves in a counter-cyclical manner. The NAD ranges from -10% to +10% and is applied on the developed markets, emerging markets, and other equity asset segments. NAD is computed using the following formula:
+<GMath title ="NAD">
+$$
+NAD = \left[a \times \left(\frac{CI_i - AI_i}{AI_i} - b \right) \right]_{-c}^{+c}
+$$
+</GMath>
+<GCmt>
+    - • $CI_i$ = Current Index value for category $i$
+    - • $AI_i$ = 3 years moving average index for category $i$
+    - • $a$ = 50%
+    - • $b$ = 7%
+    - • $c$ = 10%
+</GCmt>
+- L2-228. The results of the stresses listed above are aggregated in two steps:
+    - a. Step 1: The total level risk is calculated by aggregating the impact of the stress for each level scenario, floored at zero, using the following correlation matrix:
+      |Equity segment|Developed|Emerging|Hybrid/preferred| Other|
+      |:--:|:--:|:--:|:--:|:--:|
+      |**Developed**|100%|75%|100%|75%|
+      |**Emerging**|75%|100%|75%|75%|
+      |**Hybrid/preferred**|100%|75%|100%|75%|
+      |**Other**|75%|75%|75%|100%|
+
+      <GCaption>Table 19: Equity correlation matrix</GCaption>
+    - b. Step 2: The total Equity risk charge is calculated by summing the total level risk (from Step 1) and the impact of the stress under the volatility scenario.
+

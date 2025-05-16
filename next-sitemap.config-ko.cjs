@@ -11,7 +11,7 @@ module.exports = {
     // 'src/content/ko' 내에 있는 .mdx 파일만 처리
     const traverse = (dir) => {
       const files = fs.readdirSync(dir, { withFileTypes: true })
-      
+    
       files.forEach((file) => {
         const filePath = path.join(dir, file.name)
 

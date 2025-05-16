@@ -1,0 +1,118 @@
+---
+title: 5.3.2 금리위험
+---
+## 5.3 시장위험
+### 5.3.2 금리위험
+
+- L1-112. 금리위험액 산출은 다음의 세 가지 스트레스 시나리오를 각 통화의 무위험이자율 곡선 전체에 적용하는 방식으로 수행함. 관련 통화는 L1-114항에서 식별됨:
+  - • 평균회귀(mean-reversion) 시나리오;
+  - • 금리 상승(level up) 시나리오;
+  - • 금리 하락(level down) 시나리오.
+- L1-113. 해당 스트레스 시나리오의 특성은 Level 2 문서에서 규정함. 이들 시나리오는 무위험이자율 변화에 민감한 자산과 부채에만 적용하며, 적용 대상 자산과 부채의 식별 기준은 Level 2 문서에 명시됨. 또한, 시장 환경 변화가 계약자행동에 미치는 영향으로 인해 해지율이 변동하는 간접효과도 고려함.
+- L1-114. 상기 시나리오들의 영향은 금리 민감 자산·부채를 보유한 모든 통화에 대해 산출함. 비중요 통화는 묶어서 산출 가능함. 각 통화별(또는 그룹별) 스트레스 영향을 통합하여 전체 금리위험액을 산출함.
+- L1-115. 다섯 개 스트레스 결과와 관련 통화 전반에 걸친 통합 방식은 Level 2 문서에서 규정함.
+- L2-204. 금리위험액 산출 시 금리에 민감한 모든 자산과 부채를 포함하되, IAIG가 발행한 가용자본 적격 금융상품은 제외함.
+- L2-205. 금리를 입력 변수로 사용하는 동적 해지함수를 적용한 보험부채의 현행추정치는, 금리 스트레스 하에서도 기본 해지 가정은 변경하지 않으며, 해지율은 금리 스트레스에 따라 반응함.
+- L2-206. 금리위험액은 다음과 같이 산출함:
+<GMath title="금리위험액">
+$$
+\text{max}\left(0, \sum_i MR_i + VaR_{99.5} \left(\sum_i LT_i\right)\right)
+$$
+</GMath>
+<GCmt>
+- • $i$: IAIG가 금리위험액 측정대상 통화 인덱스
+- • $MR_i$: 통화 $i$에 대한 평균회귀 시나리오 결과 (L2-209항 참조)  
+- • $LT_i$: 확률변수로, 금리 수준 시나리오 결과를 포함함
+</GCmt>
+
+- L2-207. 통화 $i$에 대한 $LT_i$는 다음과 같이 정의함:
+<GMath title ="LT">
+$$
+\frac{1}{N^{-1}(0.995)} \times (LU_i \cdot \max(X_i, 0) - LD_i \cdot \min(X_i, 0))
+$$
+</GMath>
+<GCmt>
+- • $N^{-1}(0.995)$: 표준정규분포의 99.5% 분위  
+- • $LU_i$, $LD_i$: 각각 통화 $i$에 대한 금리 상승·하락 시나리오 결과 (L2-209항 참조)  
+- • $X_i$: 표준정규분포를 따르는 확률변수
+</GCmt>
+
+- L2-208. 확률변수 $X_i$는 $i \ne j$일 때 $corr(X_i, X_j) = 0.75$를 만족함.
+- L2-209. 통화 $i$에 대해 $MR_i$, $LU_i$, $LD_i$는 각각 평균회귀, 금리상승, 금리하락 시나리오 곡선을 적용하여 관련 자산과 부채의 가치를 재산출한 후 순자산가치 변화로 산출함. 산출 방식은 L2-210~L2-215항에서 규정함.
+- L2-210. 각 통화에 대해, 평균 회귀 시나리오에 대한 스트레스 금리곡선은 초기 금리곡선에 다음의 금리곡선을 가산하여 산출함. (LOT까지 적용):
+<GMath title="평균 회귀 시나리오 금리곡선">
+$$
+\Delta L \cdot \text{Level curve} + \Delta S \cdot \text{Slope curve} + \Delta C \cdot \text{Curvature curve}  
+$$
+</GMath>
+<GCmt>
+- • $\text{Level curve}$은 모든 만기에 대해 1인 곡선;
+- • $\text{Slope curve}$은 모든 만기 $\tau$에 대해 $\frac{1-e^{\lambda \tau}}{\lambda \tau}$인 곡선;
+- • $\text{Curvature curve}$은 모든 만기 $\tau$에 대해 $\frac{1-e^{\lambda \tau}}{\lambda \tau} -e^{\lambda \tau}$인 곡선;
+- • 𝜆는 Nelson Siegel 모델에서 위험-무위험 금리곡선의 지수 감소율 <GTooltipIcon desc="Diebold, F.X. and Li, C (2006) Forecasting the Term Structure of Government Bond Yields in Journal of Econometrics, 130, 337-364"/>;
+- • $\begin{bmatrix}
+        \Delta L_{} \\
+        \Delta S_{} \\
+        \Delta C_{}
+    \end{bmatrix}$는 $(I-e^{K})(\mu -V_0)$로 정의된 벡터;
+- • $I$는 3x3 단위 행렬;
+- • $\begin{bmatrix}
+        K_1 \; & 0 \;& 0 \\
+        0 & K_2  \; & 0 \\
+        0 & 0 \; & K_3
+      \end{bmatrix}$와 $\begin{bmatrix}
+        \Mu_1 \\
+        \Mu_2 \\
+        \Mu_3
+    \end{bmatrix}$는 벡터 $V_t$가 따르는 프로세스의 파라미터로, 다음과 같은 방정식으로 설명됨: $d V_t = K(\Mu - V_t)dt+\Sigma d W_t$;
+- • $V_t = \begin{bmatrix}
+        \beta_{1t} \\
+        \beta_{2t} \\
+        \beta_{3t}
+    \end{bmatrix}$로, $\beta_{1t}$, $\beta_{2t}$, $\beta_{3t}$는 각각 시점 $t$에서의 위험-무위험 금리곡선에 대한 Nelson Siegel 파라미터 <GTooltipIcon desc="Diebold, F.X. and Li, C (2006) Forecasting the Term Structure of Government Bond Yields in Journal of Econometrics, 130, 337-364"/>;
+- • $W_t$는 3차원 Wiener 과정이며, $\Sigma$는 실수 비음수 인자들의 하삼각 행렬.
+</GCmt>
+
+- L2-211. 평균 회귀 시나리오에 대해, LTFR의 값은 변하지 않음.
+- L2-212. 각 통화에 대해, 금리 상승(Level up) 시나리오에 대한 스트레스 금리 곡선은 다음의 금리 곡선을 초기 금리 곡선에 가산하여 산출함. (LOT까지 적용):
+
+<GMath title ="금리 상승 시나리오 금리 곡선">
+$$
+s \cdot N^{-1}(0.995)\cdot[ s \cdot l_1 \cdot \text{Level curve} + s \cdot l_2 \cdot \text{Slope curve} + s \cdot l_3 \cdot \text{Curvature curve}]  
+$$
+</GMath>
+<GCmt>
+- • $\begin{bmatrix}
+        sl_{1} \\
+        sl_{2} \\
+        sl_{3}
+    \end{bmatrix} = Me_1$  
+- • $M = \sqrt{(\Sigma\Sigma^T) \odot \big( \frac{1-e^{-(K_i+K_j)}}{K_i+K_j}\big)_{ij}}$, $\Sigma$와 $K_i$는 L2-210에서 설명한 방정식의 매개변수, $\odot$는 Hadamard 곱 연산자;
+- • $e_1$은 행렬 $N^TN$의 가장 큰 고유값에 대응하는 고유벡터;
+- • $N =\begin{bmatrix}
+      LOT \; & 0 \;& 0 \\
+      0 & a  \; & 0 \\
+      0 & 0 \; & b
+  \end{bmatrix} M$
+- • $a$ = $\sum_{\tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau}$
+- • $b$ = $\sum_{\tau = 1}^{LOT} \left(\frac{1-e^{-\lambda\tau}}{\lambda \tau} - e^{-\lambda \tau} \right)$
+- • $s = \begin{cases}
+   1 &\text{if } (s l_1 \cdot \text{Level curve}_{LOT} + s l_2 \cdot \text{Slope curve}_{LOT} + s l_3 \cdot \text{Curvature curve}_{LOT}) \ge 0 \\
+   -1 &\text{otherwise} 
+\end{cases}$
+</GCmt>
+
+- L2-213. 금리 상승 시나리오의 경우, LTFR은 다음 중 더 작은 값만큼 절대적으로 증가함:
+  - • L2-61부터 L2-64에 따라 산출된 LTFR의 10%; 및
+  - • L2-64에서 규정된 LTFR의 최대 연간 변동 한도.
+
+- L2-214. 각 통화에 대해, 금리 하락(Level down) 시나리오에 대한 스트레스 금리 곡선은 다음의 금리 곡선을 초기 금리 곡선에 가산하여 산출함. (LOT까지 적용):
+<GMath title ="금리 하락 시나리오에 대한 스트레스 금리 곡선">
+$$
+  -s \cdot N^{-1}(0.995)\cdot[ s \cdot l_1 \cdot \text{Level curve} + s \cdot l_2 \cdot \text{Slope curve} + s \cdot l_3 \cdot \text{Curvature curve}]  
+$$
+</GMath>
+
+- L2-215. 금리 하락 시나리오의 경우, LTFR은 다음 중 더 작은 값만큼 절대적으로 감소함:
+  - • L2-61부터 L2-64에 따라 산출된 LTFR의 10%; 및
+  - • L2-64에서 규정된 LTFR의 최대 연간 변동 한도.

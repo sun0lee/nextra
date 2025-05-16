@@ -24,7 +24,7 @@ src/
 — MDX 문서를 불러와서 페이지로 렌더링
 - 역할: URL에 따라 MDX 파일을 동적으로 불러와서 페이지를 렌더링하는 핵심 파일
 
-<Fieldset legend="page.tsx" toggleable>      
+<Fieldset legend="page.tsx" toggleable>    
   ```tsx
   import { useMDXComponents } from '@/mdx-components'
   import { generateStaticParamsFor, importPage } from 'nextra/pages'
@@ -35,18 +35,18 @@ src/
   <TabView>
   <TabPanel header="useMDXComponents ">
     MDX에서 사용할 커스텀 컴포넌트 집합을 가져오는 부분이야.
-      -	•	useMDXComponents()는 @/mdx-components에서 정의된 컴포넌트 매핑을 가져와서, MDX 내부에서 \<h1>, \<p> 같은 태그를 커스텀 컴포넌트로 치환할 수 있도록 도와줘.
-      -	•	예를 들어, 문서 내의 \<h1>을 자동으로 스타일링된 \<CustomH1> 컴포넌트로 변경할 수 있어.
+      -  •  useMDXComponents()는 @/mdx-components에서 정의된 컴포넌트 매핑을 가져와서, MDX 내부에서 \<h1>, \<p> 같은 태그를 커스텀 컴포넌트로 치환할 수 있도록 도와줘.
+      -  •  예를 들어, 문서 내의 \<h1>을 자동으로 스타일링된 \<CustomH1> 컴포넌트로 변경할 수 있어.
 
   </TabPanel>
   <TabPanel header="generateStaticParamsFor ">
-        - •	특정 경로(예: 'mdxPath')를 기준으로 정적 경로(static paths)를 생성하는 함수야.
-        - •	Nextra가 자동으로 MDX 파일들의 경로를 읽어서 각 페이지의 URL을 미리 만들도록 도와주는 역할을 해.
+        - • 특정 경로(예: 'mdxPath')를 기준으로 정적 경로(static paths)를 생성하는 함수야.
+        - • Nextra가 자동으로 MDX 파일들의 경로를 읽어서 각 페이지의 URL을 미리 만들도록 도와주는 역할을 해.
 
   </TabPanel>
   <TabPanel header="importPage ">
-        - •	특정 MDX 문서를 가져와서 메타데이터(metadata), 본문(content), 목차(toc) 등을 반환하는 함수야.
-        - •	params.mdxPath와 params.lang을 전달하면, 해당 경로에 있는 MDX 문서를 불러와서 렌더링할 수 있는 형태로 변환해 줘.
+        - • 특정 MDX 문서를 가져와서 메타데이터(metadata), 본문(content), 목차(toc) 등을 반환하는 함수야.
+        - • params.mdxPath와 params.lang을 전달하면, 해당 경로에 있는 MDX 문서를 불러와서 렌더링할 수 있는 형태로 변환해 줘.
 
   </TabPanel>
   </TabView>
@@ -72,30 +72,30 @@ src/
 <AccordionTab header="export ">
 <TabView>
 <TabPanel header="generateStaticParams ">
-- •	Next.js의 동적 경로(Static Path) 생성 함수야.
-- •	'mdxPath' 값을 기준으로 MDX 문서들의 정적 경로를 미리 생성해 줘서, 정적 사이트 생성(SSG)이 가능하도록 도와줘.
-- •	예시
-    - •	/docs/intro.mdx → mdxPath: \['docs', 'intro']
-    - •	/about.mdx → mdxPath: \['about'] 
+- • Next.js의 동적 경로(Static Path) 생성 함수야.
+- • 'mdxPath' 값을 기준으로 MDX 문서들의 정적 경로를 미리 생성해 줘서, 정적 사이트 생성(SSG)이 가능하도록 도와줘.
+- • 예시
+    - • /docs/intro.mdx → mdxPath: \['docs', 'intro']
+    - • /about.mdx → mdxPath: \['about'] 
 
 </TabPanel>
 <TabPanel header="generateMetadata ">
-    - •	Next.js 13+의 SEO 메타데이터 생성 함수야.
-	- •	페이지마다 메타데이터(예: 제목, 설명, OG 태그 등) 를 동적으로 불러와 설정하는 역할을 해.
+    - • Next.js 13+의 SEO 메타데이터 생성 함수야.
+  - • 페이지마다 메타데이터(예: 제목, 설명, OG 태그 등) 를 동적으로 불러와 설정하는 역할을 해.
 
 </TabPanel>
 <TabPanel header="params ">
-    - •	props.params를 가져와서 비동기적으로 해석(await) 해.
-	- •	params에는 현재 페이지의 mdxPath(파일 경로)와 lang(언어)이 포함되어 있어.
+    - • props.params를 가져와서 비동기적으로 해석(await) 해.
+  - • params에는 현재 페이지의 mdxPath(파일 경로)와 lang(언어)이 포함되어 있어.
 </TabPanel>
 <TabPanel header="metadata ">
-    - •	importPage를 사용해서 현재 페이지의 MDX 문서를 불러와서 메타데이터만 추출해. Ex) title, description
+    - • importPage를 사용해서 현재 페이지의 MDX 문서를 불러와서 메타데이터만 추출해. Ex) title, description
 
 </TabPanel>
 <TabPanel header="type PageProps ">
-    - •	PageProps 타입을 정의한 부분이야.
-	- •	params는 mdxPath와 lang을 포함하는 비동기 객체(Promise) 형태야.
-	- •	Readonly\<>를 사용해서 불변(immutable)하도록 보호하고 있어.
+    - • PageProps 타입을 정의한 부분이야.
+  - • params는 mdxPath와 lang을 포함하는 비동기 객체(Promise) 형태야.
+  - • Readonly\<>를 사용해서 불변(immutable)하도록 보호하고 있어.
 
 </TabPanel>
 </TabView>
@@ -108,8 +108,8 @@ src/
   ```
   <Accordion activeIndex={[0]}>
   <AccordionTab header=" ">
-    - •	useMDXComponents()에서 wrapper 컴포넌트를 가져와서 MDX 문서를 감싸는 역할을 해.
-	- •	보통 전체 페이지 레이아웃(TOC, 제목, 스타일링)을 담당하는 컨테이너 컴포넌트야.
+    - • useMDXComponents()에서 wrapper 컴포넌트를 가져와서 MDX 문서를 감싸는 역할을 해.
+  - • 보통 전체 페이지 레이아웃(TOC, 제목, 스타일링)을 담당하는 컨테이너 컴포넌트야.
   </AccordionTab>
   </Accordion>
 
@@ -129,8 +129,8 @@ src/
   ```
   <Accordion activeIndex={[0]}>
   <AccordionTab header=" ">
-	- •	Page 컴포넌트는 각 MDX 페이지를 렌더링하는 역할을 해.
-	- •	Next.js에서 async function을 사용하면 비동기 데이터를 직접 받아올 수 있는 서버 컴포넌트(Server Component) 가 돼.
+  - • Page 컴포넌트는 각 MDX 페이지를 렌더링하는 역할을 해.
+  - • Next.js에서 async function을 사용하면 비동기 데이터를 직접 받아올 수 있는 서버 컴포넌트(Server Component) 가 돼.
   </AccordionTab>
   </Accordion>
 </Fieldset>
@@ -187,15 +187,15 @@ src/
 - 역할: 각 MDX 파일에 대한 메타데이터(제목, 정렬순서 등)를 설정하는 파일
 
 - ✅ 주요 기능
-	- 문서의 제목(title), 정렬 순서(order), 경로(path) 등의 정보를 관리
-	- 사이드바, TOC(목차) 등의 구성에 영향을 줌
-	- 페이지 간 이동을 위해 이전/다음 페이지 링크 설정 가능
+  - 문서의 제목(title), 정렬 순서(order), 경로(path) 등의 정보를 관리
+  - 사이드바, TOC(목차) 등의 구성에 영향을 줌
+  - 페이지 간 이동을 위해 이전/다음 페이지 링크 설정 가능
 
 ## ④ content/000.mdx
 — 실제 문서 내용
 - 역할: 실제 사용자가 보는 MDX 문서(블로그 글, 기술 문서 등)
 
 - ✅ 주요 기능
-	-	실제 콘텐츠(텍스트, 이미지, 코드 등)를 포함하는 문서
-	-	MDX 문법을 사용하여 JSX 컴포넌트와 조합 가능
-	-	page.tsx에서 이 파일을 불러와서 페이지에 렌더링
+  -  실제 콘텐츠(텍스트, 이미지, 코드 등)를 포함하는 문서
+  -  MDX 문법을 사용하여 JSX 컴포넌트와 조합 가능
+  -  page.tsx에서 이 파일을 불러와서 페이지에 렌더링

@@ -1,5 +1,5 @@
 ---
-title: 3.2.5	할인
+title: 3.2.5  할인
 ---
 ### 3.2.5 할인
 
@@ -45,12 +45,12 @@ title: 3.2.5	할인
 - L2-51. 각 통화의 금융시장 특성을 고려하여, 그룹 전체 감독당국은 해당 국가의 감독당국으로부터 어떤 상품을 기초로 삼을지에 대한 자문을 받아야 하며, MAV 접근방식의 핵심 목표를 고려해야 함. 해당 선택에 대한 적절한 근거를 제시해야 하며, DLT 분석 결과도 포함되어야 함.
 
 </TabPanel>
-<TabPanel header="4) LOT(제1구간의 길이) ">
-- L2-52. DLT 평가와 제1구간의 기초상품 선택이 완료되면, 최종관측만기(LOT;Last Observed Term)는 다음을 고려하여 설정함:
-    - • 선택된 금융상품이 DLT 요건을 충족하는 가장 긴 만기;
-    - • 해당 금융시장의 특수성.
-</TabPanel>
 </TabView>
+
+- L2-52. DLT 평가와 제1구간의 기초상품 선택이 완료되면, 최종관측만기(LOT;Last Observed Term)는 다음을 고려하여 설정함:
+    - • 선택된 금융상품이 DLT 요건을 충족하는 가장 긴 만기
+    - • 해당 금융시장의 특수성
+
 
 ##### 3.2.5.2.2 신용위험보정(CRA)
 - L2-53. 선택된 금융상품의 수익률은 신용위험보정(CRA)의 적용을 받음.
@@ -58,43 +58,53 @@ title: 3.2.5	할인
 
 ##### 3.2.5.2.3 제2구간의 길이
 - L2-55. 모든 통화에 대해 제3구간의 시작 시점은 다음 중 더 나중인 시점임:
-    - • LOT 이후 30년;
-    - • 60년.
+    - • LOT 이후 30년
+    - • 60년
 
 ##### 3.2.5.2.4 외삽, 보간 및 수렴허용오차
 
 - L2-56. 제1구간 만기 간의 보간 및 LOT 이후의 외삽은 Smith-Wilson 방법론에 근거함.
 - L2-57. 보간 및 외삽의 제어 입력값은 LOT, LTFR, 수렴점(convergence point), 수렴허용오차(convergence tolerance)임.
-- L2-58. 기준금리가 스왑일 경우 신용위험 보정을 반영한 스왑 패리티 금리를 입력값으로 사용하고, 국채(할인채)일 경우 무이표수익률을 사용함.
+- L2-58. 기준금리가 스왑일 경우 신용위험 보정을 반영한 시장 스왑 고정금리(swap par rate)를 입력값으로 사용하고, 국채(할인채)일 경우 무이표수익률을 사용함.
 - L2-59. 수렴 속도를 제어하는 알파(alpha) 값은 수렴점에서 LTFR 수렴허용오차 내 도달이 가능한 최소값으로 설정함. 알파의 하한값은 0.05임.
 - L2-60. 수렴허용오차는 0.1bp이며, 이는 제2구간 종료 시점에서 달성되어야 함.
 
-##### 3.2.5.2.5	장기선도금리 (LTFR) 구성요소
+##### 3.2.5.2.5  장기선도금리 (LTFR) 구성요소
 
 - L2-61. 장기선도금리(LTFR)은 다음 두 구성요소의 합으로 계산함:
-    - a. 연간 실질이자율의 산술평균으로 계산한 기대 실질이자율. 연간 실질이자율 𝑟은 다음과 같이 계산함:<br/>
-    $$
-    r = \cfrac{\text{short term nominal rate}- \text{inflation rate}}{1 + \text{inflation rate}}
-    $$ 
-    <br/>기대 실질이자율은 가장 가까운 5bp 단위로 반올림함.
-    - b. 기대 물가상승률은 다음 기준에 따라 산정함:
+
+<TabView>
+<TabPanel header="기대 실질이자율 ">
+    - a. 연간 실질이자율의 산술평균으로 계산한 기대 실질이자율. 연간 실질이자율 𝑟은 다음과 같이 계산함: (기대 실질이자율은 가장 가까운 5bp 단위로 반올림함)
+
+      $$
+      r = \cfrac{\text{short term nominal rate}- \text{inflation rate}}{1 + \text{inflation rate}}
+      $$ 
+
+  - L2-62. 기대 실질이자율 산정을 위해 국가들을 다음 세 개의 지역으로 구분함:
+  - L2-63. 기대 실질이자율의 초기값은 다음과 같음: 이 값들은 주기적으로 검토될 예정임.
+
+  |area|지역|초기값|
+  |:--:|--|--|
+  |1|AUD, CAD, CHF, CZK, DKK, EUR, GBP, JPY, NOK, NZD, SEK, SGD, USD|1.8%|
+  |2|HKD, ILS, KRW, TWD|2.4%|
+  |3|기타 모든 통화 지역|3.0%|
+
+  <GCaption>three geographical areas</GCaption>
+
+</TabPanel>
+<TabPanel header="기대 물가상승률 ">
+    b. 기대 물가상승률은 다음 기준에 따라 산정함:
       - • 중앙은행이 공식 물가상승 목표치를 발표한 통화에 대해서는 해당 목표치를 기반으로 산정하며, 이때 기대 물가상승률은 다음과 같음:
-        - o 목표치가 1% 이하인 경우: 1%
-        - o 목표치가 1% 초과 3% 미만인 경우: 2%
-        - o 목표치가 3% 이상 4% 미만인 경우: 3%
-        - o 그 외의 경우: 4%
+        - – 목표치가 1% 이하인 경우: 1%
+        - – 목표치가 1% 초과 3% 미만인 경우: 2%
+        - – 목표치가 3% 이상 4% 미만인 경우: 3%
+        - – 그 외의 경우: 4%
       - • 중앙은행이 물가상승 목표치를 발표하지 않은 경우 기대 물가상승률은 2%로 설정함. 단, 과거 물가상승률과 물가전망이 명확하게 2%보다 현저히 높거나 낮은 경우, 해당 지표에 따라 기대 물가상승률을 결정함.
 
-- L2-62. 기대 실질이자율 산정을 위해 국가들을 다음 세 개의 지역으로 구분함:
-- L2-63. 기대 실질이자율의 초기값은 다음과 같음: 이 값들은 주기적으로 검토될 예정임.
+</TabPanel>
+</TabView>
 
-|area|지역|초기값|
-|:--:|--|--|
-|1|AUD, CAD, CHF, CZK, DKK, EUR, GBP, JPY, NOK, NZD, SEK, SGD, USD|1.8%|
-|2|HKD, ILS, KRW, TWD|2.4%|
-|3|기타 모든 통화 지역|3.0%|
-
-<GCaption>three geographical areas</GCaption>
 
 - L2-64. 장기선도금리(LTFR)의 연간 변동폭은 최대 15bp로 제한됨.  LTFR은 다음 공식을 따라 조정됨:
 
@@ -233,14 +243,14 @@ $$
     - L2-90. 스프레드 조정치는 "다중 포트폴리오 가중평균(WAMP)" 방식에 따라 산정됨.
     - L2-91. 포트폴리오 기준 WAMP 스프레드는 다음과 같이 산출됨:
   <GMath title="WAMP_spread">
-  $= w_{gov} \times spread_{\text{gov after RC}}(t)$  
+  $= w_{gov} \times spread_{\text{gov after RC}}(t)$
   $ + \sum_{ICS_{RC}} w_{\text{ICS RC}_i} \times spread_{\text{ICS RC}_i \text{after RC}}(t)$
   </GMath>
 
   <GCmt>
-    - • $w_{gov}$: 정부채권의 비중  
-    - • $w_{\text{ICS RC}_i}$: ICS 등급별 채권 비중  
-    - • $spread_{\text{gov after RC}}(t)$: 정부채권 위험조정 후 스프레드 (기준금리에 정부채권이 사용되면 0으로 간주)  
+    - • $w_{gov}$: 정부채권의 비중
+    - • $w_{\text{ICS RC}_i}$: ICS 등급별 채권 비중
+    - • $spread_{\text{gov after RC}}(t)$: 정부채권 위험조정 후 스프레드 (기준금리에 정부채권이 사용되면 0으로 간주)
     - • $spread_{\text{ICS RC}_i \text{after RC}}(t)$: ICS 등급별 채권 위험조정 후 스프레드
   </GCmt>
 
@@ -250,25 +260,25 @@ $$
     - L2-95. "총관측매칭비율(Total Observed Matching, TOM)"은 다음과 같이 계산됨:
 
   <GMath title="TOM">
-  
+
   $= \min\left(\cfrac{M}{\min(\text{LOT}, \text{lifetime of liab})}, 100\%\right)$
 
   </GMath>
   <GCmt>
-    - • $\text{lifetime of liab}$: 해당 보험부채의 예상 현금흐름 종료시점  
-    - • $M$: 현금흐름 테스트(L2-66.c 기준)를 통해, 10% 초과 캐시 캐리포워드 없이 음의 잔여현금이 발생하지 않는 최종 시점  
+    - • $\text{lifetime of liab}$: 해당 보험부채의 예상 현금흐름 종료시점
+    - • $M$: 현금흐름 테스트(L2-66.c 기준)를 통해, 10% 초과 캐시 캐리포워드 없이 음의 잔여현금이 발생하지 않는 최종 시점
       - – 예측 첫 해에 잔여 현금이 음수가 되는 경우, M은 0으로 간주 (보장 가능한 만기가 없음)
-      - – 캐리포워드 한도가 항상 충족되며 음의 현금이 없으면 $M = \text{lifetime of liab}$로 간주됨  
+      - – 캐리포워드 한도가 항상 충족되며 음의 현금이 없으면 $M = \text{lifetime of liab}$로 간주됨
   <Accordion activeIndex={[0]}>
   <AccordionTab header="이종통화의 자산의 현금흐름에서 M ">
   • $M$을 산정할 때, 이종통화의 자산의 현금흐름은 다음 조건을 만족하면 고려 가능함:
     - a. 자산의 현금흐름이 완전히 헤지된 경우
     - b. 롤링 헤지가 존재하고, 그 교체주기가 최소 월 1회 이상인 경우. 이 경우, 자산 현금흐름에 대해 통화위험 스트레스 계수의 50% 또는 20% 중 작은 값만큼 헤어컷을 적용함
     - c. IAIG가 GWS에게 다음을 입증하고, GWS가 이를 승인한 경우:
-      - o	월 1회 이상 교체되는 롤링 헤지 또는 실질적·비용 효율적인 대체 헤지수단이 존재하지 않음을 입증함.
-      - o	이 경우, 자산 현금흐름에 대해 통화위험 스트레스 계수에 따른 헤어컷이 적용됨.
+      - – 월 1회 이상 교체되는 롤링 헤지 또는 실질적·비용 효율적인 대체 헤지수단이 존재하지 않음을 입증함.
+      - – 이 경우, 자산 현금흐름에 대해 통화위험 스트레스 계수에 따른 헤어컷이 적용됨.
     - \* 위 a 및 b의 경우, 헤지 비용은 기대 현금흐름에서 차감함. 현금흐름 테스트에는 적격자산(Table 2), 현금 및 콜옵션이 있는 채권의 첫 콜일 이전의 현금흐름만 포함할 수 있음.
-        
+      
   </AccordionTab>
   </Accordion>
   </GCmt>
@@ -282,8 +292,8 @@ $$
   $$
   </GMath>
   <GCmt>
-    - • $A$ : $w_{GB} \cdot 0.8 \cdot \text{Spread Adj}_{\text{Gross-GB}}(t)$  
-    - • $B$ : $w_{MB} \cdot \left(0.8 \cdot \text{Spread Adj}_{\text{Gross-GB}}(t) \cdot (1-TOM) + 0.9 \cdot WAMP_{spread}(t) \cdot TOM \right)$  
+    - • $A$ : $w_{GB} \cdot 0.8 \cdot \text{Spread Adj}_{\text{Gross-GB}}(t)$
+    - • $B$ : $w_{MB} \cdot \left(0.8 \cdot \text{Spread Adj}_{\text{Gross-GB}}(t) \cdot (1-TOM) + 0.9 \cdot WAMP_{spread}(t) \cdot TOM \right)$
   단, $t > 0$일 때 적용하며, $\text{Spread Adj}_{MB}(0) = 0$
   </GCmt>
 
