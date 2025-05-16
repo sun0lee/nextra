@@ -1,15 +1,15 @@
 ---
-title: 3.2.5	Discounting
+title: 3.2.5  Discounting
 ---
 
-### 3.2.5	Discounting
-#### 3.2.5.1	Determination of yield curves for current estimate discounting
+### 3.2.5  Discounting
+#### 3.2.5.1  Determination of yield curves for current estimate discounting
 - L1-31. In order to calculate a current estimate, insurance liabilities are discounted using an adjusted yield curve. The adjusted yield curve is based on:
     - a) Risk adjusted liquid interest rate swaps or government bonds (risk-free yield curve); and
     - b) An adjustment.
 - L1-32. The adjusted yield curve is determined based on the methodology specified in the Level 2 text (sections 3.2.5.2 and 3.2.5.3).
 
-#### 3.2.5.2	Determination of the risk-free yield curve
+#### 3.2.5.2  Determination of the risk-free yield curve
 - L1-33. The risk-free yield curve is determined based on a three-segment approach:
     - a) Segment 1: based on market information from government bonds or swaps, including a credit risk correction, where necessary;
     - b) Segment 2: extrapolation between the first and third segments; and
@@ -20,52 +20,52 @@ title: 3.2.5	Discounting
 - L1-37. The two components of the LTFR are reviewed annually, in order to reflect potential changes in macroeconomic expectations. However, the magnitude of annual changes to the LTFR is capped in order to mitigate its potential volatility.
 - L1-38. Further specifications on the methodology to determine the risk-free interest rate are provided in the Level 2 text.
 
-##### 3.2.5.2.1	Choice of instrument for and length of Segment 1
+##### 3.2.5.2.1  Choice of instrument for and length of Segment 1
 - L2-43. The base yield curves are derived from financial instruments that are traded in deep, liquid and transparent (DLT) financial markets. A DLT assessment is carried out at regular intervals in order to identify the financial instruments and maturities for which a DLT market exists.
 - L2-44. The DLT assessment determines, in particular, whether swaps or government bonds are the relevant financial instruments for the risk-free interest rates and what the LOT is. The DLT assessment is performed for each currency.
 
 <TabView scrollable>
-<TabPanel header="1)	swap market ">
+<TabPanel header="1)  swap market ">
 - L2-45. The assessment of depth and liquidity of the swap market is carried out on the basis of swap trade data, in particular the number and notional amount of trades and is made separately for each currency and maturity. Only single-currency fixed-to-floating swaps are considered. Thresholds may need to be adapted in light of the specific circumstances of individual markets (eg less liquid currencies).
 
 </TabPanel>
-<TabPanel header="2)	bond market ">
+<TabPanel header="2)  bond market ">
 - L2-46. Given the specificity of government bond markets, a different approach to swap markets may be followed to assess the DLT nature of government bond rates.
 - L2-47. The assessment starts from the analysis of trade volume and trade frequency of government bonds, for all currencies.
 - L2-48. Where trade volume and frequency data are not available or their analysis is not conclusive, other criteria are assessed, including where possible, bid-ask spreads, the rate volatility, zero-trading days, the number of pricing sources and the number of quotes.
 
 </TabPanel>
-<TabPanel header="3)	Conclusions">
+<TabPanel header="3)  Conclusions">
 - L2-49. The DLT assessment of the relevant instruments informs the choice of the instrument on which the base yield curve is built upon, as well as the DLT maturities that are used in the derivation of the base yield curve.
 - L2-50. To maximise the use of market information, the instrument with the longer DLT segment or the instrument with a higher overall degree of liquidity should be chosen.
 - L2-51. Given the specificities of the financial markets of each currency, the group wide supervisor should seek advice from the relevant jurisdiction which instrument to take as a basis, with due consideration of the key objectives of the MAV approach. An appropriate justification for this choice is presented, covering also the outcome of the DLT analysis.
 
 </TabPanel>
-<TabPanel header="4)	LOT (Length of Segment 1) ">
+<TabPanel header="4)  LOT (Length of Segment 1) ">
 - L2-52. Following the DLT assessment and the choice of the instrument underlying segment one of the yield curve, the LOT is set taking into consideration
-    - •	the longest maturity, which is deemed to fulfil the DLT criteria, for the chosen instrument; and
-    - •	the specificities of the financial market.
+    - • the longest maturity, which is deemed to fulfil the DLT criteria, for the chosen instrument; and
+    - • the specificities of the financial market.
 
 </TabPanel>
 </TabView>
 
-##### 3.2.5.2.2	Credit Risk Adjustment
+##### 3.2.5.2.2  Credit Risk Adjustment
 - L2-53. Inputs from chosen instruments are subject to the Credit Risk Adjustment (CRA).
 - L2-54. The CRA is 0 basis points when instruments for Segment 1 are considered risk free. The CRA is 10 basis points otherwise.
 
-##### 3.2.5.2.3	Length of Segment 2
+##### 3.2.5.2.3  Length of Segment 2
 - L2-55. For all currencies, the start of the third segment as referred to in paragraph L1-33 is the later of the following:
-    - •	30 years after the LOT; and
-    - •	60 years.
+    - • 30 years after the LOT; and
+    - • 60 years.
 
-##### 3.2.5.2.4	Extrapolation, interpolation and convergence tolerance
+##### 3.2.5.2.4  Extrapolation, interpolation and convergence tolerance
 - L2-56. Both the interpolation between Segment 1 maturities and the extrapolation beyond the LOT are based on the Smith-Wilson methodology.
 - L2-57. The control input parameters for the interpolation and extrapolation are the LOT, the LTFR, the convergence point and the convergence tolerance.
 - L2-58. If the reference instruments are swap rates, the market interest rates to be used as inputs are the swap par rates after deduction of the credit risk adjustments. If the reference instruments are zero coupon government bonds, the market interest rates to be used as inputs are the zero-coupon rates.
 - L2-59. The parameter alpha that controls the convergence speed is set at the lowest value that produces a yield curve reaching the convergence tolerance of the LTFR by the convergence point. A lower bound for alpha is set at 0.05.
 - L2-60. The convergence tolerance is 0.1 basis point, and is achieved at the tenor which marks the end of Segment 2.
 
-##### 3.2.5.2.5	LTFR Components
+##### 3.2.5.2.5  LTFR Components
 - L2-61.  The LTFR is the sum of the following two components:
     - a. The expected real interest rate, computed as the simple arithmetic mean of annual real interest rates. Annual real rates 𝑟 are calculated as:<br/>
     $$
@@ -73,21 +73,21 @@ title: 3.2.5	Discounting
     $$ 
     <br/>The expected real interest rate is rounded to the nearest five basis points.
     - b. The expected inflation target, computed as follows:
-      - •	For currencies for which the central bank has announced an inflation target, the expected inflation is based on that inflation target. In this case the expected inflation rate is:
-        - o	1%, where the inflation target is lower than or equal to 1%;
-        - o	2%, where the inflation target is higher than 1% and lower than 3%;
-        - o	3%, where the inflation target is higher or equal to 3% and lower than 4%; and
-        - o	4%, otherwise.
-      - •	For currencies for which the central bank has not announced an inflation target, the expected inflation rate is set to 2%. However, where past inflation experience and projection of inflation both clearly indicate that the inflation in a currency area is materially higher or lower than 2%, the expected inflation rate is chosen in accordance with those indicators.
+      - • For currencies for which the central bank has announced an inflation target, the expected inflation is based on that inflation target. In this case the expected inflation rate is:
+        - – 1%, where the inflation target is lower than or equal to 1%;
+        - – 2%, where the inflation target is higher than 1% and lower than 3%;
+        - – 3%, where the inflation target is higher or equal to 3% and lower than 4%; and
+        - – 4%, otherwise.
+      - • For currencies for which the central bank has not announced an inflation target, the expected inflation rate is set to 2%. However, where past inflation experience and projection of inflation both clearly indicate that the inflation in a currency area is materially higher or lower than 2%, the expected inflation rate is chosen in accordance with those indicators.
 - L2-62. In order to determine the expected real interest rate, countries are grouped in the following three geographical areas:
     - a. Geographical area 1, comprised of the following currency areas: AUD, CAD, CHF, CZK, DKK, EUR, GBP, JPY, NOK, NZD, SEK, SGD, USD;
     - b. Geographical area 2, comprised of the following currency areas: HKD, ILS, KRW, TWD;
     - c. Geographical area 3, comprised of all other currency areas.
 - L2-63.  The initial values of the expected real interest rate component are:
-    - •	1.8% for geographical area 1;
-    - •	2.4% for geographical area 2; and
-    - •	3.0% for geographical area 3. The values will be regularly reviewed.
-- L2-64. The maximum annual change to the LTFR is limited to 15 bps.  
+    - • 1.8% for geographical area 1;
+    - • 2.4% for geographical area 2; and
+    - • 3.0% for geographical area 3. The values will be regularly reviewed.
+- L2-64. The maximum annual change to the LTFR is limited to 15 bps.
 The LTFR is changed according to the following formula:
 <GMath title ="LTFR">
 $$
@@ -105,16 +105,16 @@ $$
 </GCmt>
 
 
-#### 3.2.5.3	Determination of the adjustment to the risk-free yield curve
+#### 3.2.5.3  Determination of the adjustment to the risk-free yield curve
 - L1-39. The ICS yield curves include an adjustment to the risk-free curves. This adjustment is determined using the Three-Bucket Approach.
 - L1-40. The Three-Bucket Approach classifies liabilities into General Bucket, Middle Bucket and Top Bucket, depending on the nature of the liabilities and the assets backing these liabilities. A different yield curve adjustment is determined for each bucket.
 - L1-41. The criteria used for the classification of liabilities and the adjustment relevant for each bucket are specified in the Level 2 text.
 - L2-65. The following spread over the LTFR is added to all LTFR calculated according to paragraphs L2-61 to L2-64 above:
-    - •	20 basis points for geographical area 1;
-    - •	25 basis points for geographical area 2; and
-    - •	35 basis points for geographical area 3. using the geographical areas laid down in L2-62.
+    - • 20 basis points for geographical area 1;
+    - • 25 basis points for geographical area 2; and
+    - • 35 basis points for geographical area 3. using the geographical areas laid down in L2-62.
 
-##### 3.2.5.3.1	Classification criteria
+##### 3.2.5.3.1  Classification criteria
 
 <TabView>
 <TabPanel header="Top Bucket ">
@@ -144,7 +144,7 @@ $$
 </TabPanel>
 </TabView>
 
-##### 3.2.5.3.2	Adjustments to the yield curve
+##### 3.2.5.3.2  Adjustments to the yield curve
 
 <Fieldset legend ="1) Eligible investments" toggleable>
 - L2-72. For the purpose of calculating the Top Bucket and Middle Bucket adjustments, the eligibility of types of investments is specified in the following table:
@@ -194,7 +194,7 @@ $$
 </Fieldset>
 
 <TabView>
-<TabPanel header="2)	Top Bucket ">
+<TabPanel header="2)  Top Bucket ">
 - L2-76. The adjustment for the Top Bucket is based on the average spread above the risk-free yield curve of the eligible assets, as listed in Table 2, identified by the IAIG to back the portfolio of liabilities meeting the Top Bucket criteria.
 - L2-77. The IAIG may identify different portfolios, which will lead to the calculation of portfolio-specific adjustments.
 - L2-78. A cap at the level of the ICS RC 4 spread applies for assets with a lower credit quality. The ICS RC 4 cap is based on the spreads earned by the IAIG for ICS RC 4 rated assets denominated in the same currency. Where no such assets exist, the spread used for the Middle Bucket adjustment calculation is used.
@@ -205,7 +205,7 @@ $$
 - L2-83. The spread adjustment determined according to this methodology is applied as a parallel shift up to the run-off of the liabilities, which may be beyond the relevant LOT.
 
 </TabPanel>
-<TabPanel header="3)	Middle Bucket ">
+<TabPanel header="3)  Middle Bucket ">
 - L2-84. The Middle Bucket spread adjustment is a group-wide adjustment based on the eligible assets backing the Middle Bucket liabilities. The Middle Bucket spread adjustment can be portfolio specific within a single currency.
 - L2-85. The term structures of spreads by credit quality and currency serve as a basis for the calculation of the Middle Bucket adjustment.
 - L2-86. Parametric spread term structures are determined by credit quality and currency. They are obtained using the Nelson-Siegel approach on observed market spreads up to the LOT. Credit spreads are segmented by credit quality and duration buckets and sourced from recognised market data providers or if needed, derived from supervisory data.
@@ -215,7 +215,7 @@ $$
 - L2-90. The spread adjustment is calculated according to the Weighted Average of Multiple Portfolios (WAMP) methodology, as specified in the following paragraphs.
 - L2-91.  The $Wamp_{spread}(t)$ at maturity $t$ for a given portfolio is calculated as follows:
 <GMath title ="WAMP_spread">
-$= w_{gov} \times spread_{\text{gov after RC}}(t)$  
+$= w_{gov} \times spread_{\text{gov after RC}}(t)$
 $ + \sum_{ICS_{RC}} w_{\text{ICS RC}_i} \times spread_{\text{ICS RC}_i \text{after RC}}(t)$
 </GMath>
 <GCmt>
@@ -254,7 +254,7 @@ $=min \Bigg(\cfrac{M}{min(LOT,\text{lifetime of liablility})},100\% \Bigg)$
 <GMath title ="Middle Bucket spread adjustment">
 $$
 \text{Spread Adj}_{MB}(t)=Max [A,B]
-$$  
+$$
 </GMath>
 <GCmt>
 - • $A$ : $w_{GB} * 0.8 * \text{Spread Adj}_{\text{Gross-GB}}(t)$ 
@@ -265,7 +265,7 @@ $$
 - L2-97. The spread adjustment $\text{Spread Adj}_{MB}(t)$ determined according to this methodology is applied additively to the risk-free rate at each maturity $t$ up to year $M$. After that maturity, the spread adjustment is phased out in such a way that the resulting spot curve remains above the spot curve for the corresponding General Bucket.
 
 </TabPanel>
-<TabPanel header="4)	General Bucket ">
+<TabPanel header="4)  General Bucket ">
 - L2-98. The gross spread adjustment for the General Bucket ($\text{Spread Adj}_{\text{Gross-GB}}(t)$) is based on a representative portfolio that reflects the assets typically held by IAIGs in a particular currency and assumes that $\text{Spread Adj}_{\text{Gross-GB}}(0)=0$.
 - L2-99. The gross spread adjustment $\text{Spread Adj}_{\text{Gross-GB}}(t)$ includes a correction for credit risk and any other risk.
 - L2-100. For corporate bonds, the aforementioned correction is derived from the annualised cumulative default experience for a hypothetical 10-year bond, computed on the basis of transition matrices.
@@ -299,7 +299,7 @@ min \left( 1, max\left(0, \frac{PVBPU_{assets}}{PVBPU_{liab}*0.8*weight_{spread}
 $$
 </GMath>
 <GCmt>
-    - •	$w_{GB}$ is the modulation factor to be applied for General Bucket portfolios;
+    - • $w_{GB}$ is the modulation factor to be applied for General Bucket portfolios;
 </GCmt>
 
 <GMath title ="w_MB">
@@ -308,10 +308,10 @@ min \left( 1, max\left(0, \frac{PVBPU_{assets}}{PVBPU_{liab}*[TOM*0.9*weight_{sp
 $$
 </GMath>
 <GCmt>
-    - •	$w_{MB}$ is the modulation factor to be applied for Middle Bucket portfolios;
+    - • $w_{MB}$ is the modulation factor to be applied for Middle Bucket portfolios;
 </GCmt>
 
-    - •	$PVBPU$ stands for the price value of a basis point up, and is calculated in the following way
+    - • $PVBPU$ stands for the price value of a basis point up, and is calculated in the following way
 
   <GMath title ="PVBPU" severity="info">
     $$
@@ -334,5 +334,5 @@ $$
         - – Re-calculations are performed taking into consideration potential changes in cash flows when interest rates change. 
         - – The relevant yield curve for assets is the yield curve used to determine the current balance sheet value.
       </GCmt>
-    - •	$weight_{spread}$ is the weight of spread contributing assets. $weight_{spread,MB}$ is the weight of the spread contributing assets for the Middle Bucket. These are computed using the parameters as for paragraph L2-91.
-  
+    - • $weight_{spread}$ is the weight of spread contributing assets. $weight_{spread,MB}$ is the weight of the spread contributing assets for the Middle Bucket. These are computed using the parameters as for paragraph L2-91.
+

@@ -1,0 +1,112 @@
+---
+title: 5.3.2  Interest Rate risk
+---
+## 5.3  Market risks
+### 5.3.2  Interest Rate risk
+- L1-112. The calculation of the Interest Rate risk charge is based on a combination of three stresses applied to the entire risk-free yield curve for each relevant currency as identified in paragraph L1- 114:
+    - • A mean-reversion scenario;
+    - • A level up scenario; and
+    - • A level down scenario.
+- L1-113. The characteristics of those stresses are specified in the Level 2 text. The stress scenarios are applied only to assets and liabilities that are sensitive to a change in the level of risk-free rates; the identification of assets and liabilities subject to the stresses is specified in the Level 2 text. The impact of those stresses on lapse rates, due to the influence of market conditions on policyholder behaviour, is taken into account as specified in the Level 2 text.
+- L1-114. The impact of the scenarios listed above is calculated for all currencies in which the IAIG holds interest rate sensitive assets or liabilities. Currencies for which the exposure is non-material may be grouped together. The stress impacts calculated for each currency or group thereof are then combined to derive the overall Interest Rate risk charge.
+- L1-115. The methodology to aggregate the results across the five stresses and relevant currencies, is specified in the Level 2 text.
+- L2-204. All assets and liabilities sensitive to changes in interest rates are taken into account in the calculation of the Interest Rate risk charge, with the exception of financial instruments issued by the IAIG that qualify as capital resources.
+- L2-205. For current estimates of insurance liabilities calculated with a dynamic lapse function that uses the interest rate as an input variable, the base lapse assumptions stay unchanged under the interest rate stresses, but lapse rates react to the interest rate scenarios used to calculate the Interest Rate risk charge.
+- L2-206. The Interest Rate risk charge is calculated as:
+<GMath title="Interest Rate risk charge">
+$$
+max\left( 0. \sum_i MR_i + VaR_{99.5} \Big(\sum_i LT_i\Big)\right)
+$$
+</GMath>
+<GCmt>
+- • $i$ is an index over all currencies in which the IAIG is exposed to Interest Rate risk;
+- • $MR_i$ is the result of the mean reversion scenario for currency $i$, obtained as described in paragraph L2-209; and
+- • $LT_i$ is a random variable encompassing the result
+</GCmt>
+
+- L2-207. For currency $i$, $LT_i$ is defined as:
+<GMath title ="LT">
+$$
+\frac{1}{N^{-1}(0.995)}\times (LU_i max(X_i,0)-LD_i min(X_i,0))
+$$
+</GMath>
+<GCmt>
+- • $N^{-1}(0.995)$ is the 99.5% quantile of the standardised normal distribution;
+- • $LU_i$, and $LD_i$ are the results of the level up and level down scenarios respectively, obtained as described in paragraph L2-209; and
+- • $X_i$ is a random variable following a standardised normal distribution.
+</GCmt>
+- L2-208. In addition, the random variables $X_i$ are such that for any $i \ne j$, $corr(X_i,X_j)=0.75$.
+- L2-209. For currency $i$, $MR_i$, $LU_i$ and $LD_i$ correspond to the change in the IAIG’s Net Asset Value when recalculating the value of all relevant assets and liabilities using the mean reversion, level up and level down stressed yield curves respectively, obtained using the methodology described in paragraphs L2-210 to L2-215.
+- L2-210. For each currency, the stressed yield curve for the mean reversion scenario is obtained by adding the following yield curve to the initial yield curve, up to the LOT:
+<GMath title ="the stressed yield curve for the mean reversion scenario">
+$$
+\Delta L \cdot \text{Level curve} + \Delta S \cdot \text{Slope curve} + \Delta C \cdot \text{Curvature curve}
+$$
+</GMath>
+<GCmt>
+- • $\text{Level curve}$ is the curve equal to 1 for all maturities;
+- • $\text{Slope curve}$ is the curve equal to $\frac{1-e^{\lambda \tau}}{\lambda \tau}$ for any maturity $\tau$;
+- • $\text{Curvature curve}$ is the curve equal to $\frac{1-e^{\lambda \tau}}{\lambda \tau} -e^{\lambda \tau}$ for any maturity $\tau$;
+- • 𝜆 is the exponential decay rate of the Nelson Siegel model<GTooltipIcon desc="As described in the article Diebold, F.X. and Li, C (2006) Forecasting the Term Structure of Government Bond Yields in Journal of Econometrics, 130, 337-364"/> for the risk-free yield curve;
+- • $\begin{bmatrix}
+        \Delta L_{} \\
+        \Delta S_{} \\
+        \Delta C_{}
+    \end{bmatrix}$ is the vector defined as $(I-e^{K})(\mu -V_0)$
+- • $I$  is the 3𝑥3 identity matrix;
+- • $ \begin{bmatrix}
+        K_1 \; & 0 \;& 0 \\
+        0 & K_2  \; & 0 \\
+        0 & 0 \; & K_3
+      \end{bmatrix}$ and $\begin{bmatrix}
+        \Mu_1 \\
+        \Mu_2 \\
+        \Mu_3
+    \end{bmatrix}$ are parameters of the process followed by the vector $V_t$ below, described by the equation: $d V_t = K(\Mu - V_t)dt+\Sigma d W_t$
+- • $V_t = \begin{bmatrix}
+        \beta_{1t} \\
+        \beta_{2t} \\
+        \beta_{3t}
+    \end{bmatrix}$ where $\beta_{1t}$,$\beta_{2t}$ and $\beta_{3t}$ correspond to the Nelson Siegel parameters<GTooltipIcon desc="As described in the article Diebold, F.X. and Li, C (2006) Forecasting the Term Structure of Government Bond Yields in Journal of Econometrics, 130, 337-364"/> for the risk-free yield curve at time $t$; and 
+- • $W_t$ is a 3-dimensional Wiener process and Σ is a lower triangular matrix of real non-negative factors.
+</GCmt>
+
+- L2-211. For the mean reversion scenario, the value of the LTFR remains unchanged.
+- L2-212. For each currency, the stressed yield curve for the level up scenario is obtained by adding the following yield curve to the initial yield curve, up to the LOT:
+<GMath title ="the stressed yield curve for the level up scenario">
+$$
+s \cdot N^{-1}(0.995)\cdot[ s \cdot l_1 \cdot \text{Level curve} + s \cdot l_2 \cdot \text{Slope curve} + s \cdot l_3 \cdot \text{Curvature curve}]
+$$
+</GMath>
+<GCmt>
+- • $\begin{bmatrix}
+        sl_{1} \\
+        sl_{2} \\
+        sl_{3}
+    \end{bmatrix} = Me_1$ 
+- • $M = \sqrt{(\Sigma\Sigma^T) \odot \big( \frac{1-e^{-(K_i+K_j)}}{K_i+K_j}\big)_{ij}}$ with $\Sigma$ and $K_i$ denoting the parameters of the equation described in paragraph L2-210, and $\odot$ the Hadamard product operator;
+- • $e_1$ is the eigenvector associated with the highest eigenvalue of the matrix $N^TN$;
+- • $N =\begin{bmatrix}
+      LOT \; & 0 \;& 0 \\
+      0 & a  \; & 0 \\
+      0 & 0 \; & b
+  \end{bmatrix} M$
+- • $a$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau}$
+- • $b$ = $\sum_{tau = 1}^{LOT} \frac{1-e^{-\lambda\tau}}{\lambda \tau} - e^{-\lambda \tau}$
+- • $s = \begin{cases}
+   1 &\text{if } (s l_1 \cdot \text{Level curve}_{LOT} + s l_2 \cdot \text{Slope curve}_{LOT} + s l_3 \cdot \text{Curvature curve}_{LOT}) \ge 0 \\
+   -1 &\text{otherwise} 
+\end{cases}$
+</GCmt>
+- L2-213. For the level up scenario, the LTFR is subject to an absolute increase equal to the minimum between:
+    - • 10% of the LTFR calculated in accordance with paragraphs L2-61 to L2-64; and
+    - • the maximum annual change to the LTFR specified in paragraph L2-64.
+- L2-214. For each currency, the stressed yield curve for the level down scenario is obtained by adding the following yield curve to the initial yield curve, up to the LOT:
+<GMath title ="the stressed yield curve for the level down scenario">
+$$
+-s \cdot N^{-1}(0.995)\cdot[ s \cdot l_1 \cdot \text{Level curve} + s \cdot l_2 \cdot \text{Slope curve} + s \cdot l_3 \cdot \text{Curvature curve}]
+$$
+</GMath>
+- L2-215. For the level down scenario, the LTFR is subject to an absolute decrease equal to the minimum between:
+    - • 10% of the LTFR calculated in accordance with paragraphs L2-61 to L2-64; and
+    - • the maximum annual change to the LTFR specified in paragraph L2-64.

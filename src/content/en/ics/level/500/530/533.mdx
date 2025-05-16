@@ -1,0 +1,23 @@
+---
+title: 5.3.3  Non-Default Spread risk
+---
+## 5.3  Market risks
+### 5.3.3  Non-Default Spread risk
+- L1-116. Non-Default Spread risk (NDSR) is calculated as a relative bi-directional stress applied to both assets and liabilities. The Non-Default Spread risk charge is calculated as the maximum of an upward and downward stress, subject to a floor of zero.
+- L1-117. The characteristics of the stresses to apply, as well as the rules governing the identification of those assets and liabilities to which the stress applies, are specified in the Level 2 text.
+- L2-216. All liabilities sensitive to changes in spreads are taken into account in the calculation of the NDSR charge, with the exception of financial instruments issued by the IAIG that qualify as capital resources.
+- L2-217. All assets that contribute to the calculation of the spread adjustments for valuation purposes (Table 2 in section 3.2.5.3.2.1), are taken into account in the calculation of the NDSR charge, with the exception of sovereign bonds.
+- L2-218. For assets, the downward and upward spread stresses used for the calculation of the NDSR charge are a relative stress of -75% and +75% of the absolute value of spreads, respectively. The upward stress is subject to a cap and a floor.
+  <GMath title ="Spread down(t)">
+  $$
+  spread(t) -75\% \times |spread(t)|
+  $$
+  </GMath>
+  <GMath title ="Spread up(t)">
+  $$
+  spread(t)+ max\{40bps, min (150bps, 75\%\times |spread(t)|)\}
+  $$
+  </GMath>
+  where $spread(t)$ is the current spread of the asset over the relevant risk-free rate and is measured in basis points (bps).
+
+- L2-219. For the determination of the stressed insurance liabilities, the same stresses are applied to the input values (for 𝑡>0) used to derive the spread adjustments to the relevant base yield curve. Then the same methodology as laid out in section 3.2.5.3.2 is applied to these stressed input values to determine the final spread adjustment after stress.
