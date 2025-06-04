@@ -1,0 +1,873 @@
+---
+title: "Hull-White 모델"
+---
+
+# Hull-White 1 Factor 모델
+
+<GCallout severity="warn" title ="Illustration">
+    ![SW](/esg/202503_scen_sto.png)
+
+    <GCaption>Hull-White 1Factor 모델을 이용한 확률론적시나리오 산출예시 K-ICS 2025.03</GCaption>
+</GCallout>
+
+## 1. TVOG와 Hull-White 모델 
+
+> 	보험/연금 부채 평가에서 확정되지 않은 미래 금리를 어떻게 다룰 것인가? 
+
+K-ICS에서는 보험사의 지급여력 측정을 위해 부채의 경제적 가치를 산출하며, 이때 부채의 옵션(예: 금리보증)이나 금리변동 위험에 노출된 구조적 특징을 반영하기 위해서 확률론적 시나리오 기반 평가(stochastic valuation)로 금리 변동에 따라 영향을 받는 현금흐름 효과를 반영하여 측정한다. 
+
+K-ICS에서는 확률론적 시나리오를 생성하기 위해 Hull-White 1 Factor 모형을 사용하여 미래 1000개의 미래 금리 경로를 생성하고, 이를 바탕으로 각 시나리오별 부채의 현재가치를 산출한다. 이 시나리오의 변동성을 반영하여 산출되는 항목이 바로 TVOG(Time Value of Options and Guarantees)이다.
+
+즉, Hull-White 모형은 보험부채에 내재된 옵션성 가치의 측정 도구로, 이 모형을 통해 금리보증(GMDB, GMWB 등), 부리형 상품, 해지 옵션 등의 가치를 경제적으로 평가할 수 있다.
+
+
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="[IFRS 17] TVOG 관련 규정 ">
+<TabView>
+<TabPanel header="13 ">
+      13. 문단 11\~12를 적용한 후에는 주계약인 보험계약의 나머지 모든 구성요소에 이 기준서를 적용한다. 이하 이 기준서에서 내재파생상품에 관한 모든 사항은 주계약인 보험계약에서 분리되지 않은 파생상품을 말하며 투자요소에 대한 설명에서 투자요소에 관한 모든 사항은 주계약인 보험계약에서 분리되지 않은 투자요소를 말한다(문단 B31\~B32에서 설명하는 사항은 제외).
+</TabPanel>
+<TabPanel header="B48 ">
+      - B48. 자산의 운용성과에 기반하여 변동하는 현금흐름과 기타의 현금흐름 간에 유의적인 상호의존성이 있을 경우 복제포트폴리오 이외의 기법(예: 확률모형기법)을 적용하는 것이 보다 견고하거나 용이할 수 있다. 특정 상황에서 관측 가능한 시장변수와의 일관성을 유지하기 위한 목적을 가장 잘 충족할 수 있는 기법을 결정하기 위해서 판단이 요구된다. 특히, 보험계약에 옵션과 보증이 포함되어 있고 그러한 옵션과 보증에 대한 관측 가능한 시장가격이 있다면 관측 가능한 시장가격과 일관되도록 측정하는 측정기법이 사용되어야 한다.
+
+</TabPanel>
+<TabPanel header="B65 ">
+      - B65.보험계약의 경계 내에 있는 현금흐름은 계약의 이행과 직접적으로 관련이 있는 현금흐름으로서, 기업이 금액 또는 시기에 대해 재량을 가지는 현금흐름을 포함한다. 계약의 경계 내에 있는 현금흐름은 다음을 포함한다.
+          - $\cdots$ 
+          - ⑷ 파생상품으로 인하여 보험계약자에게(또는 보험계약자를 대신해서) 지급하는 금액. 이러한 파생상품의 예로 옵션 또는 보증이 보험계약에서 분리되지 않은 경우 (문단 11(1) 참조), 그 계약에 내재된 옵션 또는 보증을 들 수 있다.
+
+</TabPanel>
+<TabPanel header="B76 ">
+      - B76.변동이익을 갖는 기초항목의 성과에 따라 변동하지만, 최저수익 보증의 대상인 현금흐름은, 보증수준이 기초항목의 기대 성과보다 낮은 경우에도, 기초항목의 성과에만 근거하여 변동하지 않는다. 따라서 기업은 보증수준이 기초항목의 기대성과보다 낮은 경우에도, 보증효과에 대한 기초항목의 성과 변동성을 반영하여 할인율을 조정해야 한다.
+
+</TabPanel>
+</TabView>
+
+</AccordionTab>
+<AccordionTab header="[K-ICS] TVOG 관련 규정 ">
+<TabView>
+<TabPanel header="3-2. 현행추정부채">
+    **나. 보험료부채 ⑹ 옵션 및 보증평가**
+    - ① 현행추정부채를 산출할 때 미래 현금흐름은 보험계약에서 장래에 발생할 것으로 예상되는 옵션 및 보증을 고려하여 평가해야 한다
+      - ㈀ 옵션은 계약해지, 위험보장 증액·감액 등 계약자 행동에 따른 옵션 등을 말한다.
+      - ㈁ 보증은 최저보증이율, 최저사망보험금 보증, 최소적립금 보증 등을 말한다.
+      - ㈂ 옵션 및 보증의 시간가치(TVOG)는 확률론적 시나리오에 의해 산출된 값에서 결정론적 시나리오에 의해 산출된 값을 차감한 금액으로 산출한다.  
+
+</TabPanel>
+<TabPanel header="5-2. 할인율 산출구조 ">
+    - 나. 보험부채 평가시 적용하는 확률론적 시나리오는 조정 무위험 금리 기간구조를 기반으로 확률론적 금리모형을 통해 산출한다.  
+
+</TabPanel>
+<TabPanel header="5-3. 원화 할인율 산출 ">
+    - 다. 보험부채의 옵션 및 보증가치를 평가하기 위하여 확률론적 금리 모형을 통해 할인율을 산출한다.
+      - ⑴ 보험회사는 Ⅱ.5-3.나 (조정 무위험 금리기간구조)를 기반으로 ⑶ 산출모형에서 정한 확률론적 금리 모형을 적용하여 확률론적 시나리오를 산출한다.
+      - ⑵ 확률론적 시나리오는 최소 1,000개 이상으로 한다.
+      - ⑶ 확률론적 시나리오를 생성하는 모형(Hull-White 1 factor 모형)은 다음과 같다.
+      <GMath title ="">
+      $$
+      dr(t) = \alpha \cdot [ \theta(t) - r(t)]dt + \sigma \cdot dW(t)
+      $$
+      </GMath>
+      <GCmt>
+      - – 수렴속도 모수($\alpha$): 금리시나리오가 수익률 곡선에 회귀하는 속도를 결정하는 모수
+      - – 변동성 모수($\sigma$): 금리의 변동성을 결정하는 모수
+      - – $\theta(t)$ : 수익률곡선이 복원가능하도록 조정하는 역할을 하는 함수 (Hull-White 모형에서 이자율 곡선의 장기 평균 회귀 속도를 조절)
+      - – $dW(t)$: 브라운 운동에 대한 확률 증분 (시간에 따라 변동하는 무작위한 움직임을 표현함)
+      </GCmt>
+
+</TabPanel>
+</TabView>
+
+
+</AccordionTab>
+</Accordion>
+
+## 2. 모델의 구성
+
+확률론적 금리 시나리오는 단기금리의 확률적 경로를 바탕으로 생성된다. 단기금리란 특정 시점의 무위험 이자율 수준을 의미하며, 이를 확률과 시간의 함수로 모델링함으로써 전체 수익률곡선을 유도할 수 있다.
+
+Hull-White 1 Factor 모형은 이러한 단기금리의 확률적 움직임을 수학적으로 정의한 대표적인 모델로, 다음과 같은 기본 구조를 갖는다.
+<GMath title ="확률미분방정식(SDE)">
+$$
+dr(t) = \alpha (t) \cdot [ \theta(t) - r(t)]dt + \sigma \cdot dW(t)
+$$
+</GMath>
+<GCmt>
+    - • $$\theta(t)$$ ; 목표금리, 관찰된 시장 금리곡선에 적합시켜 금리가 시장금리곡선을 중심으로 수렴하도록 함.
+        - $\theta(t) = \dfrac{f_{t+1}-f_t}{\alpha_t \Delta t} + f_t + \int_0^t \sigma_u^2 \cdot e^{-2\alpha_u \cdot(t-u)}du
+    = \dfrac{f_{t+1}-f_t}{\alpha_t \Delta t} + f_t + Z(t)$
+    - • $$\alpha(t)$$; 회귀모수, 목표금리로 수렴하는 속도
+    - • $$\sigma(t)$$; 변동성모수, 연율화된 금리의 변동성
+    - • $$dW_t$$; Brownian Motion, 확률적으로 움직이는 위험 요인
+</GCmt>
+
+- – **drift** : $\alpha (t) \cdot [ \theta(t) - r(t)]dt$   
+    결정적 부분, 현재 이자율 $r(t)$이 장기평균 $\theta(t)$ 보다 낮으면 증가, 높으면 감소하여 평균으로 회귀하려는 경향을 나타냄. **$\alpha (t)$** 가 클수록 더 빠르게 평균 수준으로 회귀함. $\theta(t)$는 시장금리 커브와 일치조건에 따라 역산됨. 
+- – **diffusion** : **$\sigma \cdot dW(t)$**   
+    모형에서 확률적 부분으로 금리의 무작위적 변동부분을 나타냄. 평균은 0이고 분산은 시간에 비례함.
+
+<GCallout severity="success" title ="Hull-White 1 Factor 모형의 특징">
+	- •	금리는 시간이 지남에 따라 평균으로 회귀하려는 경향을 보인다 (mean-reversion)
+	- •	금리는 무작위적인 충격(브라운 운동)에 따라 변동성을 가지며 움직인다
+	- •	초기 시점의 수익률 곡선은 모델에 직접 반영되어 현실 적합성 유지한다 (No-Arbitrage)
+</GCallout>
+
+아래에서는 Hull-White one factor 모형의 모수를 스왑션 변동성 데이터를 기반으로 파라미터 추정, 시나리오 생성 및 검증 방법 등을 단계적으로 설명한다.
+
+
+
+## 3. Parameter
+
+시장 데이터는 연속적이지 않기 때문에 평균회귀 속도와 변동성에 대한 매개변수도 불연속적인 경우로 다룬다. 특히, 금리 시계열은 구간(단기구간, 장기구간)에 따라 성질이 다르므로 <GTooltipIcon desc="- 단기구간 : 중앙은행의 정책금리에 영향을 많이 받음. mean-reversion 속도가 빠름 / 장기구간 : 기대인플레이션 구조적 금리 수준의 영향을 받음. mean-reversion 속도가 느림"/>, 모수 역시 구간별 상수(Stepwise constant) 형태로 구분하여 추정한다.
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="K-ICS 확률론 시나리오 모수 추정 구간 ">      
+  <GImg caption = "" maxWidth="500px">
+  ![aa](/esg/HW-param-Fiqure_1.png)
+  </GImg>
+  수렴속도 모수($\alpha$)와 변동성 모수($\sigma$)는 스왑션 데이터가 관찰되는 기간과 데이터가 관찰 되지 않는 기간으로 구분하여 다음의 기준에 따라 산출한다. 다만, 수렴속도 모수($\alpha$)의 최저한도는 0.0001로 한다.
+      - ㈀ 모수 산출에 사용되는 스왑션 데이터는 시장에서 관찰되는 모든 스왑션 데이터(옵션만기 1년, 2년, 3년, 5년, 7년, 10년 및 스왑만기 1년, 2년, 3년, 5년, 7년, 10년에 해당하는 총 36개 데이터)를 사용한다.
+      - ㈁ 스왑션 데이터가 관찰되는 기간의 수렴속도 모수($\alpha$)는 세부기간을 구분하지 않고 단일의 모수로 산출하며, 변동성 모수($\sigma$)는 0\~1년, 1\~2년, 2\~3년, 3\~5년, 5\~7년, 7\~10년 기간별로 세분화하여 모수를 산출한다.
+      - ㈂스왑션 데이터가 관찰되지 않는 기간의 수렴속도 모수($\alpha$) 및 변동성 모수($\sigma$) 산출 기준은 감독원장이 제시한다.
+      - ㈃ 수렴속도 모수($\alpha$) 및 변동성 모수($\sigma$)는Ⅱ.2-2.가 (무위험 금리기간구조)를 바탕으로 산출한다.
+  </AccordionTab>
+  </Accordion>
+
+<TabView>
+<TabPanel header="α(수렴속도)  ">
+  $\alpha$ (Mean Reversion Speed) : 금리시나리오가 수익률 곡선에 회귀하는 속도를 결정하는 모수, 장기평균 $\theta(t)$에 되돌아오려는 속도를 의미함. 
+  - • $\alpha$가 클수록 평균수준에 빠르게 회귀.단기적인 변동이 장기금리에 미치는 영향이 작음. 
+  - • 반면 $\alpha$가 작을수록 평균수준에 느리게 회귀하며 랜덤워크에 가깝게 움직임. 
+  - • max (산출값, 0.0001)
+
+  <GCallout severity="success" title ="수렴속도 산출 세부기준 ">
+
+      |구간|산출기준|기준서|
+      |---|---|---|
+       |0년~20년 이내| 단일값 |스왑션 데이터가 관찰되는 기간의 수렴속도 모수는 세부기간을 구분하지 않고 단일의 모수로 산출.|
+       |20년 초과| 장기구간 (10년\~20년)의 최근 10년 평균값 사용|스왑션 데이터가 관찰되지 않는 기간의 수렴속도 모수 및 변동성 모수 산출 기준은 감독원장이 제시한다.|
+
+  </GCallout>
+  
+</TabPanel>
+<TabPanel header="σ(변동성) ">
+  금리의 변동성을 결정하는 모수 , 확산 계수(diffusion coefficient)
+    <GCallout severity="success" title ="변동성모수 산출 세부기준 ">
+      |구간|산출기준|기준서|
+      |---|---|---|
+      |0년~10년 이내|구간별로 적용|변동성 모수는 0\~1년, 1\~2년, 2\~3년, 3\~5년, 5\~7년, 7\~10년 기간별로 세분화하여 모수를 산출.|
+      |10년 초과|장기구간 (7년\~10년)의 최근 10년 평균값 사용|스왑션 데이터가 관찰되지 않는 기간의 수렴속도 모수 및 변동성 모수 산출 기준은 감독원장이 제시한다.|
+    </GCallout>
+</TabPanel>
+<TabPanel header="θ 장기평균 ">
+
+  수익률곡선이 복원 가능하도록 조정하는 역할을 하는 함수, Yeild Curve Fitting, 관찰된 시장 금리곡선에 적합시켜 금리가 시장금리곡선을 중심으로 수렴하도록 함.
+
+  <GCallout severity="success" title ="수익률 곡선 적합함수, 목표금리">  
+  $$
+    \theta(t) = \dfrac{f_{t+1}-f_t}{\alpha \Delta t} + f_t + \int_0^t \sigma_i^2 e^{-2\alpha(t-u)}du
+  $$
+  </GCallout>
+
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="계단식상수로 정의된 모수를 이용해서 theta 구하기 ">
+      
+* $\alpha$는 단기구간(20년 미만)과 장기구간(20년 이후)으로 구분된 piecewise constant.
+
+    $$
+    \alpha(t) = \begin{cases}    \alpha_1 &\text{if } t \lt \tau \\    \alpha_2 &\text{if } t \ge \tau  \end{cases}
+    $$
+
+* $\sigma$는 스왑션 만기구간(1,2,3,5,7,10,이후)에 따라 구분된 piecewise constant.
+
+    $$
+    \sigma(t) = \begin{cases}   \sigma_1 &\text{if } t_0 \le t \lt t_1 \\    \sigma_2 &\text{if } t_1 \le t \lt t_2 \\ \\ \cdots \\ \\ \sigma_{M-1} &\text{if } t_{M-2} \le t \lt t_{M-1} \\    \sigma_M &\text{if } t_{M-1} \le t   \end{cases}
+    $$
+
+위의 구간별 상수로 주어진 모수함수를 이용해 수치적분
+
+* $$A(t,T) = e^{- \int_t^u \alpha(v)dv}$$
+* $$B(t,T) = \displaystyle\int_t^T e^{-\int_t^u\alpha(v)dv}du$$
+* $$Z(t)= \displaystyle \int_0^t \sigma(u)^2 \cdot e^{-\int_u^t \alpha(v)dv} \cdot B(u,t)du$$
+* $$\xi(t) = \displaystyle \int_0^t \sigma(u)^2 \cdot e^{-2\int_u^t\alpha(v)dv}du$$
+*   $$\Omega(t,T) = \displaystyle\int_0^t \sigma(u)^2 \{ B(u,t)^2 - B(u,T)^2 \}du$$
+
+구간 $t$가 어디에 있는지에 따라 $a(t)$와 $\sigma(t)$가 다르게 정의되므로, $A(t,T)$, $B(t,T)$, $Z(t,T)$는 다음과 같이 정의된다.
+<GMath title ="">
+$$
+A(t,T) = \begin{cases} e^{-\alpha_1(T-t)}  &\text{if } T \lt \tau \\    e^{-\alpha_2(T-t)} &\text{if } t \ge \tau \\ e^{-\alpha_1(\tau-t)-\alpha_2(T-\tau)} &\text{if } t \le \tau  \le T \end{cases}
+$$
+</GMath>
+
+<GMath title ="">
+$$
+B(t,T) = \begin{cases}  \dfrac {1-e^{-\alpha_1(T-t)}}{\alpha_1}   &\text{if } T \lt \tau \\ \\  \dfrac {1-e^{-\alpha_2(T-t)}}{\alpha_2} &\text{if } t \ge \tau \\ \\  e^{-\alpha_1(\tau -t)} \cdot \dfrac {1-e^{-\alpha_2(T-\tau)}}{\alpha_2}  &\text{if } t \le \tau  \le T  \end{cases}
+$$
+</GMath>
+
+<GMath title ="">
+$$
+Z(t,T) = \begin{cases}   \displaystyle \int_0^t \sigma(u)^2 \cdot e^{-\alpha_1(t-u)}\cdot  \dfrac {1-e^{-\alpha_1(T-t)}}{\alpha_1} du    &\text{if } t \lt \tau \\  \\    e^{-\alpha_2(t-\tau)} \cdot  \displaystyle \int_0^ \tau \sigma(u)^2 \cdot e^{-\alpha_1(\tau-u)}\cdot  \{\dfrac {1-e^{-\alpha_1(\tau-u)}}{\alpha_1}\}du \\ + e^{-\alpha_2(t-\tau)}  \displaystyle \int_0^ \tau \sigma(u)^2 \cdot e^{-\alpha_1(\tau-u)}\cdot  \{\dfrac {1-e^{-\alpha_2(t-\tau)}}{\alpha_2}du\} \\ + \displaystyle \int_\tau^ t \sigma(u)^2 \cdot e^{-\alpha_2(t-\tau)}\cdot \{\dfrac {1-e^{-\alpha_2(t-u)}}{\alpha_2}\}du   &\text{if } t \ge \tau   \end{cases}
+$$
+</GMath>
+
+
+[참고 site](https://www.r-bloggers.com/2021/06/hull-white-1-factor-model-using-r-code/)
+
+</AccordionTab>
+</Accordion>
+
+</TabPanel>
+</TabView>
+
+## 4. Cailibration
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="모수 추정 절차 (code) ">
+
+<GCallout title="input">
+- – 시장에서 관찰되는 이자율 커브 (zero curve) : $P(0,t)$
+- – 해당 스왑션의 내재변동성 $\sigma_{Black}$
+</GCallout> 
+
+  ```java filename="Hw1fCalibrationKics.java"
+  public List<Hw1fCalibParas> getHw1fCalibrationResultList(String mode) {	
+		applySmithWilsonInterpoloation(this.prjInterval, this.lastLiquidPoint);		
+		calSwpnSwapRate();		
+		calSwpnPriceAtm();		
+		optParasHw();		
+		List<Hw1fCalibParas> hw1fParam = new ArrayList<Hw1fCalibParas>();
+		return hw1fParam;		
+	}
+  ```
+  <TabView>
+  <TabPanel header="1.할인계수 산출 ">
+  - – 스왑, 스왑션 가격 산출 시 필요한 할인계수 산출 
+  - – 비유동구간까지 금리커브를 보간하여 전 구간에 대한 무위험 이자율 커브 생성
+
+  <Accordion activeIndex={[0]}>
+  <AccordionTab header="applySmithWilsonInterpoloation(...) ">
+        
+  ```java
+  //	1st Step 1-1: Preparation of Swap Cashflow from Smith-Wilson Result from baseCurve
+	private void applySmithWilsonInterpoloation(int prjInterval, double lastLiquidPoint) {
+		
+		Map<Double, Double> ts = new TreeMap<Double, Double>();
+		for(int i=0; i<this.tenor.length; i++) ts.put(this.tenor[i], this.iRateBase[i]);
+
+		SmithWilsonKics sw = new SmithWilsonKics(this.baseDate, ts, this.cmpdType, this.isRealNumber, this.ltfr, this.ltfrT, (int) Math.round(lastLiquidPoint), prjInterval, 100, this.dayCountBasis);			
+		this.swRsltList = sw.getSmithWilsonResultList();		
+
+		this.pmtIdxBaseRate   = this.swRsltList.stream().map(s -> s.getMatTerm() * this.freq).mapToInt(Double::intValue).toArray();
+		this.priceBaseRate    = this.swRsltList.stream().map(s -> s.getDcntFactor()).mapToDouble(Double::doubleValue).toArray();		
+		this.spotContBaseRate = this.swRsltList.stream().map(s -> s.getSpotCont()).mapToDouble(Double::doubleValue).toArray();
+		this.fwdContBaseRate  = this.swRsltList.stream().map(s -> s.getFwdCont()).mapToDouble(Double::doubleValue).toArray();		
+	}	
+  ```
+  </AccordionTab>
+  </Accordion>
+
+  </TabPanel>
+  <TabPanel header="2. 스왑레이트 산출">
+  - – 각 ATM 스왑션에 해당하는 스왑레이트(현시점에서 고정과 변동의 현재가치를 같게 만드는 고정금리 수준) 계산 
+  - – 스왑에서 고정금리는 고정이자 지급의 현재가치와 변동 이자와 원금의 현재가치를 같게 하는 금리로 정의됨. 
+    - $PV_{fixed} = SwapRate \cdot \sum_{i=1}^{N} \Delta_k \cdot P(t_k)$ 이고 $PV_{floating} = P(t_a) - P(t_b)$ 이므로 두 값이 동일하게 하는 SwapRate
+  <GMath title ="Swap Rate">
+    $$
+    SwapRate = \frac{P(t_a) - P(t_b)}{\sum_{i=1}^{N} \Delta_k \cdot P(t_k)} 
+    $$
+  </GMath>
+  <GCmt>
+  - • $t_a$ :(`this.swpnMat[i]`) 스왑 시작 시점 = 스왑션 만기 (스왑 개시시점) 
+  - • $t_b$ : (`this.swapMatTenor[i][j]`) 스왑 종료 시점 = 스왑션 만기 + 스왑 기간 
+  - • $P(t)$ : (`this.priceBaseRate[k]`) t시점에서의 할인계수 
+  - • $\Delta_k$ : (`this.freq`) 스왑의 각 현금흐름 발생 시점의 기간 (예: 6개월, 1년 등) ; 고정이자 지급주기 
+  </GCmt>
+  <Accordion activeIndex={[0]}>
+  <AccordionTab header="calSwpnSwapRate() ">
+        
+    ```java 
+        //	1st Step 1-2: Calculate Exercise Rate of Swaption and PV of Swap Cashflow
+        private void calSwpnSwapRate() {
+          
+          this.swapRate      = new double[this.swpnMat.length][this.swapTenor.length];
+          this.swapDfSum     = new double[this.swpnMat.length][this.swapTenor.length];		
+              
+          for(int i=0; i<this.swpnMat.length; i++) {
+            for(int j=0; j<this.swapTenor.length; j++) {
+              this.swapDfSum[i][j] = 0.0;		
+              
+              for(int k=0; k<pmtIdxBaseRate.length; k++) {								
+                if((k+1) > this.swpnMat[i] * this.freq && (k+1) <= this.swapMatTenor[i][j] * this.freq) {
+                  this.swapDfSum[i][j] = this.swapDfSum[i][j] + this.priceBaseRate[k]; 
+                }
+              }
+              this.swapRate[i][j] = (this.priceBaseRate[this.swpnMat[i]* this.freq - 1] - this.priceBaseRate[this.swapMatTenor[i][j] * this.freq - 1]) / (this.swapDfSum[i][j] / this.freq);				
+            }				
+          }
+        }
+    ```
+  </AccordionTab>
+  </Accordion>
+  </TabPanel>
+  <TabPanel header="3. 스왑션 시장가격 산출 ">
+  - – 스왑션(일정 시점(T)에 고정금리를 지급하고 변동금리를 받는 이자율 스왑을 체결할 수 있는 권리)의 ATM(스왑레이트가 행사가격 K와 동일한 스왑션) 가격 계산 
+  - – 최적화 대상이 되는 스왑션 가격을 설정해야 Hull-White 모형의 파라미터를 추정할 수 있음
+
+  <GMath title ="Black 모델에서 스왑션 가격">
+  $$
+  Price_{ATM} = N(d_1) \cdot P(0,T) \cdot K - N(d_2) \cdot P(0,T) \cdot K
+  $$
+  </GMath>
+  <Accordion activeIndex={[0]}>
+  <AccordionTab header="calSwpnPriceAtm() ">
+    ```java 
+    //	1st Step 1-3: Calculate At The Money Price of of Swaption	 
+      private void calSwpnPriceAtm() {
+        
+        this.swpnPriceAtm = new double[this.swpnMat.length][this.swapTenor.length];
+        
+        for(int i=0; i<this.swpnMat.length; i++) {
+          for(int j=0; j<this.swapTenor.length; j++) {
+            
+            double T    = this.swpnMat[i];
+            double dPos = ( Math.log(this.swapRate[i][j]/this.swapRate[i][j]) + 0.5 * Math.pow(this.swpnVolMkt[i][j], 2) ) * T / (this.swpnVolMkt[i][j] * Math.sqrt(T));
+            double dNeg = dPos - (this.swpnVolMkt[i][j] * Math.sqrt(T));
+            
+            this.swpnPriceAtm[i][j] = this.notional * (this.swapDfSum[i][j] / this.freq) 
+                                                * (  this.swapRate[i][j] * new NormalDistribution().cumulativeProbability(dPos)
+                                                  - this.swapRate[i][j] * new NormalDistribution().cumulativeProbability(dNeg) );    // for payer swaption				
+            if(Math.abs(this.swpnPriceAtm[i][j]) < ZERO_DOUBLE) this.swpnPriceAtm[i][j] = 0.1;
+          }		
+        }
+      }
+    ```  
+
+    ```java
+          double T = this.swpnMat[i]; // 스왑션 만기
+          double sigma = this.swpnVolMkt[i][j]; // 내재변동성
+          double K = this.swapRate[i][j];       // 스왑레이트 = 행사가격
+          double A = this.swapDfSum[i][j] / this.freq; // Annuity = 고정지급의 현재가치
+
+          double dPos = (Math.log(K / K) + 0.5 * sigma^2) * T / (sigma * sqrt(T)); // = 0.5 * sigma * sqrt(T)
+          double dNeg = dPos - sigma * sqrt(T);                                    // = -0.5 * sigma * sqrt(T)
+
+          this.swpnPriceAtm[i][j] = this.notional * A * (K * N(dPos) - K * N(dNeg)); // Black 수식
+    ```
+  </AccordionTab>
+  </Accordion>
+  </TabPanel>
+  <TabPanel header="4. 모수 최적화 ">
+    - – $\alpha$, $\sigma$ 모수 최적화
+    - – 이론가격이 시장가격과 가장 유사하도록 파라미터 추정
+
+   <Accordion activeIndex={[0]}>
+   <AccordionTab header="optParasHw() ">
+      ```java filename="optParasHw()"
+          protected void optParasHw() {
+            optParasHw(new int[] {0, 1, 2, 3, 4, 5}, new int[] {0, 1, 2, 3, 4, 5});
+          }	
+      ```
+      ```java
+          private void optParasHw(int[] swpnMatIdx, int[] swapTenorIdx) {		
+            this.optParas = calibOptim(swpnMatIdx, swapTenorIdx, this.initParas);
+          }
+      ```
+        
+   </AccordionTab>
+   <AccordionTab header="calibOptim(...) ">
+      ```java
+          protected double[] calibOptim(int[] swpnMatIdx, int[] swapTenorIdx, double[] paras) {
+
+        MultivariateFunction fp = new MultivariateFunction() {
+          public double value(double[] paras) {
+            return calibErrFn(swpnMatIdx, swapTenorIdx, paras);
+          }
+        };
+        
+        double[] fpLower = new double[paras.length];
+        double[] fpUpper = new double[paras.length];
+        double[] fpScale = new double[paras.length];
+        
+        for(int i=0; i<paras.length; i++) {
+          fpLower[i] = (i<=1) ? this.alphaMin : this.sigmaMin;
+          fpUpper[i] = (i<=1) ? 2e-1 : 2e-2;
+          fpScale[i] = 1000;
+        }		
+          MultivariateFunctionPenaltyAdapter fpConstr = new MultivariateFunctionPenaltyAdapter(fp, fpLower, fpUpper, 1000, fpScale);
+        
+        double[] calibParas = paras;
+        double   calibValue = 0.0;		
+        
+        log.info("{}, {}, {}", LocalDateTime.now(), this.accuracy, paras);		
+        try {			
+          for(int i=0; i<this.itrMax; i++) {		
+            
+            SimplexOptimizer optimizer = new SimplexOptimizer(1e-12, 1e-12);
+            AbstractSimplex  ndsimplex = new NelderMeadSimplex(nelderMeadStep(calibParas, 0.001));
+            PointValuePair   result    = optimizer.optimize(new MaxEval(100000)
+                                                      , new ObjectiveFunction(fpConstr)
+                                                      , ndsimplex
+                                                      , GoalType.MINIMIZE
+                                                      , new InitialGuess(calibParas));				
+            
+            log.info("{}, {}, {}, {}", i, result.getValue(), LocalDateTime.now(), result.getPoint());		
+            calibParas = result.getPoint();
+            this.costValue = result.getValue();
+            
+            if(Math.abs(result.getValue() - calibValue) < this.accuracy) break;	
+            calibValue = result.getValue();
+            
+          }
+        }
+        catch (Exception e) {
+          log.error("Error in Cailibration of Hull-White 1 Factor Model Parameters [Calibration Mode = KICS]");
+          e.printStackTrace();
+        }		
+        log.info("{}, {}", LocalDateTime.now(), calibParas);		
+      
+        return calibParas;
+      }
+    ```  
+        
+   </AccordionTab>
+   <AccordionTab header="calibErrFn(...) ">
+      err = 관측된 스왑션 가격(swpnPriceAtm)과 모델로 계산한 스왑션 가격(swpnPriceHw)의 상대 오차의 제곱 합
+
+      ```java
+      private double calibErrFn(int[] swpnMatIdx, int[] swapTenorIdx, double[] paras) {
+          
+          double[][] swpnPrcHw = new double[swpnMatIdx.length][swapTenorIdx.length];
+          double err = 0.0;
+          double t1  = 0.0;
+          double t2  = 0.0;
+          int    k   = 0;     
+          int    l   = 0;
+          
+          double[] alpha = new double[] {paras[0], paras[1]};
+          double[] sigma = new double[] {paras[2], paras[3], paras[4], paras[5], paras[6], paras[7]};
+
+          for(int i=0; i<swpnMatIdx.length; i++) {
+            for(int j=0; j<swapTenorIdx.length; j++) {
+              k  = swpnMatIdx[i];
+              l  = swapTenorIdx[j];
+              t1 = swpnMat[k];
+              t2 = swapMatTenor[k][l];				
+            
+              swpnPrcHw[i][j] =  swpnPriceHw(t1, t2, alpha, sigma, this.swapRate[k][l]);
+                      err += Math.pow( (this.swpnPriceAtm[k][l] - swpnPrcHw[i][j]) / this.swpnPriceAtm[k][l], 2);                 
+            }
+          }
+          return err;
+        }	
+      ```
+   </AccordionTab>
+   <AccordionTab header="swpnPriceHw() ">
+   Jamshidian 아이디어를 활용해서 rOptim을 먼저 산출하고, 이를 사용하여 스왑션 가격을 계산한다.
+        ```java
+          private double swpnPriceHw(double t1, double t2, double[] alpha, double[] sigma, double K) {
+            
+            double dt     = 1.0 / this.freq;
+            double rOptim = 0.0;
+            
+            UnivariateFunction fp = new UnivariateFunction() {
+              public double value(double sRate) {
+                return rOptimSwpnErrFn(t1, t2, alpha, sigma, dt, K, sRate);
+              }
+            };
+              
+            UnivariateOptimizer optimizer = new BrentOptimizer(1e-10, 1e-14);
+            rOptim = optimizer.optimize(new MaxEval(10000)
+                                  , new UnivariateObjectiveFunction(fp)
+                                  , GoalType.MINIMIZE
+                                  , new SearchInterval(-0.9, 1.0)).getPoint();
+            
+            double[] swpnDt      = swpnDt(t1, t2, dt);
+            double[] swpnCf      = swpnCf(t1, t2, dt, K);		
+            double[] swpnSigma   = swpnSigma(t1, t2, alpha, sigma, dt);
+            double   swpnPriceHw = 0.0;        
+
+            for(int i=0; i<swpnDt.length; i++) {
+                  
+                  double xZbc  = hwZcbPrice(t1, swpnDt[i], alpha, sigma, rOptim);
+                  double pt0   = hwZcbPrice( 0,        t1, alpha, sigma, this.fwdContBaseRate[0]);
+                  double pti   = hwZcbPrice( 0, swpnDt[i], alpha, sigma, this.fwdContBaseRate[0]);
+                  double dPos  = Math.log(pti / xZbc / pt0) / swpnSigma[i] + 0.5 * swpnSigma[i];
+                  double dNeg  = dPos - swpnSigma[i];
+                  swpnPriceHw += this.notional * swpnCf[i] * (pti * new NormalDistribution().cumulativeProbability(dPos) - xZbc * pt0 * new NormalDistribution().cumulativeProbability(dNeg));
+                }        
+                return swpnPriceHw;
+          }
+        ```
+   </AccordionTab>
+   </Accordion> 
+
+  </TabPanel>
+  </TabView>
+      
+</AccordionTab>
+</Accordion>
+
+<Steps>
+### 스왑션 변동성 [#41]
+
+스왑션이란 금리 스왑에 대한 옵션으로, 특정 만기일에 금리 스왑을 체결할 수 있는 권리를 의미한다.
+스왑션 가격은 기초자산인 금리의 미래 분포에 대한 기대값으로 결정된다. 즉 스왑션 가격은 미래 금리 경로의 확률적 특성을 반영하고 있다. 따라서 스왑션 가격은 금리의 평균수준, 변동성, 평균회귀속성 등에 따라 결정된다. 
+
+스왑션 가격을 추정하는 모수는 결국 시장이 현재 기대하고 있는 금리의 움직임 (확률분포)을 잘 설명하는 값으로 해석할 수 있다. 
+따라서 시장에서 관찰되는 만기별 스왑션 변동성(Implied Volatility)을 통해 금리모형의 모수를 추정할 수 있다.
+
+
+
+
+### 이론 스왑션 가격 산출 [#42] 
+
+    **(Jamshidian 방식)** 각 채권 옵션을 제로쿠폰에 대한 콜/풋 옵션의 합으로 분해하여 계산.
+
+    <GCallout severity="info" title ="Jamshidian 방식 idea">
+    *__one-factor 이자율 모형 (Hull-White) 하에서 스왑션의 가치는, 스왑 만기 시점의 임계 단기 이자율 $r^*$을 기준으로 각 고정금리 현금흐름에 대한 zcb 옵션들의 가치 합과 같다.__*
+    </GCallout>
+    
+    - 즉, 만기시점에 채권의 가치가 행사가격을 초과하는지 여부에 따라 모든 현금흐름이 동시에 행사되거나 행사되지 않음을 이용함. 
+
+    <Accordion activeIndex={[0]}>
+    <AccordionTab header="1. 스왑션의 만기 및 행사 조건 정의">
+        - – 스왑션 만기(Expiry): $T_E$
+        - – 기초 스왑 시작일: $T_{S1}$ 
+        - – 기초 스왑 종료일: $T_{SN}$ 
+        - – 스왑 행사가격(Fixed Rate): $K$
+        - – 명목 원금(Notional): $N$ (보통 1)
+          
+    </AccordionTab>
+    <AccordionTab header="2. 고정금리 레그 현금 흐름 정의">
+        스왑의 고정금리 레그는 $T_{S1}$부터 $T_{SN}$까지 주기적으로 발생하는 $N⋅K⋅기간계수$ 형태의 쿠폰 현금 흐름과 마지막 원금 상환($N$)으로 구성됨. 이 현금 흐름들은 각각 미래 특정 시점 $t_i$ 에 지급됨.
+          
+    </AccordionTab>
+    <AccordionTab header="3. r* (rOptim)찾기 ">
+        스왑 만기($T_E$)시점에 스왑의 고정금리 레그의 가치를 행사가격 $K$에 해당하는 가치와 같게 만드는 이자율 $r^*$ 를 찾기. 임계(critical) 이자율 $r^*$
+        - – $T_E$시점의 이자율 < $r^*$ : 이익, 옵션 행사 
+        - – $T_E$시점의이자율 > $r^*$ : 손해, 옵션 미행사 
+        - – $r^*$는 스왑 만기 시점의 이자율 $r(T_E)$의 특정 값.
+        - – $r^*$를 찾기 : $T_E$ 시점에서 스왑의 고정금리 레그 현금 흐름을 $r^*$를 사용하여 할인했을 때, 그 총 가치가 0이 되거나 특정 행사가치를 만족하는 $r^*$를 찾는 수치적인 방법(예: 이분법, 뉴턴-랩슨법)이 필요함. 
+          
+    </AccordionTab>
+    <AccordionTab header="4. 각 현금 흐름을 Zero Coupon Bond에 대한 옵션으로 변환">
+        $r^*$를 알면, 스왑션 만기 $T_E$ 시점에 각 현금 흐름 $C_i$가 행사가격 $P(T_E,t_i,r^*)$를 가지는 Zero Coupon Bond $P(T_E,t_i)$에 대한 콜 옵션으로 쉽게 스왑션 가치를 산출 가능. 
+        - – $P(T_E,t_i,r^*)$ : $T_E$ 시점의 단기 이자율 = $r^*$일 때 만기 $t_i$인 Zero Coupon Bond의 가치.
+        - – 모든 현금 흐름 $C_i$ : $T_E$ 시점의 단기 이자율 $r(T_E)$ < $r^*$ 일 때 (콜 옵션의 경우) 동시에 '행사'되는 것으로 간주됨. (풋 옵션은 $r(T_E)$ > $r^*$일 때) 
+          
+    </AccordionTab>
+    <AccordionTab header="5. 각 Zero Coupon Bond 옵션의 가격을 블랙 모형으로 산출">
+        - – 각 현금 흐름 $C_i$에 대해, $T_E$ 만기, 행사가격 $P(T_E,t,r^*)$인 Zero Coupon Bond 옵션의 가격을 계산.
+        - – 이때, 블랙(Black) 모형의 채권 옵션 가격 결정 공식을 활용.
+        <GMath title ="블랙-숄즈 채권 옵션가격공식">
+        $$
+        V_{model}(\alpha, \sigma) = \sum_{i=1}^N P(0,t_i) \times Forword Bond Price \times N(d_1)- P(0,T_E)\times K \times N(d_2)
+        $$
+        </GMath>
+        <GCmt>
+        - – $P(0,t_i)$: 현재시점 (0)에서 만기 $t_i$인 Zero Coupon Bond의 가격(할인율)
+        - – Forword Bond Price$_i$ : $T_E$시점의 단기 이자율이 $r^*$일 때 만기 $t_i$인 Zero Coupon Bond의 기대 포워드가격.
+        - – $K$ : $T_E$시점의 단기 이자율이 $r^*$일 때 만기 $t_i$인 Zero Coupon Bond의 행사가격 (즉, $P(T_E,t_i,r^*)$).
+        - – $N(d_1)$,$N(d_2)$: 표준 정규 분포 누적 함수. $d_1$,$d_2$ 는 블랙 모형의 변수들로, 기초자산의 변동성($\sigma_{Black}$), 만기, 금리 등에 의해 결정됨. 
+        - – $\sigma_{Black}$: $\sigma_{Black}$​은 채권 가격의 변동성. 이 변동성은 Hull-White 모형의 $\alpha$와 $\sigma(t)$로부터 유도(즉, Hull-White 모형으로 채권 가격 변동성을 계산하여 블랙 모형에 입력)        
+        </GCmt>
+          
+    </AccordionTab>
+    <AccordionTab header="6. 모든 개별 채권 옵션 가격의 합">
+      위에서 계산된 각 현금 흐름에 대한 채권 옵션 가격을 모두 합산하면 스왑션의 이론적인 가격이 됨.
+    </AccordionTab>
+    </Accordion>
+
+
+### 모수추정 [#43]
+
+목적함수를 최소화하는 모수 세트를 추정함. 
+- – 목적함수 : 관측된 스왑션 가격(`swpnPriceAtm`)과 모델로 계산한 스왑션 가격(`swpnPriceHw`)의 상대 오차의 제곱 합(Sum of Squared Relative Errors, SSRE)
+```java
+err += Math.pow( (this.swpnPriceAtm[k][l] - swpnPrcHw[i][j]) / this.swpnPriceAtm[k][l], 2); 
+```
+
+
+</Steps>
+
+## 5. 시나리오 산출
+
+단기금리(Short Rate)가 다음의 프로세스를 따르기 때문에 
+$$
+dr(t) = \alpha_t \cdot [ \theta(t) - r(t)]dt + \sigma_t \cdot dW_t
+$$ 
+위의 식을 이산화하면 다음과 같음. 
+$$
+r_{t+1} = r_t + \alpha_t (\theta(t_i, t_{i+1})-r_t)\cdot \Delta t_i + \sigma_i(t) \sqrt{\Delta t_i } \cdot \epsilon_t
+$$
+- – 난수 생성기를 이용하여 [0,1] 균등 분포를 따르는 난수를 추출한다. 이렇게 추출된 난수는 정규 분포를 따르는 난수 $\epsilon_t \thicksim N(0,1)$로 변환된 후, 캘리브레이션으로 산출된 모수와 함께 단기 금리 시나리오를 산출하는 데 사용된다.
+- – 이 때, 난수의 변환은 균등 분포 난수를 정규 분포의 누적 분포 함수(CDF)의 역함수에 대입하여, 정규분포를 따르는 난수로 변환한다.
+  
+
+<GCallout severity="warn" title ="Illustration">
+
+<TabView>
+<TabPanel header="난수 예시 ">
+    ![SW](/esg/rnd_num.png)
+
+    <GCaption>난수 예시 </GCaption>
+
+</TabPanel>
+<TabPanel header="난수에 따른 금리 시나리오 산출 예시  ">
+    ![SW](/esg/202503_scen_sto.png)
+
+    <GCaption>Hull-White 1Factor 모델을 이용한 확률론적시나리오 산출예시 K-ICS 2025.03</GCaption>
+</TabPanel>
+</TabView>
+</GCallout>
+
+
+## 6. 적정성 검증
+
+K-ICS에서는 보험회사가 산출한 확률론적 금리시나리오에 대한 모수적정성, 난수적정성, 결과적정성 검증 등 다음의 내용이 포함된 시나리오 유효성 검증보고서를 위험관리위원회에 보고하여야 하도록 규정하고 있다. 이를 통해 통제 가능하고 재현 가능한 시나리오 체계를 구축하여, 회사에서 자율적으로 산출한 시나리오의 적정성을 검증하여 신뢰성을 높이는 것이 목적이다.
+
+### 6.1. 모수 적정성
+
+_**모수는 최적해를 효율적으로 찾을 수 있는 알고리즘에 기반하여 산출되어야 한다.**_ ([4절 Cailibration](/ko/gesg/model/02-Hull-White#4-cailibration) 참조)
+      
+_**추정된 모수를 통해 산출한 모형가격과 시장가격의 차이가 최소화되어야 한다.**_
+  - –  시장에서 관측되는 스왑션 변동성을 이용해 산출한 ATM 스왑션 가격과 Hull-white 모형으로 산출한 ATM 스왑션 가격의 상대 오차의 제곱 합을 최소화하는 모수 세트를 산출하며, 시장가격과 모형가격과 차이를 모니터링하여 모형이 시장을 잘 설명하는지 확인한다. 
+
+    <Accordion activeIndex={[0]}>
+    <AccordionTab header="Illustration (산출예시)">
+
+      <TabView>
+      <TabPanel header="스왑션 변동성 곡면 비교 2403 ">
+        <G2Col>
+        <div>
+          ![aa](/esg/202403_market_vol.png)
+        </div>
+        <div>
+          ![aa](/esg/202403_imp_vol.png)
+        </div>
+        </G2Col>
+
+      <TabView>
+      <TabPanel header="swpnPriceAtm (%) ">
+          시장에서 관측되는 스왑션 변동성을 이용해 산출한 At the Money 스왑션 가격 (A)
+          |tenor<br/>\mat|1|2|3|5|7|10|
+          |---|---|---|---|---|---|---|
+          |1 |0.2625|	0.5107|	0.7530|	1.1926|	1.5863|	2.0747|
+          |2 |0.3462|	0.6922|	0.9930|	1.5988|	2.1085|	2.7910|
+          |3 |0.4193|	0.7867|	1.1626|	1.8361|	2.4006|	3.1740|
+          |5 |0.4884|	0.9483|	1.3439|	2.0371|	2.7006|	3.6331|
+          |7 |0.4656|	0.8829|	1.2911|	2.0495|	2.7735|	3.8772|
+          |10|0.4775|	0.9366|	1.3928|	2.2361|	3.0487|	4.1862|
+
+      </TabPanel>
+      <TabPanel header="swpnPrcHw (%) ">
+          Hull-white 모형으로 산출한 At the Money 스왑션 가격 (B)
+          |tenor<br/>\mat|1|2|3|5|7|10|
+          |---|---|---|---|---|---|---|
+          |1 |0.2625|	0.5122|	0.7487|	1.1865|	1.5791|	2.0999|
+          |2 |0.3506|	0.6833|	0.9998|	1.5817|	2.1084|	2.8011|
+          |3 |0.4055|	0.7907|	1.1555|	1.8289|	2.4391|	3.2374|
+          |5 |0.4661|	0.9075|	1.3267|	2.1043|	2.8023|	3.7194|
+          |7 |0.4611|	0.8992|	1.3155|	2.0837|	2.7738|	3.6906|
+          |10|0.4943|	0.9632|	1.4076|	2.2296|	2.9754|	3.9649|
+
+      </TabPanel>
+      <TabPanel header="상대 오차의 제곱 합(%) ">
+          $(\dfrac{A-B}{A})^2$ : 시장가격과 모형가격의 상대 오차의 제곱 합(Sum of Squared Relative Errors, SSRE)  
+          |tenor<br/>\mat|1|2|3|5|7|10|
+          |---|---|---|---|---|---|---|
+          |1 |0.0000|0.0008|0.0033|0.0026|0.0020|0.0148|
+          |2 |0.0159|0.0165|0.0048|0.0115|0.0000|0.0013|
+          |3 |0.1084|0.0027|0.0038|0.0015|0.0258|0.0400|
+          |5 |0.2080|0.1848|0.0165|0.1087|0.1416|0.0563|
+          |7 |0.0091|0.0344|0.0356|0.0279|0.0000|0.2315|
+          |10|0.1239|0.0802|0.0113|0.0008|0.0578|0.2794|
+            
+        - – 최대오차 : 0.2794%
+        - – 평균오차 : 0.0518%
+
+      </TabPanel>
+      </TabView>
+
+      </TabPanel>
+      <TabPanel header="스왑션 변동성 곡면 비교 2503 ">
+        <G2Col>
+        <div>
+          ![aa](/esg/202503_market_vol.png)
+        </div>
+        <div>
+          ![aa](/esg/202503_imp_vol.png)
+        </div>
+        </G2Col>
+
+      <TabView>
+      <TabPanel header="swpnPriceAtm (%) ">
+          시장에서 관측되는 스왑션 변동성을 이용해 산출한 At the Money 스왑션 가격 (A)
+          |tenor<br/>\mat|1|2|3|5|7|10|
+          |---|---|---|---|---|---|---|
+          |1 |0.2210|0.4288|0.6815|1.1357|1.5915|2.0783|
+          |2 |0.2697|0.5967|0.8853|1.5914|2.1188|2.7369|
+          |3 |0.3761|0.7049|1.0941|1.8899|2.4693|3.1815|
+          |5 |0.4540|0.9300|1.3557|2.1264|2.7408|3.6829|
+          |7 |0.4432|0.8606|1.2579|2.0133|2.7631|3.9667|
+          |10|0.3806|0.7638|1.1841|2.0867|3.0694|4.4935|
+
+      </TabPanel>
+      <TabPanel header="swpnPrcHw (%) ">
+          Hull-white 모형으로 산출한 At the Money 스왑션 가격 (B)
+          |tenor<br/>\mat|1|2|3|5|7|10|
+          |---|---|---|---|---|---|---|
+          |1 |0.2312|0.4568|0.6754|1.0954|1.4883|2.0483|
+          |2 |0.3052|0.6019|0.8916|1.4412|1.9631|2.7053|
+          |3 |0.3740|0.7383|1.0912|1.7645|2.4073|3.3200|
+          |5 |0.4447|0.8753|1.2939|2.1006|2.8712|3.9593|
+          |7 |0.4334|0.8551|1.2663|2.0602|2.8170|3.8760|
+          |10|0.4218|0.8336|1.2357|2.0106|2.7434|3.7681|
+
+      </TabPanel>
+      <TabPanel header="상대 오차의 제곱 합 (%) ">
+          $(\dfrac{A-B}{A})^2$ : 시장가격과 모형가격의 상대 오차의 제곱 합 (Sum of Squared Relative Errors, SSRE) (%)
+          |tenor<br/>\mat|1|2|3|5|7|10|
+          |---|---|---|---|---|---|---|
+          |1 |0.2134|0.4250|0.0079|0.1264|0.4198|0.0209|
+          |2 |1.7344|0.0077|0.0050|0.8910|0.5400|0.0134|
+          |3 |0.0031|0.2254|0.0007|0.4402|0.0631|0.1896|
+          |5 |0.0419|0.3462|0.2077|0.0147|0.2265|0.5629|
+          |7 |0.0484|0.0040|0.0044|0.0541|0.0381|0.0523|
+          |10|1.1744|0.8354|0.1904|0.1329|1.1285|2.6062|
+            
+        - – 최대오차 : 2.6062%
+        - – 평균오차 : 0.3610%
+
+      </TabPanel>
+      </TabView>
+            
+      </TabPanel>
+      </TabView>
+
+    </AccordionTab>
+    </Accordion>
+
+_**시장데이터 일부를 변경하여 모수를 추정하더라도 모수가 안정적로 산출되어야 한다.**_
+- – **모수 유효성 검증**
+    - • 검증방법 : 변동성 모수의 초기값을 (0001, 0.01, 0.02, 0.03, 0.04, 0.05)로 변경하여 추정한 모수가 안정적으로 동일한 해를 찾는지 검증 
+    - • 검증목적 : localy minimum이 아닌 global minimum을 찾는지 검증. cost 함수가 급격히 변하는 구간이 존재하거나, 초기값에 따라 localy minimum에 빠지는 경우가 발생할 수 있음.
+    - • 검증결과 : 모수 추정 결과가 초기값에 관계없이 안정적으로 동일한 해를 찾는지 확인.
+- – **모수 안정성 검증**
+    - • 검증방법 : 금리 $\pm 1bp$ 및 스왑션변동성 $\pm 1bp$를 변경하여 모수를 재추정하고, 모수의 변화가 크지 않은지 검증
+    - • 검증목적 : 금리 모형이 현재 시장의 기대를 설명하는 모형이기 때문에 금리 및 변동성의 작은 변화에도 모수가 안정적으로 추정되어야 함. 모형이 특정 시점의 시장데이터에 과적합된 경우, 시장데이터의 작은 변동에도 모수가 크게 바뀔 수 있음.
+    - • 검증결과 : 모수의 변화가 크지 않으면 모수 적정성 인정.
+
+   <Accordion activeIndex={[0]}>
+   <AccordionTab header="Illustration (산출예시) ">
+      <TabView>
+      <TabPanel header="변동성 모수산출 유효성검증 ">
+            |구분|1Y|2Y|3Y|5Y|7Y|10Y|
+            |:--:|--|--|--|--|--|--|
+            |BASE      |0.69878	|0.67744	|0.65665	|0.62742	|0.45207	|0.62957|
+            |INIT 0.001|0.69878	|0.67744	|0.65664	|0.62742	|0.45207	|0.62957|
+            |INIT 0.01 |0.69878	|0.67744	|0.65664	|0.62742	|0.45207	|0.62957|
+            |INIT 0.02 |0.69878	|0.67744	|0.65664	|0.62742	|0.45207	|0.62957|
+            |INIT 0.03 |0.69878	|0.67744	|0.65664	|0.62742	|0.45207	|0.62957|
+            |INIT 0.04 |0.69878	|0.67744	|0.65664	|0.62742	|0.45207	|0.62957|
+            |INIT 0.05 |0.69878	|0.67744	|0.65664	|0.62742	|0.45207	|0.62957|
+
+      </TabPanel>
+      <TabPanel header="변동성 모수산출 안정성 검증 ">
+              |구분|1Y|2Y|3Y|5Y|7Y|10Y|
+              |:--:|--|--|--|--|--|--|
+              |base    |0.69878	|0.67744	|0.65665	|0.62742	|0.45207	|0.62957|
+              |spot+1bp|0.70079	|0.67939	|0.65840	|0.62910	|0.45362	|0.63131|
+              |spot-1bp|0.69676	|0.67549	|0.65489	|0.62574	|0.45052	|0.62783|
+              |swpn+1bp|0.69910	|0.67777	|0.65699	|0.62777	|0.45236	|0.62991|
+              |swpn-1bp|0.69878	|0.67744	|0.65665	|0.62742	|0.45207	|0.62957|
+
+      </TabPanel>
+      </TabView>        
+   </AccordionTab>
+   </Accordion>
+
+_**블랙 변동성과 노말 변동성 중 금리 환경 및 시나리오 추정 등에 적합한 데이터 사용, 변경이 있는 경우 변경내역, 변경사유 등을 명시하고, 변경 전과 후 기준에 따른 결과 등이 분석해야 한다.**_
+
+### 6.2. 난수 적정성
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="K-ICS 난수 적정성 검증 ">
+  시나리오간 정규성, 경과기간별 독립성, 난수 고정 사용 여부 등을 검증하여야 한다.
+  - ㈀ 개별 시나리오에 적용되는 난수는 경과기간별로 독립적이어야 한다.
+  - ㈁ 각 시나리오에 적용되는 난수의 분포는 매 경과기간마다 정규성을 만족하여야 한다.
+  - ㈂ 난수는 최소 10개 이상의 난수 집합을 생성한 후, 그 중 결과적정성이 가장 우월한 난수(확률론 금리 시나리오 평균과 수익률 곡선의 편차가 가장 작은 난수 집합)를 선정하고, 매 평가시점마다 동일하게 적용하여야 한다. 다만, 결과적정성 검증 기준을 충족하지 못하는 경우에만 난수를 변경할 수 있다.
+</AccordionTab>
+</Accordion>
+
+  Hull-White 모형에서 난수는 이자율의 불확실성을 모델링하는 요소로, 금리 경로의 무작위성을 생성하는데 사용된다. 난수로 확률 충격을 발생시키고 이를 누적해서 금리 경로를 생성한다. 시뮬레이션 결과의 신뢰도 확보와 검증의 효율성을 위해 다음과 같은 난수의 특성을 만족해야 한다. 
+
+  |특성|설명|
+  |:--:|--|
+  |독립성 (Independence)|- 각 난수는 서로 독립적이어야 하며, 이전 난수의 값에 영향을 받지 않아야 한다.|
+  |정규성 (Normality)| - 표준정규분포 N(0,1)을 따르는 난수여야 한다. <br/> - 비대칭성, 꼬리 왜곡 (tail distortion)이 없어야 한다.|
+  |재현가능성 (Reproducibilty)| - 시드를 고정하면 동일한 시뮬레이션 경로를 다시 생성할 수 있어야 한다. <br/>- 검증 및 테스트를 위해 동일한 난수 생성이 가능해야 한다. |
+  |균등성 (Uniform)|- 난수는 균등하게 분포되어야 하며, 특정 값에 편향되지 않아야 한다.|
+
+일반적으로 사용하는 난수는 의사 난수(Pseudo Random Number)를 사용한다. 의사난수는 수학적 알고리즘으로 난수처럼 보이는 수열을 생성하는 방식이다. Seed 값에 따라 항상 동일한 난수열을 재현할 수 있다. 
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="메르센 트위스터 (Mersenne Twister) 모형 ">
+    가장 널리 사용되는 의사난수 생성기 중 하나인 메르센 트위스터(Mersenne Twister, MT)는 시뮬레이션, 몬테카를로 방법 등에서 폭넓게 사용된다. 
+
+    MT19937 버전의 주기는 $2^{19937}-1$로 매우 긴 주기를 가지고 있다. 메르센 수 $2^p-1$ 에서 이름을 따왔다. 시드 값이 동일하면 항상 동일한 수열을 재현할 수 있으며, 균등한 분포 등 난수의 통계적 특성을 만족한다. 
+</AccordionTab>
+</Accordion>
+
+_**개별 시나리오에 적용되는 난수는 경과기간별로 독립적이어야 한다.**_
+  - – 시뮬레이션의 각 시계열 단계($\Delta t$)에서 생성되는 난수($\epsilon_t$)가 서로 독립적이어야 한다. 즉 현재시점의 금리변화에 사용된 난수가 다음 시점의 금리변화에 사용될 난수에 영향을 미치지 않아야 하는 것을 의미한다.  
+  - – Runs Test :  
+  생성된 난수 수열의 무작위성과 독립성을 평가하는 비모수통계 검정방법으로, 난수 수열에 특정 패턴이나 추세가 존재하는지 확인하는 방법이다. '런(Run)은 어떤 기준을 만족하는 연속된 동일한 결과들의 시퀀스를 의미한다. 예를들어 증가/감소 기준에 따라 런을 구분한다면, 각 숫자가 바로 이전 숫자보다 증가하는지, 감소하는지, 또는 동일한지 여부를 기준으로 런을 관찰한다. 무작위 수열이라면 '런'의 길이와 '런의 총 갯수'가 특정 통계적 분포를 따라야 한다. 런의 총 갯수가 너무 적으면 난수 수열에 장기적인 추세나 패턴이 존재할 가능성이 높음을 의미한다.(독립성 위배) 반대로 런의 총 갯수가 너무 많으면 난수 수열이 너무 자주 바뀌는 경향을 의미하며, 인위적으로 조작된 것처럼 보일 수 있다. (독립성 위배) 
+  - – Scatter Plot (산점도 시각화) :  
+  특정한 패턴 없이 평면 전체에 고르게 퍼진 분포를 보여야 하며, 특정 선형이나 곡선 패턴이 관찰되면 독립성이 떨어진다고 판단할 수 있음. 
+
+_**각 시나리오에 적용되는 난수의 분포는 매 경과기간마다 정규성을 만족하여야 한다.**_
+  - – 각 시계열 단계($\Delta t$)에서 생성되어 시뮬레이션에 사용된 $\epsilon_t$가 표준정규분포 $N(0,1)$을 따라야 한다. 
+  - – Q-Q 플롯 (Quantile-Quantile Plot) :  
+      생성된 난수($\epsilon_t$)들을 오름차순으로 정렬한 후, 각 난수의 분위수를 이론적인 표준정규분포의 분위수와 비교하여 산점도를 그린다. 난수들이 정규분포를 따른다면 점들이 $y=x$ 직선 주변에 밀집되어 나타나야 한다. 직선에서 벗어나면 정규성을 만족하지 않는다는 의미이다. 
+  - – Jarque-Bera Test :  
+      난수 집합의 왜도와 첨도를 계산하여 Jarque-Bera 검정을 테스트한다. P-Value가 유의수준보다 커서 귀무가설 (정규성)을 기각하지 못해야 한다. 
+  - – Kolmogorov-Smirnov Test :  
+      난수의 경험적 누적분포함수와 표준정규분포의 이론적 CDF 사이의 최대 차이를 검정하는 방법이다. P-Value가 유의수준보다 커서 귀무가설 (정규성)을 기각하지 못해야 한다. 
+
+
+
+_**난수는 최소 10개 이상의 난수 집합을 생성한 후, 그 중 결과적정성이 가장 우월한 난수<GTooltipIcon desc="확률론 금리 시나리오 평균과 수익률 곡선의 편차가 가장 작은 난수 집합"/>를 선정하고, 매 평가시점마다 동일하게 적용하여야 한다. 다만, 결과적정성 검증 기준을 충족하지 못하는 경우에만 난수를 변경할 수 있다.**_
+
+### 6.3. 결과 적정성
+  
+_**확률론적 금리 시나리오의 평균이 수익률 곡선과 통계적으로 일치하여야 한다.**_
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="Martingale Test (마팅게일 테스트)">
+    마팅게일은 공정한 게임을 수학적으로 정의한 확률과정이다. 즉, 어떤 확률번수 수열 $X_t$가 마팅게일이라는 것은 현재까지 알고 있는 모든 정보($F_t$)를 고려했을 때, 미래의 값이 현재 값과 평균적으로 같을 것으로 기대된다는 것을 의미한다. 
+
+    $$
+    E[X_{t+1}|F_t] = X_t
+    $$
+
+    무위험 중립측도 (Q-measure)에서 자산($X_t$)의 할인된 가격이 마팅게일이 되어야 한다. 즉, 무위험 차익거래 기회가 존재하지 않는 세상에서는 미래의 할인된 자산 가격에 대한 현재시점의 기대값은 현재 할인된 자산의 가격과 동일하다는 의미이다.
+    $$
+    E^Q[X_T e^{-\int_0^T r_s ds}|F_t] = X_t e^{-\int_0^t r_s ds}
+    $$
+
+    Hull-White 모델처럼 평균회귀 특성을 갖는 금리 모델에서는 금리가 장기평균보다 낮으면 상승할 것으로 기대하고, 높으면 하락할 것으로 기대한다. 아는 $E^Q[r_{t+k}|F_t]\ne r_t$ 로, 금리 자체는 마팅게일이 아님을 의미한다.      
+</AccordionTab>
+</Accordion>
+
+  마팅게일 테스트는 자산의 가격에 대한 특성이므로, 시뮬레이션을 통해 산출된 미래 특정 만기 무이표채 현가들의 평균 ($\bar X$)과, 현재 시장의 수익률 곡선에서 결정론적으로 계산된 동일 만기 무이표채 현가($\mu$)가 통계적으로 일치하는지를 검증한다. 이는 $\mu$ 가 ($\bar X$)의 95% 신뢰구간 $$(\bar X-1.96SE, \bar X +1.96SE)$$ 내에 위치하는지 확인함으로써 판단할 수 있다. ($$SE$$ : 시나리오 할인 곡선의 무이표채 현가의 표준오차)
+
+<GCallout severity="warn" title ="Illustration">
+    ![SW](/esg/2503_martingale_test.png)
+
+    <GCaption>마팅게일 테스트산출 예시 2025.03</GCaption>
+</GCallout>
+
