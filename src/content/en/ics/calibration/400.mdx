@@ -68,7 +68,7 @@ title: 4. Credit Risk
 </GMath>
   <GCmt severity="info">
     - • $r$ is the bond yield, and 
-    - • $PD*$ is the risk-neutral probability of default from time $H$ to time $T$. The risk-neutral probability of default is derived from the real-world probability of default via the relation:  
+    - • $PD*$ is the risk-neutral probability of default from time $H$ to time $T$. The risk-neutral probability of default is derived from the real-world probability of default via the relation:
     $PD^* = N(N^{-1}(PD))+ \lambda \rho \sqrt{T-H}$
     - • $\lambda$ : market price of risk
     - • $\rho$ : 시스템 위험(systematic risk)에 대한 민감도, 즉 전체 경제상황(공통요인)에 따라 개별 채무자의 부도확률이 얼마나 영향을 받는지를 나타내는 상관계수
@@ -77,7 +77,7 @@ title: 4. Credit Risk
 184. The stress probability of default between times $H$ and $T$ is given by:
 <GMath title="시점 H~T 사이의 real world SPD" severity="info">
     - $Pr(logA_T < logB_T)$
-   
+ 
   $$
     = N\Bigg(\cfrac{\sqrt{T} N^{-1}(PD_T) - \sqrt{H}\sqrt{\rho}N^{-1}(\alpha) - \sqrt{H}\sqrt{1-\rho}Z_H}{\sqrt{T-H}} \Bigg)
   $$
@@ -127,7 +127,7 @@ $$
     - c. The market price of risk<GTooltipIcon desc="This assumption is taken from confidential analysis used in the derivation of the Basel IRB approach."/>, $\lambda$ is given by:
     $$
       \lambda = \cfrac{0.40625 \times (T-H)^{0.0093}}{\sqrt{\rho}}
-    $$  
+    $$
     - d. As noted above, LGD is set as a constant of 45%.
 
 

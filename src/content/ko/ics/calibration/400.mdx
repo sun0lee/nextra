@@ -15,7 +15,7 @@ title: 4. 신용리스크
 
 ## 4.3 위험계수 산출
 ### 4.3.1 신용리스크 위험계수 산출
-173. 신용리스크 위험액은 특정 순익스포져 금액에 대해 규정된 위험계수를 적용하여 결정됨. 신용리스크 위험계수는 다음과 같은 익스포져 분류에 대해 ICS 등급(Rating Category, RC) 및 만기에 따라 산출됨:  
+173. 신용리스크 위험액은 특정 순익스포져 금액에 대해 규정된 위험계수를 적용하여 결정됨. 신용리스크 위험계수는 다음과 같은 익스포져 분류에 대해 ICS 등급(Rating Category, RC) 및 만기에 따라 산출됨:
     - a. 공공부문 
     - b. 일반기업 및 재보험 
     - c. 인프라 
@@ -70,8 +70,8 @@ title: 4. 신용리스크
   $$
 </GMath>
   <GCmt severity="fino">
-    - • $r$ 채권수익률,  
-    - • $PD^*$는 시점 $H$부터 $T$까지의 위험중립 부도확률이며, 위험중립 부도확률($PD^*$)은 실제 세계(real-world) 부도확률 $PD$로부터 아래 관계식을 통해 도출됨:  
+    - • $r$ 채권수익률,
+    - • $PD^*$는 시점 $H$부터 $T$까지의 위험중립 부도확률이며, 위험중립 부도확률($PD^*$)은 실제 세계(real-world) 부도확률 $PD$로부터 아래 관계식을 통해 도출됨:
     $PD^* = N(N^{-1}(PD))+ \lambda \rho \sqrt{T-H}$
     - • $\lambda$ : 시장위험가격(market price of risk)을 의미 (시장의 위험 프리미엄 계수)
     - • $\rho$ : 시스템 위험(systematic risk)에 대한 민감도, 즉 전체 경제상황(공통요인)에 따라 개별 채무자의 부도확률이 얼마나 영향을 받는지를 나타내는 상관계수
@@ -80,7 +80,7 @@ title: 4. 신용리스크
 184. 시점 $H$~$T$ 사이의 스트레스 부도확률은 아래와 같음:
 <GMath title="시점 H~T 사이의 real world SPD" severity="info">
     - $Pr(logA_T < logB_T)$
-   
+ 
   $$
     = N\Bigg(\cfrac{\sqrt{T} N^{-1}(PD_T) - \sqrt{H}\sqrt{\rho}N^{-1}(\alpha) - \sqrt{H}\sqrt{1-\rho}Z_H}{\sqrt{T-H}} \Bigg)
   $$
@@ -134,7 +134,7 @@ $$
     - c. 시장위험가격 $\lambda$는 다음과 같음:<GTooltipIcon desc=" Basel IRB 산출근거로부터 도출된 내부 분석 결과를 사용한 가정 (This assumption is taken from confidential analysis used in the derivation of the Basel IRB approach.)"/>,
     $$
       \lambda = \cfrac{0.40625 \times (T-H)^{0.0093}}{\sqrt{\rho}}
-    $$  
+    $$
     - d. 위에서 언급했듯이 LGD는 45% 고정값으로 가정함
 
 
