@@ -1,14 +1,13 @@
 ---
 title: "Smith-Wilson 방법론"
 ---
+# Smith-Wilson 방법론
 
-
-# Smith-Wilson 모델
-
+<GCallout severity="warn" title ="Illustration">
     <GImg caption = "Smith-Wilson 모델을 이용한 할인율 산출예시 K-ICS 2021.12" maxWidth="700px">
     ![SW](/esg/SW_Figure_3_202112.png)
     </GImg>
-
+</GCallout>
 
 ## 1. 이론적 배경 
 Smith-Wilson 모델은 2000년대 초반 Andrew Smith와 Tim Wilson이 개발한 금리 커브 보간 및 외삽 방법론임. 이 방법론은 관측 가능한 시장금리는 그대로 쓰고, 그 이후 구간은 ’장기 금리(LTFR)’로 부드럽게 수렴시키는 곡선을 만들어서 할인율을 만드는 방법으로, 특히 유럽 보험 규제인 Solvency II에서 EIOPA <GTooltipIcon desc="European Insurance and Occupational Pensions Authority"/>가 채택해 표준 방법론으로 사용하고 있음. K-ICS에서도 보험부채 평가를 위한 할인율 산출 시 사용되고 있음. 
@@ -30,10 +29,10 @@ $$
 - • $u_j$: 관찰된 시장 데이터의 만기
 </GCmt>
 
-<GCallout severity="warn" title ="Smith-Wilson 방법론의 아이디어">
-Smith-Wilson 방법론의 핵심 아이디어는 금리 곡선$P(t)$을 두 가지 주요 구성 요소로 나누는 것.
-1. **장기수렴점** : $e^{-LTFR·t}$ : LTFR(Long Term Forward Rate)로 수렴하는 장기 균형 성분
-2. **시장일관성** : $ \sum_{j=1}^N \zeta_j · W(t,u_j)$ : 관찰된 시장 데이터와 일치하도록 하는 조정 성분
+<GCallout severity="info" title ="Smith-Wilson 방법론의 아이디어">
+  Smith-Wilson 방법론의 핵심 아이디어는 금리 곡선$P(t)$을 두 가지 주요 구성 요소로 나누는 것.
+  1. **장기수렴점** : $e^{-LTFR·t}$ : LTFR(Long Term Forward Rate)로 수렴하는 장기 균형 성분
+  2. **시장일관성** : $ \sum_{j=1}^N \zeta_j · W(t,u_j)$ : 관찰된 시장 데이터와 일치하도록 하는 조정 성분
 </GCallout>
 
 이러한 접근법은 장기 금리의 예측 가능성을 높이고, 시장에서 관찰된 금리와의 일치를 보장함. Smith-Wilson 모델은 장기 금리가 충분히 관찰되지 않는 시장에서 유용함. (ex. 보험사의 장기 부채 평가 시 필요한 할인율 구조를 생성 등)
@@ -72,138 +71,138 @@ Smith-Wilson 모델 적용을 위해 아래과 같은 주요 파라미터들을 
 
 
 ## 4. Calibration
-<GCallout severity="warn" title =" Calibration 요약">
-<TabView>
-<TabPanel header="input data ">
-    - 무위험 금리 지표 선택(국채 수익률, OIS 등)
-    - 신용 및 유동성 리스크 조정
-    - 만기별 금리 데이터 수집
+<GCallout severity="info" title =" Calibration 요약">
+    <TabView>
+    <TabPanel header="input data ">
+        - 무위험 금리 지표 선택(국채 수익률, OIS 등)
+        - 신용 및 유동성 리스크 조정
+        - 만기별 금리 데이터 수집
 
-</TabPanel>
-<TabPanel header="➔초기 파라미터 ">
-    - LTFR 값 설정(규제 지침 또는 경제적 분석에 따름)
-    - $\alpha$ 파라미터 초기값 설정 
-      - • K-ICS : 최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값
-    - 관찰 만기 포인트 선택(어떤 만기의 시장 데이터를 사용할지)
+    </TabPanel>
+    <TabPanel header="➔초기 파라미터 ">
+        - LTFR 값 설정(규제 지침 또는 경제적 분석에 따름)
+        - $\alpha$ 파라미터 초기값 설정 
+          - • K-ICS : 최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값
+        - 관찰 만기 포인트 선택(어떤 만기의 시장 데이터를 사용할지)
 
-</TabPanel>
-<TabPanel header="➔가중치(ζ) 계산 ">
-    - 관찰된 시장 금리와 정확히 일치하도록 선형 방정식 시스템을 풀어 가중치 계산
-    - 행렬 형태로는 $\zeta = H^{-1} \cdot (\mu - LTFR)$로 표현
-    - 여기서 $H$는 Wilson 함수의 행렬, $\mu$는 관찰된 금리
+    </TabPanel>
+    <TabPanel header="➔가중치(ζ) 계산 ">
+        - 관찰된 시장 금리와 정확히 일치하도록 선형 방정식 시스템을 풀어 가중치 계산
+        - 행렬 형태로는 $\zeta = H^{-1} \cdot (\mu - LTFR)$로 표현
+        - 여기서 $H$는 Wilson 함수의 행렬, $\mu$는 관찰된 금리
 
-</TabPanel>
-<TabPanel header="➔결과 검증 및 조정 ">
-    - 생성된 금리 곡선의 경제적 합리성 검토
-    - 필요시 $\alpha$ 파라미터 조정하여 수렴 특성 최적화
-    - 특이점이나 비현실적 형태 확인
+    </TabPanel>
+    <TabPanel header="➔결과 검증 및 조정 ">
+        - 생성된 금리 곡선의 경제적 합리성 검토
+        - 필요시 $\alpha$ 파라미터 조정하여 수렴 특성 최적화
+        - 특이점이나 비현실적 형태 확인
 
-</TabPanel>
-<TabPanel header="➔민감도 분석 ">
-    - $LTFR$ 및 $\alpha$ 값 변화에 따른 금리 곡선 변화 검토
-    - 관찰 데이터 변화에 대한 모델의 안정성 평가
+    </TabPanel>
+    <TabPanel header="➔민감도 분석 ">
+        - $LTFR$ 및 $\alpha$ 값 변화에 따른 금리 곡선 변화 검토
+        - 관찰 데이터 변화에 대한 모델의 안정성 평가
 
-</TabPanel>
-</TabView>
+    </TabPanel>
+    </TabView>
 </GCallout>
 
 ### 4.1. $\alpha$ finding
 
     <GCallout severity="success" title ="K-ICS에서 부채평가 할인율 산출 시 alpha">
-  
-    speed of convergence (수렴속도, $\alpha$)는 참고 논문에서는 상수를 가정하였으나, K-ICS에서는 최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값을 산출하여 적용하도록 함.
+      
+        speed of convergence (수렴속도, $\alpha$)는 참고 논문에서는 상수를 가정하였으나, K-ICS에서는 최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값을 산출하여 적용하도록 함.
 
-      <Accordion activeIndex={[0]}>
-      <AccordionTab header="smithWilsonAlphaFinding() ">
-      ```java filename="SmithWilsonKics.java"
-        private void smithWilsonAlphaFinding() {
-        for (int i = 0; i < this.alphaItrNum; i++) {
-          initAlpha(i);
-          updateZetaAndKappa(this.alphaApplied);
+          <Accordion activeIndex={[0]}>
+          <AccordionTab header="smithWilsonAlphaFinding() ">
+          ```java filename="SmithWilsonKics.java"
+            private void smithWilsonAlphaFinding() {
+            for (int i = 0; i < this.alphaItrNum; i++) {
+              initAlpha(i);
+              updateZetaAndKappa(this.alphaApplied);
 
-          if (i == 0) {
-            if (isConverged(this.alphaFwd)) break;
-          } else {
-            adjustAlpha(this.alphaFwd);
+              if (i == 0) {
+                if (isConverged(this.alphaFwd)) break;
+              } else {
+                adjustAlpha(this.alphaFwd);
+              }
+            }
           }
-        }
-      }
-      ```      
-      <TabView>
-      <TabPanel header="initAlpha() ">
-      ```java
-        private void initAlpha(int iteration) {
-        if (iteration == 0) {
-          this.alphaApplied = 0.001;
-          this.alphaDApplied = (1.0 - 0.0001) / 4.0;
-        } else if (iteration == 1) {
-          this.alphaApplied = (1.0 + 0.0001) / 2.0;
-        }
-      }
-      ```
-      </TabPanel>
-      <TabPanel header="updateZetaAndKappa() ">
-      ```java
-        private void updateZetaAndKappa(double alpha) {
-        RealMatrix tenorCol = MatrixUtils.createColumnRealMatrix(this.tenorYearFrac);
-        RealMatrix weight = MatrixUtils.createRealMatrix(
-          smithWilsonWeight(this.tenorYearFrac, this.tenorYearFrac, alpha, this.ltfrCont)
-        );
-        RealMatrix invWeight = MatrixUtils.inverse(weight);
-
-        double[] pVal = new double[this.tenorYearFrac.length];
-        double[] mean = new double[this.tenorYearFrac.length];
-        double[] loss = new double[this.tenorYearFrac.length];
-        double[] sinh = new double[this.tenorYearFrac.length];
-
-        for (int j = 0; j < this.tenorYearFrac.length; j++) {
-          pVal[j] = zeroBondUnitPrice(this.iRateBase[j], this.tenorYearFrac[j]);
-          mean[j] = zeroBondUnitPrice(this.ltfrCont, this.tenorYearFrac[j]);
-          loss[j] = smithWilsonLoss(this.iRateBase[j], this.tenorYearFrac[j], this.ltfrCont);
-          sinh[j] = Math.sinh(alpha * this.tenorYearFrac[j]);
-        }
-
-        RealMatrix lossCol = MatrixUtils.createColumnRealMatrix(loss);
-        RealMatrix zetaCol = invWeight.multiply(lossCol);
-        RealMatrix sinhCol = MatrixUtils.createColumnRealMatrix(sinh);
-        RealMatrix qMatDiag = MatrixUtils.createRealDiagonalMatrix(mean);
-
-        double kappaNum = tenorCol.transpose().multiply(qMatDiag).multiply(zetaCol).scalarMultiply(alpha).scalarAdd(1.0).getEntry(0, 0);
-        double kappaDenom = sinhCol.transpose().multiply(qMatDiag).multiply(zetaCol).getEntry(0, 0);
-
-        this.kappaApplied = kappaNum / (Math.abs(kappaDenom) < ZERO_DOUBLE ? 1.0 : kappaDenom);
-        this.alphaPp = Math.exp(-this.ltfrCont * this.ltfrT)* (kappaNum - Math.exp(-alpha * this.ltfrT) * kappaDenom);
-        this.alphaDpp = -this.ltfrCont * this.alphaPp+ Math.exp(-this.ltfrCont * this.ltfrT)* alpha * Math.exp(-alpha * this.ltfrT) * kappaDenom;
-        this.alphaFwd = -1.0 / this.alphaPp * this.alphaDpp;
-        this.zetaColumn = zetaCol;
-      }
-      ```
-      </TabPanel>
-      <TabPanel header="isConverged() ">
-
-        ```java
-        private boolean isConverged(double alphaFwd) {
-          return Math.abs(Math.exp(this.ltfrCont) - Math.exp(alphaFwd)) < ltfrEpsilon;
-        }
-        ```
-      최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값 alpha를 찾기 
-      </TabPanel>
-      <TabPanel header="adjustAlpha() ">
-        ```java
-        private void adjustAlpha(double alphaFwd) {
-          if (Math.abs(Math.exp(alphaFwd) - Math.exp(this.ltfrCont)) > ltfrEpsilon) {
-            this.alphaApplied += this.alphaDApplied;
-          } else {
-            this.alphaApplied -= this.alphaDApplied;
+          ```      
+          <TabView>
+          <TabPanel header="initAlpha() ">
+          ```java
+            private void initAlpha(int iteration) {
+            if (iteration == 0) {
+              this.alphaApplied = 0.001;
+              this.alphaDApplied = (1.0 - 0.0001) / 4.0;
+            } else if (iteration == 1) {
+              this.alphaApplied = (1.0 + 0.0001) / 2.0;
+            }
           }
-          this.alphaDApplied *= 0.5;
-        }
-        ```
-      </TabPanel>
-      </TabView>
+          ```
+          </TabPanel>
+          <TabPanel header="updateZetaAndKappa() ">
+          ```java
+            private void updateZetaAndKappa(double alpha) {
+            RealMatrix tenorCol = MatrixUtils.createColumnRealMatrix(this.tenorYearFrac);
+            RealMatrix weight = MatrixUtils.createRealMatrix(
+              smithWilsonWeight(this.tenorYearFrac, this.tenorYearFrac, alpha, this.ltfrCont)
+            );
+            RealMatrix invWeight = MatrixUtils.inverse(weight);
 
-      </AccordionTab>
-      </Accordion>
+            double[] pVal = new double[this.tenorYearFrac.length];
+            double[] mean = new double[this.tenorYearFrac.length];
+            double[] loss = new double[this.tenorYearFrac.length];
+            double[] sinh = new double[this.tenorYearFrac.length];
+
+            for (int j = 0; j < this.tenorYearFrac.length; j++) {
+              pVal[j] = zeroBondUnitPrice(this.iRateBase[j], this.tenorYearFrac[j]);
+              mean[j] = zeroBondUnitPrice(this.ltfrCont, this.tenorYearFrac[j]);
+              loss[j] = smithWilsonLoss(this.iRateBase[j], this.tenorYearFrac[j], this.ltfrCont);
+              sinh[j] = Math.sinh(alpha * this.tenorYearFrac[j]);
+            }
+
+            RealMatrix lossCol = MatrixUtils.createColumnRealMatrix(loss);
+            RealMatrix zetaCol = invWeight.multiply(lossCol);
+            RealMatrix sinhCol = MatrixUtils.createColumnRealMatrix(sinh);
+            RealMatrix qMatDiag = MatrixUtils.createRealDiagonalMatrix(mean);
+
+            double kappaNum = tenorCol.transpose().multiply(qMatDiag).multiply(zetaCol).scalarMultiply(alpha).scalarAdd(1.0).getEntry(0, 0);
+            double kappaDenom = sinhCol.transpose().multiply(qMatDiag).multiply(zetaCol).getEntry(0, 0);
+
+            this.kappaApplied = kappaNum / (Math.abs(kappaDenom) < ZERO_DOUBLE ? 1.0 : kappaDenom);
+            this.alphaPp = Math.exp(-this.ltfrCont * this.ltfrT)* (kappaNum - Math.exp(-alpha * this.ltfrT) * kappaDenom);
+            this.alphaDpp = -this.ltfrCont * this.alphaPp+ Math.exp(-this.ltfrCont * this.ltfrT)* alpha * Math.exp(-alpha * this.ltfrT) * kappaDenom;
+            this.alphaFwd = -1.0 / this.alphaPp * this.alphaDpp;
+            this.zetaColumn = zetaCol;
+          }
+          ```
+          </TabPanel>
+          <TabPanel header="isConverged() ">
+
+            ```java
+            private boolean isConverged(double alphaFwd) {
+              return Math.abs(Math.exp(this.ltfrCont) - Math.exp(alphaFwd)) < ltfrEpsilon;
+            }
+            ```
+          최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값 alpha를 찾기 
+          </TabPanel>
+          <TabPanel header="adjustAlpha() ">
+            ```java
+            private void adjustAlpha(double alphaFwd) {
+              if (Math.abs(Math.exp(alphaFwd) - Math.exp(this.ltfrCont)) > ltfrEpsilon) {
+                this.alphaApplied += this.alphaDApplied;
+              } else {
+                this.alphaApplied -= this.alphaDApplied;
+              }
+              this.alphaDApplied *= 0.5;
+            }
+            ```
+          </TabPanel>
+          </TabView>
+
+          </AccordionTab>
+          </Accordion>
 
     </GCallout>
 
@@ -211,8 +210,6 @@ Smith-Wilson 모델 적용을 위해 아래과 같은 주요 파라미터들을 
 
 <TabView>
 <TabPanel header="1) with Zero Coupon Bonds ">
-
-      ![aa](/esg/SW_Figure_2.png)
 
     $t$시점의 단일현금흐름으로 구성된 자산의 현재 시장가치는 관측된 시장 금리에 수렴하는 할인율을 통해 계산된 현재 가치와 같음.
     장기적으로, forward 금리 곡선은 LTFR로 점차 수렴하게 되며, t->$\infin$ 일 때, 조정항(Correction)은 0에 수렴함.
@@ -284,11 +281,6 @@ Smith-Wilson 모델 적용을 위해 아래과 같은 주요 파라미터들을 
 </TabPanel>
 <TabPanel header="2) with Assets generating multiple CF ">
     만기별 무이표채가 아닌 여러 개의 현금흐름으로 구성된 채권의 시장가격을 알 때, 이를 활용하여 smith-wilson 모형을 일반화함. K-ICS의 경우 국고채 이자지급주기 연 2회를 가정하여 산출함.
-
-  <GImg caption="ytm을 spot rate으로 변환">
-      ![aa](/esg/SW_Figure_1.png)
-  </GImg>
-
 
     <GMath title ="Present market value">
     $$
@@ -432,16 +424,21 @@ Smith-Wilson 모델 적용을 위해 아래과 같은 주요 파라미터들을 
 - – [금융투자협회 채권정보센터](https://www.kofiabond.or.kr/)
 - – 관찰 테너구간 : 0.25,0.5,0.75,1,1.5,2,2.5,3,4,5,7,10,15,20,30,50
 
+<GCallout severity="warn" title ="Illustration">
     ![금융투자협회 채권정보센터](/esg/kofia.png)
+</GCallout>
 
 ### 입수한 YTM을 Spot Rate으로 변환
 - – 국고채의 경우 이자지급주기 연2회를 가정함.
 - – 최종관찰만기 : 50년 
 - – $\alpha$ 값은 0.1로 가정.
 - – LTFR은 50년물 YTM을 사용함. (2025/03 예시의 경우, 2.443%)
+
+<GCallout severity="warn" title ="Illustration">
   <GImg caption="단계별 할인율 산출" maxWidth ="700px">
     ![1단계](/esg/SW_Figure_1.png)
   </GImg>
+</GCallout>
 
 ### 자산평가용 금리기간구조 산출 
 - – 전 구간 tenor에 대해 보간 및 보외 
@@ -449,10 +446,12 @@ Smith-Wilson 모델 적용을 위해 아래과 같은 주요 파라미터들을 
 - – $\alpha$ 값은 0.1로 가정.
 - – LTFR은 50년물 YTM을 사용함. (2025/03 예시의 경우, 2.443%)
 
+<GCallout severity="warn" title ="Illustration">
   <GImg caption="단계별 할인율 산출" maxWidth ="700px">
     ![2단계](/esg/SW_Figure_2.png)
   </GImg>
-
+</GCallout>
+  
 ### 부채평가용 금리기간구조 산출 
 - – 전 구간 tenor에 대해 보간 및 보외 
 - – 최종관찰만기 : 23년 (20Y -> 30Y 단계적 조정)
@@ -460,8 +459,50 @@ Smith-Wilson 모델 적용을 위해 아래과 같은 주요 파라미터들을 
 - – VA / LP : 매년 금감원 제공 / 2025년 : 0.382% (0.478%) 
 - – LTFR (장기선도금리) : 매년 금감원 제공 / 2025년 : 4.3% 
 
-  <GImg caption="단계별 할인율 산출" maxWidth ="700px">
-    ![3단계](/esg/SW_Figure_3.png)
-  </GImg>
+  <GCallout severity="warn" title ="Illustration">
+    <GImg caption="단계별 할인율 산출" maxWidth ="700px">
+      ![3단계](/esg/SW_Figure_3.png)
+    </GImg>
+  </GCallout>
 
 </Steps>
+
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="유동성 프리미엄(LP) vs. 변동성 조정(VA) ">
+
+<G2Col>
+<Card title="유동성프리미엄" subTitle="보험감독회계 (IFRS 17) 보험부채 할인율 조정">
+
+> * B79. 기초항목의 성과에 연동되지 않는 보험계약의 현금흐름에 대한 할인율은 보유자가 신용위험에 전혀 또는 거의 노출되지 않는 금융상품에 대한 적절한 통화로 표시된 수익률 곡선을 반영하고, 보험계약집합의 유동성 특성을 반영하여 조정한다. 이러한 조정으로 보험계약집합의 유동성 특성과 수익률 곡선을 결정하기 위하여 사용한 자산의 유동성 특성간의 차이를 반영한다. 수익률 곡선은 보유자가 유의적인 원가를 들이지 않고 언제든 쉽게 일반적으로 매각할 수 있는 활성시장에서 거래되는 자산을 반영한다. 반면에, 일부 보험계약의 경우, 보험사건이 발생하기 전이나 계약에 명시된 날이 되기 전에는 급부금의 지급이 강제될 수 없다. 
+> * B80. 따라서 기초항목의 성과에 연동되지 않는 보험계약 현금흐름의 경우, 기업은 시장에서 관측되는 할인율이 적용되는 금융상품의 유동성 특성과 보험계약의 유동성 특성 간 차이를 유동성 무위험 수익률곡선에 반영하여 조정함으로써 할인율을 결정할 수 있다(Bottom up approach).
+
+보험부채는 자산과 달리 시장에서 거래되지 않으며, 자산에 비해 만기가 긴 특징이 있음. 보험부채의 비유동성 특성을 반영한 할인율을 산출하기 위해 무위험 금리기간구조에 비유동성프리미엄을 반영하여 조정함.
+</Card>
+<Card title = "변동성 조정" subTitle="K-ICS 보험부채 할인율 조정">
+> 변동성 조정은 기준 자산 포트폴리오의 위험스프레드<GTooltipIcon desc="보험사를 대표하는 포트폴리오(이하 ‘보험산업 대표 포트폴리오’)에 대해 평가시점에 시장에서 관찰되는 자산별·신용등급별· 만기별 스프레드 / 회사채 수익률과 국고채 수익률간의 차이로 산출함."/>에서 신용위험스프레드<GTooltipIcon desc="위험스프레드 중 신용손실에 상응하는 스프레드 / 차주의 부도위험 및 신용등급하락위험을 스프레드로 환산하여 산출함."/>를 차감한 값에 적용비율(80%)을 곱하여 산출한다.
+
+변동성 조정은 금융위기 발생 등으로 금리가 급변하게 되더라도 _순자산가치의 변동성을 최소화함으로써 경기순응성을 완화하기 위한 목적_ 으로 도입
+- • 금융위기 발생 시 일반적으로 금리가 상승하게 되는데, 신용 경색으로 인하여 위험 스프레드가 큰 폭으로 상승(무위험이자율은 소폭 상승)하므로 자산 평가금액이 크게 감소
+- • 이때, 보험부채를 무위험 금리기간구조로만 할인하게 되면 무위험 이자율은 소폭 상승에 그쳐 부채 평가금액은 거의 감소하지 않아 순자산가치가 크게 감소하게 되므로 경기순응성이 확대될 우려
+- • 따라서 신용 경색에 따른 순자산가치의 변동성을 축소하기 위해서는 보험회사가 보유한 자산의 위험 스프레드 중 일부를 보험부채 할인율에 가산하여 금리변동 시 자산과 부채가 일관되게 변동하도록 조정할 필요
+
+<Accordion activeIndex={[0]}>
+<AccordionTab header="변동성 조정 적용비율 80% 의 근거 ">
+
+- – 일반적으로 금리부자산(채권 등)에 비해 보험부채의 규모가 크며, 듀레이션이 김.
+- – 자산 스프레드를 보험부채 할인율에 모두 반영할 경우, 금리상승 시 자산에 비해 부채가 크게 감소하여 가용자본이 증가(금리하락 시에는 반대로 가용자본 감소)
+- – IAIS에서 IAIG를 대상으로 글로벌 경제위기상황(’08년)에서의 가용자본의 변동성을 측정 한 결과, 변동성 조정을 100%로 설정할 경우 위기상황에서 가용자본이 크게 증가(회사 별로 최대 30%까지 증가)
+- – 금리변동 시 순자산가치의 변동성을 최소화하기 위해, 금리부자산과 보험부채의 규모 차이를 비교한 후 변동성 조정 적용비율을 80%로 설정.
+      
+</AccordionTab>
+</Accordion>
+</Card>
+</G2Col>
+
+### 조정항목 비교
+* 결과적으로 두 제도상 할인율의 조정항목의 도입 목적은 상이함. 
+* 적용 결과만으로 비교하는 경우, 변동성 조정과 유동성 프리미엄(LP)은  적용비율(변동성조정 인정비율)만 다를 뿐 나머지 산출방식은 동일 ( 변동성 조정 : 유동성프리미엄 = 80% : 100% )
+
+</AccordionTab>
+</Accordion>
