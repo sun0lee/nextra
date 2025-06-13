@@ -437,6 +437,7 @@ Smith-Wilson 모델 적용을 위해 아래과 같은 주요 파라미터들을 
     ![1단계](/esg/SW_Figure_1.png)
   </GImg>
 </GCallout>
+
 ### 자산평가용 금리기간구조 산출 
 - – 전 구간 tenor에 대해 보간 및 보외 
 - – 최종관찰만기 : 50년 
@@ -447,13 +448,15 @@ Smith-Wilson 모델 적용을 위해 아래과 같은 주요 파라미터들을 
     ![2단계](/esg/SW_Figure_2.png)
   </GImg>
 </GCallout>
+  
 ### 부채평가용 금리기간구조 산출 
 - – 전 구간 tenor에 대해 보간 및 보외 
 - – 최종관찰만기 : 23년 (20Y -> 30Y 단계적 조정)
 - – $\alpha$ : 최초 수렴시점(60y)의 선도금리와 장기목표금리 간의 차이가 1.0bp이내가 되도록 하는 최소값 (init alpha=0.001)
 - – VA / LP : 매년 금감원 제공 / 2025년 : 0.382% (0.478%) 
 - – LTFR (장기선도금리) : 매년 금감원 제공 / 2025년 : 4.3% 
-<GCallout severity="warn" title ="Illustration">
+
+  <GCallout severity="warn" title ="Illustration">
   <GImg caption="단계별 할인율 산출" maxWidth ="700px">
     ![3단계](/esg/SW_Figure_3.png)
   </GImg>
