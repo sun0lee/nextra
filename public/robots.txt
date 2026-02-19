@@ -1,10 +1,16 @@
-# *
 User-agent: *
 Allow: /
+# Next.js 내부 파일 및 API 경로 크롤링 차단 (요청 수 절감에 효과적)
+Disallow: /_next/
+Disallow: /api/
 
-# Host
+# 공격적인 AI 수집 봇 차단 (선택 사항: 데이터 수집을 원치 않을 경우)
+User-agent: GPTBot
+Disallow: /
+User-agent: CCBot
+Disallow: /
+
+# Host & Sitemaps
 Host: https://nextra-ten-rose.vercel.app
-
-# Sitemaps
 Sitemap: https://nextra-ten-rose.vercel.app/ko/sitemap.xml
 Sitemap: https://nextra-ten-rose.vercel.app/en/sitemap.xml
