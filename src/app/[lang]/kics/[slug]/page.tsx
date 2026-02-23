@@ -6,7 +6,8 @@ import slugData from 'public/slugData.json'
 
 export async function generateMetadata({ params }: { params: Promise<PageProps['params']> }) {
   const resolvedParams = await params
-  const { lang, category, slug } = resolvedParams
+  const { lang, slug } = resolvedParams
+  const category = 'kics' // kics 라우트이므로 고정
 
   const pageData = slugData.find(
     (item) => item.lang === lang && item.category === category && item.targetUrl === `/${lang}/${category}/${slug}`,
@@ -23,7 +24,6 @@ export async function generateMetadata({ params }: { params: Promise<PageProps['
 type PageProps = Readonly<{
   params: {
     lang: string
-    category: string
     slug: string
   }
 }>
@@ -32,7 +32,8 @@ const Wrapper = useMDXComponents().wrapper
 
 export default async function Page({ params }: { params: Promise<PageProps['params']> }) {
   const resolvedParams = await params
-  const { lang, category, slug } = resolvedParams
+  const { lang, slug } = resolvedParams
+  const category = 'kics' // kics 라우트이므로 고정
   const pageData = slugData.find(
     (item) => item.lang === lang && item.category === category && item.targetUrl === `/${lang}/${category}/${slug}`,
   )
@@ -50,7 +51,7 @@ export default async function Page({ params }: { params: Promise<PageProps['para
 
   return (
     <Wrapper toc={toc} metadata={metadata}>
-      <MDXContent params={resolvedParams} />
+      <MDXContent params={{ ...resolvedParams, category }} />
     </Wrapper>
   )
 }
