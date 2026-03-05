@@ -1,8 +1,10 @@
-
-import { useMDXComponents } from '@/mdx-components'
 import { notFound } from 'next/navigation'
 import { importPage } from 'nextra/pages'
 import slugData from 'public/slugData.json'
+import { useMDXComponents } from '@/mdx-components'
+
+export const dynamic = 'force-static'
+export const dynamicParams = false
 
 export async function generateMetadata({ params }: { params: Promise<PageProps['params']> }) {
   const resolvedParams = await params
@@ -18,7 +20,13 @@ export async function generateMetadata({ params }: { params: Promise<PageProps['
   }
 
   const { metadata } = await importPage(pageData.actualUrl.split('/'), lang)
-  return metadata
+  return {
+    ...metadata,
+    robots: {
+      index: false,
+      follow: true,
+    },
+  }
 }
 
 type PageProps = Readonly<{
