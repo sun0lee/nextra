@@ -4,14 +4,14 @@ module.exports = {
   outDir: './public/ko', // ko 폴더에만 저장
   generateIndexSitemap: false,
   additionalPaths: async () => {
-    const fs = require('fs')
-    const path = require('path')
+    const fs = require('node:fs')
+    const path = require('node:path')
     const paths = []
 
     // 'src/content/ko' 내에 있는 .mdx 파일만 처리
     const traverse = (dir) => {
       const files = fs.readdirSync(dir, { withFileTypes: true })
-    
+
       files.forEach((file) => {
         const filePath = path.join(dir, file.name)
 
@@ -21,7 +21,7 @@ module.exports = {
           paths.push({
             loc: `https://nextra-ten-rose.vercel.app${urlPath}`,
             lastmod: new Date().toISOString(),
-            changefreq: 'daily',
+            changefreq: 'monthly',
             priority: 0.7,
           })
         }

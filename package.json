@@ -79,6 +79,7 @@
     "typescript": "^5.8.3"
   },
   "resolutions": {
-    "minimatch": "^10.2.1"
+    "immutable": "^5.1.5",
+    "minimatch": "^10.2.3"
   }
 }

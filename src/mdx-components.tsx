@@ -1,6 +1,4 @@
 import type { ReactNode } from 'react'
-import { OverviewPage } from '@/components/overview-page'
-import OverlayDemo from '@/components/ui/overlayDemo'
 import Image from 'next/image'
 import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs'
 import { Bleed, Callout, FileTree, Pre, Steps, Tabs, withIcons } from 'nextra/components'
@@ -13,6 +11,8 @@ import { Message } from 'primereact/message'
 import { ScrollPanel } from 'primereact/scrollpanel'
 import { TabPanel, TabView } from 'primereact/tabview'
 import { Tooltip } from 'primereact/tooltip'
+import { OverviewPage } from '@/components/overview-page'
+import OverlayDemo from '@/components/ui/overlayDemo'
 
 const G2Col = ({ children }: { children: ReactNode[] }) => {
   return (
@@ -74,6 +74,45 @@ const GCallout = ({
             {children && (
               <div style={{ width: '100%' }}>{children}</div>
             )}
+          </div>
+        )}
+      />
+    </div>
+  )
+}
+
+const KicsParagraph = ({
+  children,
+  width = '100%',
+}: {
+  children: ReactNode
+  width?: string
+}) => {
+  return (
+    <div className="my-3 kics-paragraph-wrapper">
+      <Message
+        style={{
+          justifyContent: 'left',
+          alignItems: 'start',
+          padding: '1.2rem 1rem',
+          width: width || '100%',
+          borderLeft: '4px solid #cbd5e1',
+        }}
+        severity="info"
+        content={(
+          /* [&_>_:first-child]:!mt-0 설명:
+             이 div 바로 아래에 오는 첫 번째 자식 요소가 무엇이든
+             margin-top을 강제로(! 중요도 포함) 0으로 만듭니다.
+          */
+          <div
+            className="[&_>_:first-child]:!mt-0"
+            style={{
+              width: '100%',
+              textAlign: 'left',
+              color: 'var(--text-color)',
+            }}
+          >
+            {children}
           </div>
         )}
       />
@@ -273,6 +312,35 @@ const GImg = ({ children, caption, maxWidth = '500px' }: GImgProps) => (
   </div>
 )
 
+const GLink = ({ href, children }: { href: string, children?: React.ReactNode }) => {
+  const isDefault = !children
+
+  return (
+    <a
+      href={href}
+      className="
+        font-bold
+        text-inherit
+        hover:text-blue-600
+        transition-colors
+        cursor-pointer
+        group
+        whitespace-nowrap
+      "
+    >
+      {isDefault
+        ? (
+            <span className="text-slate-400 dark:text-slate-500 font-medium">↩ back</span>
+          )
+        : (
+            <span className="inline-flex items-baseline gap-1 align-baseline whitespace-nowrap [text-indent:0]">
+              <span>{children}</span>
+              <i className="pi pi-search text-[0.9em] opacity-80 transition-opacity shrink-0" />
+            </span>
+          )}
+    </a>
+  )
+}
 
 export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   ...getDocsMDXComponents({
@@ -298,6 +366,7 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   OverlayDemoBasel,
   GCmt,
   GCallout,
+  KicsParagraph,
   GMath,
   G2Col,
   GTooltip,
@@ -306,4 +375,24 @@ export const useMDXComponents: typeof getDocsMDXComponents = () => ({
   GLv1,
   GLv2,
   GImg,
+  GLink,
 })
+
+export const GTag = ({ tags }: { tags?: string[] }) => {
+  if (!tags || tags.length === 0) { return null } // 태그가 없으면 아무것도 안 보여줌
+
+  return (
+    <div className="flex flex-wrap gap-2 mb-6 mt-2">
+      {tags.map((tag) => (
+        <span
+          key={tag}
+          className="px-2 py-0.5 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+        >
+          #
+          {' '}
+          {tag}
+        </span>
+      ))}
+    </div>
+  )
+}
